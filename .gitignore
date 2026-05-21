@@ -1,0 +1,16 @@
+.n-dx.local.json
+.rex/n-dx_workflow.md
+.rex/execution-log*.jsonl
+
+# Swift / SwiftPM
+.build/
+*.xcodeproj/xcuserdata/
+.swiftpm/
+DerivedData/
+
+# Build output (signed app bundle, DMGs) — never commit artifacts
+build/
+
+# Local maintainer helper for pushing release secrets (no secrets in it,
+# but kept out of the repo by preference)
+scripts/set-release-secrets.sh

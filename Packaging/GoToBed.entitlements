@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      GoToBed is fully offline (NFR-priv-1). The App Sandbox is enabled and NO
+      capability keys are granted: no network client/server, no camera, no
+      microphone, no screen recording, no Accessibility. A soft overlay drawn at
+      the shielding window level needs none of these.
+    -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+</dict>
+</plist>

@@ -1,0 +1,39 @@
+{
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 17,
+      "language": "Other",
+      "lineCount": 1,
+      "hash": "a9f02a107b4eb2b44b7e6d307c8c2b5691700f2176d028df8c3bab05d06b8363",
+      "role": "config",
+      "category": "root",
+      "lastModified": 1779332823586
+    },
+    {
+      "path": "PRD.md",
+      "size": 19917,
+      "language": "Markdown",
+      "lineCount": 267,
+      "hash": "72433320cee4ab8b919563c44c70f14dbe924837b9e423715e6e0c79510512ba",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779332768330
+    }
+  ],
+  "summary": {
+    "totalFiles": 2,
+    "totalLines": 268,
+    "byLanguage": {
+      "Other": 1,
+      "Markdown": 1
+    },
+    "byRole": {
+      "config": 1,
+      "docs": 1
+    },
+    "byCategory": {
+      "root": 2
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "schema": "rex/v1",
+  "project": "gotobed",
+  "adapter": "file",
+  "sourcevision": "auto"
+}

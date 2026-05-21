@@ -1,0 +1,12 @@
+{
+  "llm": {
+    "vendor": "claude",
+    "claude": {
+      "model": "claude-sonnet-4-6"
+    }
+  },
+  "claude": {
+    "model": "claude-sonnet-4-6"
+  },
+  "_initVersion": "0.4.1"
+}
