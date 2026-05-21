@@ -34,4 +34,9 @@ if [ -n "$NOTARY_PROFILE" ]; then
     xcrun stapler validate "$DMG"
 fi
 
-echo "==> Done: $DMG"
+# Also publish a stable, version-independent copy so the website can link to
+# https://github.com/.../releases/latest/download/GoToBed.dmg (the staple lives
+# in the DMG bytes, so the copy stays notarized).
+cp "$DMG" "build/GoToBed.dmg"
+
+echo "==> Done: $DMG (+ build/GoToBed.dmg)"

@@ -9,7 +9,7 @@ See [`PRD.md`](PRD.md) for the full product spec.
 
 ## Install
 
-1. Download the latest `GoToBed-x.y.z.dmg` from the [releases page](https://github.com/en-dash-consulting/GoToBed/releases/latest) (or [gotobed.endash.us](https://gotobed.endash.us)).
+1. [**Download GoToBed.dmg**](https://github.com/en-dash-consulting/GoToBed/releases/latest/download/GoToBed.dmg) (always the latest), or browse the [releases page](https://github.com/en-dash-consulting/GoToBed/releases/latest) / [gotobed.endash.us](https://gotobed.endash.us).
 2. Open the DMG and drag **GoToBed** into **Applications**.
 3. Launch it — look for the moon icon in your menu bar (there is no Dock icon).
 
