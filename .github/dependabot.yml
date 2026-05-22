@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # Keep the GitHub Actions used in workflows up to date. (No app dependencies:
+  # GoToBed has no external Swift packages.)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"

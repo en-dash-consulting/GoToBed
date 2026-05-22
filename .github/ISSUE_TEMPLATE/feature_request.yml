@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an idea or improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: The need or frustration behind the request.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What you'd like GoToBed to do.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered (optional)
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This fits GoToBed's focus (a simple, offline, scheduled full-screen reminder — not a full task manager).

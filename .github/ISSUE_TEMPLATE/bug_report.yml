@@ -1,0 +1,42 @@
+name: Bug report
+description: Something isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! Please make sure you're on the latest release first.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+      placeholder: |
+        Steps:
+        1. …
+        Expected: …
+        Actual: …
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: GoToBed version
+      description: Shown in the menu-bar menu (e.g. v0.2.1).
+      placeholder: v0.2.1
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      placeholder: "14.5 (Sonoma)"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs (optional)
+      description: |
+        From Console.app, filter on subsystem `us.endash.GoToBed`, or run:
+        `log show --last 10m --predicate 'subsystem == "us.endash.GoToBed"' --info`
+      render: shell
