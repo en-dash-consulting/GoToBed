@@ -13,6 +13,9 @@ See [`PRD.md`](PRD.md) for the full product spec.
 2. Open the DMG and drag **GoToBed** into **Applications**.
 3. Launch it — look for the moon icon in your menu bar (there is no Dock icon).
 
+> Tip: if the menu-bar icon is hidden behind a crowded menu bar, just open
+> **GoToBed** again (Spotlight or Finder) and its settings window comes forward.
+
 Universal (Apple Silicon + Intel), macOS 13+. Builds are Developer ID signed and
 notarized, so they launch without a Gatekeeper prompt.
 
