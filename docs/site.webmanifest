@@ -1,0 +1,13 @@
+{
+  "name": "GoToBed",
+  "short_name": "GoToBed",
+  "description": "A gentle full-screen bedtime nudge for macOS.",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#6C41F0",
+  "background_color": "#0e0b1a",
+  "display": "browser",
+  "start_url": "/"
+}
