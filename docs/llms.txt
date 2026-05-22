@@ -1,0 +1,24 @@
+# GoToBed
+
+> A lightweight, fully-offline macOS menu-bar app that draws an escapable full-screen overlay (a live clock plus a custom message) at user-scheduled times — a hard-to-ignore but non-destructive nudge to go to bed, take a break, or stop working.
+
+GoToBed runs in the menu bar (no Dock icon). You define weekly schedules, each with its own time, active days, message, dismissal behavior, and appearance. When a schedule fires it covers the active display with a soft overlay that you can always dismiss with Esc — it never traps Cmd-Tab or force-quit. It fires only while the Mac is awake; occurrences missed during sleep are skipped, not replayed. It is free, open source (MIT), and makes no network connections.
+
+## Download
+- [Download GoToBed.dmg (always latest)](https://github.com/en-dash-consulting/GoToBed/releases/latest/download/GoToBed.dmg)
+- [All releases](https://github.com/en-dash-consulting/GoToBed/releases)
+
+## Source and documentation
+- [GitHub repository](https://github.com/en-dash-consulting/GoToBed)
+- [README (install, build, architecture)](https://github.com/en-dash-consulting/GoToBed/blob/main/README.md)
+- [Product requirements document](https://github.com/en-dash-consulting/GoToBed/blob/main/PRD.md)
+- [Changelog](https://github.com/en-dash-consulting/GoToBed/blob/main/CHANGELOG.md)
+
+## Key facts
+- Platform: macOS 13 (Ventura) or later; universal binary (Apple Silicon + Intel)
+- Distribution: Developer ID signed and notarized; installs by dragging to /Applications
+- Privacy: fully offline — no network access, no telemetry, no accounts; all data stays on the Mac
+- License: MIT
+- Updating: choose "Check for Updates…" from the menu, download the new DMG, replace the app in /Applications
+- Tip: if the menu-bar icon is hidden behind a crowded menu bar, open GoToBed again (Spotlight/Finder) to surface its settings window
+- Maker: an [En Dash](https://endash.us) project
