@@ -80,3 +80,30 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload "${{ needs.release-please.outputs.tag_name }}" build/*.dmg --clobber --repo "$GITHUB_REPOSITORY"
+
+  stamp-docs:
+    # Stamp docs/sitemap.xml `<lastmod>` with the release date. site.webmanifest
+    # `version` is already bumped by release-please via `extra-files`.
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Stamp sitemap lastmod
+        run: ./scripts/stamp-site-version.sh
+      - name: Commit stamped sitemap
+        run: |
+          if git diff --quiet docs/sitemap.xml; then
+            echo "No change to sitemap."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/sitemap.xml
+          git commit -m "chore: stamp sitemap lastmod for ${{ needs.release-please.outputs.tag_name }} [skip ci]"
+          git push

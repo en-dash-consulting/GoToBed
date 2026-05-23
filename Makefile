@@ -3,6 +3,7 @@
 # The project validation command (used by the n-dx workflow).
 validate: build test
 	./scripts/verify-no-network.sh
+	./scripts/check-core-purity.sh
 
 build:
 	swift build

@@ -9,5 +9,6 @@
   "theme_color": "#6C41F0",
   "background_color": "#0e0b1a",
   "display": "browser",
-  "start_url": "/"
+  "start_url": "/",
+  "version": "0.2.1"
 }

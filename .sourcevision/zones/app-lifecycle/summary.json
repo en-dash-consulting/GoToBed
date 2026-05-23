@@ -1,0 +1,25 @@
+{
+  "id": "app-lifecycle",
+  "name": "App Lifecycle",
+  "description": "Application entry point, environment configuration, platform services, and the scheduler engine that drives bedtime enforcement at runtime.",
+  "files": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/AppInfo.swift",
+    "Sources/GoToBed/ColorBridging.swift",
+    "Sources/GoToBed/GoToBedApp.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/Scheduler/SchedulerEngine.swift"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 6,
+  "lineCount": 340,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}

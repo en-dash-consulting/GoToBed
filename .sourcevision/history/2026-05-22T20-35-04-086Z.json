@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshots": [
+    {
+      "zoneId": "app-build-scripts",
+      "zoneName": "App Build Scripts",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 4,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "app-lifecycle",
+      "zoneName": "App Lifecycle",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 6,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "core-domain-tests",
+      "zoneName": "Core Domain Tests",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 10,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "overlay-ui",
+      "zoneName": "Overlay UI",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 6,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "project-root-models",
+      "zoneName": "Project Root and Domain Models",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 7,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "settings-ui",
+      "zoneName": "Settings UI",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 9,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    },
+    {
+      "zoneId": "static-site-assets",
+      "zoneName": "Static Site Assets",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 5,
+      "timestamp": "2026-05-22T20:35:04.086Z",
+      "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+    }
+  ],
+  "analyzedAt": "2026-05-22T20:35:04.086Z",
+  "gitSha": "01b2566aee31230f430b8039ef25214fd9bbc6e6"
+}

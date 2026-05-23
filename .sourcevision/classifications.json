@@ -632,11 +632,530 @@
       }
     }
   ],
-  "files": [],
+  "files": [
+    {
+      "path": "Package.swift",
+      "archetype": "config",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "config",
+          "signalKind": "path",
+          "detail": "Swift Package Manager manifest — project configuration and dependency declarations.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/AppEnvironment.swift",
+      "archetype": "config",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "config",
+          "signalKind": "path",
+          "detail": "App-wide environment/dependency injection container wiring together subsystems.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/AppInfo.swift",
+      "archetype": "types",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "types",
+          "signalKind": "path",
+          "detail": "Bundle identifiers, version strings, and other static app metadata constants.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/ColorBridging.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Bridges color types between frameworks (e.g., NSColor ↔ SwiftUI Color).",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/GoToBedApp.swift",
+      "archetype": "entrypoint",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "entrypoint",
+          "signalKind": "path",
+          "detail": "@main App struct — top-level entry point for the SwiftUI application lifecycle.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/LaunchAtLogin.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Encapsulates launch-at-login registration logic against system APIs.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Manages overlay window lifecycle and display logic — controller layer, not a view.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI/AppKit view rendering the bedtime overlay UI.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "NSWindow subclass providing the custom overlay window surface.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Drives the scheduling loop — watches time, fires overlay triggers, coordinates subsystems.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI view for editing appearance/theme settings.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/Compat.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "OS version compatibility shims and availability helpers.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/MenuContent.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI view rendered inside the menu bar popover.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/Palette.swift",
+      "archetype": "types",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "types",
+          "signalKind": "path",
+          "detail": "Named color palette constants used across UI components.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI view for creating and editing a sleep schedule.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Pure formatting helpers that convert schedule values to display strings.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/SettingsView.swift",
+      "archetype": "page",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "page",
+          "signalKind": "path",
+          "detail": "Top-level settings screen — root UI entry point for the settings window route.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/SettingsWindowController.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "NSWindowController managing the settings window lifecycle and presentation.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "Reusable SwiftUI component for selecting one or more weekdays.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Logging/Log.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Shared logging infrastructure used across the core module.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "archetype": "model",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "model",
+          "signalKind": "path",
+          "detail": "Codable struct defining the appearance settings data shape.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Schedule.swift",
+      "archetype": "model",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "model",
+          "signalKind": "path",
+          "detail": "Codable struct representing a bedtime schedule with its fields.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Validation.swift",
+      "archetype": "schema",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "schema",
+          "signalKind": "path",
+          "detail": "Validation rules and constraints applied to model values at runtime.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Reads and writes app state to UserDefaults or disk — persistence service layer.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Pure business logic that computes next trigger times from a schedule and current date.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Store/Store.swift",
+      "archetype": "store",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "store",
+          "signalKind": "path",
+          "detail": "Observable state container holding app-wide mutable state with high fan-in.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test suite for color contrast calculations.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test suite verifying schedule correctness across DST transitions.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test suite for AppStatePersistence encode/decode behavior.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test suite for ScheduleCalculator trigger-time computations.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test file for scheduler loop behavior in the GoToBedCore module.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test file for sleep skip logic in the GoToBedCore module.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test file exercising the core store.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test file for submessage handling in GoToBedCore.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Shared test utilities and fixtures used by the GoToBedCore test suite.",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "archetype": "test-helper",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "test-helper",
+          "signalKind": "path",
+          "detail": "Test file for validation logic in GoToBedCore.",
+          "weight": 0.7
+        }
+      ]
+    }
+  ],
   "summary": {
-    "totalClassified": 0,
+    "totalClassified": 36,
     "totalUnclassified": 0,
-    "byArchetype": {},
-    "bySource": {}
+    "byArchetype": {
+      "config": 2,
+      "types": 2,
+      "utility": 4,
+      "entrypoint": 1,
+      "service": 6,
+      "component": 6,
+      "page": 1,
+      "model": 2,
+      "schema": 1,
+      "store": 1,
+      "test-helper": 10
+    },
+    "bySource": {
+      "llm": 36
+    }
   }
 }

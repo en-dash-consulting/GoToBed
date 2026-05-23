@@ -1,0 +1,23 @@
+{
+  "id": "app-build-scripts",
+  "name": "App Build Scripts",
+  "description": "Shell scripts that automate macOS desktop app packaging: icon generation, DMG creation, asset compilation, and network-isolation verification.",
+  "files": [
+    "scripts/build-app.sh",
+    "scripts/make-dmg.sh",
+    "scripts/make-icon.sh",
+    "scripts/verify-no-network.sh"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 4,
+  "lineCount": 177,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}

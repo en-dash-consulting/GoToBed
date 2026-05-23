@@ -1,0 +1,26 @@
+{
+  "id": "project-root-models",
+  "name": "Project Root and Domain Models",
+  "description": "Community detection artifact grouping project configuration files alongside GoToBedCore domain models due to shared absence of import edges.",
+  "files": [
+    ".gitignore",
+    "LICENSE",
+    "Makefile",
+    "Package.swift",
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Models/Validation.swift"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 7,
+  "lineCount": 365,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}
