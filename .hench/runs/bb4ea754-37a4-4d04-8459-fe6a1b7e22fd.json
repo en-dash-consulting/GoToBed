@@ -1,0 +1,33 @@
+{
+  "id": "bb4ea754-37a4-4d04-8459-fe6a1b7e22fd",
+  "taskId": "8967fb56-9233-47c1-9f6a-89d0d7652733",
+  "taskTitle": "Fix structural in global: No automated enforcement of cross-zone layering exists: the architectural bounda (+2 more)",
+  "startedAt": "2026-05-25T03:45:20.869Z",
+  "status": "running",
+  "turns": 0,
+  "tokenUsage": {
+    "input": 0,
+    "output": 0
+  },
+  "turnTokenUsage": [],
+  "toolCalls": [],
+  "model": "claude-sonnet-4-6",
+  "invocationContext": "cli",
+  "vendor": "claude",
+  "weight": "standard",
+  "diagnostics": {
+    "tokenDiagnosticStatus": "unavailable",
+    "parseMode": "stream-json",
+    "notes": [],
+    "vendor": "claude",
+    "sandbox": "workspace-write",
+    "approvals": "never"
+  },
+  "lastActivityAt": "2026-05-25T03:50:20.902Z",
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "cached": 0,
+    "total": 0
+  }
+}
