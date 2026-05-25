@@ -1,6 +1,7 @@
 import SwiftUI
 import AppKit
 import GoToBedCore
+import GoToBedKit
 
 /// App entry point. A menu-bar-only (accessory) app: a `MenuBarExtra` for the
 /// status item and a `Settings` scene for the schedule/appearance editors. The

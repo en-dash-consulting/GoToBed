@@ -3,11 +3,13 @@ import GoToBedCore
 
 /// The menu-bar popover: quick-toggle list of schedules plus the primary
 /// actions (PRD §6, FR-19).
-struct MenuContent: View {
+public struct MenuContent: View {
+    public init() {}
+
     @EnvironmentObject private var env: AppEnvironment
     @EnvironmentObject private var store: Store
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("GoToBed").font(.headline)

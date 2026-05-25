@@ -1,0 +1,33 @@
+{
+  "id": "50eb9259-9ff7-4614-a1fa-a7dcd80f9758",
+  "taskId": "5987c4db-6c14-48be-a879-2f6f718514ef",
+  "taskTitle": "Fix structural in core-domain-tests: The GoToBed app target has no corresponding test target — SchedulerEngine, Overl",
+  "startedAt": "2026-05-25T03:28:27.325Z",
+  "status": "running",
+  "turns": 0,
+  "tokenUsage": {
+    "input": 0,
+    "output": 0
+  },
+  "turnTokenUsage": [],
+  "toolCalls": [],
+  "model": "claude-sonnet-4-6",
+  "invocationContext": "cli",
+  "vendor": "claude",
+  "weight": "standard",
+  "diagnostics": {
+    "tokenDiagnosticStatus": "unavailable",
+    "parseMode": "stream-json",
+    "notes": [],
+    "vendor": "claude",
+    "sandbox": "workspace-write",
+    "approvals": "never"
+  },
+  "lastActivityAt": "2026-05-25T03:43:57.363Z",
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "cached": 0,
+    "total": 0
+  }
+}

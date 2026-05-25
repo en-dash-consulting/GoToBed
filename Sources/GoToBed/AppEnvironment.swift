@@ -4,10 +4,10 @@ import GoToBedCore
 /// Composition root: wires the Store -> SchedulerEngine -> OverlayController
 /// graph and exposes high-level actions (preview, launch-at-login) to the UI.
 @MainActor
-final class AppEnvironment: ObservableObject {
-    static let shared = AppEnvironment()
+public final class AppEnvironment: ObservableObject {
+    public static let shared = AppEnvironment()
 
-    let store: Store
+    public let store: Store
     let scheduler: SchedulerEngine
     let overlay: OverlayController
 
@@ -25,7 +25,7 @@ final class AppEnvironment: ObservableObject {
     }
 
     /// Open the settings/editor window (managed directly via AppKit).
-    func openSettings() {
+    public func openSettings() {
         settingsWindow.show()
     }
 
@@ -46,14 +46,14 @@ final class AppEnvironment: ObservableObject {
     }
 
     /// Begin scheduling. Called once from the app delegate after launch.
-    func start() {
+    public func start() {
         scheduler.start()
         Log.lifecycle.info("GoToBed started with \(self.store.schedules.count, privacy: .public) schedule(s).")
     }
 
     /// Tear down scheduling and any visible overlay (FR-21: quitting stops all
     /// scheduling, no daemon persists).
-    func shutdown() {
+    public func shutdown() {
         scheduler.stop()
         overlay.dismiss()
     }
