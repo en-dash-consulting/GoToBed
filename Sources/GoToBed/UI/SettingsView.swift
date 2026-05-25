@@ -16,6 +16,10 @@ struct SettingsView: View {
 }
 
 /// Master/detail: schedule list on the left, editor on the right.
+///
+/// Domain reads come from `store` (for reactive SwiftUI updates); domain
+/// writes are routed through `env` coordinator methods so this view holds no
+/// direct Store write dependency.
 private struct SchedulesPane: View {
     @EnvironmentObject private var env: AppEnvironment
     @EnvironmentObject private var store: Store
@@ -63,22 +67,25 @@ private struct SchedulesPane: View {
     }
 
     private func addSchedule() {
-        let new = store.makeSchedule(
+        let new = env.makeSchedule(
             hour: 22, minute: 30, weekdays: WeekdayPreset.everyDay,
             message: "Time to wind down. Go to bed."
         )
-        store.add(new)
+        env.addSchedule(new)
         selection = new.id
     }
 
     private func deleteSelected() {
         guard let id = selection else { return }
-        store.delete(id: id)
+        env.deleteSchedule(id: id)
         selection = store.schedules.first?.id
     }
 }
 
+/// Default appearance editor: edits a local draft and persists through the
+/// composition-root coordinator on change.
 private struct DefaultAppearancePane: View {
+    @EnvironmentObject private var env: AppEnvironment
     @EnvironmentObject private var store: Store
     @State private var draft: AppearanceSettings = .appDefault
 
@@ -91,6 +98,6 @@ private struct DefaultAppearancePane: View {
             Spacer()
         }
         .onAppear { draft = store.defaultAppearance }
-        .onChangeCompat(of: draft) { new in store.updateDefaultAppearance(new) }
+        .onChangeCompat(of: draft) { new in env.updateDefaultAppearance(new) }
     }
 }

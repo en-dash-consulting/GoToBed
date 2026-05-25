@@ -2,9 +2,12 @@
 id: "c70e62ce-7e5f-48af-9c13-4b7611a55bb6"
 level: "epic"
 title: "Code Health: 13 findings across 4 zones"
-status: "pending"
+status: "completed"
 priority: "high"
 source: "sourcevision"
+startedAt: "2026-05-25T04:03:26.368Z"
+completedAt: "2026-05-25T04:03:26.368Z"
+endedAt: "2026-05-25T04:03:26.368Z"
 description: "Automated recommendations from SourceVision analysis. 5 zone+category groups covering 13 total findings."
 recommendationMeta: {"findingCount":13}
 ---
@@ -17,4 +20,4 @@ recommendationMeta: {"findingCount":13}
 | [Fix documentation in static-site-assets (3 findings)](./fix-documentation-in-static-da9d3b/index.md) | completed |
 | [Fix structural in core-domain-tests (1 finding)](./fix-structural-in-core-domain-73abe5/index.md) | completed |
 | [Fix structural in global (3 findings)](./fix-structural-in-global-3-findings/index.md) | completed |
-| [Fix structural in settings-ui (5 findings)](./fix-structural-in-settings-ui-5-77d815/index.md) | pending |
+| [Fix structural in settings-ui (5 findings)](./fix-structural-in-settings-ui-5-77d815/index.md) | completed |

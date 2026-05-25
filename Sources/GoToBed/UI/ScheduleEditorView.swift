@@ -2,10 +2,12 @@ import SwiftUI
 import GoToBedCore
 
 /// Editor for a single schedule. Edits a local draft and writes sanitized
-/// changes back to the store (PRD §3.1, §6).
+/// changes back through AppEnvironment (the composition root).
+///
+/// Writing through `env.updateSchedule(_:)` rather than `store.update(_:)` keeps
+/// the settings-ui zone free of direct Store write dependencies (PRD §3.1, §6).
 struct ScheduleEditorView: View {
     @EnvironmentObject private var env: AppEnvironment
-    @EnvironmentObject private var store: Store
 
     @State private var draft: Schedule
     /// Remembered auto duration so toggling Manual -> Auto restores the value.
@@ -75,8 +77,8 @@ struct ScheduleEditorView: View {
             }
         }
         .formStyle(.grouped)
-        // Persist (sanitized) on any change.
-        .onChangeCompat(of: draft) { newValue in store.update(newValue) }
+        // Persist (sanitized) on any change through the composition-root coordinator.
+        .onChangeCompat(of: draft) { newValue in env.updateSchedule(newValue) }
     }
 
     // MARK: Bindings

@@ -3,11 +3,15 @@ import GoToBedCore
 
 /// The menu-bar popover: quick-toggle list of schedules plus the primary
 /// actions (PRD §6, FR-19).
+///
+/// MenuContent reads only from `AppEnvironment` (the composition root) and
+/// never touches `Store` directly. Domain data arrives pre-computed as
+/// `[ScheduleDisplayItem]` via `env.scheduleItems`, so this view has no
+/// direct domain dependency.
 public struct MenuContent: View {
     public init() {}
 
     @EnvironmentObject private var env: AppEnvironment
-    @EnvironmentObject private var store: Store
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -19,13 +23,15 @@ public struct MenuContent: View {
                     .accessibilityLabel("Version \(AppInfo.version)")
             }
 
-            if store.schedules.isEmpty {
+            if env.scheduleItems.isEmpty {
                 Text("No schedules yet.")
                     .foregroundStyle(.secondary)
                     .padding(.vertical, 4)
             } else {
-                ForEach(store.schedules) { schedule in
-                    ScheduleRow(schedule: schedule)
+                ForEach(env.scheduleItems) { item in
+                    ScheduleRow(item: item) { enabled in
+                        env.setScheduleEnabled(enabled, id: item.id)
+                    }
                 }
             }
 
@@ -53,33 +59,36 @@ public struct MenuContent: View {
 
 /// A single schedule row with an inline enable toggle. Disabled schedules are
 /// dimmed to read as visually distinct (FR-5).
+///
+/// Receives a `ScheduleDisplayItem` (plain value) and an `onToggle` callback
+/// rather than observing Store directly.
 private struct ScheduleRow: View {
-    @EnvironmentObject private var store: Store
-    let schedule: Schedule
+    let item: ScheduleDisplayItem
+    let onToggle: (Bool) -> Void
 
     var body: some View {
         HStack {
             Toggle("", isOn: Binding(
-                get: { schedule.isEnabled },
-                set: { store.setEnabled($0, id: schedule.id) }
+                get: { item.isEnabled },
+                set: { onToggle($0) }
             ))
             .labelsHidden()
             .toggleStyle(.switch)
             .controlSize(.mini)
 
             VStack(alignment: .leading, spacing: 1) {
-                Text(ScheduleFormatting.timeString(schedule))
+                Text(item.timeString)
                     .font(.system(.body, design: .rounded))
                     .monospacedDigit()
-                Text(ScheduleFormatting.daysAndMessage(schedule))
+                Text(item.subtitle)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
             Spacer()
         }
-        .opacity(schedule.isEnabled ? 1 : 0.45)
+        .opacity(item.isEnabled ? 1 : 0.45)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(ScheduleFormatting.timeString(schedule)), \(schedule.isEnabled ? "enabled" : "disabled")")
+        .accessibilityLabel("\(item.timeString), \(item.isEnabled ? "enabled" : "disabled")")
     }
 }

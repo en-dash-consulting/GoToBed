@@ -15,7 +15,6 @@ struct GoToBedApp: App {
         MenuBarExtra("GoToBed", systemImage: "moon.zzz.fill") {
             MenuContent()
                 .environmentObject(env)
-                .environmentObject(env.store)
         }
         .menuBarExtraStyle(.window)
     }

@@ -10,12 +10,15 @@
 #
 # Zone map (directory → role):
 #
-#   Sources/GoToBed/Scheduler/    service layer   — pure scheduling logic, no UI
-#   Sources/GoToBed/Overlay/      overlay-ui      — presentation only; no settings or scheduler
-#   Sources/GoToBed/UI/           settings-ui     — settings views; no overlay or scheduler
+#   Sources/GoToBed/Scheduler/           service layer   — pure scheduling logic, no UI
+#   Sources/GoToBed/Overlay/             overlay-ui      — presentation only; no settings or scheduler
+#   Sources/GoToBed/UI/                  settings-ui     — settings views; no overlay or scheduler
 #   Sources/GoToBed/AppEnvironment.swift
-#                                 app-lifecycle   — composition root; only file allowed
-#                                                   to wire all zones together
+#   Sources/GoToBed/SettingsWindowController.swift
+#                                        app-lifecycle / composition root — the only files
+#                                        allowed to wire all zones together.
+#                                        SettingsWindowController lives here (not in UI/)
+#                                        because window lifecycle is a composition-root concern.
 #
 # GoToBedCore (Sources/GoToBedCore/) boundary is enforced separately by
 # scripts/check-core-purity.sh.
@@ -84,24 +87,31 @@ SETTINGS_UI_TYPES=(
     AppearanceEditor
     ScheduleEditorView
     SettingsView
-    SettingsWindowController
     WeekdayPicker
+)
+
+# Types whose definition lives at the composition-root level alongside
+# AppEnvironment.swift (Sources/GoToBed/*.swift, not in any subdirectory zone).
+# Scheduler and Overlay zones must not reach into the composition root.
+COMPOSITION_ROOT_TYPES=(
+    SettingsWindowController
 )
 
 # ---------------------------------------------------------------------------
 # Rules
 # ---------------------------------------------------------------------------
 
-# Rule 1: Scheduler zone must not reference overlay or settings-ui types.
-#         The scheduler is a pure service; UI concerns must never leak in.
+# Rule 1: Scheduler zone must not reference overlay, settings-ui, or
+#         composition-root types. The scheduler is a pure service; UI and
+#         windowing concerns must never leak in.
 check_excludes "Sources/GoToBed/Scheduler" "scheduler-zone" \
-    "${OVERLAY_TYPES[@]}" "${SETTINGS_UI_TYPES[@]}"
+    "${OVERLAY_TYPES[@]}" "${SETTINGS_UI_TYPES[@]}" "${COMPOSITION_ROOT_TYPES[@]}"
 
-# Rule 2: Overlay zone must not reference settings-ui types or the scheduler.
-#         The overlay is a presentation component wired by the composition root;
-#         it must remain independent of settings views and scheduling logic.
+# Rule 2: Overlay zone must not reference settings-ui, composition-root types,
+#         or the scheduler. The overlay is a presentation component wired by the
+#         composition root; it must remain independent of settings and scheduling.
 check_excludes "Sources/GoToBed/Overlay" "overlay-zone" \
-    "${SETTINGS_UI_TYPES[@]}" "${SCHEDULER_TYPES[@]}"
+    "${SETTINGS_UI_TYPES[@]}" "${COMPOSITION_ROOT_TYPES[@]}" "${SCHEDULER_TYPES[@]}"
 
 # Rule 3: Settings-ui zone must not reference overlay types or the scheduler.
 #         Settings views access the overlay or scheduler only through

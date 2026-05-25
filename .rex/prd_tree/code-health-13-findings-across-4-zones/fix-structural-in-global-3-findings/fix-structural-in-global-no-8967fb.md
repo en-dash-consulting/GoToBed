@@ -12,5 +12,7 @@ resolutionType: "code-change"
 resolutionDetail: "Added scripts/check-zone-layering.sh enforcing the three intra-module zone boundaries within GoToBedKit; wired into make validate and CI."
 acceptanceCriteria: []
 description: "- No automated enforcement of cross-zone layering exists: the architectural boundary between domain (project-root-models), UI (settings-ui, overlay-ui), and composition (app-lifecycle) is expressed only by file organization, not by Swift module visibility rules or CI checks — this boundary will erode silently as the codebase grows.\n- The full inter-service event chain (Store → SchedulerEngine → AppEnvironment closure → OverlayController) is tested by no automated path; a regression in any link would only surface at runtime.\n- Add a Swift Package Manager build-phase script or a CI lint rule that verifies GoToBedCore compiles with no AppKit or SwiftUI imports; this makes the UI-framework-free constraint machine-enforced rather than convention-only and will catch accidental framework imports before they reach main."
+commits:
+  - {"hash":"6f0ae53936b655028691a71ca694ee3fa2858a37","author":"Nick Daniel","authorEmail":"nick@endash.us","timestamp":"2026-05-24T23:51:01-04:00"}
 recommendationMeta: {"findingHashes":["17956696e1f1","b392eb569e5b","6b11ec6e6ad2"],"category":"structural","severityDistribution":{"warning":3},"findingCount":3}
 ---

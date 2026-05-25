@@ -1,0 +1,33 @@
+{
+  "id": "ee8e4e4c-ba20-4796-b270-b0a07e50ce5c",
+  "taskId": "b8afc227-38b6-4fb4-8063-ea489a5a820d",
+  "taskTitle": "Fix structural in settings-ui: If settings-ui components directly mutate project-root-models types rather than  (+4 more)",
+  "startedAt": "2026-05-25T03:51:03.325Z",
+  "status": "running",
+  "turns": 0,
+  "tokenUsage": {
+    "input": 0,
+    "output": 0
+  },
+  "turnTokenUsage": [],
+  "toolCalls": [],
+  "model": "claude-sonnet-4-6",
+  "invocationContext": "cli",
+  "vendor": "claude",
+  "weight": "standard",
+  "diagnostics": {
+    "tokenDiagnosticStatus": "unavailable",
+    "parseMode": "stream-json",
+    "notes": [],
+    "vendor": "claude",
+    "sandbox": "workspace-write",
+    "approvals": "never"
+  },
+  "lastActivityAt": "2026-05-25T04:03:03.368Z",
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "cached": 0,
+    "total": 0
+  }
+}
