@@ -82,8 +82,10 @@ jobs:
         run: gh release upload "${{ needs.release-please.outputs.tag_name }}" build/*.dmg --clobber --repo "$GITHUB_REPOSITORY"
 
   stamp-docs:
-    # Stamp docs/sitemap.xml `<lastmod>` with the release date. site.webmanifest
-    # `version` is already bumped by release-please via `extra-files`.
+    # Stamp docs/ with the release version and date.
+    # stamp-site-version.sh reads VERSION (bumped by release-please) and updates:
+    #   - docs/sitemap.xml       <lastmod> with today's UTC date
+    #   - docs/site.webmanifest  "version" with the VERSION value
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     runs-on: ubuntu-latest
@@ -94,16 +96,16 @@ jobs:
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Stamp sitemap lastmod
+      - name: Stamp docs version and date
         run: ./scripts/stamp-site-version.sh
-      - name: Commit stamped sitemap
+      - name: Commit stamped docs
         run: |
-          if git diff --quiet docs/sitemap.xml; then
-            echo "No change to sitemap."
+          if git diff --quiet docs/sitemap.xml docs/site.webmanifest; then
+            echo "No changes to docs."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/sitemap.xml
-          git commit -m "chore: stamp sitemap lastmod for ${{ needs.release-please.outputs.tag_name }} [skip ci]"
+          git add docs/sitemap.xml docs/site.webmanifest
+          git commit -m "chore: stamp docs for ${{ needs.release-please.outputs.tag_name }} [skip ci]"
           git push

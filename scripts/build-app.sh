@@ -33,10 +33,20 @@ swift build -c release \
 
 BIN="$(swift build -c release --arch arm64 --arch x86_64 --product GoToBed --show-bin-path)/GoToBed"
 
-# Single-source the version from the git tag (vX.Y.Z); fall back for untagged
-# local builds. Build number is the commit count.
+# Resolve version using a priority chain:
+#   1. MARKETING_VERSION env var (set by Makefile from the VERSION file)
+#   2. VERSION env var (manual override)
+#   3. VERSION file at the repository root
+#   4. Nearest git tag (vX.Y.Z stripped of the leading "v")
+#   5. Hard-coded dev fallback
 # `|| true` keeps an untagged repo from aborting under `set -e`/`pipefail`.
-VERSION="${VERSION:-$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || true)}"
+VERSION="${MARKETING_VERSION:-${VERSION:-}}"
+if [ -z "$VERSION" ] && [ -f VERSION ]; then
+    VERSION="$(tr -d '[:space:]' < VERSION)"
+fi
+if [ -z "$VERSION" ]; then
+    VERSION="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || true)"
+fi
 VERSION="${VERSION:-0.0.0-dev}"
 BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
 

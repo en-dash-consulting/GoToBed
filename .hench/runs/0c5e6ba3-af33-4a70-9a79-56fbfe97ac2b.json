@@ -1,0 +1,33 @@
+{
+  "id": "0c5e6ba3-af33-4a70-9a79-56fbfe97ac2b",
+  "taskId": "6a58e4b1-3f06-48b9-80d1-b39ed8751c42",
+  "taskTitle": "Fix documentation in global: Introduce a single VERSION file at the repository root consumed by both the Make",
+  "startedAt": "2026-05-25T03:15:06.364Z",
+  "status": "running",
+  "turns": 0,
+  "tokenUsage": {
+    "input": 0,
+    "output": 0
+  },
+  "turnTokenUsage": [],
+  "toolCalls": [],
+  "model": "claude-sonnet-4-6",
+  "invocationContext": "cli",
+  "vendor": "claude",
+  "weight": "standard",
+  "diagnostics": {
+    "tokenDiagnosticStatus": "unavailable",
+    "parseMode": "stream-json",
+    "notes": [],
+    "vendor": "claude",
+    "sandbox": "workspace-write",
+    "approvals": "never"
+  },
+  "lastActivityAt": "2026-05-25T03:19:36.389Z",
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "cached": 0,
+    "total": 0
+  }
+}

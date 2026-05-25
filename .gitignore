@@ -14,3 +14,4 @@ build/
 # Local maintainer helper for pushing release secrets (no secrets in it,
 # but kept out of the repo by preference)
 scripts/set-release-secrets.sh
+.run-logs/

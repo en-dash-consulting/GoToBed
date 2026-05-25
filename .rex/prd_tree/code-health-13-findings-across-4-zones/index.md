@@ -13,7 +13,7 @@ recommendationMeta: {"findingCount":13}
 
 | Title | Status |
 |-------|--------|
-| [Fix documentation in global (1 finding)](./fix-documentation-in-global-1-finding/index.md) | pending |
+| [Fix documentation in global (1 finding)](./fix-documentation-in-global-1-finding/index.md) | completed |
 | [Fix documentation in static-site-assets (3 findings)](./fix-documentation-in-static-da9d3b/index.md) | pending |
 | [Fix structural in core-domain-tests (1 finding)](./fix-structural-in-core-domain-73abe5/index.md) | pending |
 | [Fix structural in global (3 findings)](./fix-structural-in-global-3-findings/index.md) | pending |

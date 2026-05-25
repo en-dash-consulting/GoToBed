@@ -2,12 +2,15 @@
 id: "d989dac9-0b48-4108-a72e-61169a63ce00"
 level: "feature"
 title: "Open-source the repository (MIT)"
-status: "pending"
+status: "completed"
 priority: "high"
 tags:
   - "open-source"
   - "github"
 source: "User request"
+startedAt: "2026-05-25T03:00:57.693Z"
+completedAt: "2026-05-25T03:00:57.693Z"
+endedAt: "2026-05-25T03:00:57.693Z"
 acceptanceCriteria:
   - "MIT LICENSE file present at repo root"
   - "README reads well for a first-time visitor (what it is, install, build)"
@@ -20,4 +23,4 @@ description: "Publish the project as a public, MIT-licensed GitHub repository: a
 | Title | Status |
 |-------|--------|
 | [Add MIT LICENSE and finalize public README](./add-mit-license-and-finalize-2a7602.md) | completed |
-| [Create public GitHub repo and push main](./create-public-github-repo-and-push-main.md) | pending |
+| [Create public GitHub repo and push main](./create-public-github-repo-and-push-main.md) | completed |

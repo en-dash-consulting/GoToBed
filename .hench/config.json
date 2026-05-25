@@ -15,12 +15,11 @@
       "node_modules/**"
     ],
     "allowedCommands": [
-      "npm",
-      "npx",
-      "node",
-      "git",
-      "tsc",
-      "vitest"
+      "swift",
+      "make",
+      "xcodebuild",
+      "xcrun",
+      "git"
     ],
     "commandTimeout": 30000,
     "maxFileSize": 1048576,
