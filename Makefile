@@ -9,6 +9,7 @@ export MARKETING_VERSION
 validate: build test
 	./scripts/verify-no-network.sh
 	./scripts/check-core-purity.sh
+	sh ./scripts/check-site-docs.sh
 
 build:
 	swift build

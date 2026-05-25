@@ -15,6 +15,7 @@ GoToBed runs in the menu bar (no Dock icon). You define weekly schedules, each w
 - [Changelog](https://github.com/en-dash-consulting/GoToBed/blob/main/CHANGELOG.md)
 
 ## Key facts
+- Current version: 0.2.1
 - Platform: macOS 13 (Ventura) or later; universal binary (Apple Silicon + Intel)
 - Distribution: Developer ID signed and notarized; installs by dragging to /Applications
 - Privacy: fully offline — no network access, no telemetry, no accounts; all data stays on the Mac

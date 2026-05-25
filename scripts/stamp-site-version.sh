@@ -4,10 +4,12 @@
 # Reads the version from the VERSION file at the repository root and updates:
 #   - docs/sitemap.xml       <lastmod>YYYY-MM-DD</lastmod>
 #   - docs/site.webmanifest  "version": "x.y.z"
+#   - docs/llms.txt          "- Current version: x.y.z"
 #
-# The `version` field in site.webmanifest is driven by the VERSION file, which
-# release-please bumps as part of the release PR. This script is the single
-# docs-generation step that propagates that value into both site artifacts.
+# The `version` field in site.webmanifest and the "Current version" line in
+# llms.txt are both driven by the VERSION file, which release-please bumps as
+# part of the release PR. This script is the single docs-generation step that
+# propagates that value into all site artifacts.
 #
 # Run this from the release workflow *after* release-please has produced a tag,
 # or locally before pushing a release commit.
@@ -23,6 +25,7 @@ cd "$(dirname "$0")/.."
 DATE="${1:-$(date -u +%Y-%m-%d)}"
 SITEMAP="docs/sitemap.xml"
 MANIFEST="docs/site.webmanifest"
+LLMS="docs/llms.txt"
 VERSION_FILE="VERSION"
 
 if [ ! -f "$SITEMAP" ]; then
@@ -32,6 +35,11 @@ fi
 
 if [ ! -f "$MANIFEST" ]; then
     echo "stamp-site-version: $MANIFEST not found" >&2
+    exit 1
+fi
+
+if [ ! -f "$LLMS" ]; then
+    echo "stamp-site-version: $LLMS not found" >&2
     exit 1
 fi
 
@@ -66,3 +74,14 @@ awk -v ver="$VERSION" '
 ' "$MANIFEST" > "$TMP"
 mv "$TMP" "$MANIFEST"
 echo "stamp-site-version: set version=$VERSION in $MANIFEST"
+
+# Update llms.txt "Current version" line.
+TMP="$(mktemp)"
+awk -v ver="$VERSION" '
+    /^- Current version:/ {
+        sub(/^- Current version: [^[:space:]]+/, "- Current version: " ver)
+    }
+    { print }
+' "$LLMS" > "$TMP"
+mv "$TMP" "$LLMS"
+echo "stamp-site-version: set version=$VERSION in $LLMS"
