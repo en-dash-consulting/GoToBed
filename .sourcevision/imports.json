@@ -1415,8 +1415,8 @@
       },
       {
         "cycle": [
-          "Sources/GoToBed/ColorBridging.swift",
-          "Sources/GoToBedCore/Models/AppearanceSettings.swift"
+          "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "Sources/GoToBed/ColorBridging.swift"
         ]
       }
     ],
@@ -1498,7 +1498,7 @@
         "count": 2
       },
       {
-        "path": "Sources/GoToBed/AppInfo.swift",
+        "path": "Sources/GoToBed/SettingsWindowController.swift",
         "count": 1
       }
     ],

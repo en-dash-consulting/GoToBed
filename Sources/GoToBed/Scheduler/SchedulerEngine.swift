@@ -16,8 +16,10 @@ import GoToBedCore
 ///   change notifications.
 @MainActor
 final class SchedulerEngine {
-    /// Called on the main thread when a schedule fires.
-    var onFire: ((Schedule) -> Void)?
+    /// Called on the main thread when a schedule fires. Required at init so an
+    /// unwired scheduler can't exist — a missing handler used to silently drop
+    /// fires. `var` (not `let`) so tests can swap the handler mid-test.
+    var onFire: (Schedule) -> Void
 
     private let store: Store
     private let calculator: ScheduleCalculator
@@ -30,10 +32,12 @@ final class SchedulerEngine {
 
     init(
         store: Store,
+        onFire: @escaping (Schedule) -> Void,
         calendar: Calendar = .current,
         now: @escaping () -> Date = { Date() }
     ) {
         self.store = store
+        self.onFire = onFire
         self.calculator = ScheduleCalculator(calendar: calendar)
         self.now = now
     }
@@ -119,7 +123,7 @@ final class SchedulerEngine {
             return
         }
         Log.scheduler.info("Schedule fired: \(schedule.message, privacy: .private).")
-        onFire?(schedule)
+        onFire(schedule)
         rearm()
     }
 }

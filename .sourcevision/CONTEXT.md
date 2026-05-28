@@ -6,13 +6,13 @@
 <architecture>
 
 Project: gotobed
-Git: sv @ df3d76b
-Files: 112, Lines: 5969
-Languages: Swift(42) Markdown(27) Other(19) Shell(8) YAML(6)
-Zones: 9, Described: 9
-Weighted avg cohesion: 0.48, coupling: 0.16 (6 zones with ≥5 files)
-Unweighted avg cohesion: 0.39, coupling: 0.12
-Small zones excluded from averages: 3 (<5 files, unreliable metrics)
+Git: sv @ 500fe5e
+Files: 111, Lines: 5968
+Languages: Swift(42) Markdown(27) Other(18) Shell(8) YAML(6)
+Zones: 6, Described: 6
+Weighted avg cohesion: 0.36, coupling: 0.00 (4 zones with ≥5 files)
+Unweighted avg cohesion: 0.25, coupling: 0.00
+Small zones excluded from averages: 2 (<5 files, unreliable metrics)
 Import edges: 134, External packages: 10
 Circulars: 4
 
@@ -23,21 +23,12 @@ Circulars: 4
 [build-release-scripts] Build & Release Scripts (8 files, coh=0.00 coup=0.00)
   Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.
   files: scripts/build-app.sh, scripts/check-core-purity.sh, scripts/check-site-docs.sh, scripts/check-zone-layering.sh, scripts/make-dmg.sh, scripts/make-icon.sh, scripts/stamp-site-version.sh, scripts/verify-no-network.sh
-[log-overlaycontroller] Log Overlaycontroller (3 files, coh=0.21 coup=0.79)
-  3 files, primarily Swift
-  files: Sources/GoToBed/Overlay/OverlayController.swift [service], Sources/GoToBed/Scheduler/SchedulerEngine.swift [service], Sources/GoToBedCore/Logging/Log.swift [utility]
 [packaging] Packaging (3 files, coh=0.00 coup=0.00)
   3 files, primarily Other
   files: Packaging/AppIcon.icns, Packaging/GoToBed.entitlements, Packaging/Info.plist
-[root] Root (6 files, coh=0.00 coup=0.00)
+[root] Root (5 files, coh=0.00 coup=0.00)
   6 files, primarily Other, Makefile, Swift
-  files: .gitignore, .n-dx-web.port, LICENSE, Makefile, Package.swift, VERSION
-[sources] Sources (14 files, coh=0.63 coup=0.37)
-  14 files, primarily Swift
-  files: Sources/GoToBed/AppEnvironment.swift [config], Sources/GoToBed/AppInfo.swift [types], Sources/GoToBed/LaunchAtLogin.swift [service], Sources/GoToBed/MenuBar/MenuViewModel.swift [store], Sources/GoToBed/SettingsWindowController.swift [service], Sources/GoToBed/UI/ScheduleEditorView.swift [component], Sources/GoToBed/UI/ScheduleFormatting.swift [utility], Sources/GoToBed/UI/SettingsView.swift [page], Sources/GoToBedApp/GoToBedApp.swift [entrypoint], Sources/GoToBedCore/Models/Schedule.swift [model] +4
-[sources-gotobed] Sources Gotobed (10 files, coh=0.68 coup=0.32)
-  10 files, primarily Swift
-  files: Sources/GoToBed/ColorBridging.swift [utility], Sources/GoToBed/MenuBar/MenuContent.swift [component], Sources/GoToBed/Overlay/OverlayView.swift [component], Sources/GoToBed/Overlay/OverlayWindow.swift [component], Sources/GoToBed/UI/AppearanceEditor.swift [component], Sources/GoToBed/UI/Compat.swift [utility], Sources/GoToBed/UI/Palette.swift [component], Sources/GoToBed/UI/WeekdayPicker.swift [component], Sources/GoToBedCore/Models/AppearanceSettings.swift [model], Sources/GoToBedCore/Models/Palette.swift [model]
+  files: .gitignore, LICENSE, Makefile, Package.swift, VERSION
 [static-site-assets] Static Site Assets (5 files, coh=0.00 coup=0.00)
   Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.
   files: docs/CNAME, docs/llms.txt, docs/robots.txt, docs/site.webmanifest, docs/sitemap.xml
@@ -76,27 +67,12 @@ Circular chains:
 <findings>
 
 [warning] 4 circular dependency chains detected — see imports.json for details
-[warning] Bidirectional coupling: "sources" ↔ "sources-gotobed" (11+8 crossings) — consider extracting shared interface
-[warning] High coupling (0.79) — 6 imports target "sources" [log-overlaycontroller]
-[warning] Log.swift (pure Foundation/os utility, no application imports) is grouped with two high-coupling runtime services by community detection. Its inclusion distorts cohesion measurements for the zone without reflecting any actual structural relationship. [log-overlaycontroller]
-[warning] AppEnvironment uses a static shared singleton (line 14) as its access point. This means the composition root is globally reachable from any file that imports the module, not just from the app entry point — the intended constraint (only AppEnvironment decides when and how the model changes) is unenforced by the type system. [sources]
 
 </findings>
 
 <next-steps>
 
-[high] Log.swift (pure Foundation/os utility, no application imports) is grouped with …
-  files: Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBedCore/Logging/Log.swift
-  category: extract
-[high] High coupling (0.79) — 6 imports target "sources"
-  files: Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBedCore/Logging/Log.swift
-  category: refactor
-[medium] AppEnvironment uses a static shared singleton (line 14) as its access point. Th…
-  files: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/AppInfo.swift, Sources/GoToBed/LaunchAtLogin.swift
-  category: extract
 [medium] 4 circular dependency chains detected — see imports.json for details
-  category: refactor
-[medium] Bidirectional coupling: "sources" ↔ "sources-gotobed" (11+8 crossings) — consid…
   category: refactor
 
 </next-steps>

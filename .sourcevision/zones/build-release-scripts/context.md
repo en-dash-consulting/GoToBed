@@ -35,10 +35,5 @@ scripts/verify-no-network.sh (Shell, 33 lines, build)
 <insights>
 
 - Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)
-- Two complementary architectural guard scripts operate at different layers: check-core-purity.sh enforces module-level UI framework exclusion from GoToBedCore, while check-zone-layering.sh enforces intra-module type-reference isolation within GoToBedKit — both must run in CI to prevent silent layering erosion
-- The app signing and DMG packaging flow is intentionally sequential: build-app.sh produces a code-signed universal binary (accepting an optional NOTARY_PROFILE), then make-dmg.sh wraps it into a distributable DMG with the same notarization path — callers must invoke them in order
-- stamp-site-version.sh automates version stamping for site docs; confirm it reads from the VERSION file or built bundle rather than deriving a version independently, since release-please and VERSION already own that source of truth
-- check-site-docs.sh validates docs/llms.txt against Packaging/Info.plist, creating the only runtime bridge between the static-site-assets zone and the packaging zone — this cross-zone consistency check is the right place to catch docs drift on LSMinimumSystemVersion changes.
-- verify-no-network.sh enforces network isolation during builds or tests to protect reproducibility; confirm it is wired into the Makefile test or build targets so it cannot be bypassed when running make directly.
 
 </insights>

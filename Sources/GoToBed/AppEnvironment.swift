@@ -26,10 +26,18 @@ public final class AppEnvironment: ObservableObject {
 
     private init() {
         store = Store()
-        overlay = OverlayController()
-        scheduler = SchedulerEngine(store: store)
+        let overlay = OverlayController()
+        self.overlay = overlay
 
-        scheduler.onFire = { [overlay] schedule in
+        // The scheduler → overlay edge is intentionally wired via closure
+        // injection rather than a direct import. Scheduler must not `import`
+        // the Overlay layer; doing so would reintroduce an architectural cycle
+        // (overlay depends on Schedule types from the domain, scheduler depends
+        // on overlay to present → cycle). AppEnvironment is the only place that
+        // knows about both, so it crosses the boundary here and nowhere else.
+        // If you find yourself wanting to replace this closure with a direct
+        // `scheduler.overlay = ...` reference, stop and read this comment.
+        scheduler = SchedulerEngine(store: store) { schedule in
             overlay.present(schedule)
         }
 

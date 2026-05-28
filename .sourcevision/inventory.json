@@ -281,16 +281,6 @@
       "lastModified": 1779677793006
     },
     {
-      "path": ".n-dx-web.port",
-      "size": 5,
-      "language": "Other",
-      "lineCount": 1,
-      "hash": "fb9814ed5b5b0d69adc8f8d4f08d5b481a294aed17f1b1043e07cfb883185564",
-      "role": "other",
-      "category": "root",
-      "lastModified": 1779937803500
-    },
-    {
       "path": ".n-dx.json",
       "size": 236,
       "language": "JSON",
@@ -1122,14 +1112,14 @@
     }
   ],
   "summary": {
-    "totalFiles": 112,
-    "totalLines": 5969,
+    "totalFiles": 111,
+    "totalLines": 5968,
     "byLanguage": {
       "Markdown": 27,
       "JSON": 4,
       "TOML": 1,
       "YAML": 6,
-      "Other": 19,
+      "Other": 18,
       "Makefile": 1,
       "Swift": 42,
       "HTML": 1,
@@ -1139,7 +1129,7 @@
     },
     "byRole": {
       "docs": 43,
-      "other": 15,
+      "other": 14,
       "build": 10,
       "config": 2,
       "asset": 1,
@@ -1151,7 +1141,7 @@
       ".claude": 10,
       ".codex": 1,
       ".github": 7,
-      "root": 17,
+      "root": 16,
       "packaging": 4,
       "sources": 27,
       "tests": 14,

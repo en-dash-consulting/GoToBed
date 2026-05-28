@@ -21,7 +21,7 @@ final class SchedulerEngineTests: XCTestCase {
     // MARK: rearm() state
 
     func testRearmWithNoSchedulesArmsNoTimer() {
-        let engine = SchedulerEngine(store: makeStore(), calendar: cal)
+        let engine = SchedulerEngine(store: makeStore(), onFire: { _ in }, calendar: cal)
         engine.rearm()
         XCTAssertNil(engine.nextScheduledFire, "Empty store must leave timer unarmed")
     }
@@ -32,7 +32,7 @@ final class SchedulerEngineTests: XCTestCase {
         let store = makeStore()
         store.add(Schedule(hour: 10, minute: 0, weekdays: WeekdayPreset.everyDay, message: "wake"))
 
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { now })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { now })
         engine.rearm()
 
         let fire = engine.nextScheduledFire
@@ -48,7 +48,7 @@ final class SchedulerEngineTests: XCTestCase {
         schedule.isEnabled = false
         store.add(schedule)
 
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { now })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { now })
         engine.rearm()
 
         XCTAssertNil(engine.nextScheduledFire, "Disabled schedule must not arm a timer")
@@ -61,7 +61,7 @@ final class SchedulerEngineTests: XCTestCase {
         store.add(Schedule(hour: 10, minute: 0, weekdays: WeekdayPreset.everyDay, message: "later"))
         store.add(Schedule(hour: 9, minute: 0, weekdays: WeekdayPreset.everyDay, message: "sooner"))
 
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { now })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { now })
         engine.rearm()
 
         let fire = engine.nextScheduledFire
@@ -77,7 +77,7 @@ final class SchedulerEngineTests: XCTestCase {
         let store = makeStore()
         store.add(Schedule(hour: 10, minute: 0, weekdays: WeekdayPreset.everyDay, message: "x"))
 
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { now })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { now })
         engine.rearm()
         XCTAssertNotNil(engine.nextScheduledFire, "Precondition: timer should be armed")
 
@@ -86,7 +86,7 @@ final class SchedulerEngineTests: XCTestCase {
     }
 
     func testStopIsIdempotent() {
-        let engine = SchedulerEngine(store: makeStore(), calendar: cal)
+        let engine = SchedulerEngine(store: makeStore(), onFire: { _ in }, calendar: cal)
         // Two consecutive stops must not crash.
         engine.stop()
         engine.stop()
@@ -115,7 +115,7 @@ final class SchedulerEngineTests: XCTestCase {
         var receivedSchedule: Schedule?
         let exp = expectation(description: "onFire called")
 
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { nowDate })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { nowDate })
         engine.onFire = { [weak store] schedule in
             // Delete the schedule so the post-fire rearm() finds nothing and
             // the timer does not immediately re-arm.
@@ -146,7 +146,7 @@ final class SchedulerEngineTests: XCTestCase {
         ))
 
         var callbackFired = false
-        let engine = SchedulerEngine(store: store, calendar: cal, now: { nowDate })
+        let engine = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { nowDate })
         engine.onFire = { _ in callbackFired = true }
         engine.start()
 

@@ -32,9 +32,5 @@ docs/sitemap.xml (XML, 13 lines, docs)
 <insights>
 
 - Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)
-- llms.txt is validated against Packaging/Info.plist by scripts/check-site-docs.sh — any LSMinimumSystemVersion bump in Info.plist must be reflected here or CI will fail
-- The CNAME, robots.txt, and sitemap.xml form the complete SEO and domain-binding surface; all three should be reviewed together whenever the distribution domain changes
-- site.webmanifest provides PWA configuration for the static documentation site, not the native macOS app — this is the expected pattern for a GitHub Pages hosted docs site
-- Zero cohesion and coupling scores reflect the structural absence of import relationships among static web assets — this is correct and expected, not a decay signal.
 
 </insights>

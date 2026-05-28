@@ -1,40 +1,40 @@
 {
   "schemaVersion": "1.0.0",
   "toolVersion": "0.1.0",
-  "analyzedAt": "2026-05-28T03:14:38.567Z",
-  "gitSha": "df3d76b59b8761108c84272e531175749ebaae02",
+  "analyzedAt": "2026-05-28T03:43:34.677Z",
+  "gitSha": "500fe5e1f0975104db8a3608306d6188d81d9070",
   "gitBranch": "sv",
   "targetPath": "/Users/nick/development/endash/gotobed",
   "modules": {
     "inventory": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:10:56.598Z",
-      "completedAt": "2026-05-28T03:10:56.629Z"
+      "startedAt": "2026-05-28T03:34:47.748Z",
+      "completedAt": "2026-05-28T03:34:47.798Z"
     },
     "imports": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:10:56.629Z",
-      "completedAt": "2026-05-28T03:10:56.650Z"
+      "startedAt": "2026-05-28T03:34:47.799Z",
+      "completedAt": "2026-05-28T03:34:47.829Z"
     },
     "classifications": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:10:56.650Z",
-      "completedAt": "2026-05-28T03:10:56.670Z"
+      "startedAt": "2026-05-28T03:34:47.829Z",
+      "completedAt": "2026-05-28T03:35:28.091Z"
     },
     "zones": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:10:56.671Z",
-      "completedAt": "2026-05-28T03:14:38.512Z"
+      "startedAt": "2026-05-28T03:35:28.092Z",
+      "completedAt": "2026-05-28T03:43:34.626Z"
     },
     "components": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:14:38.514Z",
-      "completedAt": "2026-05-28T03:14:38.545Z"
+      "startedAt": "2026-05-28T03:43:34.629Z",
+      "completedAt": "2026-05-28T03:43:34.656Z"
     },
     "callgraph": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:14:38.545Z",
-      "completedAt": "2026-05-28T03:14:38.567Z"
+      "startedAt": "2026-05-28T03:43:34.656Z",
+      "completedAt": "2026-05-28T03:43:34.677Z"
     }
   },
   "language": "swift",
@@ -43,7 +43,7 @@
   ],
   "zoneOutputs": true,
   "tokenUsage": {
-    "calls": 2,
+    "calls": 3,
     "inputTokens": 0,
     "outputTokens": 0,
     "vendor": "claude",

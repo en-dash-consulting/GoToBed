@@ -4,7 +4,6 @@
   "description": "6 files, primarily Other, Makefile, Swift",
   "files": [
     ".gitignore",
-    ".n-dx-web.port",
     "LICENSE",
     "Makefile",
     "Package.swift",
@@ -13,8 +12,8 @@
   "entryPoints": [],
   "cohesion": 0,
   "coupling": 0,
-  "fileCount": 6,
-  "lineCount": 110,
+  "fileCount": 5,
+  "lineCount": 109,
   "riskMetrics": {
     "cohesion": 0,
     "coupling": 0,

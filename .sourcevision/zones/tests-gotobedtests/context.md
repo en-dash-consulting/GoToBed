@@ -27,10 +27,6 @@ Internal:
   Tests/GoToBedTests/InterServiceWiringTests.swift → Tests/GoToBedTests/TestHelpers.swift {AppLayerTestHelpers}
   Tests/GoToBedTests/SchedulerEngineTests.swift → Tests/GoToBedTests/TestHelpers.swift {AppLayerTestHelpers}
 
-Outgoing (this zone → other zones):
-  → log-overlaycontroller: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift
-  → sources: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Store/Store.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Store/Store.swift
-
 </imports>
 
 <findings>

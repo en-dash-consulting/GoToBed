@@ -30,7 +30,7 @@ final class InterServiceWiringTests: XCTestCase {
 
         let store    = makeStore()
         let overlay  = OverlayController()
-        let scheduler = SchedulerEngine(store: store, calendar: cal, now: { nowDate })
+        let scheduler = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { nowDate })
 
         // Wire exactly as AppEnvironment does.
         scheduler.onFire = { [weak store, overlay] schedule in
@@ -74,7 +74,7 @@ final class InterServiceWiringTests: XCTestCase {
         let now = AppLayerTestHelpers.date(2025, 1, 6, 9, 59, calendar: cal)
         let store    = makeStore()
         let overlay  = OverlayController()
-        let scheduler = SchedulerEngine(store: store, calendar: cal, now: { now })
+        let scheduler = SchedulerEngine(store: store, onFire: { _ in }, calendar: cal, now: { now })
 
         store.add(Schedule(hour: 10, minute: 0, weekdays: WeekdayPreset.everyDay, message: "x"))
         scheduler.rearm()

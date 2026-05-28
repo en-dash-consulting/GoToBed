@@ -5,14 +5,14 @@
 
 ## Project Overview
 
-- **Files**: 112
-- **Lines of code**: 5,969
-- **Languages**: Swift (42), Markdown (27), Other (19), Shell (8), YAML (6)
-- **Zones**: 9 (9 with descriptions)
-- **Avg cohesion**: 0.48, **avg coupling**: 0.16 (weighted by file count, 6 zones with ≥5 files)
-- **Small zones**: 3 excluded from averages (<5 files)
-- **Git**: sv @ df3d76b
-- **Analyzed**: 2026-05-28T03:14:38.567Z
+- **Files**: 111
+- **Lines of code**: 5,968
+- **Languages**: Swift (42), Markdown (27), Other (18), Shell (8), YAML (6)
+- **Zones**: 6 (6 with descriptions)
+- **Avg cohesion**: 0.36, **avg coupling**: 0.00 (weighted by file count, 4 zones with ≥5 files)
+- **Small zones**: 2 excluded from averages (<5 files)
+- **Git**: sv @ 500fe5e
+- **Analyzed**: 2026-05-28T03:43:34.677Z
 
 ## Architecture Zones
 
@@ -23,15 +23,6 @@ Provides the complete build, packaging, distribution, and architectural validati
 - Files: 8
 - Cohesion: 0.00, Coupling: 0.00
 - Detail: `.sourcevision/zones/build-release-scripts/context.md`
-
-### Log Overlaycontroller (`log-overlaycontroller`)
-
-3 files, primarily Swift
-
-- Files: 3
-- Cohesion: 0.21, Coupling: 0.79
-- Entry points: Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBedCore/Logging/Log.swift
-- Detail: `.sourcevision/zones/log-overlaycontroller/context.md`
 
 ### Packaging (`packaging`)
 
@@ -45,27 +36,9 @@ Provides the complete build, packaging, distribution, and architectural validati
 
 6 files, primarily Other, Makefile, Swift
 
-- Files: 6
+- Files: 5
 - Cohesion: 0.00, Coupling: 0.00
 - Detail: `.sourcevision/zones/root/context.md`
-
-### Sources (`sources`)
-
-14 files, primarily Swift
-
-- Files: 14
-- Cohesion: 0.63, Coupling: 0.37
-- Entry points: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/LaunchAtLogin.swift, Sources/GoToBed/MenuBar/MenuViewModel.swift, Sources/GoToBedCore/Models/Schedule.swift, Sources/GoToBedCore/Models/Validation.swift (+3 more)
-- Detail: `.sourcevision/zones/sources/context.md`
-
-### Sources Gotobed (`sources-gotobed`)
-
-10 files, primarily Swift
-
-- Files: 10
-- Cohesion: 0.68, Coupling: 0.32
-- Entry points: Sources/GoToBed/ColorBridging.swift, Sources/GoToBed/MenuBar/MenuContent.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/UI/AppearanceEditor.swift, Sources/GoToBed/UI/Compat.swift (+3 more)
-- Detail: `.sourcevision/zones/sources-gotobed/context.md`
 
 ### Static Site Assets (`static-site-assets`)
 
@@ -126,41 +99,22 @@ Found 4 circular dependency chain(s):
 - `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift`
 - `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift` → `Sources/GoToBed/UI/SettingsView.swift`
 - `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift` → `Sources/GoToBed/UI/SettingsView.swift` → `Sources/GoToBed/UI/ScheduleEditorView.swift`
-- `Sources/GoToBed/ColorBridging.swift` → `Sources/GoToBedCore/Models/AppearanceSettings.swift`
+- `Sources/GoToBedCore/Models/AppearanceSettings.swift` → `Sources/GoToBed/ColorBridging.swift`
 
 ## Findings
-
-### Patterns
-
-- The runtime data flow (Store mutation → SchedulerEngine re-arms → onFire closure → OverlayController.present) is fully acyclic and unidirectional, but the zone-level import graph appears bidirectional because the composition root (AppEnvironment) sits in the same Louvain zone as the domain models it depends on. Separating AppEnvironment into its own zone (or into the app entry-point target) would make the zone graph match the runtime topology. [info]
-- Log.swift (pure Foundation/os utility, no application imports) is grouped with two high-coupling runtime services by community detection. Its inclusion distorts cohesion measurements for the zone without reflecting any actual structural relationship. [warning] (log-overlaycontroller)
-- AppEnvironment uses a static shared singleton (line 14) as its access point. This means the composition root is globally reachable from any file that imports the module, not just from the app entry point — the intended constraint (only AppEnvironment decides when and how the model changes) is unenforced by the type system. [warning] (sources)
-- MenuContent's indirection through ScheduleDisplayItem is the only domain-to-UI translation layer in the codebase. OverlayView and OverlayController both consume the raw Schedule struct directly. If Schedule gains fields that are internal to domain logic, OverlayView will receive them with no filtering — the same ScheduleDisplayItem pattern applied to the overlay path would make the boundary consistent. [info] (sources-gotobed)
-
-### Relationships
-
-- OverlayController is a one-way sink: it receives Schedule via present() and has no back-channel to Store or SchedulerEngine. The bidirectional coupling reported between log-overlaycontroller ↔ sources is driven by SchedulerEngine alone, not by both services equally — splitting them into separate zones would accurately reflect this asymmetry. [info] (log-overlaycontroller)
-- The bidirectional coupling between 'sources' and 'sources-gotobed' is a composition-root artifact: AppEnvironment (sources) imports SettingsWindowController and other UI components (sources-gotobed) while those components import GoToBedCore models. Extracting the composition wiring into a dedicated AppDelegate or SceneDelegate file would make the coupling directional and eliminate the zone-level bidirectionality. [info] (sources)
 
 ### Observations
 
 - Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0) [info] (build-release-scripts)
 - 4 circular dependency chains detected — see imports.json for details [warning]
-- Bidirectional coupling: "sources" ↔ "sources-gotobed" (11+8 crossings) — consider extracting shared interface [warning]
-- Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 4 zones — cross-cutting dependency [info]
-- The scripts zone combines build automation (build-app.sh, make-dmg.sh, make-icon.sh) with architectural enforcement scripts (check-core-purity.sh, check-zone-layering.sh, verify-no-network.sh) in a flat directory — these serve different audiences but the naming convention makes their purpose clear without further subdivision. [info]
-- High coupling (0.79) — 6 imports target "sources" [warning] (log-overlaycontroller)
 - Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0) [info] (packaging)
-- Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0) [info] (root)
+- Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0) [info] (root)
 - Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0) [info] (static-site-assets)
 - High cohesion (1) — files are tightly interconnected [info] (tests-gotobedcoretests)
-- ... and 1 more
+- High cohesion (1) — files are tightly interconnected [info] (tests-gotobedtests)
 
 ### Suggestions
 
-- Zone "sources" has files across 8 directories — consider consolidating under a dedicated directory [info] (sources)
-- Zone "sources-gotobed" has files across 5 directories — consider consolidating under a dedicated directory [info] (sources-gotobed)
-- Zone "Log Overlaycontroller" (log-overlaycontroller) has catastrophic risk (score: 0.79, cohesion: 0.21, coupling: 0.79) — unreliable: zone has only 3 files (minimum 5 for reliable metrics) [info] (log-overlaycontroller)
 - Zone "Build & Release Scripts" (build-release-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds [info] (build-release-scripts)
 - Zone "Packaging" (packaging) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — unreliable: zone has only 3 files (minimum 5 for reliable metrics) [info] (packaging)
 - Zone "Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds [info] (root)
@@ -170,27 +124,11 @@ Found 4 circular dependency chain(s):
 
 Prioritized work items derived from analysis:
 
-### High Priority
-
-1. **Log.swift (pure Foundation/os utility, no application imports) is grouped with …**
-   Files: `Sources/GoToBed/Overlay/OverlayController.swift`, `Sources/GoToBed/Scheduler/SchedulerEngine.swift`, `Sources/GoToBedCore/Logging/Log.swift`
-
-1. **High coupling (0.79) — 6 imports target "sources"**
-   Files: `Sources/GoToBed/Overlay/OverlayController.swift`, `Sources/GoToBed/Scheduler/SchedulerEngine.swift`, `Sources/GoToBedCore/Logging/Log.swift`
-
 ### Medium Priority
-
-1. **AppEnvironment uses a static shared singleton (line 14) as its access point. Th…**
-   Files: `Sources/GoToBed/AppEnvironment.swift`, `Sources/GoToBed/AppInfo.swift`, `Sources/GoToBed/LaunchAtLogin.swift`
 
 1. **4 circular dependency chains detected — see imports.json for details**
 
-1. **Bidirectional coupling: "sources" ↔ "sources-gotobed" (11+8 crossings) — consid…**
-
 ### Low Priority
-
-1. **Zone "Log Overlaycontroller" (log-overlaycontroller) has catastrophic risk (sco…**
-   Files: `Sources/GoToBed/Overlay/OverlayController.swift`, `Sources/GoToBed/Scheduler/SchedulerEngine.swift`, `Sources/GoToBedCore/Logging/Log.swift`
 
 1. **Zone "Build & Release Scripts" (build-release-scripts) has at-risk risk (score:…**
    Files: `scripts/build-app.sh`, `scripts/check-core-purity.sh`, `scripts/check-site-docs.sh`
@@ -199,16 +137,10 @@ Prioritized work items derived from analysis:
    Files: `Packaging/AppIcon.icns`, `Packaging/GoToBed.entitlements`, `Packaging/Info.plist`
 
 1. **Zone "Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.0…**
-   Files: `.gitignore`, `.n-dx-web.port`, `LICENSE`
+   Files: `.gitignore`, `LICENSE`, `Makefile`
 
 1. **Zone "Static Site Assets" (static-site-assets) has at-risk risk (score: 0.50, c…**
    Files: `docs/CNAME`, `docs/llms.txt`, `docs/robots.txt`
-
-1. **Zone "sources" has files across 8 directories — consider consolidating under a …**
-   Files: `Sources/GoToBed/AppEnvironment.swift`, `Sources/GoToBed/AppInfo.swift`, `Sources/GoToBed/LaunchAtLogin.swift`
-
-1. **Zone "sources-gotobed" has files across 5 directories — consider consolidating …**
-   Files: `Sources/GoToBed/ColorBridging.swift`, `Sources/GoToBed/MenuBar/MenuContent.swift`, `Sources/GoToBed/Overlay/OverlayView.swift`
 
 ## File Inventory
 
@@ -242,7 +174,6 @@ Prioritized work items derived from analysis:
 | `.github/workflows/ci.yml` | build |  |  |
 | `.github/workflows/release.yml` | build |  |  |
 | `.gitignore` | other |  | root |
-| `.n-dx-web.port` | other |  | root |
 | `.n-dx.json` | other |  |  |
 | `.release-please-manifest.json` | other |  |  |
 | `AGENTS.md` | docs |  |  |
@@ -260,33 +191,33 @@ Prioritized work items derived from analysis:
 | `Packaging/Info.plist` | other |  | packaging |
 | `README.md` | docs |  |  |
 | `SECURITY.md` | docs |  |  |
-| `Sources/GoToBed/AppEnvironment.swift` | source | config | sources |
-| `Sources/GoToBed/AppInfo.swift` | source | types | sources |
-| `Sources/GoToBed/ColorBridging.swift` | source | utility | sources-gotobed |
-| `Sources/GoToBed/LaunchAtLogin.swift` | source | service | sources |
-| `Sources/GoToBed/MenuBar/MenuContent.swift` | source | component | sources-gotobed |
-| `Sources/GoToBed/MenuBar/MenuViewModel.swift` | source | store | sources |
-| `Sources/GoToBed/Overlay/OverlayController.swift` | source | service | log-overlaycontroller |
-| `Sources/GoToBed/Overlay/OverlayView.swift` | source | component | sources-gotobed |
-| `Sources/GoToBed/Overlay/OverlayWindow.swift` | source | component | sources-gotobed |
-| `Sources/GoToBed/Scheduler/SchedulerEngine.swift` | source | service | log-overlaycontroller |
-| `Sources/GoToBed/SettingsWindowController.swift` | source | service | sources |
-| `Sources/GoToBed/UI/AppearanceEditor.swift` | source | component | sources-gotobed |
-| `Sources/GoToBed/UI/Compat.swift` | source | utility | sources-gotobed |
-| `Sources/GoToBed/UI/Palette.swift` | source | component | sources-gotobed |
-| `Sources/GoToBed/UI/ScheduleEditorView.swift` | source | component | sources |
-| `Sources/GoToBed/UI/ScheduleFormatting.swift` | source | utility | sources |
-| `Sources/GoToBed/UI/SettingsView.swift` | source | page | sources |
-| `Sources/GoToBed/UI/WeekdayPicker.swift` | source | component | sources-gotobed |
-| `Sources/GoToBedApp/GoToBedApp.swift` | source | entrypoint | sources |
-| `Sources/GoToBedCore/Logging/Log.swift` | source | utility | log-overlaycontroller |
-| `Sources/GoToBedCore/Models/AppearanceSettings.swift` | source | model | sources-gotobed |
-| `Sources/GoToBedCore/Models/Palette.swift` | source | model | sources-gotobed |
-| `Sources/GoToBedCore/Models/Schedule.swift` | source | model | sources |
-| `Sources/GoToBedCore/Models/Validation.swift` | source | schema | sources |
-| `Sources/GoToBedCore/Persistence/AppStatePersistence.swift` | source | service | sources |
-| `Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift` | source | service | sources |
-| `Sources/GoToBedCore/Store/Store.swift` | source | store | sources |
+| `Sources/GoToBed/AppEnvironment.swift` | source | config |  |
+| `Sources/GoToBed/AppInfo.swift` | source | types |  |
+| `Sources/GoToBed/ColorBridging.swift` | source | utility |  |
+| `Sources/GoToBed/LaunchAtLogin.swift` | source | service |  |
+| `Sources/GoToBed/MenuBar/MenuContent.swift` | source | component |  |
+| `Sources/GoToBed/MenuBar/MenuViewModel.swift` | source | store |  |
+| `Sources/GoToBed/Overlay/OverlayController.swift` | source | service |  |
+| `Sources/GoToBed/Overlay/OverlayView.swift` | source | component |  |
+| `Sources/GoToBed/Overlay/OverlayWindow.swift` | source | component |  |
+| `Sources/GoToBed/Scheduler/SchedulerEngine.swift` | source | service |  |
+| `Sources/GoToBed/SettingsWindowController.swift` | source | service |  |
+| `Sources/GoToBed/UI/AppearanceEditor.swift` | source | component |  |
+| `Sources/GoToBed/UI/Compat.swift` | source | utility |  |
+| `Sources/GoToBed/UI/Palette.swift` | source | component |  |
+| `Sources/GoToBed/UI/ScheduleEditorView.swift` | source | component |  |
+| `Sources/GoToBed/UI/ScheduleFormatting.swift` | source | utility |  |
+| `Sources/GoToBed/UI/SettingsView.swift` | source | page |  |
+| `Sources/GoToBed/UI/WeekdayPicker.swift` | source | component |  |
+| `Sources/GoToBedApp/GoToBedApp.swift` | source | entrypoint |  |
+| `Sources/GoToBedCore/Logging/Log.swift` | source | utility |  |
+| `Sources/GoToBedCore/Models/AppearanceSettings.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Palette.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Schedule.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Validation.swift` | source | schema |  |
+| `Sources/GoToBedCore/Persistence/AppStatePersistence.swift` | source | service |  |
+| `Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift` | source | service |  |
+| `Sources/GoToBedCore/Store/Store.swift` | source | store |  |
 | `Tests/GoToBedCoreTests/ContrastTests.swift` | test |  | tests-gotobedcoretests |
 | `Tests/GoToBedCoreTests/DSTTests.swift` | test |  | tests-gotobedcoretests |
 | `Tests/GoToBedCoreTests/PersistenceTests.swift` | test |  | tests-gotobedcoretests |

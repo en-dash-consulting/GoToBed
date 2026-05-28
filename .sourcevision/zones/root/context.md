@@ -5,17 +5,16 @@
 <zone>
 
 Zone: Root (`root`)
-Files: 6, Cohesion: 0.00, Coupling: 0.00
+Files: 5, Cohesion: 0.00, Coupling: 0.00
 Risk: at-risk (score: 0.50)
 Description: 6 files, primarily Other, Makefile, Swift
-Lines: 110
+Lines: 109
 
 </zone>
 
 <files>
 
 .gitignore (Other, 17 lines, other)
-.n-dx-web.port (Other, 1 lines, other)
 LICENSE (Other, 21 lines, docs)
 Makefile (Makefile, 27 lines, config)
 Package.swift (Swift, 43 lines, config)
@@ -25,13 +24,13 @@ VERSION (Other, 1 lines, other)
 
 <findings>
 
-[observation] [info] Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)
+[observation] [info] Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)
 [suggestion] [info] Zone "Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds
 
 </findings>
 
 <insights>
 
-- Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)
+- Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)
 
 </insights>
