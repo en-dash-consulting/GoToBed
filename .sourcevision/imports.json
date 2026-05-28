@@ -1,12 +1,1507 @@
 {
-  "edges": [],
-  "external": [],
+  "edges": [
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/AppInfo.swift",
+      "type": "static",
+      "symbols": [
+        "AppInfo"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/LaunchAtLogin.swift",
+      "type": "static",
+      "symbols": [
+        "LaunchAtLogin"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleDisplayItem"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "type": "static",
+      "symbols": [
+        "OverlayController"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "type": "static",
+      "symbols": [
+        "SchedulerEngine"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/SettingsWindowController.swift",
+      "type": "static",
+      "symbols": [
+        "SettingsWindowController"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleFormatting"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "DismissMode",
+        "WeekdayPreset"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/ColorBridging.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "Double"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/LaunchAtLogin.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "type": "static",
+      "symbols": [
+        "AppEnvironment"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/LaunchAtLogin.swift",
+      "type": "static",
+      "symbols": [
+        "LaunchAtLogin"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleDisplayItem"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "type": "static",
+      "symbols": [
+        "OverlayWindow"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings",
+        "Double"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "type": "static",
+      "symbols": [
+        "OverlayView"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 7
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleCalculator"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "type": "static",
+      "symbols": [
+        "AppEnvironment"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBed/UI/SettingsView.swift",
+      "type": "static",
+      "symbols": [
+        "SettingsView"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "ColorComponents",
+        "Color"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "to": "Sources/GoToBed/UI/Palette.swift",
+      "type": "static",
+      "symbols": [
+        "PresetRow",
+        "SwatchPicker"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings",
+        "Double",
+        "ColorComponents"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "to": "Sources/GoToBedCore/Models/Palette.swift",
+      "type": "static",
+      "symbols": [
+        "ColorComponents"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/Palette.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color",
+        "ColorComponents"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBed/UI/Palette.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/UI/Palette.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings",
+        "ColorComponents"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBed/UI/Palette.swift",
+      "to": "Sources/GoToBedCore/Models/Palette.swift",
+      "type": "static",
+      "symbols": [
+        "AppearancePreset",
+        "ColorComponents",
+        "BrandColor"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "type": "static",
+      "symbols": [
+        "AppEnvironment"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceEditor"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "type": "static",
+      "symbols": [
+        "WeekdayPicker"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "DismissMode"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "type": "static",
+      "symbols": [
+        "AppEnvironment"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceEditor"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleEditorView"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleFormatting"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color"
+      ],
+      "weight": 9
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "type": "static",
+      "symbols": [
+        "View"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "WeekdayPreset"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "type": "static",
+      "symbols": [
+        "AppEnvironment"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "type": "static",
+      "symbols": [
+        "MenuContent"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBedCore/Models/Palette.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBedCore/Models/Palette.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "Double",
+        "AppearanceSettings"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Sources/GoToBedCore/Models/Schedule.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "AppState"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBed/LaunchAtLogin.swift",
+      "type": "static",
+      "symbols": [
+        "LaunchAtLogin"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "type": "static",
+      "symbols": [
+        "Log"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "AppState",
+        "Schedule",
+        "DismissMode"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 8
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "type": "static",
+      "symbols": [
+        "AppStatePersistence"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "type": "static",
+      "symbols": [
+        "Color",
+        "ColorComponents"
+      ],
+      "weight": 9
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings",
+        "ColorComponents"
+      ],
+      "weight": 7
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/Palette.swift",
+      "type": "static",
+      "symbols": [
+        "ColorComponents"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleCalculator"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "type": "static",
+      "symbols": [
+        "TestSupport"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "AppState",
+        "Schedule"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "type": "static",
+      "symbols": [
+        "AppStatePersistence"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleCalculator"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "type": "static",
+      "symbols": [
+        "TestSupport"
+      ],
+      "weight": 7
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleCalculator"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "type": "static",
+      "symbols": [
+        "TestSupport"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "type": "static",
+      "symbols": [
+        "ScheduleCalculator"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "type": "static",
+      "symbols": [
+        "TestSupport"
+      ],
+      "weight": 4
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "type": "static",
+      "symbols": [
+        "AppearanceSettings"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "type": "static",
+      "symbols": [
+        "AppStatePersistence"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 8
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 8
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "type": "static",
+      "symbols": [
+        "OverlayController"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "type": "static",
+      "symbols": [
+        "SchedulerEngine"
+      ],
+      "weight": 2
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "type": "static",
+      "symbols": [
+        "AppStatePersistence"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Tests/GoToBedTests/TestHelpers.swift",
+      "type": "static",
+      "symbols": [
+        "AppLayerTestHelpers"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "type": "static",
+      "symbols": [
+        "OverlayController"
+      ],
+      "weight": 5
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 6
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 3
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "type": "static",
+      "symbols": [
+        "SchedulerEngine"
+      ],
+      "weight": 8
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule",
+        "WeekdayPreset"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "type": "static",
+      "symbols": [
+        "Schedule"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "type": "static",
+      "symbols": [
+        "AppStatePersistence"
+      ],
+      "weight": 1
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "type": "static",
+      "symbols": [
+        "Store"
+      ],
+      "weight": 10
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Tests/GoToBedTests/TestHelpers.swift",
+      "type": "static",
+      "symbols": [
+        "AppLayerTestHelpers"
+      ],
+      "weight": 7
+    }
+  ],
+  "external": [
+    {
+      "package": "GoToBedCore",
+      "importedBy": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/LaunchAtLogin.swift",
+        "Sources/GoToBed/MenuBar/MenuContent.swift",
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Overlay/OverlayView.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBed/SettingsWindowController.swift",
+        "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "Sources/GoToBed/UI/Palette.swift",
+        "Sources/GoToBed/UI/ScheduleEditorView.swift",
+        "Sources/GoToBed/UI/ScheduleFormatting.swift",
+        "Sources/GoToBed/UI/SettingsView.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift",
+        "Sources/GoToBedApp/GoToBedApp.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "GoToBedKit",
+      "importedBy": [
+        "Sources/GoToBedApp/GoToBedApp.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "PackageDescription",
+      "importedBy": [
+        "Package.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "ServiceManagement",
+      "importedBy": [
+        "Sources/GoToBed/LaunchAtLogin.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:AppKit",
+      "importedBy": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBed/SettingsWindowController.swift",
+        "Sources/GoToBedApp/GoToBedApp.swift",
+        "Tests/GoToBedTests/InterServiceWiringTests.swift",
+        "Tests/GoToBedTests/OverlayControllerTests.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:Combine",
+      "importedBy": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBedCore/Store/Store.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:Foundation",
+      "importedBy": [
+        "Sources/GoToBed/AppInfo.swift",
+        "Sources/GoToBed/LaunchAtLogin.swift",
+        "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBed/UI/ScheduleFormatting.swift",
+        "Sources/GoToBedCore/Logging/Log.swift",
+        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "Sources/GoToBedCore/Models/Palette.swift",
+        "Sources/GoToBedCore/Models/Schedule.swift",
+        "Sources/GoToBedCore/Models/Validation.swift",
+        "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "Sources/GoToBedCore/Store/Store.swift",
+        "Tests/GoToBedCoreTests/TestSupport.swift",
+        "Tests/GoToBedTests/TestHelpers.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:SwiftUI",
+      "importedBy": [
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/MenuBar/MenuContent.swift",
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Overlay/OverlayView.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/SettingsWindowController.swift",
+        "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "Sources/GoToBed/UI/Compat.swift",
+        "Sources/GoToBed/UI/Palette.swift",
+        "Sources/GoToBed/UI/ScheduleEditorView.swift",
+        "Sources/GoToBed/UI/SettingsView.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift",
+        "Sources/GoToBedApp/GoToBedApp.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:XCTest",
+      "importedBy": [
+        "Tests/GoToBedCoreTests/ContrastTests.swift",
+        "Tests/GoToBedCoreTests/DSTTests.swift",
+        "Tests/GoToBedCoreTests/PersistenceTests.swift",
+        "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+        "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+        "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+        "Tests/GoToBedCoreTests/StoreTests.swift",
+        "Tests/GoToBedCoreTests/SubmessageTests.swift",
+        "Tests/GoToBedCoreTests/ValidationTests.swift",
+        "Tests/GoToBedTests/InterServiceWiringTests.swift",
+        "Tests/GoToBedTests/OverlayControllerTests.swift",
+        "Tests/GoToBedTests/SchedulerEngineTests.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    },
+    {
+      "package": "stdlib:os",
+      "importedBy": [
+        "Sources/GoToBedCore/Logging/Log.swift"
+      ],
+      "symbols": [
+        "*"
+      ]
+    }
+  ],
   "summary": {
-    "totalEdges": 0,
-    "totalExternal": 0,
-    "circularCount": 0,
-    "circulars": [],
-    "mostImported": [],
-    "avgImportsPerFile": 0
+    "totalEdges": 134,
+    "totalExternal": 10,
+    "circularCount": 4,
+    "circulars": [
+      {
+        "cycle": [
+          "Sources/GoToBed/AppEnvironment.swift",
+          "Sources/GoToBed/SettingsWindowController.swift"
+        ]
+      },
+      {
+        "cycle": [
+          "Sources/GoToBed/AppEnvironment.swift",
+          "Sources/GoToBed/SettingsWindowController.swift",
+          "Sources/GoToBed/UI/SettingsView.swift"
+        ]
+      },
+      {
+        "cycle": [
+          "Sources/GoToBed/AppEnvironment.swift",
+          "Sources/GoToBed/SettingsWindowController.swift",
+          "Sources/GoToBed/UI/SettingsView.swift",
+          "Sources/GoToBed/UI/ScheduleEditorView.swift"
+        ]
+      },
+      {
+        "cycle": [
+          "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "Sources/GoToBed/ColorBridging.swift"
+        ]
+      }
+    ],
+    "mostImported": [
+      {
+        "path": "Sources/GoToBedCore/Models/Schedule.swift",
+        "count": 23
+      },
+      {
+        "path": "Sources/GoToBedCore/Models/Validation.swift",
+        "count": 21
+      },
+      {
+        "path": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "count": 11
+      },
+      {
+        "path": "Sources/GoToBed/UI/Compat.swift",
+        "count": 9
+      },
+      {
+        "path": "Sources/GoToBed/ColorBridging.swift",
+        "count": 8
+      },
+      {
+        "path": "Sources/GoToBedCore/Logging/Log.swift",
+        "count": 8
+      },
+      {
+        "path": "Sources/GoToBedCore/Store/Store.swift",
+        "count": 6
+      },
+      {
+        "path": "Sources/GoToBed/AppEnvironment.swift",
+        "count": 5
+      },
+      {
+        "path": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "count": 5
+      },
+      {
+        "path": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "count": 5
+      },
+      {
+        "path": "Tests/GoToBedCoreTests/TestSupport.swift",
+        "count": 4
+      },
+      {
+        "path": "Sources/GoToBed/LaunchAtLogin.swift",
+        "count": 3
+      },
+      {
+        "path": "Sources/GoToBed/Overlay/OverlayController.swift",
+        "count": 3
+      },
+      {
+        "path": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "count": 3
+      },
+      {
+        "path": "Sources/GoToBedCore/Models/Palette.swift",
+        "count": 3
+      },
+      {
+        "path": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+        "count": 2
+      },
+      {
+        "path": "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "count": 2
+      },
+      {
+        "path": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+        "count": 2
+      },
+      {
+        "path": "Tests/GoToBedTests/TestHelpers.swift",
+        "count": 2
+      },
+      {
+        "path": "Sources/GoToBed/SettingsWindowController.swift",
+        "count": 1
+      }
+    ],
+    "avgImportsPerFile": 3.94
   }
 }

@@ -1,0 +1,23 @@
+{
+  "id": "tests-gotobedtests",
+  "name": "Tests Gotobedtests",
+  "description": "4 files, primarily Swift",
+  "files": [
+    "Tests/GoToBedTests/InterServiceWiringTests.swift",
+    "Tests/GoToBedTests/OverlayControllerTests.swift",
+    "Tests/GoToBedTests/SchedulerEngineTests.swift",
+    "Tests/GoToBedTests/TestHelpers.swift"
+  ],
+  "entryPoints": [],
+  "cohesion": 1,
+  "coupling": 0,
+  "fileCount": 4,
+  "lineCount": 356,
+  "riskMetrics": {
+    "cohesion": 1,
+    "coupling": 0,
+    "riskScore": 0,
+    "riskLevel": "healthy",
+    "failsThreshold": false
+  }
+}

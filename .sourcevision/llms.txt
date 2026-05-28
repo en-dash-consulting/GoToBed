@@ -5,17 +5,255 @@
 
 ## Project Overview
 
-- **Files**: 2
-- **Lines of code**: 268
-- **Languages**: Other (1), Markdown (1)
-- **Zones**: 0 (0 with descriptions)
-- **Analyzed**: 2026-05-21T03:07:04.522Z
+- **Files**: 111
+- **Lines of code**: 5,968
+- **Languages**: Swift (42), Markdown (27), Other (18), Shell (8), YAML (6)
+- **Zones**: 6 (6 with descriptions)
+- **Avg cohesion**: 0.36, **avg coupling**: 0.00 (weighted by file count, 4 zones with ≥5 files)
+- **Small zones**: 2 excluded from averages (<5 files)
+- **Git**: sv @ 500fe5e
+- **Analyzed**: 2026-05-28T03:43:34.677Z
+
+## Architecture Zones
+
+### Build & Release Scripts (`build-release-scripts`)
+
+Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.
+
+- Files: 8
+- Cohesion: 0.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/build-release-scripts/context.md`
+
+### Packaging (`packaging`)
+
+3 files, primarily Other
+
+- Files: 3
+- Cohesion: 0.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/packaging/context.md`
+
+### Root (`root`)
+
+6 files, primarily Other, Makefile, Swift
+
+- Files: 5
+- Cohesion: 0.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/root/context.md`
+
+### Static Site Assets (`static-site-assets`)
+
+Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.
+
+- Files: 5
+- Cohesion: 0.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/static-site-assets/context.md`
+
+### Tests Gotobedcoretests (`tests-gotobedcoretests`)
+
+10 files, primarily Swift
+
+- Files: 10
+- Cohesion: 1.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/tests-gotobedcoretests/context.md`
+
+### Tests Gotobedtests (`tests-gotobedtests`)
+
+4 files, primarily Swift
+
+- Files: 4
+- Cohesion: 1.00, Coupling: 0.00
+- Detail: `.sourcevision/zones/tests-gotobedtests/context.md`
 
 ## Key Dependencies
+
+### Most-Imported Files
+
+- `Sources/GoToBedCore/Models/Schedule.swift` (23 imports)
+- `Sources/GoToBedCore/Models/Validation.swift` (21 imports)
+- `Sources/GoToBedCore/Models/AppearanceSettings.swift` (11 imports)
+- `Sources/GoToBed/UI/Compat.swift` (9 imports)
+- `Sources/GoToBed/ColorBridging.swift` (8 imports)
+- `Sources/GoToBedCore/Logging/Log.swift` (8 imports)
+- `Sources/GoToBedCore/Store/Store.swift` (6 imports)
+- `Sources/GoToBed/AppEnvironment.swift` (5 imports)
+- `Sources/GoToBedCore/Persistence/AppStatePersistence.swift` (5 imports)
+- `Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift` (5 imports)
+
+### External Packages
+
+- `GoToBedCore` (used by 16 files)
+- `stdlib:Foundation` (used by 15 files)
+- `stdlib:SwiftUI` (used by 13 files)
+- `stdlib:XCTest` (used by 12 files)
+- `stdlib:AppKit` (used by 8 files)
+- `stdlib:Combine` (used by 3 files)
+- `GoToBedKit` (used by 1 files)
+- `PackageDescription` (used by 1 files)
+- `ServiceManagement` (used by 1 files)
+- `stdlib:os` (used by 1 files)
+
+### Circular Dependencies
+
+Found 4 circular dependency chain(s):
+
+- `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift`
+- `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift` → `Sources/GoToBed/UI/SettingsView.swift`
+- `Sources/GoToBed/AppEnvironment.swift` → `Sources/GoToBed/SettingsWindowController.swift` → `Sources/GoToBed/UI/SettingsView.swift` → `Sources/GoToBed/UI/ScheduleEditorView.swift`
+- `Sources/GoToBedCore/Models/AppearanceSettings.swift` → `Sources/GoToBed/ColorBridging.swift`
+
+## Findings
+
+### Observations
+
+- Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0) [info] (build-release-scripts)
+- 4 circular dependency chains detected — see imports.json for details [warning]
+- Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0) [info] (packaging)
+- Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0) [info] (root)
+- Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0) [info] (static-site-assets)
+- High cohesion (1) — files are tightly interconnected [info] (tests-gotobedcoretests)
+- High cohesion (1) — files are tightly interconnected [info] (tests-gotobedtests)
+
+### Suggestions
+
+- Zone "Build & Release Scripts" (build-release-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds [info] (build-release-scripts)
+- Zone "Packaging" (packaging) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — unreliable: zone has only 3 files (minimum 5 for reliable metrics) [info] (packaging)
+- Zone "Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds [info] (root)
+- Zone "Static Site Assets" (static-site-assets) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds [info] (static-site-assets)
+
+## Next Steps
+
+Prioritized work items derived from analysis:
+
+### Medium Priority
+
+1. **4 circular dependency chains detected — see imports.json for details**
+
+### Low Priority
+
+1. **Zone "Build & Release Scripts" (build-release-scripts) has at-risk risk (score:…**
+   Files: `scripts/build-app.sh`, `scripts/check-core-purity.sh`, `scripts/check-site-docs.sh`
+
+1. **Zone "Packaging" (packaging) has at-risk risk (score: 0.50, cohesion: 0.00, cou…**
+   Files: `Packaging/AppIcon.icns`, `Packaging/GoToBed.entitlements`, `Packaging/Info.plist`
+
+1. **Zone "Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.0…**
+   Files: `.gitignore`, `LICENSE`, `Makefile`
+
+1. **Zone "Static Site Assets" (static-site-assets) has at-risk risk (score: 0.50, c…**
+   Files: `docs/CNAME`, `docs/llms.txt`, `docs/robots.txt`
 
 ## File Inventory
 
 | Path | Role | Archetype | Zone |
 |------|------|-----------|------|
-| `.gitignore` | config |  |  |
+| `.agents/skills/ndx-capture/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-config/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-feedback/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-plan/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-reshape/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-status/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-work/SKILL.md` | docs |  |  |
+| `.agents/skills/ndx-zone/SKILL.md` | docs |  |  |
+| `.agents/skills/no-plan-mode/SKILL.md` | docs |  |  |
+| `.claude/settings.local.json` | other |  |  |
+| `.claude/skills/ndx-capture/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-config/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-feedback/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-plan/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-reshape/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-status/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-work/SKILL.md` | docs |  |  |
+| `.claude/skills/ndx-zone/SKILL.md` | docs |  |  |
+| `.claude/skills/no-plan-mode/SKILL.md` | docs |  |  |
+| `.codex/config.toml` | other |  |  |
+| `.github/ISSUE_TEMPLATE/bug_report.yml` | other |  |  |
+| `.github/ISSUE_TEMPLATE/config.yml` | other |  |  |
+| `.github/ISSUE_TEMPLATE/feature_request.yml` | other |  |  |
+| `.github/PULL_REQUEST_TEMPLATE.md` | docs |  |  |
+| `.github/dependabot.yml` | other |  |  |
+| `.github/workflows/ci.yml` | build |  |  |
+| `.github/workflows/release.yml` | build |  |  |
+| `.gitignore` | other |  | root |
+| `.n-dx.json` | other |  |  |
+| `.release-please-manifest.json` | other |  |  |
+| `AGENTS.md` | docs |  |  |
+| `CHANGELOG.md` | docs |  |  |
+| `CLAUDE.md` | docs |  |  |
+| `CODE_OF_CONDUCT.md` | docs |  |  |
+| `CONTRIBUTING.md` | docs |  |  |
+| `LICENSE` | docs |  | root |
+| `Makefile` | config |  | root |
 | `PRD.md` | docs |  |  |
+| `Package.swift` | config |  | root |
+| `Packaging/AppIcon-source.png` | asset |  |  |
+| `Packaging/AppIcon.icns` | other |  | packaging |
+| `Packaging/GoToBed.entitlements` | other |  | packaging |
+| `Packaging/Info.plist` | other |  | packaging |
+| `README.md` | docs |  |  |
+| `SECURITY.md` | docs |  |  |
+| `Sources/GoToBed/AppEnvironment.swift` | source | config |  |
+| `Sources/GoToBed/AppInfo.swift` | source | types |  |
+| `Sources/GoToBed/ColorBridging.swift` | source | utility |  |
+| `Sources/GoToBed/LaunchAtLogin.swift` | source | service |  |
+| `Sources/GoToBed/MenuBar/MenuContent.swift` | source | component |  |
+| `Sources/GoToBed/MenuBar/MenuViewModel.swift` | source | store |  |
+| `Sources/GoToBed/Overlay/OverlayController.swift` | source | service |  |
+| `Sources/GoToBed/Overlay/OverlayView.swift` | source | component |  |
+| `Sources/GoToBed/Overlay/OverlayWindow.swift` | source | component |  |
+| `Sources/GoToBed/Scheduler/SchedulerEngine.swift` | source | service |  |
+| `Sources/GoToBed/SettingsWindowController.swift` | source | service |  |
+| `Sources/GoToBed/UI/AppearanceEditor.swift` | source | component |  |
+| `Sources/GoToBed/UI/Compat.swift` | source | utility |  |
+| `Sources/GoToBed/UI/Palette.swift` | source | component |  |
+| `Sources/GoToBed/UI/ScheduleEditorView.swift` | source | component |  |
+| `Sources/GoToBed/UI/ScheduleFormatting.swift` | source | utility |  |
+| `Sources/GoToBed/UI/SettingsView.swift` | source | page |  |
+| `Sources/GoToBed/UI/WeekdayPicker.swift` | source | component |  |
+| `Sources/GoToBedApp/GoToBedApp.swift` | source | entrypoint |  |
+| `Sources/GoToBedCore/Logging/Log.swift` | source | utility |  |
+| `Sources/GoToBedCore/Models/AppearanceSettings.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Palette.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Schedule.swift` | source | model |  |
+| `Sources/GoToBedCore/Models/Validation.swift` | source | schema |  |
+| `Sources/GoToBedCore/Persistence/AppStatePersistence.swift` | source | service |  |
+| `Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift` | source | service |  |
+| `Sources/GoToBedCore/Store/Store.swift` | source | store |  |
+| `Tests/GoToBedCoreTests/ContrastTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/DSTTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/PersistenceTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/SchedulerLoopTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/SleepSkipTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/StoreTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/SubmessageTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/TestSupport.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedCoreTests/ValidationTests.swift` | test |  | tests-gotobedcoretests |
+| `Tests/GoToBedTests/InterServiceWiringTests.swift` | test |  | tests-gotobedtests |
+| `Tests/GoToBedTests/OverlayControllerTests.swift` | test |  | tests-gotobedtests |
+| `Tests/GoToBedTests/SchedulerEngineTests.swift` | test |  | tests-gotobedtests |
+| `Tests/GoToBedTests/TestHelpers.swift` | test |  | tests-gotobedtests |
+| `VERSION` | other |  | root |
+| `docs/CNAME` | docs |  | static-site-assets |
+| `docs/apple-touch-icon.png` | docs |  |  |
+| `docs/demo.mp4` | docs |  |  |
+| `docs/favicon-16x16.png` | docs |  |  |
+| `docs/favicon-32x32.png` | docs |  |  |
+| `docs/favicon.ico` | docs |  |  |
+| `docs/icon-192.png` | docs |  |  |
+| `docs/icon-512.png` | docs |  |  |
+| `docs/icon.png` | docs |  |  |
+| `docs/index.html` | docs |  |  |
+| `docs/llms.txt` | docs |  | static-site-assets |
+| `docs/og-image.png` | docs |  |  |
+| `docs/robots.txt` | docs |  | static-site-assets |
+| `docs/site.webmanifest` | docs |  | static-site-assets |
+| `docs/sitemap.xml` | docs |  | static-site-assets |
+| `release-please-config.json` | other |  |  |
+| `scripts/build-app.sh` | build |  | build-release-scripts |
+| `scripts/check-core-purity.sh` | build |  | build-release-scripts |
+| `scripts/check-site-docs.sh` | build |  | build-release-scripts |
+| `scripts/check-zone-layering.sh` | build |  | build-release-scripts |
+| `scripts/make-dmg.sh` | build |  | build-release-scripts |
+| `scripts/make-icon.sh` | build |  | build-release-scripts |
+| `scripts/stamp-site-version.sh` | build |  | build-release-scripts |
+| `scripts/verify-no-network.sh` | build |  | build-release-scripts |

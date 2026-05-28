@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "findings": [
+    {
+      "hash": "34d3c41e2708",
+      "reason": "acknowledged",
+      "text": "Non-Swift packaging assets are merged into the overlay UI zone by community detection, masking the true cohesion of the OverlayController/OverlayView/OverlayWindow triad.",
+      "type": "observation",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-23T03:03:54.573Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "f48f68efb301",
+      "reason": "acknowledged",
+      "text": "Project configuration files (Makefile, LICENSE, .gitignore) are merged with core Swift domain models due to shared absence of import edges, obscuring the models' architectural role.",
+      "type": "observation",
+      "scope": "project-root-models",
+      "acknowledgedAt": "2026-05-23T03:03:54.574Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "bd918793cfbc",
+      "reason": "acknowledged",
+      "text": "All zone cohesion and coupling metrics are 0.0 with no detected cross-zone imports, indicating Swift import graph resolution was incomplete; treat zone membership as approximate until re-analyzed with full dependency data.",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-23T03:03:54.574Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "1a501a41c90a",
+      "reason": "acknowledged",
+      "text": "Universal 0-cohesion across all zones suggests the primary source language is not JavaScript/TypeScript (or the JS/TS entry points are minimal); consider supplementing sourcevision's import-graph analysis with file-proximity clustering or manifest-based dependency analysis to get meaningful architectural signal.",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-23T03:03:54.574Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "7bb165fe7388",
+      "reason": "acknowledged",
+      "text": "AppEnvironment is an undocumented composition root — it is the single point where all inter-service wiring happens, but no comment or type annotation marks it as such, increasing the risk that a future contributor adds service coupling elsewhere.",
+      "type": "pattern",
+      "scope": "app-lifecycle",
+      "acknowledgedAt": "2026-05-23T03:03:54.574Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "21d510da5e51",
+      "reason": "acknowledged",
+      "text": "NSApp activation policy is switched inside OverlayController.present() as an undocumented side effect — callers have no way to opt out or observe the transition, creating hidden global state coupling.",
+      "type": "pattern",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-23T03:03:54.574Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "4bc575887d87",
+      "reason": "acknowledged",
+      "text": "No service protocols exist for SchedulerEngine or OverlayController — AppEnvironment couples concrete types directly, making the composition root difficult to test in isolation.",
+      "type": "pattern",
+      "scope": "app-lifecycle",
+      "acknowledgedAt": "2026-05-23T03:04:10.235Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "ab6ceabd03a8",
+      "reason": "acknowledged",
+      "text": "No zone boundary is machine-enforced between the three production UI zones (settings-ui, overlay-ui, app-lifecycle). Swift module visibility (internal vs. public) is the only available compile-time mechanism to prevent settings-ui from importing overlay-ui types or vice versa, but there is no evidence this is used intentionally as an architectural constraint — meaning cross-UI-zone coupling can accumulate invisibly.",
+      "type": "anti-pattern",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-23T03:04:21.952Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "699a5776bf7d",
+      "reason": "acknowledged",
+      "text": "Add a replaceError or catch operator to each Combine sink in the Store → SchedulerEngine → AppEnvironment event chain so that a single domain error does not permanently cancel the subscription; document the expected error types at each link so recovery behavior is explicit.",
+      "type": "suggestion",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-23T03:06:00.000Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "2360c21c19db",
+      "reason": "circulars are AppEnv ↔ SettingsWindowController ↔ Settings views — addressed by accepted doc-only finding 0013e7. Bidirectional 'overlay-ui ↔ scheduler-engine' is a zone-naming artifact: scheduler-engine zone over-includes GoToBedCore + composition root, and overlay-ui zone contains settings editors, not overlay code.",
+      "text": "4 circular dependency chains detected — see imports.json for details",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-25T18:17:31.561Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "1aab9b391f3c",
+      "reason": "circulars are AppEnv ↔ SettingsWindowController ↔ Settings views — addressed by accepted doc-only finding 0013e7. Bidirectional 'overlay-ui ↔ scheduler-engine' is a zone-naming artifact: scheduler-engine zone over-includes GoToBedCore + composition root, and overlay-ui zone contains settings editors, not overlay code.",
+      "text": "Bidirectional coupling: \"overlay-ui\" ↔ \"scheduler-engine\" (9+3 crossings) — consider extracting shared interface",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-25T18:17:31.561Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "ac6e2b482214",
+      "reason": "tool-artifact",
+      "text": "High coupling (0.67) — 9 imports target \"scheduler-engine\"",
+      "type": "observation",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:38.965Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "2014d80fbcde",
+      "reason": "tool-artifact",
+      "text": "Low cohesion (0.33) — files are loosely related, consider splitting this zone",
+      "type": "observation",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:38.966Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "a86c248e6e05",
+      "reason": "over-engineered",
+      "text": "overlay-ui views take @EnvironmentObject var env: AppEnvironment (the composition root) rather than a narrower @EnvironmentObject scoped to only the actions they invoke (updateSchedule, previewOverlay); this prevents standalone SwiftUI Previews and inflates the dependency surface of every settings screen",
+      "type": "relationship",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:41.822Z",
+      "acknowledgedBy": "user"
+    }
+  ]
+}

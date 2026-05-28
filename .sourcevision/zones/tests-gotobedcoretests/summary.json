@@ -1,0 +1,29 @@
+{
+  "id": "tests-gotobedcoretests",
+  "name": "Tests Gotobedcoretests",
+  "description": "10 files, primarily Swift",
+  "files": [
+    "Tests/GoToBedCoreTests/ContrastTests.swift",
+    "Tests/GoToBedCoreTests/DSTTests.swift",
+    "Tests/GoToBedCoreTests/PersistenceTests.swift",
+    "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+    "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+    "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+    "Tests/GoToBedCoreTests/StoreTests.swift",
+    "Tests/GoToBedCoreTests/SubmessageTests.swift",
+    "Tests/GoToBedCoreTests/TestSupport.swift",
+    "Tests/GoToBedCoreTests/ValidationTests.swift"
+  ],
+  "entryPoints": [],
+  "cohesion": 1,
+  "coupling": 0,
+  "fileCount": 10,
+  "lineCount": 526,
+  "riskMetrics": {
+    "cohesion": 1,
+    "coupling": 0,
+    "riskScore": 0,
+    "riskLevel": "healthy",
+    "failsThreshold": false
+  }
+}

@@ -1,14 +1,374 @@
 {
   "files": [
     {
+      "path": ".agents/skills/ndx-capture/SKILL.md",
+      "size": 1425,
+      "language": "Markdown",
+      "lineCount": 25,
+      "hash": "2d9d5ecb0290fa02f2345bba4f1cdb7ef0e5e1581d3d4962ac9a88cc52c91e0b",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830465
+    },
+    {
+      "path": ".agents/skills/ndx-config/SKILL.md",
+      "size": 675,
+      "language": "Markdown",
+      "lineCount": 19,
+      "hash": "a6af1d07661be06445b7742092560a278e927f780f4647821be1c44ec3b67554",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830466
+    },
+    {
+      "path": ".agents/skills/ndx-feedback/SKILL.md",
+      "size": 2445,
+      "language": "Markdown",
+      "lineCount": 61,
+      "hash": "a30d91bf4afa30b1ecdea08fc32d3765d602ad62fe864414a819c9d10ab22720",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830466
+    },
+    {
+      "path": ".agents/skills/ndx-plan/SKILL.md",
+      "size": 785,
+      "language": "Markdown",
+      "lineCount": 15,
+      "hash": "28333f8932432ad4ead5b823e7e13e5d3cd0f33aa443a525df2084e4f027b6c0",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830465
+    },
+    {
+      "path": ".agents/skills/ndx-reshape/SKILL.md",
+      "size": 2857,
+      "language": "Markdown",
+      "lineCount": 49,
+      "hash": "3fe8d716e27afb18c623824a1f4ee4f135b9e1a135f7682db930d8cf7dac98c0",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830466
+    },
+    {
+      "path": ".agents/skills/ndx-status/SKILL.md",
+      "size": 653,
+      "language": "Markdown",
+      "lineCount": 13,
+      "hash": "ab18acd1ecf73a1a40bb15281733e51c59d73856178286b4e407635048cfbe6e",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830465
+    },
+    {
+      "path": ".agents/skills/ndx-work/SKILL.md",
+      "size": 1168,
+      "language": "Markdown",
+      "lineCount": 19,
+      "hash": "7cbe6c2ce00b0e48019a21ab429243cdd5a618ecb8a2d387dc9232f8893005b5",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830466
+    },
+    {
+      "path": ".agents/skills/ndx-zone/SKILL.md",
+      "size": 727,
+      "language": "Markdown",
+      "lineCount": 14,
+      "hash": "2dde956c5327b78669b5617d8d768b8edb540c52ccf8019caae6d7bbb9c24cba",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830465
+    },
+    {
+      "path": ".agents/skills/no-plan-mode/SKILL.md",
+      "size": 2290,
+      "language": "Markdown",
+      "lineCount": 46,
+      "hash": "8f9a3d5635079d2389371a08a0f756d894cb0e10437a2613611f19a4a662a2dc",
+      "role": "docs",
+      "category": ".agents",
+      "lastModified": 1779332830465
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "size": 2167,
+      "language": "JSON",
+      "lineCount": 54,
+      "hash": "4a8180d205724363dd15479f8ea4d159119accabff44e8f5b5187afc672f8c19",
+      "role": "other",
+      "category": ".claude",
+      "lastModified": 1779667406351
+    },
+    {
+      "path": ".claude/skills/ndx-capture/SKILL.md",
+      "size": 1425,
+      "language": "Markdown",
+      "lineCount": 25,
+      "hash": "2d9d5ecb0290fa02f2345bba4f1cdb7ef0e5e1581d3d4962ac9a88cc52c91e0b",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/ndx-config/SKILL.md",
+      "size": 675,
+      "language": "Markdown",
+      "lineCount": 19,
+      "hash": "a6af1d07661be06445b7742092560a278e927f780f4647821be1c44ec3b67554",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/ndx-feedback/SKILL.md",
+      "size": 2445,
+      "language": "Markdown",
+      "lineCount": 61,
+      "hash": "a30d91bf4afa30b1ecdea08fc32d3765d602ad62fe864414a819c9d10ab22720",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828845
+    },
+    {
+      "path": ".claude/skills/ndx-plan/SKILL.md",
+      "size": 785,
+      "language": "Markdown",
+      "lineCount": 15,
+      "hash": "28333f8932432ad4ead5b823e7e13e5d3cd0f33aa443a525df2084e4f027b6c0",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/ndx-reshape/SKILL.md",
+      "size": 2857,
+      "language": "Markdown",
+      "lineCount": 49,
+      "hash": "3fe8d716e27afb18c623824a1f4ee4f135b9e1a135f7682db930d8cf7dac98c0",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828845
+    },
+    {
+      "path": ".claude/skills/ndx-status/SKILL.md",
+      "size": 653,
+      "language": "Markdown",
+      "lineCount": 13,
+      "hash": "ab18acd1ecf73a1a40bb15281733e51c59d73856178286b4e407635048cfbe6e",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/ndx-work/SKILL.md",
+      "size": 1168,
+      "language": "Markdown",
+      "lineCount": 19,
+      "hash": "7cbe6c2ce00b0e48019a21ab429243cdd5a618ecb8a2d387dc9232f8893005b5",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/ndx-zone/SKILL.md",
+      "size": 727,
+      "language": "Markdown",
+      "lineCount": 14,
+      "hash": "2dde956c5327b78669b5617d8d768b8edb540c52ccf8019caae6d7bbb9c24cba",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828844
+    },
+    {
+      "path": ".claude/skills/no-plan-mode/SKILL.md",
+      "size": 2290,
+      "language": "Markdown",
+      "lineCount": 46,
+      "hash": "8f9a3d5635079d2389371a08a0f756d894cb0e10437a2613611f19a4a662a2dc",
+      "role": "docs",
+      "category": ".claude",
+      "lastModified": 1779332828843
+    },
+    {
+      "path": ".codex/config.toml",
+      "size": 311,
+      "language": "TOML",
+      "lineCount": 10,
+      "hash": "fea9a22f6e232494abf8a1b203d5c48514354b80a9a6760a91888448087c5d84",
+      "role": "other",
+      "category": ".codex",
+      "lastModified": 1779388889428
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "size": 1157,
+      "language": "YAML",
+      "lineCount": 42,
+      "hash": "bcb777c71ecdbc70f0e99fee327bb2a39693373c61b9119e493b8bbf8065c2cc",
+      "role": "other",
+      "category": ".github",
+      "lastModified": 1779419769995
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "size": 455,
+      "language": "YAML",
+      "lineCount": 11,
+      "hash": "9e1b177c5753c6933f24070508a1a2326d3668f08020db290f8a9949ee3f2103",
+      "role": "other",
+      "category": ".github",
+      "lastModified": 1779419780221
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "size": 782,
+      "language": "YAML",
+      "lineCount": 28,
+      "hash": "9f3ff8f87027ef47929d1b7badc4d5a46c803a5b4506fbdc5bb7f9bd50a473dd",
+      "role": "other",
+      "category": ".github",
+      "lastModified": 1779419775523
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "size": 535,
+      "language": "Markdown",
+      "lineCount": 13,
+      "hash": "0252764051915d8c282a68f5b4aca241a31041e826ec444c786ef2af2ff5aca9",
+      "role": "docs",
+      "category": ".github",
+      "lastModified": 1779419786771
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "size": 282,
+      "language": "YAML",
+      "lineCount": 10,
+      "hash": "c4ca86b9e2faefd3107ee8487aa27507c76b095d92f083bf84ed88e0b2f11737",
+      "role": "other",
+      "category": ".github",
+      "lastModified": 1779419791471
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "size": 643,
+      "language": "YAML",
+      "lineCount": 24,
+      "hash": "b65ab438a299207cbc7a3aaf5885550cf6611a0bc2b7a6c0989cca3cc8159cae",
+      "role": "build",
+      "category": ".github",
+      "lastModified": 1779505959994
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "size": 4475,
+      "language": "YAML",
+      "lineCount": 112,
+      "hash": "3bbf29770383f70ede627a4c763d0fb67a927a597a70b2dc097b308e08adaa12",
+      "role": "build",
+      "category": ".github",
+      "lastModified": 1779679633842
+    },
+    {
       "path": ".gitignore",
-      "size": 17,
+      "size": 373,
       "language": "Other",
-      "lineCount": 1,
-      "hash": "a9f02a107b4eb2b44b7e6d307c8c2b5691700f2176d028df8c3bab05d06b8363",
+      "lineCount": 17,
+      "hash": "41e2db5903d1437f1a3c325a08e6b3e7ae055390fc0c8c04c38cbf2c27a9cd6c",
+      "role": "other",
+      "category": "root",
+      "lastModified": 1779677793006
+    },
+    {
+      "path": ".n-dx.json",
+      "size": 236,
+      "language": "JSON",
+      "lineCount": 15,
+      "hash": "d3a586721d6866123e615193235ff863bf43599bf408668dffa5edcc4e1d0315",
+      "role": "other",
+      "category": "root",
+      "lastModified": 1779678160820
+    },
+    {
+      "path": ".release-please-manifest.json",
+      "size": 19,
+      "language": "JSON",
+      "lineCount": 3,
+      "hash": "47782935da4bf180afb7d35e64010d945987eb4ac7fcbb742b8974cee06bb253",
+      "role": "other",
+      "category": "root",
+      "lastModified": 1779418688137
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 17221,
+      "language": "Markdown",
+      "lineCount": 342,
+      "hash": "b659773dcf4201247a0a2aff5571e5af27d08b59d0c4686aebd37c5440ef1163",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779332830466
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 580,
+      "language": "Markdown",
+      "lineCount": 15,
+      "hash": "bcfadccfe6366d08651a6bc01b2393e9dfc58cf3db0b4c7e1dc0a6f59a1029b2",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779418688138
+    },
+    {
+      "path": "CLAUDE.md",
+      "size": 30919,
+      "language": "Markdown",
+      "lineCount": 422,
+      "hash": "300890d7db94fd9c441c9a674ce995780106e3453965b3c7b49d23c772044631",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779332830463
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "size": 2390,
+      "language": "Markdown",
+      "lineCount": 59,
+      "hash": "680b891779f6f4a1ef5c1e6031f3667f6f74903bc7277babdf80384ed9c55388",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779419762257
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 2315,
+      "language": "Markdown",
+      "lineCount": 64,
+      "hash": "5b5dfae7d5bbf75204af4ec4c706257d736f97e8475ac77ab668235f3961cbc0",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779419318320
+    },
+    {
+      "path": "LICENSE",
+      "size": 1068,
+      "language": "Other",
+      "lineCount": 21,
+      "hash": "9dfc87ea310bb6a7fca98f9f7103f93378d3d56d7dc4430c64ecad9b1a1d15ef",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779387573893
+    },
+    {
+      "path": "Makefile",
+      "size": 690,
+      "language": "Makefile",
+      "lineCount": 27,
+      "hash": "60151f542ccea51db771954103511d086a44f31b72e741da752f3bb0d8a5502a",
       "role": "config",
       "category": "root",
-      "lastModified": 1779332823586
+      "lastModified": 1779681013603
     },
     {
       "path": "PRD.md",
@@ -19,21 +379,774 @@
       "role": "docs",
       "category": "root",
       "lastModified": 1779332768330
+    },
+    {
+      "path": "Package.swift",
+      "size": 1536,
+      "language": "Swift",
+      "lineCount": 43,
+      "hash": "80772e5a5bba576108cc9e39301dcc01d02c21ee1a9bf7439e355984d47126ac",
+      "role": "config",
+      "category": "root",
+      "lastModified": 1779680347238
+    },
+    {
+      "path": "Packaging/AppIcon-source.png",
+      "size": 1267087,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "4dd2a65024e25e6e94e9e7e8ffcf66274c3c64ae54dce46f4f973b05c70e79b1",
+      "role": "asset",
+      "category": "packaging",
+      "lastModified": 1779395565355
+    },
+    {
+      "path": "Packaging/AppIcon.icns",
+      "size": 1520901,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "ef436d6bdcbfc5711e918d5df7c72ef0d7f8c45927e2dd9f5eb29cacf7129fd9",
+      "role": "other",
+      "category": "packaging",
+      "lastModified": 1779395565906
+    },
+    {
+      "path": "Packaging/GoToBed.entitlements",
+      "size": 552,
+      "language": "Other",
+      "lineCount": 14,
+      "hash": "fc28c67778a3089a5cf8a469c4cec6f9003eba293882f2848f8671016dfa775b",
+      "role": "other",
+      "category": "packaging",
+      "lastModified": 1779367452505
+    },
+    {
+      "path": "Packaging/Info.plist",
+      "size": 971,
+      "language": "Other",
+      "lineCount": 31,
+      "hash": "eebf047eb0e6f63a4af411d40f32f62efcaaa96a0090ebf2999c5c0f3928d824",
+      "role": "other",
+      "category": "packaging",
+      "lastModified": 1779372313210
+    },
+    {
+      "path": "README.md",
+      "size": 6105,
+      "language": "Markdown",
+      "lineCount": 130,
+      "hash": "35d191a9868cb0dfe98bcc17847075f779d15050ff7c833c22babb1fa8b94042",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779410165450
+    },
+    {
+      "path": "SECURITY.md",
+      "size": 930,
+      "language": "Markdown",
+      "lineCount": 25,
+      "hash": "18018a00666d4dc377ddbc613857150a8ce35ec5b666bb7826eea60fb9d7b513",
+      "role": "docs",
+      "category": "root",
+      "lastModified": 1779419326802
+    },
+    {
+      "path": "Sources/GoToBed/AppEnvironment.swift",
+      "size": 5506,
+      "language": "Swift",
+      "lineCount": 161,
+      "hash": "83a15b4b5e2004e1238cf10455f6629f7e6d473892802a7a6cf3f2fef3878f46",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681688349
+    },
+    {
+      "path": "Sources/GoToBed/AppInfo.swift",
+      "size": 821,
+      "language": "Swift",
+      "lineCount": 21,
+      "hash": "b65b36dadf236e710f7462bffc5eb69960c45a882367375140f53c0cdb6cd291",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779389652579
+    },
+    {
+      "path": "Sources/GoToBed/ColorBridging.swift",
+      "size": 904,
+      "language": "Swift",
+      "lineCount": 29,
+      "hash": "874c231b22b32981e7c25b0ea56f3570f96ee1e2f1fdcc59e47362dbd3881dde",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362013505
+    },
+    {
+      "path": "Sources/GoToBed/LaunchAtLogin.swift",
+      "size": 840,
+      "language": "Swift",
+      "lineCount": 23,
+      "hash": "47e16cbb6add29bbcfa46671b426e577f22b9ddc7d0f909b3462f18e98da66aa",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362102236
+    },
+    {
+      "path": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "size": 3194,
+      "language": "Swift",
+      "lineCount": 94,
+      "hash": "d5e312c6955df4f822c90cc01d1593700b6fb6c1c7b3d673a0fc9f7aa2975403",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681702958
+    },
+    {
+      "path": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+      "size": 520,
+      "language": "Swift",
+      "lineCount": 14,
+      "hash": "86e28db73bfaf3fe7db8c7e21bc8bc62c0b27359f522aa7836d6cb3b557e2151",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681659977
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "size": 3662,
+      "language": "Swift",
+      "lineCount": 98,
+      "hash": "353abb4c833e11667602bba9859f959fadb9ed4a869ae05d515a5bac31121390",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779677706803
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "size": 4902,
+      "language": "Swift",
+      "lineCount": 117,
+      "hash": "1b7e349f5cc0f43ef56b5c3e65978c35ae1f56ee08c3c0a1171f6f6b1f6d68a6",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779374945466
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "size": 2283,
+      "language": "Swift",
+      "lineCount": 69,
+      "hash": "d91a7312199d7718a698f0e08c16bc4f393d3f4cffc7b041a915ee99d5fdc3a0",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362067070
+    },
+    {
+      "path": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "size": 4710,
+      "language": "Swift",
+      "lineCount": 125,
+      "hash": "d459ef22c21a615f7cf60dfd09676522bdd09d2bd10ebf8958057a5f1b01db95",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362988083
+    },
+    {
+      "path": "Sources/GoToBed/SettingsWindowController.swift",
+      "size": 2233,
+      "language": "Swift",
+      "lineCount": 63,
+      "hash": "3650ee794bd1b6bf7c8283b0db3048e55fc235f7c0ae47d5f38bc8a29837d0e3",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681648070
+    },
+    {
+      "path": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "size": 5199,
+      "language": "Swift",
+      "lineCount": 114,
+      "hash": "4ca393dc21248f8f1a3d5daa64fe69081e596630a27ea8abc65f6d20bd4817f9",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779376654025
+    },
+    {
+      "path": "Sources/GoToBed/UI/Compat.swift",
+      "size": 677,
+      "language": "Swift",
+      "lineCount": 17,
+      "hash": "0f61ff8a0691fe29b92e6015e8d850eb6f0b5f282035c16f5433b5883a7217b9",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362923732
+    },
+    {
+      "path": "Sources/GoToBed/UI/Palette.swift",
+      "size": 3277,
+      "language": "Swift",
+      "lineCount": 76,
+      "hash": "d032d4060049669e37d467cd3411906ae4380a7446c128e7256cba2a7f2d3565",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681633062
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "size": 4469,
+      "language": "Swift",
+      "lineCount": 118,
+      "hash": "36f8d4aac735b385c4df653afa273bd550ae0c3eeadfb67d218e26ac234da894",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681723695
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "size": 1661,
+      "language": "Swift",
+      "lineCount": 42,
+      "hash": "ee4567e4970e8bb9a96ee7c8d55c4e3639795474215ef15bb4d4827456e7fd9e",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779362140812
+    },
+    {
+      "path": "Sources/GoToBed/UI/SettingsView.swift",
+      "size": 3804,
+      "language": "Swift",
+      "lineCount": 103,
+      "hash": "c88f1c8f2db22673b7f6be6dacea9fe30eba7f52a5a7e5a48ab098d9eea8807d",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681741925
+    },
+    {
+      "path": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "size": 2566,
+      "language": "Swift",
+      "lineCount": 71,
+      "hash": "2b1d0046a0c4e369e04a84724aa79426f80dd8fcc8a62611d2200d4ba3da4119",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779373336961
+    },
+    {
+      "path": "Sources/GoToBedApp/GoToBedApp.swift",
+      "size": 2418,
+      "language": "Swift",
+      "lineCount": 59,
+      "hash": "95bc9ab5c8fe3ea92a29a64d8b780b490ba3a404f8b70cd4492000a3149a43ac",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681747791
+    },
+    {
+      "path": "Sources/GoToBedCore/Logging/Log.swift",
+      "size": 595,
+      "language": "Swift",
+      "lineCount": 14,
+      "hash": "ccb33efc0d2cd2e5eb21fab5566bf490b80aea16d9e0589f110307ec3b2a065a",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779333990367
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "size": 3431,
+      "language": "Swift",
+      "lineCount": 92,
+      "hash": "9f32fbddc34bf420dffdc269d6ff22737e27ab0a90724a0f4ca3f0d06e766721",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779333934423
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Palette.swift",
+      "size": 3705,
+      "language": "Swift",
+      "lineCount": 98,
+      "hash": "6d11cde3c3df4f251977652a039ed86eb6f67455d9aaf7f6a6205f5300aada40",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779681617398
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Schedule.swift",
+      "size": 4292,
+      "language": "Swift",
+      "lineCount": 113,
+      "hash": "be71e34d8bf261b3725be65b9ff22561fa2cee126825bd4ee204c27d38fdff61",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779374915060
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Validation.swift",
+      "size": 3255,
+      "language": "Swift",
+      "lineCount": 77,
+      "hash": "2bc0cd11dc1eaaa34488c4804c6f6365fda0cb4eda678d7b20d85e290807b613",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779374937226
+    },
+    {
+      "path": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "size": 2332,
+      "language": "Swift",
+      "lineCount": 58,
+      "hash": "56aac4a93f4dc341e09ffda9c4210706b1170766bd4e687e3cd7ac280a80093f",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779334000452
+    },
+    {
+      "path": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "size": 2713,
+      "language": "Swift",
+      "lineCount": 68,
+      "hash": "49880f38d33e75efe2be42db82e46eaee481942ade0ce9e21aec283428b1e07d",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779333981238
+    },
+    {
+      "path": "Sources/GoToBedCore/Store/Store.swift",
+      "size": 3474,
+      "language": "Swift",
+      "lineCount": 107,
+      "hash": "c9d17d5c64d638b9e8cdeb31a6dfb70d22934470347e0665f0689efe45cd0696",
+      "role": "source",
+      "category": "sources",
+      "lastModified": 1779334045379
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "size": 1587,
+      "language": "Swift",
+      "lineCount": 39,
+      "hash": "f3dd0c883fcde56c317c41806044580e9ca12a31e00f7d51c2794e26a445a809",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334142975
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "size": 2043,
+      "language": "Swift",
+      "lineCount": 38,
+      "hash": "c85a790e7b741f9885a2317c03b0e1aba07fd553f0336ac49d3f99b75174aa8b",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334104419
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "size": 1806,
+      "language": "Swift",
+      "lineCount": 47,
+      "hash": "1855c686fb14d70740a89784593329da4354deba2559afa137d3ec715bf322f0",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334121813
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "size": 4485,
+      "language": "Swift",
+      "lineCount": 87,
+      "hash": "7e52646752d6290b86ca11be0ec716eb981def41c3e032173affafba9a634782",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779361094007
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "size": 3228,
+      "language": "Swift",
+      "lineCount": 65,
+      "hash": "311fddcf46ea96f4bd7284fd957465a0ed4f9a37616df899b3c781ed74ca0b5b",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779367491909
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "size": 2503,
+      "language": "Swift",
+      "lineCount": 48,
+      "hash": "1855a4ace3db0462f6e28829cfc3ad47725edfd71f6387d975dc6207f76f1974",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779361100023
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "size": 3063,
+      "language": "Swift",
+      "lineCount": 79,
+      "hash": "837a373eb5865356f4635ee7bf6054c9d3d85107661c32d6888e69514766049c",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334135370
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "size": 1819,
+      "language": "Swift",
+      "lineCount": 39,
+      "hash": "49aa325858f534dadfd49331adc2aa654642fc2d28662b471a829b96300cb816",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779374972272
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/TestSupport.swift",
+      "size": 938,
+      "language": "Swift",
+      "lineCount": 29,
+      "hash": "71cbad34ec2dfcba91a73eb9b9dcea89da1b0320ca75a41f36ea3e5caa298ad6",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334063228
+    },
+    {
+      "path": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "size": 2392,
+      "language": "Swift",
+      "lineCount": 55,
+      "hash": "07a2d7e500868d5902b202d17f47b6f04c34edce08c2587ad1edcba9f0fef2ad",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779334113685
+    },
+    {
+      "path": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "size": 3856,
+      "language": "Swift",
+      "lineCount": 95,
+      "hash": "7afa54f70b636cb22777b9ff843429331664529aea77964133270f1114912b1c",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779680583273
+    },
+    {
+      "path": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "size": 2632,
+      "language": "Swift",
+      "lineCount": 73,
+      "hash": "440f63b958e8f9e6ea17d6bc3e957ae2c4e46af8fff5144bca4e5cf4797e1300",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779680556460
+    },
+    {
+      "path": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "size": 6718,
+      "language": "Swift",
+      "lineCount": 162,
+      "hash": "13fb1c87ac298efd3ea06264c7b4bbc0e2483d3d94ad2c28ca013beee18b62c1",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779680542648
+    },
+    {
+      "path": "Tests/GoToBedTests/TestHelpers.swift",
+      "size": 899,
+      "language": "Swift",
+      "lineCount": 26,
+      "hash": "9c576adf4e693e341fbf5cee7cdd4674e075d5c1deba8bd2c99f7bc105dec666",
+      "role": "test",
+      "category": "tests",
+      "lastModified": 1779680445638
+    },
+    {
+      "path": "VERSION",
+      "size": 6,
+      "language": "Other",
+      "lineCount": 1,
+      "hash": "71015c979ccb0fc8a0be7ca0ae83046ab045cdc2c8faa09fb2f0f7e440f9b4a6",
+      "role": "other",
+      "category": "root",
+      "lastModified": 1779679123717
+    },
+    {
+      "path": "docs/CNAME",
+      "size": 18,
+      "language": "Other",
+      "lineCount": 1,
+      "hash": "86a8b816a9f5520c39292393b6c7c2e3090bc132d330bf3ed780c50496e44fe9",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779387577439
+    },
+    {
+      "path": "docs/apple-touch-icon.png",
+      "size": 31781,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "92bf0d76dbde8fc9c506479ea63037eb510581c26b48b3edae80323cd226ad31",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688146
+    },
+    {
+      "path": "docs/demo.mp4",
+      "size": 1223648,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "e105bc8a643c3a635826c0a1e116bbb3d8f892aace656f5f5e22542258f0db59",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779457383838
+    },
+    {
+      "path": "docs/favicon-16x16.png",
+      "size": 1190,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "271aa7bd561ae55c630a993357b49495d7c401b1d5053ea1ba5be066a5321df5",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688146
+    },
+    {
+      "path": "docs/favicon-32x32.png",
+      "size": 2251,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "08d754663265ff9f797519a1df0b750e7d5a631e692363e6b51d47e249fb99c3",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688147
+    },
+    {
+      "path": "docs/favicon.ico",
+      "size": 3479,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "ac1f7c58544316002846a23862d0bb278e6b24c7dc9662766d4a51943c3f9b9c",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688147
+    },
+    {
+      "path": "docs/icon-192.png",
+      "size": 36060,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "f32e1d3e14df48c00ebf6049f732f9848a2511234463149fa9df9b87c50d6397",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688147
+    },
+    {
+      "path": "docs/icon-512.png",
+      "size": 245253,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "823841c11d225ce45cb22486e1e01b53f3fea48c347db32f1d63754a1268822f",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688148
+    },
+    {
+      "path": "docs/icon.png",
+      "size": 1267087,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "4dd2a65024e25e6e94e9e7e8ffcf66274c3c64ae54dce46f4f973b05c70e79b1",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779395565357
+    },
+    {
+      "path": "docs/index.html",
+      "size": 7887,
+      "language": "HTML",
+      "lineCount": 154,
+      "hash": "a03783c4d059e3d7e7036211572d510792431fc48657aa7f456ba0ebac0e11df",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779457205137
+    },
+    {
+      "path": "docs/llms.txt",
+      "size": 1948,
+      "language": "Text",
+      "lineCount": 25,
+      "hash": "6603c6e1b54c7967c0966da0c51cf16610ab8149aed5ecb1656ed915d1717743",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779679550908
+    },
+    {
+      "path": "docs/og-image.png",
+      "size": 239160,
+      "language": "Other",
+      "lineCount": 0,
+      "hash": "19657131efc93887f2dfedb1347a0a1f0daae3491c8f1e4a573c6c4a2ece60a7",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779418688149
+    },
+    {
+      "path": "docs/robots.txt",
+      "size": 71,
+      "language": "Text",
+      "lineCount": 4,
+      "hash": "e37b50c9dd63eee3364420283e4f70c7fe84d1364b0e8520ce42442b2965a7a5",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779419035241
+    },
+    {
+      "path": "docs/site.webmanifest",
+      "size": 407,
+      "language": "Other",
+      "lineCount": 14,
+      "hash": "8420fe270b4f5bd7e853e4fb6e739a794c98fb07dc495f3ea8c9aab26da3a03a",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779505783612
+    },
+    {
+      "path": "docs/sitemap.xml",
+      "size": 421,
+      "language": "XML",
+      "lineCount": 13,
+      "hash": "cd8a0afbb1c2dfe2dd43ea6a4ae218d9699f0e5b90a8cd4f176eb5fabac949ca",
+      "role": "docs",
+      "category": "docs",
+      "lastModified": 1779505859755
+    },
+    {
+      "path": "release-please-config.json",
+      "size": 337,
+      "language": "JSON",
+      "lineCount": 14,
+      "hash": "047778233793d869d6c79f70bbfefb2774b15c6b024c1f256aa1dec736eae1b8",
+      "role": "other",
+      "category": "root",
+      "lastModified": 1779679160644
+    },
+    {
+      "path": "scripts/build-app.sh",
+      "size": 3551,
+      "language": "Shell",
+      "lineCount": 91,
+      "hash": "c697dfba06ed59f8fef54565c7433759483116731c308ce99df3ce52000d3c47",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779679140143
+    },
+    {
+      "path": "scripts/check-core-purity.sh",
+      "size": 1186,
+      "language": "Shell",
+      "lineCount": 32,
+      "hash": "9c30befdb7fbf44a9584c267b6055e92091e8a8505b9fff107affbdf3f9cba2f",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779505938178
+    },
+    {
+      "path": "scripts/check-site-docs.sh",
+      "size": 1757,
+      "language": "Shell",
+      "lineCount": 57,
+      "hash": "ee60dd3b71cc88b6a322527548644bb38405b77586233a7194b30b7f6051a69b",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779679578409
+    },
+    {
+      "path": "scripts/check-zone-layering.sh",
+      "size": 5273,
+      "language": "Shell",
+      "lineCount": 135,
+      "hash": "6ca0e6fd6604d7c218a36951d8ebe045544e1b8db903ca245b9523ab9276de6d",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779681768921
+    },
+    {
+      "path": "scripts/make-dmg.sh",
+      "size": 1512,
+      "language": "Shell",
+      "lineCount": 42,
+      "hash": "04c8cc96ff46a27c9f67e5071c0cb2456435dab2d8ead38292c264fa8abe16d7",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779397144994
+    },
+    {
+      "path": "scripts/make-icon.sh",
+      "size": 666,
+      "language": "Shell",
+      "lineCount": 21,
+      "hash": "21cb42eca7a48459aabdda2889da4195efe30563a131a6f275c65b5f0528bf21",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779372273308
+    },
+    {
+      "path": "scripts/stamp-site-version.sh",
+      "size": 2522,
+      "language": "Shell",
+      "lineCount": 87,
+      "hash": "18286fc9d4cc90e5e78c225d870b9533b2795f97e1c4c668bdd6b505968d388b",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779679567263
+    },
+    {
+      "path": "scripts/verify-no-network.sh",
+      "size": 1131,
+      "language": "Shell",
+      "lineCount": 33,
+      "hash": "bb91e4f8a67c271afaad9751265f5a8986c33e38d46a1327414cebc2c8ecf4df",
+      "role": "build",
+      "category": "scripts",
+      "lastModified": 1779367468110
     }
   ],
   "summary": {
-    "totalFiles": 2,
-    "totalLines": 268,
+    "totalFiles": 111,
+    "totalLines": 5968,
     "byLanguage": {
-      "Other": 1,
-      "Markdown": 1
+      "Markdown": 27,
+      "JSON": 4,
+      "TOML": 1,
+      "YAML": 6,
+      "Other": 18,
+      "Makefile": 1,
+      "Swift": 42,
+      "HTML": 1,
+      "Text": 2,
+      "XML": 1,
+      "Shell": 8
     },
     "byRole": {
-      "config": 1,
-      "docs": 1
+      "docs": 43,
+      "other": 14,
+      "build": 10,
+      "config": 2,
+      "asset": 1,
+      "source": 27,
+      "test": 14
     },
     "byCategory": {
-      "root": 2
+      ".agents": 9,
+      ".claude": 10,
+      ".codex": 1,
+      ".github": 7,
+      "root": 16,
+      "packaging": 4,
+      "sources": 27,
+      "tests": 14,
+      "docs": 15,
+      "scripts": 8
     }
   }
 }

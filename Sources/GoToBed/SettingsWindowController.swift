@@ -9,6 +9,11 @@ import GoToBedCore
 /// `NSWindow` hosting `SettingsView` and bring it forward on demand. While it is
 /// open the app is `.regular` (so it can take focus and show in the Dock); it
 /// returns to `.accessory` on close unless an overlay is up.
+///
+/// This file lives alongside AppEnvironment.swift (the composition root) rather
+/// than inside UI/ because window lifecycle is a composition-root concern:
+/// AppEnvironment decides when to present or dismiss the window, and all
+/// windowing decisions flow through it.
 @MainActor
 final class SettingsWindowController: NSObject, NSWindowDelegate {
     private var window: NSWindow?

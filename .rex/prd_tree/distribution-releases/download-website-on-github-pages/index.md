@@ -2,7 +2,7 @@
 id: "0c8fdb55-00cf-4d16-8f8d-74ba27ccb88f"
 level: "feature"
 title: "Download website on GitHub Pages"
-status: "pending"
+status: "completed"
 priority: "medium"
 tags:
   - "website"
@@ -10,6 +10,9 @@ tags:
 blockedBy:
   - "b6cd6bcc-16b0-4432-a337-a91bcdab9b25"
 source: "User request (clean GitHub Pages site)"
+startedAt: "2026-05-25T03:00:56.289Z"
+completedAt: "2026-05-25T03:00:56.289Z"
+endedAt: "2026-05-25T03:00:56.289Z"
 acceptanceCriteria:
   - "Static landing/download page built (in docs/ or a gh-pages branch)"
   - "Site live at https://gotobed.endash.us via GitHub Pages + CNAME"
@@ -22,4 +25,4 @@ description: "A clean, simple static site at gotobed.endash.us: a one-line pitch
 | Title | Status |
 |-------|--------|
 | [Build the static landing/download page](./build-the-static-landing-download-page.md) | completed |
-| [Configure GitHub Pages + CNAME for gotobed.endash.us](./configure-github-pages-cname-a4ae6d.md) | pending |
+| [Configure GitHub Pages + CNAME for gotobed.endash.us](./configure-github-pages-cname-a4ae6d.md) | completed |

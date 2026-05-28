@@ -1,0 +1,24 @@
+name: CI
+
+# Validates every push and PR: builds, runs the GoToBedCore tests, and runs the
+# architectural guards (`verify-no-network`, `check-core-purity`). This is the
+# same `make validate` target a contributor runs locally — keeping CI and local
+# checks identical avoids "works on my machine" drift.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+
+      - name: Validate (build + test + architectural guards)
+        run: make validate

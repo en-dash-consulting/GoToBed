@@ -632,11 +632,403 @@
       }
     }
   ],
-  "files": [],
+  "files": [
+    {
+      "path": "Sources/GoToBed/AppEnvironment.swift",
+      "archetype": "config",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "config",
+          "signalKind": "path",
+          "detail": "App-level environment/dependency wiring — configures runtime context for the application",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/AppInfo.swift",
+      "archetype": "types",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "types",
+          "signalKind": "path",
+          "detail": "Bundle metadata constants (version, identifier, display name)",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/ColorBridging.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Conversion helpers bridging color types across frameworks",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/LaunchAtLogin.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Encapsulates SMAppService / login-item registration logic",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI view rendering menu bar popover content",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+      "archetype": "store",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "store",
+          "signalKind": "path",
+          "detail": "ObservableObject driving menu bar view state with high fan-in from UI",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Coordinates overlay presentation, dismissal, and lifecycle",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI view defining overlay visual content",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "NSWindow subclass providing the overlay window shell",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Core scheduling business logic — triggers, timers, and alarm dispatch",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/SettingsWindowController.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "NSWindowController managing settings window lifecycle",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "Reusable SwiftUI component for editing appearance options",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/Compat.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "OS-version compatibility shims and conditional API wrappers",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/Palette.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI component rendering a color/theme palette picker",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "SwiftUI component for editing a schedule entry",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Pure formatting helpers converting schedule values to display strings",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/SettingsView.swift",
+      "archetype": "page",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "page",
+          "signalKind": "path",
+          "detail": "Top-level SwiftUI settings screen — route-level UI entry point",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "archetype": "component",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "component",
+          "signalKind": "path",
+          "detail": "Reusable SwiftUI component for selecting days of the week",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedApp/GoToBedApp.swift",
+      "archetype": "entrypoint",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "entrypoint",
+          "signalKind": "path",
+          "detail": "@main App struct — application entry point",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Logging/Log.swift",
+      "archetype": "utility",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "utility",
+          "signalKind": "path",
+          "detail": "Shared logging infrastructure with high fan-in across the module",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "archetype": "model",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "model",
+          "signalKind": "path",
+          "detail": "Codable struct defining appearance preference data shape",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Palette.swift",
+      "archetype": "model",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "model",
+          "signalKind": "path",
+          "detail": "Codable struct representing a named color palette",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Schedule.swift",
+      "archetype": "model",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "model",
+          "signalKind": "path",
+          "detail": "Core Codable struct defining schedule data shape",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Models/Validation.swift",
+      "archetype": "schema",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "schema",
+          "signalKind": "path",
+          "detail": "Validation rules and constraint definitions for model values",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Reads/writes app state to disk — persistence layer abstraction",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "archetype": "service",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "service",
+          "signalKind": "path",
+          "detail": "Pure business logic computing next trigger times from a schedule",
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "path": "Sources/GoToBedCore/Store/Store.swift",
+      "archetype": "store",
+      "confidence": 0.7,
+      "source": "llm",
+      "evidence": [
+        {
+          "archetypeId": "store",
+          "signalKind": "path",
+          "detail": "Central ObservableObject state store — high fan-in from views and services",
+          "weight": 0.7
+        }
+      ]
+    }
+  ],
   "summary": {
-    "totalClassified": 0,
+    "totalClassified": 27,
     "totalUnclassified": 0,
-    "byArchetype": {},
-    "bySource": {}
+    "byArchetype": {
+      "config": 1,
+      "types": 1,
+      "utility": 4,
+      "service": 6,
+      "component": 7,
+      "store": 2,
+      "page": 1,
+      "entrypoint": 1,
+      "model": 3,
+      "schema": 1
+    },
+    "bySource": {
+      "llm": 27
+    }
   }
 }

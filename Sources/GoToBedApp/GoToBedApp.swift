@@ -1,6 +1,7 @@
 import SwiftUI
 import AppKit
 import GoToBedCore
+import GoToBedKit
 
 /// App entry point. A menu-bar-only (accessory) app: a `MenuBarExtra` for the
 /// status item and a `Settings` scene for the schedule/appearance editors. The
@@ -14,7 +15,6 @@ struct GoToBedApp: App {
         MenuBarExtra("GoToBed", systemImage: "moon.zzz.fill") {
             MenuContent()
                 .environmentObject(env)
-                .environmentObject(env.store)
         }
         .menuBarExtraStyle(.window)
     }
