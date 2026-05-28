@@ -1,0 +1,25 @@
+{
+  "id": "root",
+  "name": "Root",
+  "description": "6 files, primarily Other, Makefile, Swift",
+  "files": [
+    ".gitignore",
+    ".n-dx-web.port",
+    "LICENSE",
+    "Makefile",
+    "Package.swift",
+    "VERSION"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 6,
+  "lineCount": 110,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}

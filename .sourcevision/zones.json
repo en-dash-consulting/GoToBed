@@ -1,25 +1,29 @@
 {
   "zones": [
     {
-      "id": "app-build-scripts",
-      "name": "App Build Scripts",
-      "description": "Shell scripts that automate macOS desktop app packaging: icon generation, DMG creation, asset compilation, and network-isolation verification.",
+      "id": "build-release-scripts",
+      "name": "Build & Release Scripts",
+      "description": "Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.",
       "files": [
         "scripts/build-app.sh",
+        "scripts/check-core-purity.sh",
+        "scripts/check-site-docs.sh",
+        "scripts/check-zone-layering.sh",
         "scripts/make-dmg.sh",
         "scripts/make-icon.sh",
+        "scripts/stamp-site-version.sh",
         "scripts/verify-no-network.sh"
       ],
       "entryPoints": [],
       "cohesion": 0,
       "coupling": 0,
       "insights": [
-        "Isolated files — no import edges between 4 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 4 files, cohesion is unmeasurable (reported as 0)",
-        "verify-no-network.sh implies a policy of offline-capable or hermetic builds — document this constraint explicitly in CONTRIBUTING.md so contributors don't accidentally introduce network calls into the build pipeline.",
-        "make-dmg.sh and make-icon.sh are macOS-specific; if Linux or Windows CI runners are ever added, these steps will need platform guards or cross-platform replacements.",
-        "Consider consolidating the four scripts behind a single Makefile or package.json script target to make build-step ordering explicit and reduce the number of entry points contributors must learn.",
-        "Shell scripts produce 0-cohesion in import-graph analysis by definition — the metric is an artifact of the analysis tool and does not indicate a structural problem."
+        "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)",
+        "Two complementary architectural guard scripts operate at different layers: check-core-purity.sh enforces module-level UI framework exclusion from GoToBedCore, while check-zone-layering.sh enforces intra-module type-reference isolation within GoToBedKit — both must run in CI to prevent silent layering erosion",
+        "The app signing and DMG packaging flow is intentionally sequential: build-app.sh produces a code-signed universal binary (accepting an optional NOTARY_PROFILE), then make-dmg.sh wraps it into a distributable DMG with the same notarization path — callers must invoke them in order",
+        "stamp-site-version.sh automates version stamping for site docs; confirm it reads from the VERSION file or built bundle rather than deriving a version independently, since release-please and VERSION already own that source of truth",
+        "check-site-docs.sh validates docs/llms.txt against Packaging/Info.plist, creating the only runtime bridge between the static-site-assets zone and the packaging zone — this cross-zone consistency check is the right place to catch docs drift on LSMinimumSystemVersion changes.",
+        "verify-no-network.sh enforces network isolation during builds or tests to protect reproducibility; confirm it is wired into the Makefile test or build targets so it cannot be bypassed when running make directly."
       ],
       "riskMetrics": {
         "cohesion": 0,
@@ -30,33 +34,51 @@
       }
     },
     {
-      "id": "app-lifecycle",
-      "name": "App Lifecycle",
-      "description": "Application entry point, environment configuration, platform services, and the scheduler engine that drives bedtime enforcement at runtime.",
+      "id": "log-overlaycontroller",
+      "name": "Log Overlaycontroller",
+      "description": "3 files, primarily Swift",
       "files": [
-        "Sources/GoToBed/AppEnvironment.swift",
-        "Sources/GoToBed/AppInfo.swift",
-        "Sources/GoToBed/ColorBridging.swift",
-        "Sources/GoToBed/GoToBedApp.swift",
-        "Sources/GoToBed/LaunchAtLogin.swift",
-        "Sources/GoToBed/Scheduler/SchedulerEngine.swift"
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBedCore/Logging/Log.swift"
+      ],
+      "entryPoints": [
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBedCore/Logging/Log.swift"
+      ],
+      "cohesion": 0.21,
+      "coupling": 0.79,
+      "insights": [
+        "High coupling (0.79) — 6 imports target \"sources\"",
+        "High coupling (0.79) — 6 imports target \"sources\"",
+        "OverlayController has no Store dependency and receives Schedule exclusively via the present() callback — the zone's high coupling (0.79) is carried entirely by SchedulerEngine's Store subscription, not by OverlayController. The two services have fundamentally different coupling profiles despite sharing a zone.",
+        "Log.swift imports only Foundation and os — it has zero application-layer dependencies and contributes nothing to the zone's coupling score. Its placement here is a Louvain artifact; structurally it belongs at the domain foundation level alongside GoToBedCore.",
+        "OverlayController is a one-way sink: it receives Schedule via present() and has no back-channel to Store or SchedulerEngine. The bidirectional coupling reported between log-overlaycontroller ↔ sources is driven by SchedulerEngine alone, not by both services equally — splitting them into separate zones would accurately reflect this asymmetry.",
+        "Log.swift (pure Foundation/os utility, no application imports) is grouped with two high-coupling runtime services by community detection. Its inclusion distorts cohesion measurements for the zone without reflecting any actual structural relationship."
+      ],
+      "riskMetrics": {
+        "cohesion": 0.21,
+        "coupling": 0.79,
+        "riskScore": 0.79,
+        "riskLevel": "catastrophic",
+        "failsThreshold": true
+      }
+    },
+    {
+      "id": "packaging",
+      "name": "Packaging",
+      "description": "3 files, primarily Other",
+      "files": [
+        "Packaging/AppIcon.icns",
+        "Packaging/GoToBed.entitlements",
+        "Packaging/Info.plist"
       ],
       "entryPoints": [],
       "cohesion": 0,
       "coupling": 0,
       "insights": [
-        "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
-        "SchedulerEngine.swift is classified as a service but lives in the app target alongside the entry point — if it holds significant scheduling logic, migrating it into GoToBedCore would allow it to be unit-tested without the full app target.",
-        "ColorBridging.swift (utility) bridges color types across frameworks but has no obvious lifecycle role; verify it belongs here rather than in the UI zone where it is likely consumed.",
-        "LaunchAtLogin.swift wraps a platform capability requiring entitlement configuration; ensure it has integration test coverage that can detect entitlement regressions across macOS versions.",
-        "SchedulerEngine is co-located with the app entry point rather than with testable GoToBedCore logic, which may limit unit test coverage of core scheduling behavior.",
-        "AppEnvironment acts as the sole composition root: it instantiates Store, SchedulerEngine, and OverlayController in its initializer and wires them together via a single closure (scheduler.onFire → overlay.present), making it the only place where inter-service coupling is expressed.",
-        "No protocol or interface layer exists between the three services owned by AppEnvironment — all references are concrete types, which means tests of the wiring logic require real objects or subclass overrides rather than lightweight mocks.",
-        "AppEnvironment.shared is a singleton injected as an @EnvironmentObject, creating dual ownership semantics — the singleton lifetime and the SwiftUI environment lifetime are different and could diverge if the view tree is torn down without calling AppEnvironment.shutdown().",
-        "The scheduler.onFire closure set in AppEnvironment creates an implicit ordering constraint: OverlayController must be fully initialized before SchedulerEngine fires; there is no guard against a race at launch if the first fire happens before setup completes.",
-        "AppEnvironment is an undocumented composition root — it is the single point where all inter-service wiring happens, but no comment or type annotation marks it as such, increasing the risk that a future contributor adds service coupling elsewhere.",
-        "No service protocols exist for SchedulerEngine or OverlayController — AppEnvironment couples concrete types directly, making the composition root difficult to test in isolation."
+        "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)"
       ],
       "riskMetrics": {
         "cohesion": 0,
@@ -67,9 +89,152 @@
       }
     },
     {
-      "id": "core-domain-tests",
-      "name": "Core Domain Tests",
-      "description": "Comprehensive test suite for GoToBedCore covering scheduling calculation, persistence, DST edge cases, sleep-skip logic, contrast, and validation.",
+      "id": "root",
+      "name": "Root",
+      "description": "6 files, primarily Other, Makefile, Swift",
+      "files": [
+        ".gitignore",
+        ".n-dx-web.port",
+        "LICENSE",
+        "Makefile",
+        "Package.swift",
+        "VERSION"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "sources",
+      "name": "Sources",
+      "description": "14 files, primarily Swift",
+      "files": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/AppInfo.swift",
+        "Sources/GoToBed/LaunchAtLogin.swift",
+        "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+        "Sources/GoToBed/SettingsWindowController.swift",
+        "Sources/GoToBed/UI/ScheduleEditorView.swift",
+        "Sources/GoToBed/UI/ScheduleFormatting.swift",
+        "Sources/GoToBed/UI/SettingsView.swift",
+        "Sources/GoToBedApp/GoToBedApp.swift",
+        "Sources/GoToBedCore/Models/Schedule.swift",
+        "Sources/GoToBedCore/Models/Validation.swift",
+        "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "Sources/GoToBedCore/Store/Store.swift"
+      ],
+      "entryPoints": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/LaunchAtLogin.swift",
+        "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+        "Sources/GoToBedCore/Models/Schedule.swift",
+        "Sources/GoToBedCore/Models/Validation.swift",
+        "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "Sources/GoToBedCore/Store/Store.swift"
+      ],
+      "cohesion": 0.63,
+      "coupling": 0.37,
+      "insights": [
+        "Zone \"sources\" has files across 8 directories — consider consolidating under a dedicated directory",
+        "AppEnvironment.swift (in this zone) is explicitly documented as the composition root — it wires Store → SchedulerEngine → OverlayController in its initializer and uses a closure to deliver Schedule from scheduler.onFire to overlay.present(). This single file is the origin of the bidirectional coupling between 'sources' ↔ 'sources-gotobed' and 'sources' ↔ 'log-overlaycontroller': AppEnvironment imports both execution-tier services and UI components while those components import domain models back through GoToBedCore.",
+        "The store field on AppEnvironment is declared public (line 16), directly exposing the mutable Store to any consumer that holds an AppEnvironment reference. Settings-ui views that go through AppEnvironment coordinator methods are correctly shielded, but any code that accesses env.store directly bypasses the write-proxy contract described in AppEnvironment's own documentation.",
+        "AppEnvironment uses a static shared singleton (line 14) as its access point. This means the composition root is globally reachable from any file that imports the module, not just from the app entry point — the intended constraint (only AppEnvironment decides when and how the model changes) is unenforced by the type system.",
+        "The bidirectional coupling between 'sources' and 'sources-gotobed' is a composition-root artifact: AppEnvironment (sources) imports SettingsWindowController and other UI components (sources-gotobed) while those components import GoToBedCore models. Extracting the composition wiring into a dedicated AppDelegate or SceneDelegate file would make the coupling directional and eliminate the zone-level bidirectionality."
+      ],
+      "riskMetrics": {
+        "cohesion": 0.63,
+        "coupling": 0.37,
+        "riskScore": 0.37,
+        "riskLevel": "healthy",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "sources-gotobed",
+      "name": "Sources Gotobed",
+      "description": "10 files, primarily Swift",
+      "files": [
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/MenuBar/MenuContent.swift",
+        "Sources/GoToBed/Overlay/OverlayView.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "Sources/GoToBed/UI/Compat.swift",
+        "Sources/GoToBed/UI/Palette.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift",
+        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "Sources/GoToBedCore/Models/Palette.swift"
+      ],
+      "entryPoints": [
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/MenuBar/MenuContent.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "Sources/GoToBed/UI/Compat.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift",
+        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "Sources/GoToBedCore/Models/Palette.swift"
+      ],
+      "cohesion": 0.68,
+      "coupling": 0.32,
+      "insights": [
+        "Zone \"sources-gotobed\" has files across 5 directories — consider consolidating under a dedicated directory",
+        "MenuContent reads ScheduleDisplayItem (a computed property on AppEnvironment) rather than raw Schedule domain types. This provides a deliberate view-model translation layer that prevents Schedule fields irrelevant to the menu UI (e.g. dismissMode timing, appearance colour components) from leaking into presentation logic.",
+        "MenuContent's indirection through ScheduleDisplayItem is the only domain-to-UI translation layer in the codebase. OverlayView and OverlayController both consume the raw Schedule struct directly. If Schedule gains fields that are internal to domain logic, OverlayView will receive them with no filtering — the same ScheduleDisplayItem pattern applied to the overlay path would make the boundary consistent."
+      ],
+      "riskMetrics": {
+        "cohesion": 0.68,
+        "coupling": 0.32,
+        "riskScore": 0.31999999999999995,
+        "riskLevel": "healthy",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "static-site-assets",
+      "name": "Static Site Assets",
+      "description": "Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.",
+      "files": [
+        "docs/CNAME",
+        "docs/llms.txt",
+        "docs/robots.txt",
+        "docs/site.webmanifest",
+        "docs/sitemap.xml"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
+        "llms.txt is validated against Packaging/Info.plist by scripts/check-site-docs.sh — any LSMinimumSystemVersion bump in Info.plist must be reflected here or CI will fail",
+        "The CNAME, robots.txt, and sitemap.xml form the complete SEO and domain-binding surface; all three should be reviewed together whenever the distribution domain changes",
+        "site.webmanifest provides PWA configuration for the static documentation site, not the native macOS app — this is the expected pattern for a GitHub Pages hosted docs site",
+        "Zero cohesion and coupling scores reflect the structural absence of import relationships among static web assets — this is correct and expected, not a decay signal."
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "tests-gotobedcoretests",
+      "name": "Tests Gotobedcoretests",
+      "description": "10 files, primarily Swift",
       "files": [
         "Tests/GoToBedCoreTests/ContrastTests.swift",
         "Tests/GoToBedCoreTests/DSTTests.swift",
@@ -83,315 +248,571 @@
         "Tests/GoToBedCoreTests/ValidationTests.swift"
       ],
       "entryPoints": [],
-      "cohesion": 0,
+      "cohesion": 1,
       "coupling": 0,
       "insights": [
-        "Isolated files — no import edges between 10 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 10 files, cohesion is unmeasurable (reported as 0)",
-        "DSTTests.swift and SleepSkipTests.swift signal proactive coverage of edge cases that commonly regress in calendar-aware apps — treat these as required tests and protect them from deletion during refactors.",
-        "TestSupport.swift likely contains shared fixtures; keep it focused on factory methods and test data builders rather than test logic to prevent it from becoming a maintenance burden as the suite grows.",
-        "SubmessageTests.swift is less obviously named than the other files — verify the 'submessage' concept is still active in the domain model and rename the file if the abstraction has been removed or renamed.",
-        "Ten test files provide broad coverage of GoToBedCore concerns; mapping each test file explicitly to a corresponding production module would make coverage gaps visible as the codebase evolves.",
-        "GoToBedCoreTests is the only test target in the package — there is no test target for the GoToBed app layer (SchedulerEngine, OverlayController, AppEnvironment wiring), so the composition root and all service interactions are entirely untested at the unit level.",
-        "The GoToBed app target has no corresponding test target — SchedulerEngine, OverlayController, AppEnvironment, and their inter-service wiring have zero automated test coverage."
+        "High cohesion (1) — files are tightly interconnected"
       ],
       "riskMetrics": {
-        "cohesion": 0,
+        "cohesion": 1,
         "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
+        "riskScore": 0,
+        "riskLevel": "healthy",
         "failsThreshold": false
       }
     },
     {
-      "id": "overlay-ui",
-      "name": "Overlay UI",
-      "description": "App packaging assets co-detected with the overlay window and view components that present the bedtime notification overlay to the user.",
+      "id": "tests-gotobedtests",
+      "name": "Tests Gotobedtests",
+      "description": "4 files, primarily Swift",
       "files": [
-        "Packaging/AppIcon.icns",
-        "Packaging/GoToBed.entitlements",
-        "Packaging/Info.plist",
-        "Sources/GoToBed/Overlay/OverlayController.swift",
-        "Sources/GoToBed/Overlay/OverlayView.swift",
-        "Sources/GoToBed/Overlay/OverlayWindow.swift"
+        "Tests/GoToBedTests/InterServiceWiringTests.swift",
+        "Tests/GoToBedTests/OverlayControllerTests.swift",
+        "Tests/GoToBedTests/SchedulerEngineTests.swift",
+        "Tests/GoToBedTests/TestHelpers.swift"
       ],
       "entryPoints": [],
-      "cohesion": 0,
+      "cohesion": 1,
       "coupling": 0,
       "insights": [
-        "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
-        "Packaging/ assets (Info.plist, entitlements, icon) carry no Swift import edges and are merged into this zone by proximity; excluding non-Swift assets from community detection inputs would surface the overlay triad as its own coherent zone.",
-        "OverlayController (service), OverlayView (component), and OverlayWindow (component) form a coherent presentation triad — once packaging files are excluded they should cluster cleanly with high internal cohesion.",
-        "Verify OverlayWindow uses a non-activating NSPanel subclass appropriate for a bedtime overlay; the co-location of the entitlements file here is a useful reminder that the overlay's window level and focus behavior must match declared entitlements.",
-        "Non-Swift packaging assets are merged into the overlay UI zone by community detection, masking the true cohesion of the OverlayController/OverlayView/OverlayWindow triad.",
-        "OverlayController temporarily mutates NSApp's activation policy from accessory to regular as a side effect of presenting the overlay — this is a global app-state change that is invisible to callers and could interfere with other components that assume the policy is stable.",
-        "The OverlayController → OverlayWindow → OverlayView chain passes Schedule directly down through all three layers without a ViewModel or display adapter, meaning any change to Schedule's structure will propagate as a compile-time break through the full overlay stack — this is intentional rigidity but should be documented.",
-        "NSApp activation policy is switched inside OverlayController.present() as an undocumented side effect — callers have no way to opt out or observe the transition, creating hidden global state coupling."
+        "High cohesion (1) — files are tightly interconnected"
       ],
       "riskMetrics": {
-        "cohesion": 0,
+        "cohesion": 1,
         "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
-      }
-    },
-    {
-      "id": "project-root-models",
-      "name": "Project Root and Domain Models",
-      "description": "Community detection artifact grouping project configuration files alongside GoToBedCore domain models due to shared absence of import edges.",
-      "files": [
-        ".gitignore",
-        "LICENSE",
-        "Makefile",
-        "Package.swift",
-        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
-        "Sources/GoToBedCore/Models/Schedule.swift",
-        "Sources/GoToBedCore/Models/Validation.swift"
-      ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
-      "insights": [
-        "Isolated files — no import edges between 7 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 7 files, cohesion is unmeasurable (reported as 0)",
-        "Separate the domain models (AppearanceSettings, Schedule, Validation) into their own explicit zone by ensuring Swift module imports are resolved so community detection can distinguish them from project configuration files.",
-        "Exclude non-source assets (Makefile, LICENSE, .gitignore) from zone analysis inputs — they have no import edges and will always anchor to whichever zone lacks a stronger attractor.",
-        "Validation.swift is classified as 'schema' alongside 'model' files; verify it contains only structural constraints and not business logic that belongs in a service layer.",
-        "Project configuration files (Makefile, LICENSE, .gitignore) are merged with core Swift domain models due to shared absence of import edges, obscuring the models' architectural role.",
-        "AppearanceSettings embeds WCAG contrast and luminance calculations as pure logic — this means display correctness logic lives in the persistence model layer rather than a dedicated presentation or accessibility service, which is pragmatic for a small app but will require extraction if theming ever becomes more complex.",
-        "Validation.swift is an extension on Schedule rather than a standalone validator type — this collapses the schema and domain model into the same type, making it impossible to validate a schedule without instantiating one.",
-        "Validation logic is expressed as a Schedule extension rather than an injectable validator, coupling the domain model to its own schema enforcement and preventing alternative validation strategies (e.g., stricter import-time vs. editor-time rules) without modifying the model itself."
-      ],
-      "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
-      }
-    },
-    {
-      "id": "settings-ui",
-      "name": "Settings UI",
-      "description": "All SwiftUI components and utilities composing the menu bar interface, settings window, appearance editor, and schedule editing experience.",
-      "files": [
-        "Sources/GoToBed/UI/AppearanceEditor.swift",
-        "Sources/GoToBed/UI/Compat.swift",
-        "Sources/GoToBed/UI/MenuContent.swift",
-        "Sources/GoToBed/UI/Palette.swift",
-        "Sources/GoToBed/UI/ScheduleEditorView.swift",
-        "Sources/GoToBed/UI/ScheduleFormatting.swift",
-        "Sources/GoToBed/UI/SettingsView.swift",
-        "Sources/GoToBed/UI/SettingsWindowController.swift",
-        "Sources/GoToBed/UI/WeekdayPicker.swift"
-      ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
-      "insights": [
-        "Isolated files — no import edges between 9 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 9 files, cohesion is unmeasurable (reported as 0)",
-        "The zone is well-bounded — AppearanceEditor, ScheduleEditorView, SettingsView, WeekdayPicker, and MenuContent cover the full user-facing settings surface; preserve this grouping as the UI grows.",
-        "ScheduleFormatting.swift formats schedule data for display — if its logic is non-trivial, move it into GoToBedCore so it can be tested independently of the UI target and reused if a CLI surface is added.",
-        "Compat.swift likely papers over API availability differences across macOS versions; document the minimum deployment target it assumes so future contributors know when its workarounds can be removed.",
-        "Settings UI is the largest production zone at 9 files and is thematically coherent; cohesion reads as 0 due to Swift import analysis limitations rather than structural fragmentation.",
-        "If settings-ui components directly mutate project-root-models types rather than delegating writes through a coordinator in app-lifecycle, that is a leaky abstraction: presentation layer is reaching past its intended boundary into the domain layer.",
-        "SettingsWindowController.swift is an NSWindowController responsible for window show/hide/close lifecycle — that responsibility belongs to the composition root (app-lifecycle), not the UI content zone; its presence in settings-ui means AppEnvironment must reach into a UI zone to control window state rather than calling a lifecycle peer.",
-        "MenuContent.swift most likely constructs the NSMenu for the status-bar item, making it the app's primary navigation surface rather than a settings component; co-locating it with settings views conflates the app's entry-point menu with its configuration screens.",
-        "Palette.swift (classified 'types') is the only color/style token file in the codebase; if overlay-ui consumes any of the same visual tokens, it must either duplicate them or reach across zone boundaries into settings-ui — neither is acceptable. Color tokens shared across two or more UI zones belong in project-root-models or a dedicated ui-tokens file.",
-        "settings-ui mixes three distinct concern layers in one zone: window lifecycle management (SettingsWindowController), view composition (SettingsView, AppearanceEditor, ScheduleEditorView, WeekdayPicker, MenuContent), and cross-cutting utilities (ScheduleFormatting, Compat). At 9 files it is already the largest zone; if a second settings screen or an onboarding flow is added, it will become unwieldy without a prior split.",
-        "SettingsWindowController.swift manages NSWindow lifecycle (show, hide, close, ordering) from within the UI content zone. Window controllers are composition-root concerns: AppEnvironment must call into settings-ui to present or dismiss the window, inverting the expected dependency direction where app-lifecycle owns all windowing decisions.",
-        "MenuContent.swift (the status-bar NSMenu) is co-located with settings views, making the app's primary navigation surface a subordinate member of a settings zone. Any future requirement to hide, modify, or gate the status-bar menu requires touching settings-ui rather than the composition root, which will surprise contributors.",
-        "Palette.swift is the sole visual-token definition file and lives inside settings-ui. If overlay-ui requires the same color values (e.g. for a dark sleep overlay that matches the app theme), the only options are duplication or an undocumented cross-zone import — both erode zone boundaries silently. Move shared visual tokens to project-root-models or extract a ui-shared zone.",
-        "WeekdayPicker.swift is a reusable UI primitive (day-of-week selector) with no inherent coupling to settings screens; if a future quick-add popover or menu-bar picker requires day selection, the only options will be duplication or an undocumented cross-zone import from settings-ui — move it to a shared UI primitives layer before a second consumer forces the decision.",
-        "Compat.swift is an undifferentiated shim file; as the minimum deployment target advances, individual workarounds will become removable but a monolithic file gives no signal about which shims are still load-bearing — splitting into per-API extensions (e.g. NSButton+Compat.swift) would make removal of individual workarounds mechanical rather than investigative.",
-        "If MenuContent.swift uses @EnvironmentObject or receives bindings to read schedule state for the status-bar menu title, it is a view component performing composition-root data wiring — the status-bar display string should be driven by a view model owned by app-lifecycle, not by a settings-zone view reaching directly into the environment.",
-        "ScheduleEditorView likely both renders the editor UI and handles schedule mutations directly — if it writes to Store or a model type it is a smart component (container) whose mutation logic should be extracted to a coordinator in app-lifecycle so the view zone contains only rendering and user-intent emission.",
-        "WeekdayPicker.swift has no settings-specific logic by name — audit whether it imports any settings-ui types; if it is dependency-free, move it to a ui-shared zone so it is available to overlay-ui or any future scheduling surface without cross-zone reach-ins.",
-        "Rename Compat.swift to a per-API extension convention (e.g. NSButton+Compat.swift, NSColor+Compat.swift) so each shim carries its own deployment-target precondition comment and can be deleted independently when the minimum OS version advances past the guarded API.",
-        "Audit MenuContent.swift for @EnvironmentObject or @Binding reads from domain state; if present, introduce a MenuViewModel owned by app-lifecycle that pre-computes the display string and passes it into MenuContent as a plain value — removing the view's direct domain dependency."
-      ],
-      "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
-      }
-    },
-    {
-      "id": "static-site-assets",
-      "name": "Static Site Assets",
-      "description": "Web presence files for the project's public landing page, including SEO metadata, crawler directives, and AI-consumption hints.",
-      "files": [
-        "docs/CNAME",
-        "docs/llms.txt",
-        "docs/robots.txt",
-        "docs/site.webmanifest",
-        "docs/sitemap.xml"
-      ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
-      "insights": [
-        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
-        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
-        "Add a llms-full.txt alongside llms.txt to give AI consumers richer context about the project's full API and architecture, following the emerging llms.txt convention.",
-        "The site.webmanifest and CNAME together imply a hosted static deployment (likely GitHub Pages) — ensure the CI pipeline validates these files on each release to prevent silent drift.",
-        "robots.txt and sitemap.xml are present but there is no explicit cache or CDN invalidation strategy documented; add a note in the deployment runbook so SEO assets are refreshed on each release.",
-        "Cohesion is 0 because static web assets have no import relationships — the graph metric is not meaningful here; evaluate zone health structurally rather than by cohesion score.",
-        "No build step links static-site-assets content to the Swift source zones — llms.txt and sitemap.xml are manually authored, creating documentation drift risk on every feature release.",
-        "No file in static-site-assets references the app version string defined in app-build-scripts (Makefile, build scripts, or Info.plist). sitemap.xml lastmod dates and site.webmanifest metadata will silently lag the shipping version after every release unless a generation step writes them from the authoritative version source.",
-        "sitemap.xml and site.webmanifest are hand-authored with no link to the authoritative version variable in app-build-scripts. Each app release can ship with stale metadata in the static site without any CI signal — the dual-artifact release model requires a shared version source, not two independently maintained version strings.",
-        "The docs/ directory has no 404.html file; GitHub Pages custom domains serve the platform default error page when one is absent, breaking site branding and navigation for any mistyped or expired URL.",
-        "If any HTML or Markdown file in docs/ contains a hardcoded download URL pointing to a versioned DMG artifact, that URL becomes stale on every app release and must be updated manually — a release-time sed substitution or template variable driven from the authoritative version source in app-build-scripts would make this automatic.",
-        "llms.txt describes the project for AI consumers but has no programmatic link to the GoToBedCore public API surface (schedule types, validation rules, store interface) — AI assistants consuming only llms.txt will produce suggestions inconsistent with actual domain types unless the file is regenerated from source on each release.",
-        "Add a docs/404.html file with site navigation so GitHub Pages serves a branded error page instead of the platform default when a URL is not found.",
-        "Add a CI step that extracts the CFBundleShortVersionString from Info.plist (or the VERSION variable from app-build-scripts) and writes it into sitemap.xml lastmod dates and any versioned download links in docs/ — eliminating the manual sync requirement on each release."
-      ],
-      "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
+        "riskScore": 0,
+        "riskLevel": "healthy",
         "failsThreshold": false
       }
     }
   ],
-  "crossings": [],
-  "unzoned": [
-    "Sources/GoToBedCore/Logging/Log.swift",
-    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
-    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
-    "Sources/GoToBedCore/Store/Store.swift"
+  "crossings": [
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "fromZone": "log-overlaycontroller",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBed/LaunchAtLogin.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "sources",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/UI/SettingsView.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBedCore/Models/Schedule.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "sources",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/AppEnvironment.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/LaunchAtLogin.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+      "to": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "sources-gotobed",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/Palette.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "sources-gotobed"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "log-overlaycontroller"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "sources"
+    }
   ],
+  "unzoned": [],
   "insights": [
-    "All zones report cohesion 0 and coupling 0 with no detected cross-zone imports, indicating Swift import edges were not fully resolved during analysis; re-running with explicit module mapping will produce reliable zone metrics.",
-    "The GoToBedCore/GoToBed target split is positively reflected in the zone structure — core models and tests are isolated from the app UI and lifecycle code, which is architecturally sound for a macOS app with a separately testable framework.",
-    "Non-Swift assets (packaging files, Makefile, LICENSE) are anchoring zones incorrectly; excluding them from community detection inputs would sharpen all zone boundaries without changing the underlying architecture.",
-    "All zones in this codebase report cohesion 0 and coupling 0, which is consistent with a native macOS desktop app (shell build scripts, static web assets, non-JS source files) where import-graph community detection yields no signal — zone health should be evaluated structurally rather than by graph metrics alone.",
-    "The DMG packaging scripts and web presence assets (CNAME, sitemap, webmanifest) reveal a dual-artifact release model: a downloadable macOS app and a hosted marketing/documentation site — ensure both release paths are gated in CI so neither can ship independently of the other.",
-    "All zone cohesion and coupling metrics are 0.0 with no detected cross-zone imports, indicating Swift import graph resolution was incomplete; treat zone membership as approximate until re-analyzed with full dependency data.",
-    "The separation between GoToBedCore (models, validation) and GoToBed (UI, lifecycle, overlay) targets maps cleanly to a testable core + thin app shell pattern, which is a strong architectural positive for a macOS menu bar app.",
-    "Universal 0-cohesion across all zones suggests the primary source language is not JavaScript/TypeScript (or the JS/TS entry points are minimal); consider supplementing sourcevision's import-graph analysis with file-proximity clustering or manifest-based dependency analysis to get meaningful architectural signal.",
-    "The inter-zone dependency graph is a clean hub-and-spoke topology: GoToBedCore sits at the foundation with no upward imports; AppEnvironment is the hub that wires all app-layer spokes (SchedulerEngine, OverlayController, settings); SwiftUI views receive state via @EnvironmentObject without direct service references. No circular dependencies exist.",
-    "Event flow is strictly unidirectional: Store changes propagate to SchedulerEngine via Combine; SchedulerEngine notifies AppEnvironment via the onFire closure; AppEnvironment delegates to OverlayController. This chain has no feedback loops, which is architecturally sound.",
-    "The absence of a test target for the GoToBed app layer is the most significant structural gap: the composition root (AppEnvironment), the scheduler-to-overlay event path, and NSApp policy switching are all live-only behaviors with no regression harness.",
-    "GoToBedCore's zero-UI-dependency constraint is currently enforced only by convention (no AppKit/SwiftUI imports observed); adding a build-phase or test assertion that the Core target compiles without UI frameworks would make this boundary machine-enforceable rather than review-dependent.",
-    "app-lifecycle is the most likely hidden composition root: it presumably instantiates the app delegate, presents the settings window (settings-ui), and triggers the sleep overlay (overlay-ui). If correct, it is the only zone that should hold references to both UI zones — any direct coupling between settings-ui and overlay-ui would be an architectural violation that Swift access control (internal vs. public) could enforce at compile time.",
-    "core-domain-tests (10 files) is the only test zone visible in the analysis, targeting project-root-models. The absence of a dedicated test zone for settings-ui or overlay-ui logic suggests UI behavior is either untested or covered only through manual/end-to-end flows — unit tests for ScheduleFormatting and any view-model logic would harden the domain/UI boundary against regressions.",
-    "The dual-artifact release model has no shared versioning artifact visible across zones — a single VERSION or release manifest consumed by both app-build-scripts and the static-site pipeline would prevent version skew between the downloadable app and the hosted documentation site.",
-    "With no import edges resolved across any zone boundary, the intended layering (project-root-models → UI zones → app-lifecycle composition root) is conventional rather than enforced — adding a Swift package dependency graph check to CI (e.g., via a custom build phase or swift-dependency-graph tooling) would make the architecture mechanically enforceable.",
-    "The full inter-service event chain (Store → SchedulerEngine → AppEnvironment closure → OverlayController) is tested by no automated path; a regression in any link would only surface at runtime.",
-    "GoToBedCore's UI-framework-free constraint is valuable but convention-enforced only — a compile-time boundary check (e.g., a Package.swift platform restriction or a CI lint rule) would prevent accidental framework imports from eroding the core layer.",
-    "The overall zone structure follows a clean hub-and-spoke pattern with project-root-models as the hub and settings-ui, overlay-ui, and app-lifecycle as spokes — this is appropriate for a macOS menu bar app and should be preserved as the feature set grows.",
-    "No automated enforcement of cross-zone layering exists: the architectural boundary between domain (project-root-models), UI (settings-ui, overlay-ui), and composition (app-lifecycle) is expressed only by file organization, not by Swift module visibility rules or CI checks — this boundary will erode silently as the codebase grows.",
-    "The settings-ui zone is doing triple duty as window manager, view library, and utility host; SettingsWindowController belongs in app-lifecycle (composition root), Palette should migrate to project-root-models (shared tokens), and ScheduleFormatting should migrate to the core domain — leaving settings-ui as a pure view-composition zone with 5–6 files and a single clear responsibility.",
-    "Cross-zone color/style token sharing has no declared mechanism: Palette.swift is the only token file but lives inside a UI zone rather than the shared foundation. As overlay-ui and settings-ui both render on-screen content, any theme consistency requirement will silently force one zone to reach into the other's internals or duplicate definitions.",
-    "SettingsWindowController in settings-ui and the presumed window-presentation call in app-lifecycle create a hidden inbound dependency: app-lifecycle → settings-ui for window control. Combined with the insight that settings-ui components may mutate project-root-models types directly, settings-ui risks becoming the de facto composition hub rather than a pure view zone — inverting the intended dependency direction at both ends.",
-    "The dependency direction app-lifecycle → settings-ui (to present the settings window via SettingsWindowController) combined with a potential settings-ui → project-root-models write path means settings-ui is coupled upward to the composition root and downward to the domain layer simultaneously. A pure UI zone should have exactly one dependency direction: receiving data from the domain and emitting user actions upward — not owning window lifecycle or writing domain state.",
-    "No zone boundary is machine-enforced between the three production UI zones (settings-ui, overlay-ui, app-lifecycle). Swift module visibility (internal vs. public) is the only available compile-time mechanism to prevent settings-ui from importing overlay-ui types or vice versa, but there is no evidence this is used intentionally as an architectural constraint — meaning cross-UI-zone coupling can accumulate invisibly.",
-    "The Combine event chain Store → SchedulerEngine → AppEnvironment closure → OverlayController has no error boundary visible in any zone; a sink that receives a completion(.failure) will silently cancel the subscription and stop all future schedule firings until the app restarts — the chain needs an explicit catch or replaceError operator at each link to remain live after a domain error.",
-    "All six zones (including app-lifecycle and overlay-ui) report zero cross-zone imports despite app-lifecycle necessarily presenting the settings window and triggering the overlay; this confirms the import graph is unresolved rather than reflecting real isolation — until Swift module resolution works, treat any architectural enforcement claim as unverified.",
-    "The dual-artifact release (DMG + GitHub Pages site) has two independently maintained version strings with no shared source and no CI gate that fails when they diverge; a single VERSION file consumed by both app-build-scripts (injected into Info.plist) and a docs-generation step (written into sitemap.xml, llms.txt, and download links) would make version skew a build error rather than a post-release discovery.",
-    "With core-domain-tests as the only test zone and no test zone for app-lifecycle, the highest-risk behavioral path — schedule fires at the correct wall-clock time, NSApp policy switches to prohibitSleep, overlay renders, and dismissal restores policy — is covered by zero automated assertions; a single integration test exercising this path with a mock clock would catch the most common regression class.",
-    "No zone in the codebase owns accessibility annotations as an explicit responsibility; macOS VoiceOver compatibility for the settings views (WeekdayPicker, ScheduleEditorView) and the sleep overlay requires accessibilityLabel/accessibilityHint on interactive controls — without a convention or audit zone, a11y coverage will be inconsistent across components.",
-    "Add a Swift Package Manager build-phase script or a CI lint rule that verifies GoToBedCore compiles with no AppKit or SwiftUI imports; this makes the UI-framework-free constraint machine-enforced rather than convention-only and will catch accidental framework imports before they reach main.",
-    "Introduce a single VERSION file at the repository root consumed by both the Makefile (injected as MARKETING_VERSION into xcodebuild) and a docs-generation script (substituted into sitemap.xml lastmod, site.webmanifest version, and any DMG download URLs in docs/) — one source of truth for both release artifacts.",
-    "Add a replaceError or catch operator to each Combine sink in the Store → SchedulerEngine → AppEnvironment event chain so that a single domain error does not permanently cancel the subscription; document the expected error types at each link so recovery behavior is explicit."
+    "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 4 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Models/Validation.swift is imported by 4 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Store/Store.swift is imported by 3 zones — cross-cutting dependency",
+    "Bidirectional coupling: \"sources\" ↔ \"sources-gotobed\" (11+8 crossings) — consider extracting shared interface",
+    "Bidirectional coupling: \"log-overlaycontroller\" ↔ \"sources\" (6+8 crossings) — consider extracting shared interface",
+    "4 circular dependency chains detected — see imports.json for details",
+    "The scripts and docs zones are both structurally isolated with zero import coupling to any source zone — build infrastructure and static assets correctly sit outside the application dependency graph",
+    "The two architectural guard scripts (check-core-purity.sh, check-zone-layering.sh) complement Package.swift target boundaries: Package.swift enforces module separation at compile time while the shell scripts make the same constraints machine-checkable at the grep level, providing defense-in-depth for core-purity and zone-layering invariants",
+    "The cross-zone import graph shows a clean directed topology: test zones import source zones, source zones import each other in a DAG, and neither scripts nor docs participate — confirming infrastructure zones are correctly decoupled from the application import graph",
+    "The scripts zone combines build automation (build-app.sh, make-dmg.sh, make-icon.sh) with architectural enforcement scripts (check-core-purity.sh, check-zone-layering.sh, verify-no-network.sh) in a flat directory — these serve different audiences but the naming convention makes their purpose clear without further subdivision.",
+    "File \"Tests/GoToBedCoreTests/SubmessageTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
+    "All inter-zone coupling ultimately terminates at AppEnvironment.swift — it is both the composition root and the source of every bidirectional zone relationship. The 4 circular dependency chains reported by sourcevision are composition-root-induced: AppEnvironment (sources) imports execution-tier services (log-overlaycontroller) and UI components (sources-gotobed) while those components import domain models that live in the same 'sources' zone, closing apparent cycles at the zone graph level without any true import circularity at the file level.",
+    "The GoToBedCore models (Schedule, Validation, Store) are hub files with zero upward dependencies — they import only Foundation and Combine. Their hub status in the import graph is a sign of a healthy domain layer, not a design smell: cross-cutting domain types are expected to be widely imported.",
+    "The scheduler-to-overlay data path is implemented entirely via closure injection (scheduler.onFire = { overlay.present($0) } in AppEnvironment.init), making it invisible to static import analysis. This explains why sourcevision shows no direct edge from SchedulerEngine to OverlayController despite them being functionally coupled at runtime.",
+    "The runtime data flow (Store mutation → SchedulerEngine re-arms → onFire closure → OverlayController.present) is fully acyclic and unidirectional, but the zone-level import graph appears bidirectional because the composition root (AppEnvironment) sits in the same Louvain zone as the domain models it depends on. Separating AppEnvironment into its own zone (or into the app entry-point target) would make the zone graph match the runtime topology."
   ],
   "findings": [
     {
       "type": "observation",
       "pass": 0,
-      "scope": "app-build-scripts",
-      "text": "Isolated files — no import edges between 4 files, cohesion is unmeasurable (reported as 0)",
+      "scope": "build-release-scripts",
+      "text": "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "4 circular dependency chains detected — see imports.json for details",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "Bidirectional coupling: \"sources\" ↔ \"sources-gotobed\" (11+8 crossings) — consider extracting shared interface",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 4 zones — cross-cutting dependency",
       "severity": "info"
     },
     {
       "type": "observation",
       "pass": 1,
-      "scope": "app-build-scripts",
-      "text": "Shell scripts produce 0-cohesion in import-graph analysis by definition — the metric is an artifact of the analysis tool and does not indicate a structural problem.",
+      "scope": "global",
+      "text": "The scripts zone combines build automation (build-app.sh, make-dmg.sh, make-icon.sh) with architectural enforcement scripts (check-core-purity.sh, check-zone-layering.sh, verify-no-network.sh) in a flat directory — these serve different audiences but the naming convention makes their purpose clear without further subdivision.",
       "severity": "info",
       "category": "structural"
     },
     {
       "type": "observation",
       "pass": 0,
-      "scope": "app-lifecycle",
+      "scope": "log-overlaycontroller",
+      "text": "High coupling (0.79) — 6 imports target \"sources\"",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "packaging",
+      "text": "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "root",
       "text": "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
       "severity": "info"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "app-lifecycle",
-      "text": "SchedulerEngine is co-located with the app entry point rather than with testable GoToBedCore logic, which may limit unit test coverage of core scheduling behavior.",
-      "severity": "info",
-      "category": "structural"
-    },
-    {
-      "type": "observation",
-      "pass": 0,
-      "scope": "core-domain-tests",
-      "text": "Isolated files — no import edges between 10 files, cohesion is unmeasurable (reported as 0)",
-      "severity": "info"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "core-domain-tests",
-      "text": "Ten test files provide broad coverage of GoToBedCore concerns; mapping each test file explicitly to a corresponding production module would make coverage gaps visible as the codebase evolves.",
-      "severity": "info",
-      "category": "documentation"
-    },
-    {
-      "type": "observation",
-      "pass": 0,
-      "scope": "overlay-ui",
-      "text": "Isolated files — no import edges between 6 files, cohesion is unmeasurable (reported as 0)",
-      "severity": "info"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "overlay-ui",
-      "text": "Non-Swift packaging assets are merged into the overlay UI zone by community detection, masking the true cohesion of the OverlayController/OverlayView/OverlayWindow triad.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "observation",
-      "pass": 0,
-      "scope": "project-root-models",
-      "text": "Isolated files — no import edges between 7 files, cohesion is unmeasurable (reported as 0)",
-      "severity": "info"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "project-root-models",
-      "text": "Project configuration files (Makefile, LICENSE, .gitignore) are merged with core Swift domain models due to shared absence of import edges, obscuring the models' architectural role.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "observation",
-      "pass": 0,
-      "scope": "settings-ui",
-      "text": "Isolated files — no import edges between 9 files, cohesion is unmeasurable (reported as 0)",
-      "severity": "info"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "settings-ui",
-      "text": "Settings UI is the largest production zone at 9 files and is thematically coherent; cohesion reads as 0 due to Swift import analysis limitations rather than structural fragmentation.",
-      "severity": "info",
-      "category": "structural"
     },
     {
       "type": "observation",
@@ -402,242 +823,121 @@
     },
     {
       "type": "observation",
-      "pass": 1,
-      "scope": "static-site-assets",
-      "text": "Cohesion is 0 because static web assets have no import relationships — the graph metric is not meaningful here; evaluate zone health structurally rather than by cohesion score.",
-      "severity": "info",
-      "category": "structural"
+      "pass": 0,
+      "scope": "tests-gotobedcoretests",
+      "text": "High cohesion (1) — files are tightly interconnected",
+      "severity": "info"
     },
     {
       "type": "observation",
-      "pass": 1,
-      "scope": "global",
-      "text": "All zone cohesion and coupling metrics are 0.0 with no detected cross-zone imports, indicating Swift import graph resolution was incomplete; treat zone membership as approximate until re-analyzed with full dependency data.",
-      "severity": "warning",
-      "category": "structural"
+      "pass": 0,
+      "scope": "tests-gotobedtests",
+      "text": "High cohesion (1) — files are tightly interconnected",
+      "severity": "info"
     },
     {
-      "type": "observation",
-      "pass": 1,
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "sources",
+      "text": "Zone \"sources\" has files across 8 directories — consider consolidating under a dedicated directory",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "sources-gotobed",
+      "text": "Zone \"sources-gotobed\" has files across 5 directories — consider consolidating under a dedicated directory",
+      "severity": "info"
+    },
+    {
+      "type": "move-file",
+      "pass": 0,
       "scope": "global",
-      "text": "The separation between GoToBedCore (models, validation) and GoToBed (UI, lifecycle, overlay) targets maps cleanly to a testable core + thin app shell pattern, which is a strong architectural positive for a macOS menu bar app.",
+      "text": "File \"Tests/GoToBedCoreTests/SubmessageTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
       "severity": "info",
-      "category": "structural"
-    },
-    {
-      "type": "observation",
-      "pass": 1,
-      "scope": "global",
-      "text": "Universal 0-cohesion across all zones suggests the primary source language is not JavaScript/TypeScript (or the JS/TS entry points are minimal); consider supplementing sourcevision's import-graph analysis with file-proximity clustering or manifest-based dependency analysis to get meaningful architectural signal.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "pattern",
-      "pass": 2,
-      "scope": "app-lifecycle",
-      "text": "AppEnvironment is an undocumented composition root — it is the single point where all inter-service wiring happens, but no comment or type annotation marks it as such, increasing the risk that a future contributor adds service coupling elsewhere.",
-      "severity": "warning",
-      "category": "documentation"
-    },
-    {
-      "type": "pattern",
-      "pass": 2,
-      "scope": "app-lifecycle",
-      "text": "No service protocols exist for SchedulerEngine or OverlayController — AppEnvironment couples concrete types directly, making the composition root difficult to test in isolation.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "pattern",
-      "pass": 2,
-      "scope": "core-domain-tests",
-      "text": "The GoToBed app target has no corresponding test target — SchedulerEngine, OverlayController, AppEnvironment, and their inter-service wiring have zero automated test coverage.",
-      "severity": "warning",
-      "category": "structural"
+      "related": [
+        "Tests/GoToBedCoreTests/SubmessageTests.swift"
+      ],
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/",
+      "moveReason": "import-neighbor-majority",
+      "predictedImpact": 2
     },
     {
       "type": "pattern",
       "pass": 2,
       "scope": "global",
-      "text": "GoToBedCore's UI-framework-free constraint is valuable but convention-enforced only — a compile-time boundary check (e.g., a Package.swift platform restriction or a CI lint rule) would prevent accidental framework imports from eroding the core layer.",
+      "text": "The runtime data flow (Store mutation → SchedulerEngine re-arms → onFire closure → OverlayController.present) is fully acyclic and unidirectional, but the zone-level import graph appears bidirectional because the composition root (AppEnvironment) sits in the same Louvain zone as the domain models it depends on. Separating AppEnvironment into its own zone (or into the app entry-point target) would make the zone graph match the runtime topology.",
       "severity": "info",
       "category": "structural"
     },
     {
       "type": "pattern",
       "pass": 2,
-      "scope": "global",
-      "text": "No automated enforcement of cross-zone layering exists: the architectural boundary between domain (project-root-models), UI (settings-ui, overlay-ui), and composition (app-lifecycle) is expressed only by file organization, not by Swift module visibility rules or CI checks — this boundary will erode silently as the codebase grows.",
+      "scope": "log-overlaycontroller",
+      "text": "Log.swift (pure Foundation/os utility, no application imports) is grouped with two high-coupling runtime services by community detection. Its inclusion distorts cohesion measurements for the zone without reflecting any actual structural relationship.",
       "severity": "warning",
       "category": "structural"
     },
     {
       "type": "pattern",
       "pass": 2,
-      "scope": "global",
-      "text": "The overall zone structure follows a clean hub-and-spoke pattern with project-root-models as the hub and settings-ui, overlay-ui, and app-lifecycle as spokes — this is appropriate for a macOS menu bar app and should be preserved as the feature set grows.",
-      "severity": "info",
-      "category": "structural"
-    },
-    {
-      "type": "pattern",
-      "pass": 2,
-      "scope": "overlay-ui",
-      "text": "NSApp activation policy is switched inside OverlayController.present() as an undocumented side effect — callers have no way to opt out or observe the transition, creating hidden global state coupling.",
+      "scope": "sources",
+      "text": "AppEnvironment uses a static shared singleton (line 14) as its access point. This means the composition root is globally reachable from any file that imports the module, not just from the app entry point — the intended constraint (only AppEnvironment decides when and how the model changes) is unenforced by the type system.",
       "severity": "warning",
       "category": "structural"
     },
     {
       "type": "pattern",
       "pass": 2,
-      "scope": "project-root-models",
-      "text": "Validation logic is expressed as a Schedule extension rather than an injectable validator, coupling the domain model to its own schema enforcement and preventing alternative validation strategies (e.g., stricter import-time vs. editor-time rules) without modifying the model itself.",
+      "scope": "sources-gotobed",
+      "text": "MenuContent's indirection through ScheduleDisplayItem is the only domain-to-UI translation layer in the codebase. OverlayView and OverlayController both consume the raw Schedule struct directly. If Schedule gains fields that are internal to domain logic, OverlayView will receive them with no filtering — the same ScheduleDisplayItem pattern applied to the overlay path would make the boundary consistent.",
       "severity": "info",
       "category": "structural"
     },
     {
       "type": "relationship",
       "pass": 2,
-      "scope": "global",
-      "text": "The full inter-service event chain (Store → SchedulerEngine → AppEnvironment closure → OverlayController) is tested by no automated path; a regression in any link would only surface at runtime.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "relationship",
-      "pass": 2,
-      "scope": "settings-ui",
-      "text": "If settings-ui components directly mutate project-root-models types rather than delegating writes through a coordinator in app-lifecycle, that is a leaky abstraction: presentation layer is reaching past its intended boundary into the domain layer.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "relationship",
-      "pass": 2,
-      "scope": "static-site-assets",
-      "text": "No build step links static-site-assets content to the Swift source zones — llms.txt and sitemap.xml are manually authored, creating documentation drift risk on every feature release.",
-      "severity": "warning",
-      "category": "documentation"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "global",
-      "text": "No zone boundary is machine-enforced between the three production UI zones (settings-ui, overlay-ui, app-lifecycle). Swift module visibility (internal vs. public) is the only available compile-time mechanism to prevent settings-ui from importing overlay-ui types or vice versa, but there is no evidence this is used intentionally as an architectural constraint — meaning cross-UI-zone coupling can accumulate invisibly.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "global",
-      "text": "The dependency direction app-lifecycle → settings-ui (to present the settings window via SettingsWindowController) combined with a potential settings-ui → project-root-models write path means settings-ui is coupled upward to the composition root and downward to the domain layer simultaneously. A pure UI zone should have exactly one dependency direction: receiving data from the domain and emitting user actions upward — not owning window lifecycle or writing domain state.",
-      "severity": "critical",
-      "category": "structural"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "settings-ui",
-      "text": "MenuContent.swift (the status-bar NSMenu) is co-located with settings views, making the app's primary navigation surface a subordinate member of a settings zone. Any future requirement to hide, modify, or gate the status-bar menu requires touching settings-ui rather than the composition root, which will surprise contributors.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "settings-ui",
-      "text": "Palette.swift is the sole visual-token definition file and lives inside settings-ui. If overlay-ui requires the same color values (e.g. for a dark sleep overlay that matches the app theme), the only options are duplication or an undocumented cross-zone import — both erode zone boundaries silently. Move shared visual tokens to project-root-models or extract a ui-shared zone.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "settings-ui",
-      "text": "SettingsWindowController.swift manages NSWindow lifecycle (show, hide, close, ordering) from within the UI content zone. Window controllers are composition-root concerns: AppEnvironment must call into settings-ui to present or dismiss the window, inverting the expected dependency direction where app-lifecycle owns all windowing decisions.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "anti-pattern",
-      "pass": 3,
-      "scope": "static-site-assets",
-      "text": "sitemap.xml and site.webmanifest are hand-authored with no link to the authoritative version variable in app-build-scripts. Each app release can ship with stale metadata in the static site without any CI signal — the dual-artifact release model requires a shared version source, not two independently maintained version strings.",
-      "severity": "warning",
-      "category": "documentation"
-    },
-    {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "global",
-      "text": "Add a Swift Package Manager build-phase script or a CI lint rule that verifies GoToBedCore compiles with no AppKit or SwiftUI imports; this makes the UI-framework-free constraint machine-enforced rather than convention-only and will catch accidental framework imports before they reach main.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "global",
-      "text": "Add a replaceError or catch operator to each Combine sink in the Store → SchedulerEngine → AppEnvironment event chain so that a single domain error does not permanently cancel the subscription; document the expected error types at each link so recovery behavior is explicit.",
-      "severity": "critical",
-      "category": "code"
-    },
-    {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "global",
-      "text": "Introduce a single VERSION file at the repository root consumed by both the Makefile (injected as MARKETING_VERSION into xcodebuild) and a docs-generation script (substituted into sitemap.xml lastmod, site.webmanifest version, and any DMG download URLs in docs/) — one source of truth for both release artifacts.",
-      "severity": "warning",
-      "category": "documentation"
-    },
-    {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "settings-ui",
-      "text": "Audit MenuContent.swift for @EnvironmentObject or @Binding reads from domain state; if present, introduce a MenuViewModel owned by app-lifecycle that pre-computes the display string and passes it into MenuContent as a plain value — removing the view's direct domain dependency.",
-      "severity": "warning",
-      "category": "structural"
-    },
-    {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "settings-ui",
-      "text": "Rename Compat.swift to a per-API extension convention (e.g. NSButton+Compat.swift, NSColor+Compat.swift) so each shim carries its own deployment-target precondition comment and can be deleted independently when the minimum OS version advances past the guarded API.",
+      "scope": "log-overlaycontroller",
+      "text": "OverlayController is a one-way sink: it receives Schedule via present() and has no back-channel to Store or SchedulerEngine. The bidirectional coupling reported between log-overlaycontroller ↔ sources is driven by SchedulerEngine alone, not by both services equally — splitting them into separate zones would accurately reflect this asymmetry.",
       "severity": "info",
-      "category": "code"
+      "category": "structural"
     },
     {
-      "type": "suggestion",
-      "pass": 4,
-      "scope": "settings-ui",
-      "text": "WeekdayPicker.swift has no settings-specific logic by name — audit whether it imports any settings-ui types; if it is dependency-free, move it to a ui-shared zone so it is available to overlay-ui or any future scheduling surface without cross-zone reach-ins.",
+      "type": "relationship",
+      "pass": 2,
+      "scope": "sources",
+      "text": "The bidirectional coupling between 'sources' and 'sources-gotobed' is a composition-root artifact: AppEnvironment (sources) imports SettingsWindowController and other UI components (sources-gotobed) while those components import GoToBedCore models. Extracting the composition wiring into a dedicated AppDelegate or SceneDelegate file would make the coupling directional and eliminate the zone-level bidirectionality.",
       "severity": "info",
       "category": "structural"
     },
     {
       "type": "suggestion",
       "pass": 0,
-      "scope": "settings-ui",
-      "text": "Zone \"Settings UI\" (settings-ui) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "scope": "log-overlaycontroller",
+      "text": "Zone \"Log Overlaycontroller\" (log-overlaycontroller) has catastrophic risk (score: 0.79, cohesion: 0.21, coupling: 0.79) — unreliable: zone has only 3 files (minimum 5 for reliable metrics)",
       "severity": "info"
     },
     {
       "type": "suggestion",
-      "pass": 4,
-      "scope": "static-site-assets",
-      "text": "Add a CI step that extracts the CFBundleShortVersionString from Info.plist (or the VERSION variable from app-build-scripts) and writes it into sitemap.xml lastmod dates and any versioned download links in docs/ — eliminating the manual sync requirement on each release.",
-      "severity": "warning",
-      "category": "documentation"
+      "pass": 0,
+      "scope": "build-release-scripts",
+      "text": "Zone \"Build & Release Scripts\" (build-release-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "severity": "info"
     },
     {
       "type": "suggestion",
-      "pass": 4,
-      "scope": "static-site-assets",
-      "text": "Add a docs/404.html file with site navigation so GitHub Pages serves a branded error page instead of the platform default when a URL is not found.",
-      "severity": "info",
-      "category": "documentation"
+      "pass": 0,
+      "scope": "packaging",
+      "text": "Zone \"Packaging\" (packaging) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — unreliable: zone has only 3 files (minimum 5 for reliable metrics)",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "root",
+      "text": "Zone \"Root\" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "severity": "info"
     },
     {
       "type": "suggestion",
@@ -645,58 +945,22 @@
       "scope": "static-site-assets",
       "text": "Zone \"Static Site Assets\" (static-site-assets) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
       "severity": "info"
-    },
-    {
-      "type": "suggestion",
-      "pass": 0,
-      "scope": "app-build-scripts",
-      "text": "Zone \"App Build Scripts\" (app-build-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — unreliable: zone has only 4 files (minimum 5 for reliable metrics)",
-      "severity": "info"
-    },
-    {
-      "type": "suggestion",
-      "pass": 0,
-      "scope": "app-lifecycle",
-      "text": "Zone \"App Lifecycle\" (app-lifecycle) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
-      "severity": "info"
-    },
-    {
-      "type": "suggestion",
-      "pass": 0,
-      "scope": "core-domain-tests",
-      "text": "Zone \"Core Domain Tests\" (core-domain-tests) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
-      "severity": "info"
-    },
-    {
-      "type": "suggestion",
-      "pass": 0,
-      "scope": "overlay-ui",
-      "text": "Zone \"Overlay UI\" (overlay-ui) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
-      "severity": "info"
-    },
-    {
-      "type": "suggestion",
-      "pass": 0,
-      "scope": "project-root-models",
-      "text": "Zone \"Project Root and Domain Models\" (project-root-models) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
-      "severity": "info"
     }
   ],
-  "enrichmentPass": 4,
-  "structureHash": "649da5159959bb95",
-  "inputFingerprint": "06dc01732c0279bb",
+  "enrichmentPass": 2,
+  "structureHash": "1403288faa0d15c9",
+  "inputFingerprint": "bea2599227b1b597",
   "zoneContentHashes": {
-    "app-build-scripts": "196148d42086263a",
-    "app-lifecycle": "b9cd1803a1aa3e3e",
-    "core-domain-tests": "4f649f6a85085328",
-    "overlay-ui": "ac897d6eba7e6e61",
-    "project-root-models": "f914ce77b025ee58",
-    "settings-ui": "aaab1bc5cfebf72a",
-    "static-site-assets": "48ddeae85d9114cf"
+    "log-overlaycontroller": "97eb8a8ca7d5a6de",
+    "sources": "50fce0ee5ed55ddd",
+    "sources-gotobed": "2a136c3cd9ce7310",
+    "build-release-scripts": "72b734f5580cb047",
+    "packaging": "4f649f6a85085328",
+    "root": "f51e19cda84d7b47"
   },
   "stability": {
     "fileRetention": 1,
-    "persistedZones": 7,
+    "persistedZones": 9,
     "newZones": 0,
     "removedZones": 0,
     "reassignedFiles": []

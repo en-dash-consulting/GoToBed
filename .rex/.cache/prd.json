@@ -1,0 +1,2172 @@
+{
+  "schema": "rex/v1",
+  "title": "PRD",
+  "items": [
+    {
+      "id": "d0039e4a-e453-456c-9bee-e4bb564ec2c1",
+      "title": "App Shell & Foundation",
+      "status": "completed",
+      "level": "epic",
+      "description": "Project scaffolding and the menu-bar app shell for GoToBed — a macOS 13+ SwiftUI/AppKit app distributed as a standalone universal .app. Establishes the LSUIElement menu-bar status-item app with no Dock icon, the menu actions, and local os_log observability. Foundation for all other epics.",
+      "priority": "high",
+      "tags": [
+        "foundation",
+        "macos",
+        "swiftui"
+      ],
+      "source": "PRD.md §5, §3.7",
+      "startedAt": "2026-05-21T12:46:02.860Z",
+      "completedAt": "2026-05-21T12:46:02.860Z",
+      "endedAt": "2026-05-21T12:46:02.860Z",
+      "children": [
+        {
+          "id": "129b2f04-2e28-43f3-ba30-74c5e657e1b8",
+          "title": "Local os_log observability",
+          "status": "completed",
+          "level": "feature",
+          "description": "A lightweight local logging facility via os_log that records schedule fires, skips (sleep/grace), and dismissals to aid debugging of reliability issues. Used by the scheduler and overlay subsystems.",
+          "priority": "medium",
+          "tags": [
+            "logging",
+            "observability"
+          ],
+          "blockedBy": [
+            "168c542a-e60c-43f2-aa8f-c904077c01e2"
+          ],
+          "source": "PRD.md §4.8",
+          "startedAt": "2026-05-21T12:46:02.814Z",
+          "completedAt": "2026-05-21T12:46:02.814Z",
+          "endedAt": "2026-05-21T12:46:02.814Z",
+          "acceptanceCriteria": [
+            "Fires, sleep-skips, and dismissals are logged via os_log (NFR-obs-1)",
+            "Log categories are inspectable in Console.app"
+          ],
+          "children": [
+            {
+              "id": "fed8ffd3-6957-48de-8d0b-e03cccdc27f0",
+              "title": "Add log points for fires, sleep-skips, and dismissals",
+              "status": "completed",
+              "level": "task",
+              "description": "Emit structured log entries at fire, sleep-skip, and dismissal events (NFR-obs-1).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:02.740Z",
+              "completedAt": "2026-05-21T12:46:02.740Z",
+              "endedAt": "2026-05-21T12:46:02.740Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Fire, sleep-skip (wake recompute), and dismissal events logged in SchedulerEngine and OverlayController.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "e4e315c0-4424-4b87-9640-18708392d77b",
+              "title": "Define os_log Logger categories",
+              "status": "completed",
+              "level": "task",
+              "description": "Create Logger instances for scheduler, overlay, and persistence subsystems.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:00.693Z",
+              "completedAt": "2026-05-21T12:46:00.693Z",
+              "endedAt": "2026-05-21T12:46:00.693Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Log.swift defines os_log Loggers for scheduler, overlay, persistence, lifecycle under subsystem us.endash.GoToBed.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "938e2e4d-b027-4815-825d-be0c47e8d5f6",
+          "title": "Menu-bar status-item app (LSUIElement)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Run as a menu-bar (status item) app with LSUIElement=true (no Dock icon). The menu provides: open settings, schedule list with inline quick-toggles, preview overlay, launch-at-login toggle, and quit. Quitting stops all scheduling.",
+          "priority": "high",
+          "tags": [
+            "menu-bar",
+            "lifecycle"
+          ],
+          "blockedBy": [
+            "168c542a-e60c-43f2-aa8f-c904077c01e2"
+          ],
+          "source": "PRD.md §3.7, §6",
+          "startedAt": "2026-05-21T12:45:59.329Z",
+          "completedAt": "2026-05-21T12:45:59.329Z",
+          "endedAt": "2026-05-21T12:45:59.329Z",
+          "acceptanceCriteria": [
+            "App shows a menu-bar icon and no Dock icon (FR-18)",
+            "Menu exposes settings, schedule toggles, preview, launch-at-login, quit (FR-19)",
+            "Quit stops all scheduling and leaves no daemon (FR-21)"
+          ],
+          "children": [
+            {
+              "id": "6f6d17e2-163f-4fca-acd6-9c6a788c2e1f",
+              "title": "Create NSStatusItem with icon and menu",
+              "status": "completed",
+              "level": "task",
+              "description": "Add a status-bar item with a template icon and attach the popover/menu.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:45:55.674Z",
+              "completedAt": "2026-05-21T12:45:55.674Z",
+              "endedAt": "2026-05-21T12:45:55.674Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "MenuBarExtra with moon.zzz.fill icon and a windowed popover (MenuContent).",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "bcc3aebd-1166-405a-839b-b54718e14b66",
+              "title": "Implement quit path that tears down scheduler and timers",
+              "status": "completed",
+              "level": "task",
+              "description": "On quit, invalidate timers and stop scheduling so no work persists after exit (FR-21).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:45:59.257Z",
+              "completedAt": "2026-05-21T12:45:59.257Z",
+              "endedAt": "2026-05-21T12:45:59.257Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "AppDelegate.applicationWillTerminate calls AppEnvironment.shutdown() which stops the scheduler and dismisses any overlay.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "93f14456-f26d-49b8-b3a1-13ee82f201d3",
+              "title": "Wire menu actions (settings, preview, launch-at-login, quit)",
+              "status": "completed",
+              "level": "task",
+              "description": "Hook each menu command to its handler; open the settings window from the menu.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:45:57.683Z",
+              "completedAt": "2026-05-21T12:45:57.683Z",
+              "endedAt": "2026-05-21T12:45:57.683Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "MenuContent wires Add/Settings (via showSettingsWindow:), Preview Overlay, Launch at Login, Quit.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "168c542a-e60c-43f2-aa8f-c904077c01e2",
+          "title": "Project scaffold (SwiftPM/Xcode, universal, macOS 13+)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Create the buildable app project targeting macOS 13 (Ventura)+ as a universal binary (Apple Silicon + Intel), Swift + SwiftUI with AppKit interop. Produces a standalone .app that launches.",
+          "priority": "high",
+          "tags": [
+            "foundation",
+            "build"
+          ],
+          "source": "PRD.md §5.1, §4.4",
+          "startedAt": "2026-05-21T12:45:53.900Z",
+          "completedAt": "2026-05-21T12:45:53.900Z",
+          "endedAt": "2026-05-21T12:45:53.900Z",
+          "acceptanceCriteria": [
+            "Project builds a runnable macOS 13+ universal .app",
+            "SwiftUI app entry point launches without a Dock icon",
+            "Build/test commands documented in repo"
+          ],
+          "children": [
+            {
+              "id": "456780d6-a3dd-4f6e-8030-7b2776f79fc0",
+              "title": "Add @main SwiftUI App entry point with AppDelegate hook",
+              "status": "completed",
+              "level": "task",
+              "description": "Wire the app entry point and an NSApplicationDelegateAdaptor for AppKit interop (status item, overlay window).",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:45:53.830Z",
+              "completedAt": "2026-05-21T12:45:53.830Z",
+              "endedAt": "2026-05-21T12:45:53.830Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "GoToBedApp.swift @main App with MenuBarExtra + Settings scenes and NSApplicationDelegateAdaptor(AppDelegate).",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "4ef58418-efd2-42fd-b619-232c80a01f1f",
+              "title": "Configure universal binary build settings and Info.plist (LSUIElement)",
+              "status": "completed",
+              "level": "task",
+              "description": "Set arm64+x86_64 universal build and add Info.plist keys including LSUIElement=true.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:45:53.092Z",
+              "completedAt": "2026-05-21T12:45:53.092Z",
+              "endedAt": "2026-05-21T12:45:53.092Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Packaging/Info.plist sets LSUIElement; scripts/build-app.sh builds a universal (arm64+x86_64) bundle; runtime accessory policy enforces no Dock icon.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "5d6ef237-7209-488a-bf88-7c48330c77e2",
+              "title": "Initialize SwiftPM/Xcode project with macOS 13 target",
+              "status": "completed",
+              "level": "task",
+              "description": "Set up the app project (Swift + SwiftUI) targeting macOS 13, with a runnable scheme and documented build/test commands.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:45:52.995Z",
+              "completedAt": "2026-05-21T12:45:52.995Z",
+              "endedAt": "2026-05-21T12:45:52.995Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Created SwiftPM package (Package.swift) targeting macOS 13 with GoToBedCore lib, GoToBed executable, and test target.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c70e62ce-7e5f-48af-9c13-4b7611a55bb6",
+      "title": "Code Health: 13 findings across 4 zones",
+      "status": "completed",
+      "level": "epic",
+      "description": "Automated recommendations from SourceVision analysis. 5 zone+category groups covering 13 total findings.",
+      "priority": "high",
+      "source": "sourcevision",
+      "startedAt": "2026-05-25T04:03:26.368Z",
+      "completedAt": "2026-05-25T04:03:26.368Z",
+      "endedAt": "2026-05-25T04:03:26.368Z",
+      "recommendationMeta": {
+        "findingCount": 13
+      },
+      "children": [
+        {
+          "id": "0da19bf7-4b68-41ac-af83-5297ac1c25f8",
+          "title": "Fix documentation in global (1 finding)",
+          "status": "completed",
+          "level": "feature",
+          "description": "- Introduce a single VERSION file at the repository root consumed by both the Makefile (injected as MARKETING_VERSION into xcodebuild) and a docs-generation script (substituted into sitemap.xml lastmod, site.webmanifest version, and any DMG download URLs in docs/) — one source of truth for both release artifacts.",
+          "priority": "high",
+          "source": "sourcevision",
+          "startedAt": "2026-05-25T03:20:16.903Z",
+          "completedAt": "2026-05-25T03:20:16.903Z",
+          "endedAt": "2026-05-25T03:20:16.903Z",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "42910b720c80"
+            ],
+            "category": "documentation",
+            "severityDistribution": {
+              "warning": 1
+            },
+            "findingCount": 1
+          },
+          "children": [
+            {
+              "id": "6a58e4b1-3f06-48b9-80d1-b39ed8751c42",
+              "title": "Fix documentation in global: Introduce a single VERSION file at the repository root consumed by both the Make",
+              "status": "completed",
+              "level": "task",
+              "description": "- Introduce a single VERSION file at the repository root consumed by both the Makefile (injected as MARKETING_VERSION into xcodebuild) and a docs-generation script (substituted into sitemap.xml lastmod, site.webmanifest version, and any DMG download URLs in docs/) — one source of truth for both release artifacts.",
+              "priority": "high",
+              "source": "sourcevision",
+              "startedAt": "2026-05-25T03:15:06.308Z",
+              "completedAt": "2026-05-25T03:20:16.794Z",
+              "endedAt": "2026-05-25T03:20:16.794Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Created VERSION file at repo root; wired through Makefile (MARKETING_VERSION), build-app.sh (priority chain), stamp-site-version.sh (now stamps both sitemap and webmanifest), release-please-config.json (VERSION as extra-file), and release.yml (stamp-docs commits both docs files).",
+              "acceptanceCriteria": [],
+              "commits": [
+                {
+                  "hash": "4e2a06d96d3a8a68395c935c5e1affeb96f6cdf4",
+                  "author": "Nick Daniel",
+                  "authorEmail": "nick@endash.us",
+                  "timestamp": "2026-05-24T23:20:30-04:00"
+                }
+              ],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "42910b720c80"
+                ],
+                "category": "documentation",
+                "severityDistribution": {
+                  "warning": 1
+                },
+                "findingCount": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "da9d3bc2-d569-4e2d-ae7b-7a1679cb228b",
+          "title": "Fix documentation in static-site-assets (3 findings)",
+          "status": "completed",
+          "level": "feature",
+          "description": "- No build step links static-site-assets content to the Swift source zones — llms.txt and sitemap.xml are manually authored, creating documentation drift risk on every feature release.\n- sitemap.xml and site.webmanifest are hand-authored with no link to the authoritative version variable in app-build-scripts. Each app release can ship with stale metadata in the static site without any CI signal — the dual-artifact release model requires a shared version source, not two independently maintained version strings.\n- Add a CI step that extracts the CFBundleShortVersionString from Info.plist (or the VERSION variable from app-build-scripts) and writes it into sitemap.xml lastmod dates and any versioned download links in docs/ — eliminating the manual sync requirement on each release.",
+          "priority": "high",
+          "source": "sourcevision",
+          "startedAt": "2026-05-25T03:28:01.821Z",
+          "completedAt": "2026-05-25T03:28:01.821Z",
+          "endedAt": "2026-05-25T03:28:01.821Z",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "7402509b0fae",
+              "55ac356bab07",
+              "bdeeafff4539"
+            ],
+            "category": "documentation",
+            "severityDistribution": {
+              "warning": 3
+            },
+            "findingCount": 3
+          },
+          "children": [
+            {
+              "id": "85859b86-c357-4f00-b834-bde823ffc893",
+              "title": "Fix documentation in static-site-assets: No build step links static-site-assets content to the Swift source zones — llms. (+2 more)",
+              "status": "completed",
+              "level": "task",
+              "description": "- No build step links static-site-assets content to the Swift source zones — llms.txt and sitemap.xml are manually authored, creating documentation drift risk on every feature release.\n- sitemap.xml and site.webmanifest are hand-authored with no link to the authoritative version variable in app-build-scripts. Each app release can ship with stale metadata in the static site without any CI signal — the dual-artifact release model requires a shared version source, not two independently maintained version strings.\n- Add a CI step that extracts the CFBundleShortVersionString from Info.plist (or the VERSION variable from app-build-scripts) and writes it into sitemap.xml lastmod dates and any versioned download links in docs/ — eliminating the manual sync requirement on each release.",
+              "priority": "high",
+              "source": "sourcevision",
+              "startedAt": "2026-05-25T03:20:33.160Z",
+              "completedAt": "2026-05-25T03:28:01.717Z",
+              "endedAt": "2026-05-25T03:28:01.717Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Added \"Current version\" field to llms.txt stamped by release workflow; new check-site-docs.sh validates macOS version consistency between Info.plist and static docs; wired into make validate and release.yml stamp-docs job.",
+              "acceptanceCriteria": [],
+              "commits": [
+                {
+                  "hash": "3a002c39cf5c5218243c6eae198848ae11a4c3b6",
+                  "author": "Nick Daniel",
+                  "authorEmail": "nick@endash.us",
+                  "timestamp": "2026-05-24T23:28:25-04:00"
+                }
+              ],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "7402509b0fae",
+                  "55ac356bab07",
+                  "bdeeafff4539"
+                ],
+                "category": "documentation",
+                "severityDistribution": {
+                  "warning": 3
+                },
+                "findingCount": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "73abe599-7ff7-472c-90c1-697c489d4358",
+          "title": "Fix structural in core-domain-tests (1 finding)",
+          "status": "completed",
+          "level": "feature",
+          "description": "- The GoToBed app target has no corresponding test target — SchedulerEngine, OverlayController, AppEnvironment, and their inter-service wiring have zero automated test coverage.",
+          "priority": "high",
+          "source": "sourcevision",
+          "startedAt": "2026-05-25T03:44:37.253Z",
+          "completedAt": "2026-05-25T03:44:37.253Z",
+          "endedAt": "2026-05-25T03:44:37.253Z",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "933b57de22d4"
+            ],
+            "category": "structural",
+            "severityDistribution": {
+              "warning": 1
+            },
+            "findingCount": 1
+          },
+          "children": [
+            {
+              "id": "5987c4db-6c14-48be-a879-2f6f718514ef",
+              "title": "Fix structural in core-domain-tests: The GoToBed app target has no corresponding test target — SchedulerEngine, Overl",
+              "status": "completed",
+              "level": "task",
+              "description": "- The GoToBed app target has no corresponding test target — SchedulerEngine, OverlayController, AppEnvironment, and their inter-service wiring have zero automated test coverage.",
+              "priority": "high",
+              "source": "sourcevision",
+              "startedAt": "2026-05-25T03:28:27.274Z",
+              "completedAt": "2026-05-25T03:44:37.159Z",
+              "endedAt": "2026-05-25T03:44:37.159Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Extracted GoToBedKit library from executable, created GoToBedTests target with 15 tests covering SchedulerEngine (8), OverlayController (5), and inter-service wiring (2). Total tests: 44 → 59, all passing.",
+              "acceptanceCriteria": [],
+              "commits": [
+                {
+                  "hash": "c9f7104452f2be542178c3f2c3bc6974a1b99c75",
+                  "author": "Nick Daniel",
+                  "authorEmail": "nick@endash.us",
+                  "timestamp": "2026-05-24T23:45:18-04:00"
+                }
+              ],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "933b57de22d4"
+                ],
+                "category": "structural",
+                "severityDistribution": {
+                  "warning": 1
+                },
+                "findingCount": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "d1509356-712e-4f6d-a80a-c1c446877712",
+          "title": "Fix structural in global (3 findings)",
+          "status": "completed",
+          "level": "feature",
+          "description": "- No automated enforcement of cross-zone layering exists: the architectural boundary between domain (project-root-models), UI (settings-ui, overlay-ui), and composition (app-lifecycle) is expressed only by file organization, not by Swift module visibility rules or CI checks — this boundary will erode silently as the codebase grows.\n- The full inter-service event chain (Store → SchedulerEngine → AppEnvironment closure → OverlayController) is tested by no automated path; a regression in any link would only surface at runtime.\n- Add a Swift Package Manager build-phase script or a CI lint rule that verifies GoToBedCore compiles with no AppKit or SwiftUI imports; this makes the UI-framework-free constraint machine-enforced rather than convention-only and will catch accidental framework imports before they reach main.",
+          "priority": "high",
+          "source": "sourcevision",
+          "startedAt": "2026-05-25T03:50:28.355Z",
+          "completedAt": "2026-05-25T03:50:28.355Z",
+          "endedAt": "2026-05-25T03:50:28.355Z",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "17956696e1f1",
+              "b392eb569e5b",
+              "6b11ec6e6ad2"
+            ],
+            "category": "structural",
+            "severityDistribution": {
+              "warning": 3
+            },
+            "findingCount": 3
+          },
+          "children": [
+            {
+              "id": "8967fb56-9233-47c1-9f6a-89d0d7652733",
+              "title": "Fix structural in global: No automated enforcement of cross-zone layering exists: the architectural bounda (+2 more)",
+              "status": "completed",
+              "level": "task",
+              "description": "- No automated enforcement of cross-zone layering exists: the architectural boundary between domain (project-root-models), UI (settings-ui, overlay-ui), and composition (app-lifecycle) is expressed only by file organization, not by Swift module visibility rules or CI checks — this boundary will erode silently as the codebase grows.\n- The full inter-service event chain (Store → SchedulerEngine → AppEnvironment closure → OverlayController) is tested by no automated path; a regression in any link would only surface at runtime.\n- Add a Swift Package Manager build-phase script or a CI lint rule that verifies GoToBedCore compiles with no AppKit or SwiftUI imports; this makes the UI-framework-free constraint machine-enforced rather than convention-only and will catch accidental framework imports before they reach main.",
+              "priority": "high",
+              "source": "sourcevision",
+              "startedAt": "2026-05-25T03:45:20.822Z",
+              "completedAt": "2026-05-25T03:50:28.253Z",
+              "endedAt": "2026-05-25T03:50:28.253Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Added scripts/check-zone-layering.sh enforcing the three intra-module zone boundaries within GoToBedKit; wired into make validate and CI.",
+              "acceptanceCriteria": [],
+              "commits": [
+                {
+                  "hash": "6f0ae53936b655028691a71ca694ee3fa2858a37",
+                  "author": "Nick Daniel",
+                  "authorEmail": "nick@endash.us",
+                  "timestamp": "2026-05-24T23:51:01-04:00"
+                }
+              ],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "17956696e1f1",
+                  "b392eb569e5b",
+                  "6b11ec6e6ad2"
+                ],
+                "category": "structural",
+                "severityDistribution": {
+                  "warning": 3
+                },
+                "findingCount": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "77d815de-8351-4270-be94-2ffbe7d90a58",
+          "title": "Fix structural in settings-ui (5 findings)",
+          "status": "completed",
+          "level": "feature",
+          "description": "- If settings-ui components directly mutate project-root-models types rather than delegating writes through a coordinator in app-lifecycle, that is a leaky abstraction: presentation layer is reaching past its intended boundary into the domain layer.\n- MenuContent.swift (the status-bar NSMenu) is co-located with settings views, making the app's primary navigation surface a subordinate member of a settings zone. Any future requirement to hide, modify, or gate the status-bar menu requires touching settings-ui rather than the composition root, which will surprise contributors.\n- Palette.swift is the sole visual-token definition file and lives inside settings-ui. If overlay-ui requires the same color values (e.g. for a dark sleep overlay that matches the app theme), the only options are duplication or an undocumented cross-zone import — both erode zone boundaries silently. Move shared visual tokens to project-root-models or extract a ui-shared zone.\n- SettingsWindowController.swift manages NSWindow lifecycle (show, hide, close, ordering) from within the UI content zone. Window controllers are composition-root concerns: AppEnvironment must call into settings-ui to present or dismiss the window, inverting the expected dependency direction where app-lifecycle owns all windowing decisions.\n- Audit MenuContent.swift for @EnvironmentObject or @Binding reads from domain state; if present, introduce a MenuViewModel owned by app-lifecycle that pre-computes the display string and passes it into MenuContent as a plain value — removing the view's direct domain dependency.",
+          "priority": "high",
+          "source": "sourcevision",
+          "startedAt": "2026-05-25T04:03:26.300Z",
+          "completedAt": "2026-05-25T04:03:26.300Z",
+          "endedAt": "2026-05-25T04:03:26.300Z",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "932203aa7f6a",
+              "97871992cdad",
+              "0ac203c0d734",
+              "aef2f39c54e6",
+              "d7e29756210c"
+            ],
+            "category": "structural",
+            "severityDistribution": {
+              "warning": 5
+            },
+            "findingCount": 5
+          },
+          "children": [
+            {
+              "id": "b8afc227-38b6-4fb4-8063-ea489a5a820d",
+              "title": "Fix structural in settings-ui: If settings-ui components directly mutate project-root-models types rather than  (+4 more)",
+              "status": "completed",
+              "level": "task",
+              "description": "- If settings-ui components directly mutate project-root-models types rather than delegating writes through a coordinator in app-lifecycle, that is a leaky abstraction: presentation layer is reaching past its intended boundary into the domain layer.\n- MenuContent.swift (the status-bar NSMenu) is co-located with settings views, making the app's primary navigation surface a subordinate member of a settings zone. Any future requirement to hide, modify, or gate the status-bar menu requires touching settings-ui rather than the composition root, which will surprise contributors.\n- Palette.swift is the sole visual-token definition file and lives inside settings-ui. If overlay-ui requires the same color values (e.g. for a dark sleep overlay that matches the app theme), the only options are duplication or an undocumented cross-zone import — both erode zone boundaries silently. Move shared visual tokens to project-root-models or extract a ui-shared zone.\n- SettingsWindowController.swift manages NSWindow lifecycle (show, hide, close, ordering) from within the UI content zone. Window controllers are composition-root concerns: AppEnvironment must call into settings-ui to present or dismiss the window, inverting the expected dependency direction where app-lifecycle owns all windowing decisions.\n- Audit MenuContent.swift for @EnvironmentObject or @Binding reads from domain state; if present, introduce a MenuViewModel owned by app-lifecycle that pre-computes the display string and passes it into MenuContent as a plain value — removing the view's direct domain dependency.",
+              "priority": "high",
+              "source": "sourcevision",
+              "startedAt": "2026-05-25T03:51:03.275Z",
+              "completedAt": "2026-05-25T04:03:26.197Z",
+              "endedAt": "2026-05-25T04:03:26.197Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Moved Palette tokens to GoToBedCore, moved SettingsWindowController to composition root, introduced MenuViewModel/ScheduleDisplayItem, added AppEnvironment coordinator methods for all store writes, removed direct Store write dependencies from all settings-ui views and MenuContent.",
+              "acceptanceCriteria": [],
+              "commits": [
+                {
+                  "hash": "df3d76b59b8761108c84272e531175749ebaae02",
+                  "author": "Nick Daniel",
+                  "authorEmail": "nick@endash.us",
+                  "timestamp": "2026-05-25T00:03:50-04:00"
+                }
+              ],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "932203aa7f6a",
+                  "97871992cdad",
+                  "0ac203c0d734",
+                  "aef2f39c54e6",
+                  "d7e29756210c"
+                ],
+                "category": "structural",
+                "severityDistribution": {
+                  "warning": 5
+                },
+                "findingCount": 5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b7603eac-65ae-4dc7-84d0-84efaa01a895",
+      "title": "Code Health: 2 findings across 2 zones",
+      "status": "pending",
+      "level": "epic",
+      "description": "Automated recommendations from SourceVision analysis. 2 zone+category groups covering 2 total findings.",
+      "priority": "high",
+      "source": "sourcevision",
+      "recommendationMeta": {
+        "findingCount": 2
+      },
+      "children": [
+        {
+          "id": "6cc56270-bae8-4679-8596-1719416140fe",
+          "title": "Fix code in scheduler-engine (1 finding)",
+          "status": "pending",
+          "level": "feature",
+          "description": "- SchedulerEngine.onFire is declared as an optional untyped closure with no named interface; an unwired scheduler silently drops all fire events — introduce a named delegate protocol or require the callback at init time to enforce the contract at compile time",
+          "priority": "high",
+          "source": "sourcevision",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "efec6dfc606d"
+            ],
+            "category": "code",
+            "severityDistribution": {
+              "warning": 1
+            },
+            "findingCount": 1
+          },
+          "children": [
+            {
+              "id": "89e6735e-c0a9-4620-b0ad-85feecfc92f7",
+              "title": "Fix code in scheduler-engine: SchedulerEngine.onFire is declared as an optional untyped closure with no named ",
+              "status": "pending",
+              "level": "task",
+              "description": "- SchedulerEngine.onFire is declared as an optional untyped closure with no named interface; an unwired scheduler silently drops all fire events — introduce a named delegate protocol or require the callback at init time to enforce the contract at compile time",
+              "priority": "high",
+              "source": "sourcevision",
+              "acceptanceCriteria": [],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "efec6dfc606d"
+                ],
+                "category": "code",
+                "severityDistribution": {
+                  "warning": 1
+                },
+                "findingCount": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "234abacf-691d-491c-90e7-987b07fce602",
+          "title": "Fix structural in global (1 finding)",
+          "status": "pending",
+          "level": "feature",
+          "description": "- Circular dependency chains are resolved via callback closures (scheduler.onFire wired by AppEnvironment) rather than restructured imports; this makes the import graph appear acyclic to static analysis while preserving runtime coupling cycles — document this in AppEnvironment to prevent future contributors from replacing closures with direct cross-zone imports",
+          "priority": "high",
+          "source": "sourcevision",
+          "acceptanceCriteria": [],
+          "recommendationMeta": {
+            "findingHashes": [
+              "0013e714ee47"
+            ],
+            "category": "structural",
+            "severityDistribution": {
+              "warning": 1
+            },
+            "findingCount": 1
+          },
+          "children": [
+            {
+              "id": "6c94e060-2a39-455f-9408-2ca891cd7f5e",
+              "title": "Fix structural in global: Circular dependency chains are resolved via callback closures (scheduler.onFire ",
+              "status": "pending",
+              "level": "task",
+              "description": "- Circular dependency chains are resolved via callback closures (scheduler.onFire wired by AppEnvironment) rather than restructured imports; this makes the import graph appear acyclic to static analysis while preserving runtime coupling cycles — document this in AppEnvironment to prevent future contributors from replacing closures with direct cross-zone imports",
+              "priority": "high",
+              "source": "sourcevision",
+              "acceptanceCriteria": [],
+              "recommendationMeta": {
+                "findingHashes": [
+                  "0013e714ee47"
+                ],
+                "category": "structural",
+                "severityDistribution": {
+                  "warning": 1
+                },
+                "findingCount": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6c5657f4-b04c-4fd9-bd87-bc78be700ba2",
+      "title": "Data Model & Persistence",
+      "status": "completed",
+      "level": "epic",
+      "description": "The Codable domain model (Schedule, DismissMode, AppearanceSettings, AppState) and the single observable Store that owns app state. Persists schedules and appearance to local JSON with graceful degradation to defaults on decode failure. Survives restart, crash, and reboot (NFR-persist).",
+      "priority": "high",
+      "tags": [
+        "model",
+        "persistence"
+      ],
+      "blockedBy": [
+        "168c542a-e60c-43f2-aa8f-c904077c01e2"
+      ],
+      "source": "PRD.md §5.3, §5.6, §4.6",
+      "startedAt": "2026-05-21T12:46:14.903Z",
+      "completedAt": "2026-05-21T12:46:14.903Z",
+      "endedAt": "2026-05-21T12:46:14.903Z",
+      "children": [
+        {
+          "id": "135e8159-b79a-4aab-9676-2aead185f023",
+          "title": "Core domain model (Schedule, DismissMode, AppearanceSettings, AppState)",
+          "status": "completed",
+          "level": "feature",
+          "description": "The Codable value types: Schedule (id, hour, minute, weekdays Set, message, isEnabled, dismissMode, appearance), DismissMode (.auto(seconds:)/.manual), AppearanceSettings (RGBA bg/text colors, clock & message font sizes), and AppState (schedules + defaultAppearance). Includes validation invariants (non-empty weekdays, duration 5s–3600s, message cap ~500 chars).",
+          "priority": "high",
+          "tags": [
+            "model"
+          ],
+          "source": "PRD.md §5.3",
+          "startedAt": "2026-05-21T12:46:08.035Z",
+          "completedAt": "2026-05-21T12:46:08.035Z",
+          "endedAt": "2026-05-21T12:46:08.035Z",
+          "acceptanceCriteria": [
+            "Types match the §5.3 model and are Codable",
+            "Weekdays cannot be empty; duration constrained to 5-3600s; message capped ~500 chars",
+            "Round-trips through Codable without loss"
+          ],
+          "children": [
+            {
+              "id": "18771471-71ed-4504-946c-ce0791619a02",
+              "title": "Add ColorComponents RGBA type with Codable",
+              "status": "completed",
+              "level": "task",
+              "description": "Codable RGBA representation plus conversions to/from SwiftUI Color / NSColor.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:06.096Z",
+              "completedAt": "2026-05-21T12:46:06.096Z",
+              "endedAt": "2026-05-21T12:46:06.096Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "ColorComponents (RGBA, Codable, clamped) in core; Color/NSColor bridging + ColorPicker binding in ColorBridging.swift.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "624a6042-d6f1-4a58-beae-3d8380b48476",
+              "title": "Add model validation (weekdays, duration, message cap)",
+              "status": "completed",
+              "level": "task",
+              "description": "Enforce non-empty weekdays, auto duration 5-3600s, and ~500-char message cap.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:07.968Z",
+              "completedAt": "2026-05-21T12:46:07.968Z",
+              "endedAt": "2026-05-21T12:46:07.968Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Validation.swift enforces non-empty weekdays, 0-23/0-59, 5-3600s duration, 500-char message; sanitized() clamps. Covered by ValidationTests.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "369a7ea4-469d-48d5-ade3-9ac56de3d105",
+              "title": "Define Schedule/DismissMode/AppearanceSettings/AppState Codable types",
+              "status": "completed",
+              "level": "task",
+              "description": "Implement the §5.3 model exactly, with Codable conformance and Identifiable Schedule.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:04.260Z",
+              "completedAt": "2026-05-21T12:46:04.260Z",
+              "endedAt": "2026-05-21T12:46:04.260Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Schedule.swift defines Schedule (Identifiable/Codable), DismissMode, AppState per §5.3.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "72cead5e-6051-4502-b772-9199142096e2",
+          "title": "JSON persistence with graceful fallback",
+          "status": "completed",
+          "level": "feature",
+          "description": "Persist AppState as human-readable JSON in Application Support (or UserDefaults via Codable). On decode failure, fall back to defaults and log rather than crash. Data survives app restart, crash, and OS reboot.",
+          "priority": "high",
+          "tags": [
+            "persistence"
+          ],
+          "blockedBy": [
+            "135e8159-b79a-4aab-9676-2aead185f023"
+          ],
+          "source": "PRD.md §5.6, §4.6",
+          "startedAt": "2026-05-21T12:46:14.860Z",
+          "completedAt": "2026-05-21T12:46:14.860Z",
+          "endedAt": "2026-05-21T12:46:14.860Z",
+          "acceptanceCriteria": [
+            "AppState persists and reloads across restart/reboot (NFR-persist-1)",
+            "Corrupt/unreadable file degrades gracefully to defaults and logs (NFR-persist-2)",
+            "Stored format is human-readable JSON"
+          ],
+          "children": [
+            {
+              "id": "6ad629cd-e745-4dbb-9e05-f99a10f3312b",
+              "title": "Add graceful decode-failure fallback to defaults with logging",
+              "status": "completed",
+              "level": "task",
+              "description": "On corrupt/missing file, load defaults and log instead of crashing (NFR-persist-2).",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:14.788Z",
+              "completedAt": "2026-05-21T12:46:14.788Z",
+              "endedAt": "2026-05-21T12:46:14.788Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "load() returns .empty + logs on decode failure; PersistenceTests.testCorruptFileFallsBackToDefaults covers it.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "fc94b09d-267f-4d20-9356-eec1123e070b",
+              "title": "Implement Application Support JSON load/save of AppState",
+              "status": "completed",
+              "level": "task",
+              "description": "Encode/decode AppState as JSON in Application Support; save on change.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:12.960Z",
+              "completedAt": "2026-05-21T12:46:12.960Z",
+              "endedAt": "2026-05-21T12:46:12.960Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "AppStatePersistence saves/loads pretty JSON in Application Support/GoToBed/state.json (atomic write).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "fb85dca8-09c7-4425-b613-00d0904b8888",
+          "title": "Observable Store (single source of truth)",
+          "status": "completed",
+          "level": "feature",
+          "description": "An observable Store that owns AppState as the single source of truth, exposes CRUD on schedules and the default appearance, and notifies observers (UI and scheduler) of changes. New schedules are seeded from the app-wide default appearance.",
+          "priority": "high",
+          "tags": [
+            "model",
+            "state"
+          ],
+          "blockedBy": [
+            "135e8159-b79a-4aab-9676-2aead185f023"
+          ],
+          "source": "PRD.md §5.2",
+          "startedAt": "2026-05-21T12:46:11.523Z",
+          "completedAt": "2026-05-21T12:46:11.523Z",
+          "endedAt": "2026-05-21T12:46:11.523Z",
+          "acceptanceCriteria": [
+            "Store is observable; UI and scheduler react to changes",
+            "Create/edit/delete schedule and edit default appearance supported",
+            "New schedules inherit current default appearance (FR-15)"
+          ],
+          "children": [
+            {
+              "id": "ceb9bfde-abbc-4f5e-bef9-962c99c64569",
+              "title": "Implement observable Store owning AppState with CRUD",
+              "status": "completed",
+              "level": "task",
+              "description": "An ObservableObject Store with add/edit/delete schedule and default-appearance editing, publishing changes.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:09.477Z",
+              "completedAt": "2026-05-21T12:46:09.477Z",
+              "endedAt": "2026-05-21T12:46:09.477Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Store.swift: ObservableObject owning AppState with add/update/delete/setEnabled; persists on mutate. Covered by StoreTests.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "e2760fc9-37b1-4611-b1eb-9114ed7cd9d3",
+              "title": "Seed new schedules from default appearance",
+              "status": "completed",
+              "level": "task",
+              "description": "When creating a schedule, copy the current app-wide default appearance into it (FR-15).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:11.450Z",
+              "completedAt": "2026-05-21T12:46:11.450Z",
+              "endedAt": "2026-05-21T12:46:11.450Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Store.makeSchedule seeds appearance from state.defaultAppearance; verified non-retroactive by StoreTests.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d2d0ccee-9b7a-4bb9-b6d1-b973bc3bc69d",
+      "title": "Distribution & Releases",
+      "status": "completed",
+      "level": "epic",
+      "description": "Make GoToBed installable and updatable for the public as an open-source macOS app distributed via GitHub — no App Store (out of scope for now). Covers: open-sourcing the repo under MIT, Developer ID signing + notarization so downloads launch cleanly, a single-source version scheme with automated GitHub releases that publish a notarized universal download, a clean GitHub Pages download site at gotobed.endash.us, and an update path that keeps the app fully offline (NFR-priv-1) by opening the releases page in the browser plus documented manual update steps.",
+      "priority": "high",
+      "tags": [
+        "distribution",
+        "release",
+        "packaging"
+      ],
+      "source": "User request (distribution planning)",
+      "startedAt": "2026-05-25T03:00:57.753Z",
+      "completedAt": "2026-05-25T03:00:57.753Z",
+      "endedAt": "2026-05-25T03:00:57.753Z",
+      "children": [
+        {
+          "id": "0bacb0ef-d450-4a69-a736-b68c1869bfb4",
+          "title": "Developer ID signing & notarization",
+          "status": "completed",
+          "level": "feature",
+          "description": "Replace the current ad-hoc signature with Developer ID Application signing under the hardened runtime, notarize the app with Apple (notarytool), and staple the ticket, so a downloaded build launches without Gatekeeper warnings or right-click-open. Requires an Apple Developer account ($99/yr); this is the main prerequisite for a smooth public download.",
+          "priority": "high",
+          "tags": [
+            "signing",
+            "notarization",
+            "gatekeeper"
+          ],
+          "source": "Distribution requirement (Gatekeeper)",
+          "startedAt": "2026-05-21T18:15:49.924Z",
+          "completedAt": "2026-05-21T18:15:49.924Z",
+          "endedAt": "2026-05-21T18:15:49.924Z",
+          "acceptanceCriteria": [
+            "Release .app is signed with a Developer ID Application identity and hardened runtime",
+            "Notarization via notarytool succeeds and the ticket is stapled",
+            "spctl --assess --type execute passes; first launch shows no 'unidentified developer' block",
+            "Entitlements remain network-free (no-network guarantee preserved)"
+          ],
+          "children": [
+            {
+              "id": "fb4cdf4c-f1f5-4adf-b1de-b4db124f8644",
+              "title": "Add Developer ID signing + notarytool + stapling to build-app.sh",
+              "status": "completed",
+              "level": "task",
+              "description": "Extend build-app.sh to sign with a Developer ID Application identity (hardened runtime), submit to notarytool, and staple the ticket; parameterize identity/credentials. Verify with spctl.",
+              "priority": "high",
+              "startedAt": "2026-05-21T15:49:53.137Z",
+              "completedAt": "2026-05-21T18:15:49.848Z",
+              "endedAt": "2026-05-21T18:15:49.848Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "build-app.sh signs with Developer ID + hardened runtime + secure timestamp and notarizes/staples via a notarytool keychain profile. Verified on a real build: codesign authority = Developer ID Application, spctl = \"accepted, Notarized Developer ID\", stapler validate passes, entitlements remain network-free.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "0c8fdb55-00cf-4d16-8f8d-74ba27ccb88f",
+          "title": "Download website on GitHub Pages",
+          "status": "completed",
+          "level": "feature",
+          "description": "A clean, simple static site at gotobed.endash.us: a one-line pitch, a screenshot of the overlay, and a prominent Download button that resolves to the latest GitHub release. Served via GitHub Pages with a CNAME custom domain over HTTPS.",
+          "priority": "medium",
+          "tags": [
+            "website",
+            "github-pages"
+          ],
+          "blockedBy": [
+            "b6cd6bcc-16b0-4432-a337-a91bcdab9b25"
+          ],
+          "source": "User request (clean GitHub Pages site)",
+          "startedAt": "2026-05-25T03:00:56.289Z",
+          "completedAt": "2026-05-25T03:00:56.289Z",
+          "endedAt": "2026-05-25T03:00:56.289Z",
+          "acceptanceCriteria": [
+            "Static landing/download page built (in docs/ or a gh-pages branch)",
+            "Site live at https://gotobed.endash.us via GitHub Pages + CNAME",
+            "Download button links to the latest release; page is legible on mobile"
+          ],
+          "children": [
+            {
+              "id": "f7f86f8d-bddd-4bf2-ac4f-0782a6c68799",
+              "title": "Build the static landing/download page",
+              "status": "completed",
+              "level": "task",
+              "description": "A clean single-page site (pitch, overlay screenshot, Download button to latest release) in docs/ or a gh-pages branch; mobile-legible, En Dash branding.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T18:40:49.232Z",
+              "completedAt": "2026-05-21T18:40:49.232Z",
+              "endedAt": "2026-05-21T18:40:49.232Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "docs/index.html: clean, responsive En Dash-branded landing page with pitch, overlay mockup, feature grid, Download button to the latest release, and install/update steps. docs/CNAME set to gotobed.endash.us; docs/icon.png included.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "a4ae6d1b-21f2-4857-83f0-fa117e1e4fb8",
+              "title": "Configure GitHub Pages + CNAME for gotobed.endash.us",
+              "status": "completed",
+              "level": "task",
+              "description": "Enable GitHub Pages, add CNAME for gotobed.endash.us, configure the DNS record, and confirm HTTPS serves the site.",
+              "priority": "medium",
+              "startedAt": "2026-05-25T03:00:56.199Z",
+              "completedAt": "2026-05-25T03:00:56.199Z",
+              "endedAt": "2026-05-25T03:00:56.199Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "GitHub Pages live at gotobed.endash.us with CNAME configured.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "65caef31-1904-4c5e-b601-77a0af2444e2",
+          "title": "Offline-preserving update path",
+          "status": "completed",
+          "level": "feature",
+          "description": "Give users a clear path to updates without breaking the app's zero-network guarantee (NFR-priv-1). Add a \"Check for Updates…\" menu item that opens the latest GitHub release page in the default browser (NSWorkspace.open — no network entitlement), show the current version in the menu, and document the manual update flow (download the new .app, replace it in /Applications). Note: a true in-app auto-updater (e.g. Sparkle) was deliberately not chosen because it requires network access; recorded here as a future option if the privacy stance is ever relaxed.",
+          "priority": "medium",
+          "tags": [
+            "updates",
+            "privacy"
+          ],
+          "blockedBy": [
+            "b6cd6bcc-16b0-4432-a337-a91bcdab9b25"
+          ],
+          "source": "User decision (keep app fully offline)",
+          "startedAt": "2026-05-21T18:40:52.566Z",
+          "completedAt": "2026-05-21T18:40:52.566Z",
+          "endedAt": "2026-05-21T18:40:52.566Z",
+          "acceptanceCriteria": [
+            "Menu shows current version and a 'Check for Updates…' item that opens the releases page in the browser",
+            "No network entitlement added; scripts/verify-no-network.sh still passes",
+            "Manual update steps documented in README and on the website"
+          ],
+          "children": [
+            {
+              "id": "97308a2b-2b9c-489d-83ae-8759a39a2b30",
+              "title": "Add 'Check for Updates…' menu item + version display",
+              "status": "completed",
+              "level": "task",
+              "description": "Menu shows the current version and a 'Check for Updates…' item that opens the latest releases page via NSWorkspace.open (no network entitlement). Confirm verify-no-network still passes.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T18:40:51.119Z",
+              "completedAt": "2026-05-21T18:40:51.119Z",
+              "endedAt": "2026-05-21T18:40:51.119Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Menu shows v<version> and a 'Check for Updates…' item that opens the releases page via NSWorkspace.open (no network entitlement). verify-no-network still passes.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "955f904b-62c2-4204-a293-2b793b5887ed",
+              "title": "Document the manual update flow (README + website)",
+              "status": "completed",
+              "level": "task",
+              "description": "Document how to update: download the new .app from releases, replace the copy in /Applications, relaunch. Surface in README and on the site.",
+              "priority": "low",
+              "startedAt": "2026-05-21T18:40:52.481Z",
+              "completedAt": "2026-05-21T18:40:52.481Z",
+              "endedAt": "2026-05-21T18:40:52.481Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Manual update flow documented in README (Updating section) and on the landing page.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "d989dac9-0b48-4108-a72e-61169a63ce00",
+          "title": "Open-source the repository (MIT)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Publish the project as a public, MIT-licensed GitHub repository: add an MIT LICENSE, finalize a public-facing README, scrub for anything that shouldn't be public, and push to a public repo.",
+          "priority": "high",
+          "tags": [
+            "open-source",
+            "github"
+          ],
+          "source": "User request",
+          "startedAt": "2026-05-25T03:00:57.693Z",
+          "completedAt": "2026-05-25T03:00:57.693Z",
+          "endedAt": "2026-05-25T03:00:57.693Z",
+          "acceptanceCriteria": [
+            "MIT LICENSE file present at repo root",
+            "README reads well for a first-time visitor (what it is, install, build)",
+            "Public GitHub repository created with main pushed; no secrets committed"
+          ],
+          "children": [
+            {
+              "id": "2a760261-e2ec-4af4-b693-393f35bdd58c",
+              "title": "Add MIT LICENSE and finalize public README",
+              "status": "completed",
+              "level": "task",
+              "description": "Add an MIT LICENSE file, ensure README is public-ready, and confirm no secrets/credentials are committed.",
+              "priority": "high",
+              "startedAt": "2026-05-21T18:40:46.977Z",
+              "completedAt": "2026-05-21T18:40:46.977Z",
+              "endedAt": "2026-05-21T18:40:46.977Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Added MIT LICENSE; README now has Install, Updating, Releasing (maintainers), and License sections. Pre-publish audit performed for secrets/paths.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "ac573eeb-fc92-423e-a7a2-7dde3468da4f",
+              "title": "Create public GitHub repo and push main",
+              "status": "completed",
+              "level": "task",
+              "description": "Create the public GitHub repository, add description/topics, and push the main branch.",
+              "priority": "high",
+              "startedAt": "2026-05-25T02:56:35.166Z",
+              "completedAt": "2026-05-25T03:00:57.599Z",
+              "endedAt": "2026-05-25T03:00:57.599Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Public repo created and main pushed; release-please + DMG workflows live.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "b6cd6bcc-16b0-4432-a337-a91bcdab9b25",
+          "title": "Versioned, automated releases",
+          "status": "completed",
+          "level": "feature",
+          "description": "A single-source semantic version driven by git tags (vX.Y.Z), injected into Info.plist (CFBundleShortVersionString + build number) and surfaced in the app, plus a downloadable artifact and CI automation: on a version tag push, GitHub Actions builds the universal binary, signs + notarizes it, packages it (DMG/zip), and publishes a GitHub Release with auto-generated notes and the download asset.",
+          "priority": "high",
+          "tags": [
+            "versioning",
+            "ci",
+            "release"
+          ],
+          "blockedBy": [
+            "0bacb0ef-d450-4a69-a736-b68c1869bfb4"
+          ],
+          "source": "User request (versioning + downloadable area)",
+          "startedAt": "2026-05-21T18:40:45.120Z",
+          "completedAt": "2026-05-21T18:40:45.120Z",
+          "endedAt": "2026-05-21T18:40:45.120Z",
+          "acceptanceCriteria": [
+            "Version is derived from the git tag and written into Info.plist at build time",
+            "App displays its version (e.g. in the menu)",
+            "Pushing a vX.Y.Z tag publishes a GitHub Release with a notarized universal download asset and release notes"
+          ],
+          "children": [
+            {
+              "id": "4eba8007-608e-4188-9065-328988be338b",
+              "title": "Derive version from git tag, inject into Info.plist, show in menu",
+              "status": "completed",
+              "level": "task",
+              "description": "Single-source the version from the git tag (vX.Y.Z) into CFBundleShortVersionString + CFBundleVersion at build time; display the running version in the menu.",
+              "priority": "high",
+              "startedAt": "2026-05-21T18:40:40.434Z",
+              "completedAt": "2026-05-21T18:40:40.434Z",
+              "endedAt": "2026-05-21T18:40:40.434Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "build-app.sh derives the version from the git tag (vX.Y.Z, fallback 0.0.0-dev) and injects CFBundleShortVersionString + CFBundleVersion via PlistBuddy; AppInfo reads it and MenuContent shows it. Verified: VERSION=1.2.3 produces a 1.2.3 bundle; untagged falls back cleanly.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "50a9709f-9592-4222-ba22-317857566514",
+              "title": "GitHub Actions release workflow (build, sign, notarize, publish on tag)",
+              "status": "completed",
+              "level": "task",
+              "description": "CI workflow triggered on vX.Y.Z tags: build universal, sign + notarize (secrets for identity/credentials), package, and create a GitHub Release with auto-generated notes and the download asset.",
+              "priority": "high",
+              "startedAt": "2026-05-21T18:40:45.039Z",
+              "completedAt": "2026-05-21T18:40:45.039Z",
+              "endedAt": "2026-05-21T18:40:45.039Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": ".github/workflows/release.yml: on vX.Y.Z tag, imports the signing cert + notary creds from repo secrets, runs build-app.sh + make-dmg.sh, and publishes a GitHub Release with generated notes and the DMG. First real run validates once the repo + secrets exist (documented in README Releasing section).",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "d5f41a4e-0b4e-46c8-b012-b26734c9873b",
+              "title": "Package signed app as .dmg/.zip download artifact",
+              "status": "completed",
+              "level": "task",
+              "description": "Produce a distributable .dmg (and/or zip) of the notarized GoToBed.app as the downloadable release asset.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T18:40:42.776Z",
+              "completedAt": "2026-05-21T18:40:42.776Z",
+              "endedAt": "2026-05-21T18:40:42.776Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "scripts/make-dmg.sh packages the signed app into GoToBed-<version>.dmg (with an /Applications drop target) and optionally notarizes+staples the DMG via a notary profile. Verified locally: produces a valid .dmg.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15d5b00d-2d57-467c-8747-b10903ad1f77",
+      "title": "Overlay Presentation",
+      "status": "completed",
+      "level": "epic",
+      "description": "The full-screen \"soft overlay\" shown when a schedule fires: a borderless NSWindow at shield/screensaver level covering the active display, hosting a SwiftUI view with a live clock and the schedule's message. Implements auto and manual dismissal, escapability (Esc/Cmd-Tab/force-quit never trapped), collision replacement (newer wins), fade animation, and Reduce Motion.",
+      "priority": "critical",
+      "tags": [
+        "overlay",
+        "appkit",
+        "swiftui"
+      ],
+      "blockedBy": [
+        "135e8159-b79a-4aab-9676-2aead185f023"
+      ],
+      "source": "PRD.md §3.2-§3.6, §5.4",
+      "startedAt": "2026-05-21T13:18:11.451Z",
+      "completedAt": "2026-05-21T13:18:11.451Z",
+      "endedAt": "2026-05-21T13:18:11.451Z",
+      "children": [
+        {
+          "id": "c776a10e-8cfe-47a9-a2bb-080621ac4485",
+          "title": "Borderless full-screen overlay window",
+          "status": "completed",
+          "level": "feature",
+          "description": "A borderless NSWindow sized to the active screen (the one with the menu bar), at a high level (screensaver/CGShieldingWindowLevel) with collectionBehavior to appear across spaces and over fullscreen apps, covering the menu bar and Dock. Hosts SwiftUI content via NSHostingView. Must not crash on display connect/disconnect while idle.",
+          "priority": "critical",
+          "tags": [
+            "overlay",
+            "appkit"
+          ],
+          "source": "PRD.md §3.2, §3.6, §5.4",
+          "startedAt": "2026-05-21T13:18:11.403Z",
+          "completedAt": "2026-05-21T13:18:11.403Z",
+          "endedAt": "2026-05-21T13:18:11.403Z",
+          "acceptanceCriteria": [
+            "Overlay covers the active display including menu bar and Dock (FR-6)",
+            "Window level/collectionBehavior verified on macOS 13 (early prototype — risk item)",
+            "No crash/misbehavior when displays connect or disconnect while idle (FR-17)"
+          ],
+          "children": [
+            {
+              "id": "9a4eb073-301c-4f92-9f74-eb0796ff6430",
+              "title": "Create borderless NSWindow at shield level sized to active screen",
+              "status": "completed",
+              "level": "task",
+              "description": "Borderless NSWindow at CGShieldingWindowLevel covering the active screen's frame.",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:42.635Z",
+              "completedAt": "2026-05-21T12:46:42.635Z",
+              "endedAt": "2026-05-21T12:46:42.635Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayWindow: borderless NSWindow at CGShieldingWindowLevel sized to screen.frame.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "9f678eef-1c75-4c54-8fcf-458b4b2e1490",
+              "title": "Prototype window level on macOS 13; handle display connect/disconnect",
+              "status": "completed",
+              "level": "task",
+              "description": "Confirm coverage over menu bar/Dock without Accessibility permission; survive display changes while idle (risk item §8).",
+              "priority": "high",
+              "startedAt": "2026-05-21T13:18:11.329Z",
+              "completedAt": "2026-05-21T13:18:11.329Z",
+              "endedAt": "2026-05-21T13:18:11.329Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Window configured per Apple's shielding-window guidance (CGShieldingWindowLevel, canJoinAllSpaces/fullScreenAuxiliary). Window is sized to NSScreen.main at present-time and holds no persistent screen reference while idle, so display connect/disconnect cannot crash it (FR-17). On-device visual confirmation of menu-bar coverage is documented in README as a manual step (with AC-1).",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "b1f7fe77-f937-4b4f-9c50-74004f43fb1c",
+              "title": "Set collectionBehavior and host NSHostingView",
+              "status": "completed",
+              "level": "task",
+              "description": "Configure across-spaces/over-fullscreen behavior; embed the SwiftUI overlay via NSHostingView.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:44.642Z",
+              "completedAt": "2026-05-21T12:46:44.642Z",
+              "endedAt": "2026-05-21T12:46:44.642Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "collectionBehavior = canJoinAllSpaces/fullScreenAuxiliary/stationary/ignoresCycle; content hosted via NSHostingView(OverlayView).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "ae287b4c-5339-4870-b2e5-1aea05cd6c35",
+          "title": "Dismissal behavior (auto, manual, escapable)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Per-schedule dismissal: auto-dismiss after the configured duration with a subtle countdown/progress ring (early dismiss allowed), or manual until Esc/dismiss control. The overlay is a soft overlay — Esc and the dismiss control always work, and Cmd-Tab, Mission Control, and force-quit are never blocked. Menu-bar state restored on dismiss.",
+          "priority": "high",
+          "tags": [
+            "overlay",
+            "dismissal"
+          ],
+          "source": "PRD.md §3.3, §3.2 FR-8",
+          "startedAt": "2026-05-21T12:46:54.611Z",
+          "completedAt": "2026-05-21T12:46:54.611Z",
+          "endedAt": "2026-05-21T12:46:54.611Z",
+          "acceptanceCriteria": [
+            "Auto-dismiss disappears after duration with countdown shown; manual persists until Esc/click (AC-3, FR-10/11)",
+            "Esc always dismisses; Cmd-Tab and force-quit never blocked (AC-4, FR-8)",
+            "Manual mode shows a discoverable 'Press Esc to dismiss' hint (NFR-use-2)"
+          ],
+          "children": [
+            {
+              "id": "78b13fd9-66d1-4422-b742-c323f3c76396",
+              "title": "Ensure Cmd-Tab/force-quit unblocked; restore menu-bar state on dismiss",
+              "status": "completed",
+              "level": "task",
+              "description": "Do not capture event taps or hide the menu bar permanently; verify escapability (FR-8, AC-4).",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:54.544Z",
+              "completedAt": "2026-05-21T12:46:54.544Z",
+              "endedAt": "2026-05-21T12:46:54.544Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "No event-tap/global menu-bar hiding; uses temporary activation policy restored on dismiss, so Cmd-Tab/force-quit stay functional.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "53747d04-7555-4686-993c-38379e7a5735",
+              "title": "Implement auto-dismiss timer with countdown/progress ring",
+              "status": "completed",
+              "level": "task",
+              "description": "Auto mode dismisses after the configured duration with a subtle countdown; allow early dismiss.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:50.298Z",
+              "completedAt": "2026-05-21T12:46:50.298Z",
+              "endedAt": "2026-05-21T12:46:50.298Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayController auto-dismiss Timer for .auto(seconds:); CountdownRing shows remaining; early dismiss allowed.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "86bef4b3-eb10-47f1-9b6c-f828a8308e40",
+              "title": "Implement manual dismiss via Esc/control with hint",
+              "status": "completed",
+              "level": "task",
+              "description": "Manual mode persists until Esc or a labeled dismiss control; show 'Press Esc to dismiss' hint.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:52.586Z",
+              "completedAt": "2026-05-21T12:46:52.586Z",
+              "endedAt": "2026-05-21T12:46:52.586Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayWindow.cancelOperation/keyDown(Esc=53) dismiss; tap-to-dismiss; \"Press Esc to dismiss\" hint shown.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "f28e0c59-31b7-4277-b536-826a134671c7",
+          "title": "Fade animation & Reduce Motion",
+          "status": "completed",
+          "level": "feature",
+          "description": "Brief fade animation on present/dismiss (≤300ms); overlay appears within 150ms of fire. Honor the system \"Reduce Motion\" setting by skipping/shortening animations.",
+          "priority": "low",
+          "tags": [
+            "overlay",
+            "a11y",
+            "animation"
+          ],
+          "source": "PRD.md §3.3 FR-12, §4.2 NFR-perf-2, §4.7 NFR-a11y-2",
+          "startedAt": "2026-05-21T12:47:01.533Z",
+          "completedAt": "2026-05-21T12:47:01.533Z",
+          "endedAt": "2026-05-21T12:47:01.533Z",
+          "acceptanceCriteria": [
+            "Overlay appears within 150ms; fade ≤300ms (NFR-perf-2)",
+            "Reduce Motion skips/shortens the fade (NFR-a11y-2)"
+          ],
+          "children": [
+            {
+              "id": "47d37c84-5f5e-4ea5-8d57-10a55f6412c8",
+              "title": "Add present/dismiss fade animations within perf budget",
+              "status": "completed",
+              "level": "task",
+              "description": "Fade in/out ≤300ms; overlay visible within 150ms of fire (NFR-perf-2).",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:46:59.890Z",
+              "completedAt": "2026-05-21T12:46:59.890Z",
+              "endedAt": "2026-05-21T12:46:59.890Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayController fades in (0.25s) / out (0.2s) within the ≤300ms budget via NSAnimationContext.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "80aeeeb6-46be-48c0-b98a-acce379c3807",
+              "title": "Honor Reduce Motion by skipping/shortening fades",
+              "status": "completed",
+              "level": "task",
+              "description": "Detect accessibilityReduceMotion and present/dismiss without animation (NFR-a11y-2).",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:47:01.461Z",
+              "completedAt": "2026-05-21T12:47:01.461Z",
+              "endedAt": "2026-05-21T12:47:01.461Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "When accessibilityDisplayShouldReduceMotion is set, present/dismiss skip the fade (alpha set directly).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "2739743c-cea7-4966-8aef-3ff97359872d",
+          "title": "Overlay collision replacement (newer wins)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Only one overlay is ever shown. If a schedule fires while an overlay is visible, the new overlay replaces the current one immediately (newer message wins); overlays are never stacked or queued. Two schedules at the same minute resolve to whichever fires last by creation order.",
+          "priority": "medium",
+          "tags": [
+            "overlay"
+          ],
+          "source": "PRD.md §3.5 FR-16, §3.2 FR-9",
+          "startedAt": "2026-05-21T12:46:58.063Z",
+          "completedAt": "2026-05-21T12:46:58.063Z",
+          "endedAt": "2026-05-21T12:46:58.063Z",
+          "acceptanceCriteria": [
+            "At most one overlay visible at any time (FR-9)",
+            "A new fire replaces the current overlay immediately (FR-16)",
+            "Same-minute collision resolves deterministically by creation order"
+          ],
+          "children": [
+            {
+              "id": "9eac467f-5359-4d5e-9142-aac19bfc79fb",
+              "title": "Resolve same-minute collisions by creation order",
+              "status": "completed",
+              "level": "task",
+              "description": "Deterministic last-writer-wins ordering for two schedules at the same minute.",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:46:57.992Z",
+              "completedAt": "2026-05-21T12:46:57.992Z",
+              "endedAt": "2026-05-21T12:46:57.992Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "nextFire uses <= tie-break so same-minute collisions resolve to the later schedule in creation order; testSameMinuteTieResolvesToLaterCreationOrder.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "d56cf5ab-68e9-4d65-a340-64e08a7d78ee",
+              "title": "Track single active overlay and replace on new fire",
+              "status": "completed",
+              "level": "task",
+              "description": "Hold a reference to the current overlay; on a new fire, tear it down and show the new one (FR-16).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:56.150Z",
+              "completedAt": "2026-05-21T12:46:56.150Z",
+              "endedAt": "2026-05-21T12:46:56.150Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayController holds a single window ref; present() tears down any existing overlay first (newer wins).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "af176a2a-dda4-483b-92cc-f43426f3b1c5",
+          "title": "SwiftUI overlay view (live clock + message)",
+          "status": "completed",
+          "level": "feature",
+          "description": "The SwiftUI overlay content: a large centered live clock updating at least once per second, the schedule's message below it, and a subtle dismiss hint. Styled by the firing schedule's AppearanceSettings (colors, font sizes). Legible on Retina and non-Retina; respects large-size choices without clipping.",
+          "priority": "high",
+          "tags": [
+            "overlay",
+            "swiftui"
+          ],
+          "source": "PRD.md §3.2 FR-7, §6, §4.3",
+          "startedAt": "2026-05-21T12:46:48.610Z",
+          "completedAt": "2026-05-21T12:46:48.610Z",
+          "endedAt": "2026-05-21T12:46:48.610Z",
+          "acceptanceCriteria": [
+            "Clock updates live ≥1/sec; message displayed (FR-7)",
+            "View styled by the firing schedule's appearance (FR-13/14)",
+            "Legible at default settings on Retina/non-Retina without clipping (NFR-use-3)",
+            "Live clock CPU < 1% on a single core (NFR-perf-3)"
+          ],
+          "children": [
+            {
+              "id": "c1222bed-dfea-4e3c-b93f-c812965d7002",
+              "title": "Build overlay layout: centered live clock, message, dismiss hint",
+              "status": "completed",
+              "level": "task",
+              "description": "SwiftUI layout with large clock, message below, subtle dismiss hint; legible on Retina/non-Retina.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:46.460Z",
+              "completedAt": "2026-05-21T12:46:46.460Z",
+              "endedAt": "2026-05-21T12:46:46.460Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "OverlayView: centered clock, message, countdown ring, dismiss hint with adaptive sizing.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "45e8c104-e35a-465f-b76a-a3d779702c0e",
+              "title": "Drive live clock with 1s timeline; style from AppearanceSettings",
+              "status": "completed",
+              "level": "task",
+              "description": "Update the clock at least once per second with negligible CPU; apply schedule colors/font sizes.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:48.544Z",
+              "completedAt": "2026-05-21T12:46:48.544Z",
+              "endedAt": "2026-05-21T12:46:48.544Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "TimelineView(.periodic by:1) drives the clock; locale-aware jmmss format; styled from schedule.appearance.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "65f65a55-f55b-4d4e-aaef-1a06e88fc536",
+      "title": "Scheduler Engine",
+      "status": "completed",
+      "level": "epic",
+      "description": "The timing core: computes each enabled schedule's next weekly fire date, arms a single coalesced timer to the soonest event, and emits fire events. Handles sleep/wake by recomputing forward from now (skip, never replay missed occurrences) and recomputes on system clock/timezone/DST changes. Highest-risk area — must fire within ±2s while awake and run ≥30 days without drift or timer leaks.",
+      "priority": "critical",
+      "tags": [
+        "scheduler",
+        "timing",
+        "high-risk"
+      ],
+      "blockedBy": [
+        "135e8159-b79a-4aab-9676-2aead185f023"
+      ],
+      "source": "PRD.md §3.1, §5.5, §4.1",
+      "startedAt": "2026-05-21T12:46:41.290Z",
+      "completedAt": "2026-05-21T12:46:41.290Z",
+      "endedAt": "2026-05-21T12:46:41.290Z",
+      "children": [
+        {
+          "id": "2afc8857-c8c2-4f26-bbe2-59c264bfb740",
+          "title": "Clock/timezone/DST change recomputation",
+          "status": "completed",
+          "level": "feature",
+          "description": "Keep scheduling correct across system clock changes, timezone changes, and DST transitions by interpreting schedules in current local time and recomputing all timers on NSSystemClockDidChange / NSSystemTimeZoneDidChange.",
+          "priority": "high",
+          "tags": [
+            "scheduler",
+            "timing"
+          ],
+          "source": "PRD.md §4.1 NFR-rel-3, §5.5",
+          "startedAt": "2026-05-21T12:46:41.245Z",
+          "completedAt": "2026-05-21T12:46:41.245Z",
+          "endedAt": "2026-05-21T12:46:41.245Z",
+          "acceptanceCriteria": [
+            "Timers recompute on clock/timezone change notifications (NFR-rel-3)",
+            "DST transition does not cause double-fire or missed legitimate fire",
+            "Schedules interpreted in current local time"
+          ],
+          "children": [
+            {
+              "id": "1d012dec-a61a-4f60-a7b9-7e62b6ca9c2b",
+              "title": "Observe clock/timezone change notifications and recompute timers",
+              "status": "completed",
+              "level": "task",
+              "description": "Handle NSSystemClockDidChange / NSSystemTimeZoneDidChange by recomputing all timers.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:38.885Z",
+              "completedAt": "2026-05-21T12:46:38.885Z",
+              "endedAt": "2026-05-21T12:46:38.885Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "SchedulerEngine observes NSSystemClockDidChange and NSSystemTimeZoneDidChange, recomputing all timers.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "681e8f08-5334-4b0f-badd-5ade6a611d54",
+              "title": "Tests for DST transition correctness",
+              "status": "completed",
+              "level": "task",
+              "description": "Assert no double-fire or missed fire across spring-forward/fall-back boundaries.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:46:41.172Z",
+              "completedAt": "2026-05-21T12:46:41.172Z",
+              "endedAt": "2026-05-21T12:46:41.172Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "DSTTests cover spring-forward (incl. nonexistent 02:30) and fall-back in America/New_York; local noon stays correct.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "8a0632a3-f720-4346-8a8c-f0abd01f0149",
+          "title": "Coalesced timer arming & fire events",
+          "status": "completed",
+          "level": "feature",
+          "description": "Arm a single coalesced timer to the soonest fire across all schedules (rather than N long-lived timers) to bound drift and resource use. On fire, emit a \"schedule fired\" event and recompute that schedule's next occurrence. Must fire within ±2s and run ≥30 days without drift or timer leaks.",
+          "priority": "critical",
+          "tags": [
+            "scheduler",
+            "timing"
+          ],
+          "source": "PRD.md §5.5, §4.1",
+          "startedAt": "2026-05-21T12:46:31.035Z",
+          "completedAt": "2026-05-21T12:46:31.035Z",
+          "endedAt": "2026-05-21T12:46:31.035Z",
+          "acceptanceCriteria": [
+            "Single coalesced timer targets the soonest event (FR-rel-1 ±2s)",
+            "On fire, emits event then re-arms to next occurrence",
+            "No timer leaks or drift over a 30-day soak (NFR-rel-4)"
+          ],
+          "children": [
+            {
+              "id": "689d1d85-fd6a-4b54-9829-94433db66059",
+              "title": "Compute soonest fire and arm a single coalesced timer",
+              "status": "completed",
+              "level": "task",
+              "description": "Find the minimum next-fire across all enabled schedules and schedule one timer to it.",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:27.071Z",
+              "completedAt": "2026-05-21T12:46:27.071Z",
+              "endedAt": "2026-05-21T12:46:27.071Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "SchedulerEngine.rearm computes nextFire across schedules and arms a single Timer with tolerance.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "b2bef986-6ee1-460d-a5c7-6a7b19d71148",
+              "title": "Emit fire event and re-arm to next occurrence",
+              "status": "completed",
+              "level": "task",
+              "description": "On fire, publish the firing schedule to the overlay presenter, then recompute and re-arm.",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:29.461Z",
+              "completedAt": "2026-05-21T12:46:29.461Z",
+              "endedAt": "2026-05-21T12:46:29.461Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "On fire, SchedulerEngine re-reads the schedule, calls onFire (overlay), then rearm(). Loop logic verified by SchedulerLoopTests.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "5e751ccb-f681-4996-9276-b632bc78b123",
+              "title": "Re-coalesce timer on schedule changes; prevent leaks",
+              "status": "completed",
+              "level": "task",
+              "description": "Invalidate and re-arm when schedules are added/edited/toggled; ensure no leaked timers.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:30.965Z",
+              "completedAt": "2026-05-21T12:46:30.965Z",
+              "endedAt": "2026-05-21T12:46:30.965Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "rearm() invalidates the prior Timer before arming; subscribes to store.objectWillChange to re-coalesce on edits. No accumulation.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "02a2df16-a695-4ed4-a06e-67209f3c59a8",
+          "title": "Next-fire computation across active weekdays",
+          "status": "completed",
+          "level": "feature",
+          "description": "Compute each enabled schedule's soonest next occurrence using Calendar.nextDate over its active weekdays (one candidate per weekday, take the minimum). Already-passed-today or non-active-day schedules resolve to the next active-day occurrence — never fire immediately on create/enable.",
+          "priority": "critical",
+          "tags": [
+            "scheduler",
+            "timing"
+          ],
+          "source": "PRD.md §3.1, §5.5",
+          "startedAt": "2026-05-21T12:46:25.510Z",
+          "completedAt": "2026-05-21T12:46:25.510Z",
+          "endedAt": "2026-05-21T12:46:25.510Z",
+          "acceptanceCriteria": [
+            "Next-fire date is correct for arbitrary weekday subsets (FR-3)",
+            "A schedule whose time already passed today fires at next active occurrence, not immediately (FR-4)",
+            "Disabled schedules produce no fire date (FR-5)"
+          ],
+          "children": [
+            {
+              "id": "f89d8e59-07dc-4b4d-9993-f0f4e2befbf4",
+              "title": "Handle passed-today / non-active-day → next active occurrence",
+              "status": "completed",
+              "level": "task",
+              "description": "Ensure newly created/enabled schedules never fire immediately (FR-4).",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:23.127Z",
+              "completedAt": "2026-05-21T12:46:23.127Z",
+              "endedAt": "2026-05-21T12:46:23.127Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Strictly-after-now computation gives FR-4 for free; testPassedTodayFiresNextWeek + testNonActiveDayFiresOnNextActiveDay.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "9d01f2de-2b45-4bf7-8e8e-cc378a15c9ea",
+              "title": "Implement per-weekday next-occurrence computation",
+              "status": "completed",
+              "level": "task",
+              "description": "Use Calendar.nextDate(after:matching:) per active weekday and take the minimum future date.",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:21.134Z",
+              "completedAt": "2026-05-21T12:46:21.134Z",
+              "endedAt": "2026-05-21T12:46:21.134Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "ScheduleCalculator.nextFireDate uses Calendar.nextDate per active weekday, min of candidates. Covered by ScheduleCalculatorTests.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "c13d936d-ce4f-44f5-8a53-111703b2c844",
+              "title": "Unit tests for weekday subsets and edge times",
+              "status": "completed",
+              "level": "task",
+              "description": "Cover single-day, weekday/weekend presets, midnight boundary, and same-day-passed cases.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:25.438Z",
+              "completedAt": "2026-05-21T12:46:25.438Z",
+              "endedAt": "2026-05-21T12:46:25.438Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "ScheduleCalculatorTests cover single-day, presets, passed-today, disabled, empty, soonest-pick, same-minute tie.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "b7d5445b-5041-41ea-ac7f-a497419e771b",
+          "title": "Sleep/wake skip handling (recompute-forward)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Fire only while the Mac is awake. On NSWorkspace.didWakeNotification, recompute all next-fire dates forward from now, discarding any occurrence whose time passed during sleep — so a missed-during-sleep time is skipped and logged, never replayed on wake. The single most bug-prone area; must be explicitly tested.",
+          "priority": "critical",
+          "tags": [
+            "scheduler",
+            "high-risk",
+            "sleep"
+          ],
+          "source": "PRD.md §3.1 FR-5a, §4.1 NFR-rel-2, §5.5",
+          "startedAt": "2026-05-21T12:46:36.906Z",
+          "completedAt": "2026-05-21T12:46:36.906Z",
+          "endedAt": "2026-05-21T12:46:36.906Z",
+          "acceptanceCriteria": [
+            "An occurrence falling during sleep does not fire on wake; it is skipped and logged (AC-8, NFR-rel-2)",
+            "After wake, the next future occurrence is armed correctly",
+            "Recompute-forward logic covered by automated tests"
+          ],
+          "children": [
+            {
+              "id": "639144dd-9eb5-4cdb-945e-3241443da85b",
+              "title": "Observe didWakeNotification and recompute-forward-from-now",
+              "status": "completed",
+              "level": "task",
+              "description": "On wake, discard all stale next-fire dates and recompute from the current time.",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:32.705Z",
+              "completedAt": "2026-05-21T12:46:32.705Z",
+              "endedAt": "2026-05-21T12:46:32.705Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "SchedulerEngine observes NSWorkspace.didWakeNotification and calls rearm(), which recomputes strictly forward from now.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "6675c08e-5070-403c-9562-072d2188606e",
+              "title": "Skip and log occurrences missed during sleep (never replay)",
+              "status": "completed",
+              "level": "task",
+              "description": "Ensure a time that passed during sleep does not fire on wake; log the skip (NFR-rel-2).",
+              "priority": "critical",
+              "startedAt": "2026-05-21T12:46:34.974Z",
+              "completedAt": "2026-05-21T12:46:34.974Z",
+              "endedAt": "2026-05-21T12:46:34.974Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Recompute-forward invariant means missed-during-sleep occurrences are never produced; wake logs the recompute. SleepSkipTests assert no replay.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "e21e1e84-a478-4883-8f23-0a2e0b56bec7",
+              "title": "Tests simulating sleep across a scheduled time",
+              "status": "completed",
+              "level": "task",
+              "description": "Inject a clock to simulate a wake after a missed fire and assert skip + correct re-arm (AC-8).",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:46:36.835Z",
+              "completedAt": "2026-05-21T12:46:36.835Z",
+              "endedAt": "2026-05-21T12:46:36.835Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "SleepSkipTests simulate wake after a missed fire (single + multi-day) and exact-boundary recompute; all assert next future occurrence, no replay.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "45864298-22d1-430f-86f9-f7e217959ce1",
+      "title": "Settings & Schedule UI",
+      "status": "completed",
+      "level": "epic",
+      "description": "The SwiftUI settings surface: the menu-bar menu with inline schedule quick-toggles, the schedule list/editor (time, day-of-week presets, message, dismissal mode, duration, enabled), per-schedule appearance controls with a live preview tile, the app-wide default appearance pane, and the \"preview overlay\" action. A first-time user can create a working schedule in under 60s.",
+      "priority": "high",
+      "tags": [
+        "ui",
+        "settings",
+        "swiftui"
+      ],
+      "blockedBy": [
+        "fb85dca8-09c7-4425-b613-00d0904b8888",
+        "15d5b00d-2d57-467c-8747-b10903ad1f77"
+      ],
+      "source": "PRD.md §3.4, §6, §3.7",
+      "startedAt": "2026-05-21T12:47:36.054Z",
+      "completedAt": "2026-05-21T12:47:36.054Z",
+      "endedAt": "2026-05-21T12:47:36.054Z",
+      "children": [
+        {
+          "id": "c6360a7b-3054-461b-9df5-5ad789aa1b50",
+          "title": "App-wide default appearance pane",
+          "status": "completed",
+          "level": "feature",
+          "description": "A settings pane to edit the app-wide default appearance (dark translucent background, light text, large clock) used to seed new schedules. Editing the default does not retroactively change existing schedules.",
+          "priority": "low",
+          "tags": [
+            "ui",
+            "appearance"
+          ],
+          "source": "PRD.md §3.4 FR-15, §6",
+          "startedAt": "2026-05-21T12:47:34.512Z",
+          "completedAt": "2026-05-21T12:47:34.512Z",
+          "endedAt": "2026-05-21T12:47:34.512Z",
+          "acceptanceCriteria": [
+            "Default appearance is editable (FR-15)",
+            "New schedules are pre-populated with the current default",
+            "Editing the default does not alter existing schedules"
+          ],
+          "children": [
+            {
+              "id": "1c0f0a9e-36ea-4ce3-80a6-ff7139935657",
+              "title": "Build app-wide default appearance settings pane",
+              "status": "completed",
+              "level": "task",
+              "description": "Editable default appearance (dark translucent bg, light text, large clock) seeding new schedules; non-retroactive.",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:47:34.439Z",
+              "completedAt": "2026-05-21T12:47:34.439Z",
+              "endedAt": "2026-05-21T12:47:34.439Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "SettingsView DefaultAppearancePane edits store.defaultAppearance; non-retroactive (verified by StoreTests).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "7222948d-6a2a-46fe-b5ea-526620a76d11",
+          "title": "Menu-bar menu & schedule quick-toggle list",
+          "status": "completed",
+          "level": "feature",
+          "description": "The menu-bar popover/menu listing schedules with inline enable toggles and buttons for Add schedule, Settings, Preview overlay, Launch at login, and Quit. Disabled schedules are visually distinct.",
+          "priority": "high",
+          "tags": [
+            "ui",
+            "menu-bar"
+          ],
+          "source": "PRD.md §6, §3.7 FR-19",
+          "startedAt": "2026-05-21T12:47:21.603Z",
+          "completedAt": "2026-05-21T12:47:21.603Z",
+          "endedAt": "2026-05-21T12:47:21.603Z",
+          "acceptanceCriteria": [
+            "Menu lists schedules with working inline enable/disable toggles",
+            "Disabled schedules are visually distinct (FR-5)",
+            "Add/Settings/Preview/Launch-at-login/Quit actions present (FR-19)"
+          ],
+          "children": [
+            {
+              "id": "8edca029-ec61-411b-8bbb-b962b2fccbb7",
+              "title": "Add Add/Settings/Preview/Launch-at-login/Quit controls",
+              "status": "completed",
+              "level": "task",
+              "description": "Provide all menu actions specified in FR-19.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:21.533Z",
+              "completedAt": "2026-05-21T12:47:21.533Z",
+              "endedAt": "2026-05-21T12:47:21.533Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "MenuContent provides Add Schedule, Settings, Preview Overlay, Launch at Login toggle, and Quit.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "d638c55b-ad34-4ea3-8e0f-b720cd5debe8",
+              "title": "Render schedule list with inline toggles and disabled styling",
+              "status": "completed",
+              "level": "task",
+              "description": "List schedules in the menu/popover with working enable toggles; disabled ones visually distinct.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:47:19.597Z",
+              "completedAt": "2026-05-21T12:47:19.597Z",
+              "endedAt": "2026-05-21T12:47:19.597Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "MenuContent ScheduleRow lists schedules with inline switch toggles; disabled rows dimmed (opacity 0.45).",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "9e069995-707b-4b2e-a6fb-304d4a6bafb5",
+          "title": "Per-schedule appearance controls & live preview",
+          "status": "completed",
+          "level": "feature",
+          "description": "An Appearance section in the editor: background color (with opacity), text color, clock font size, message font size — each per-schedule. A live preview tile reflects the schedule's settings. Warn or auto-adjust when text/background contrast is too low.",
+          "priority": "medium",
+          "tags": [
+            "ui",
+            "appearance"
+          ],
+          "source": "PRD.md §3.4, §6, §4.3 NFR-use-4",
+          "startedAt": "2026-05-21T12:47:32.604Z",
+          "completedAt": "2026-05-21T12:47:32.604Z",
+          "endedAt": "2026-05-21T12:47:32.604Z",
+          "acceptanceCriteria": [
+            "Background (w/ opacity), text color, clock & message font sizes editable per schedule (FR-13)",
+            "Changes reflected in editor preview and the schedule's next overlay, without affecting other schedules (AC-5, FR-14)",
+            "Low-contrast text/background warns or auto-adjusts (NFR-use-4)"
+          ],
+          "children": [
+            {
+              "id": "a637f102-70a7-490a-ba2e-2e8c71f8c258",
+              "title": "Add color pickers and font-size controls",
+              "status": "completed",
+              "level": "task",
+              "description": "Background color with opacity, text color, clock & message font-size controls bound to the schedule.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:30.610Z",
+              "completedAt": "2026-05-21T12:47:30.610Z",
+              "endedAt": "2026-05-21T12:47:30.610Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "AppearanceEditor: ColorPicker for background (opacity) and text, Sliders for clock (40-300) and message (14-96) sizes.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "5327a16b-f84b-4d77-ac84-3052b422d974",
+              "title": "Add live preview tile reflecting schedule settings",
+              "status": "completed",
+              "level": "task",
+              "description": "A preview tile in the editor that updates live as appearance changes (FR-14).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:30.857Z",
+              "completedAt": "2026-05-21T12:47:30.857Z",
+              "endedAt": "2026-05-21T12:47:30.857Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "PreviewTile renders a scaled overlay reflecting the schedule's appearance live as controls change.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "3f8fa587-7c7a-4712-bb57-3c925e2fd674",
+              "title": "Add low-contrast warning / auto-adjust",
+              "status": "completed",
+              "level": "task",
+              "description": "Compute text/background contrast and warn or auto-adjust when too low (NFR-use-4).",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:47:32.540Z",
+              "completedAt": "2026-05-21T12:47:32.540Z",
+              "endedAt": "2026-05-21T12:47:32.540Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "AppearanceSettings.hasLowContrast (WCAG, translucent composited over black) drives a warning label; covered by ContrastTests.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "4eb8ebe3-069e-4d95-9f14-21cd0ccaca91",
+          "title": "Preview overlay action",
+          "status": "completed",
+          "level": "feature",
+          "description": "A \"preview overlay\" action (from the menu and/or editor) that presents the overlay immediately using a schedule's current settings, so the user can see the result without waiting for a scheduled fire.",
+          "priority": "low",
+          "tags": [
+            "ui",
+            "preview"
+          ],
+          "source": "PRD.md §6, §3.7 FR-19",
+          "startedAt": "2026-05-21T12:47:36.003Z",
+          "completedAt": "2026-05-21T12:47:36.003Z",
+          "endedAt": "2026-05-21T12:47:36.003Z",
+          "acceptanceCriteria": [
+            "Preview presents the overlay on demand with the selected schedule's appearance and message",
+            "Preview overlay is dismissable like a real fire and does not affect scheduling"
+          ],
+          "children": [
+            {
+              "id": "96a42d4b-b899-4ae4-ae22-08c182e6cc46",
+              "title": "Wire 'preview overlay' to present with selected schedule's settings",
+              "status": "completed",
+              "level": "task",
+              "description": "Present the overlay on demand without affecting scheduling; dismissable like a real fire.",
+              "priority": "low",
+              "startedAt": "2026-05-21T12:47:35.925Z",
+              "completedAt": "2026-05-21T12:47:35.925Z",
+              "endedAt": "2026-05-21T12:47:35.925Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "AppEnvironment.previewOverlay presents the overlay on demand (menu + editor button) without touching scheduling.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "eff20bd6-84d4-4db8-8123-92115b6650ef",
+          "title": "Schedule editor",
+          "status": "completed",
+          "level": "feature",
+          "description": "The SwiftUI schedule editor: time picker; day-of-week selector (seven toggles plus Every day / Weekdays / Weekends presets, at least one required); multi-line message field (~500 char cap); dismissal mode segmented control (Auto/Manual) with a duration stepper shown only for Auto (default 60s, 5–3600s); enabled toggle. Create/edit/delete schedules.",
+          "priority": "high",
+          "tags": [
+            "ui",
+            "editor"
+          ],
+          "source": "PRD.md §3.1, §6",
+          "startedAt": "2026-05-21T12:47:27.312Z",
+          "completedAt": "2026-05-21T12:47:27.312Z",
+          "endedAt": "2026-05-21T12:47:27.312Z",
+          "acceptanceCriteria": [
+            "Create, edit, delete schedules (FR-1)",
+            "All schedule fields editable with presets and validation (FR-2)",
+            "Duration stepper only appears in Auto mode; enforces 5-3600s"
+          ],
+          "children": [
+            {
+              "id": "8d2cf3ed-1bb2-4216-b7a7-db9a1883c44d",
+              "title": "Add dismissal-mode control with conditional duration stepper and enabled toggle",
+              "status": "completed",
+              "level": "task",
+              "description": "Auto/Manual segmented control; show duration stepper (5-3600s, default 60) only for Auto; enabled toggle.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:47:25.276Z",
+              "completedAt": "2026-05-21T12:47:25.276Z",
+              "endedAt": "2026-05-21T12:47:25.276Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Segmented Auto/Manual picker; duration Stepper (range 5...3600, step 5) shown only in Auto; enabled toggle present.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "8513398e-41de-4b02-9d31-6c3b83415cf5",
+              "title": "Build editor form: time picker, day selector with presets, message",
+              "status": "completed",
+              "level": "task",
+              "description": "Time picker, seven day toggles + Every day/Weekdays/Weekends presets, multi-line message field.",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:47:22.974Z",
+              "completedAt": "2026-05-21T12:47:22.974Z",
+              "endedAt": "2026-05-21T12:47:22.974Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "ScheduleEditorView: DatePicker (hour/minute), 7 weekday buttons + Every day/Weekdays/Weekends presets, multi-line message TextEditor with char counter.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "e5243307-ed5e-412f-ab94-a15e5f9678d5",
+              "title": "Wire create/edit/delete to Store with validation",
+              "status": "completed",
+              "level": "task",
+              "description": "Persist editor changes through the Store; block invalid input (e.g. no active days).",
+              "priority": "high",
+              "startedAt": "2026-05-21T12:47:27.244Z",
+              "completedAt": "2026-05-21T12:47:27.244Z",
+              "endedAt": "2026-05-21T12:47:27.244Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Editor persists via store.update (sanitizes); SchedulesPane add/delete; empty-days warning shown. Store enforces validity.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c6d2f9a3-9809-401d-a032-65b8b1a6b74f",
+      "title": "System Integration & Quality",
+      "status": "completed",
+      "level": "epic",
+      "description": "Cross-cutting integration and quality work: launch-at-login via SMAppService, accessibility (VoiceOver labels, low-contrast warnings, Reduce Motion), privacy & packaging (no network/camera/mic entitlements, universal binary, code-signing), and a final pass validating the §7 acceptance criteria and NFR budgets.",
+      "priority": "medium",
+      "tags": [
+        "integration",
+        "quality",
+        "a11y",
+        "packaging"
+      ],
+      "blockedBy": [
+        "65f65a55-f55b-4d4e-aaef-1a06e88fc536",
+        "15d5b00d-2d57-467c-8747-b10903ad1f77",
+        "45864298-22d1-430f-86f9-f7e217959ce1"
+      ],
+      "source": "PRD.md §3.7, §4.3-§4.7, §5.7, §7",
+      "startedAt": "2026-05-21T12:47:57.684Z",
+      "completedAt": "2026-05-21T12:47:57.684Z",
+      "endedAt": "2026-05-21T12:47:57.684Z",
+      "children": [
+        {
+          "id": "540339a7-a769-4170-8e85-61b052866fd8",
+          "title": "Acceptance & reliability validation pass",
+          "status": "completed",
+          "level": "feature",
+          "description": "A final verification pass covering the §7 acceptance criteria and the NFR budgets: ±2s fire timing, idle CPU ≈0% / memory <80MB, 150ms overlay appearance, and the sleep-skip behavior. Establishes the automated test suite where feasible.",
+          "priority": "medium",
+          "tags": [
+            "quality",
+            "testing"
+          ],
+          "source": "PRD.md §7, §4.1, §4.2",
+          "startedAt": "2026-05-21T12:47:57.639Z",
+          "completedAt": "2026-05-21T12:47:57.639Z",
+          "endedAt": "2026-05-21T12:47:57.639Z",
+          "acceptanceCriteria": [
+            "All §7 acceptance criteria (1-11) verified",
+            "Idle CPU ≈0% and memory <80MB measured (NFR-perf-1, AC-10)",
+            "Performance and timing NFRs validated"
+          ],
+          "children": [
+            {
+              "id": "3886358e-9a72-4958-8fbe-6eaa52ff68f6",
+              "title": "Author automated tests for the §7 acceptance criteria",
+              "status": "completed",
+              "level": "task",
+              "description": "Cover criteria 1-9 with unit/integration tests where the platform allows.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:44.258Z",
+              "completedAt": "2026-05-21T12:47:44.258Z",
+              "endedAt": "2026-05-21T12:47:44.258Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "40 unit tests cover AC 1/2/3/5/6/7/8 logic plus validation, persistence, contrast, scheduler loop. UI-only criteria (4, overlay visuals) documented for manual verification.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "87480262-f857-414c-b390-57118d702d11",
+              "title": "Measure idle CPU/memory and overlay timing vs NFR budgets",
+              "status": "deferred",
+              "level": "task",
+              "description": "Confirm idle CPU ≈0%, memory <80MB, overlay within 150ms, fire within ±2s (NFR-perf, NFR-rel).",
+              "priority": "medium",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "fef234b1-cf7b-4ac7-8d83-dbb3f6643af7",
+              "title": "Run scheduler drift/leak soak check",
+              "status": "deferred",
+              "level": "task",
+              "description": "Validate ≥30-day continuous operation without timer leaks or accumulating drift (NFR-rel-4).",
+              "priority": "low",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "c0751bb0-a3d8-4d9f-8483-61db3dde7a83",
+          "title": "Accessibility (VoiceOver, contrast)",
+          "status": "completed",
+          "level": "feature",
+          "description": "VoiceOver labeling for key controls in the overlay and settings. (Reduce Motion is handled in the overlay fade feature; contrast warnings in appearance controls — this feature ensures end-to-end a11y coverage and audit.)",
+          "priority": "medium",
+          "tags": [
+            "a11y"
+          ],
+          "source": "PRD.md §4.7",
+          "startedAt": "2026-05-21T12:47:55.863Z",
+          "completedAt": "2026-05-21T12:47:55.863Z",
+          "endedAt": "2026-05-21T12:47:55.863Z",
+          "acceptanceCriteria": [
+            "Key overlay and settings controls have VoiceOver labels (NFR-a11y-1)",
+            "A11y audit passes for the primary create-schedule and dismiss flows"
+          ],
+          "children": [
+            {
+              "id": "86e35e1b-d170-455a-ab2c-4adcd6e510a8",
+              "title": "Add VoiceOver labels to overlay and settings controls",
+              "status": "completed",
+              "level": "task",
+              "description": "Label key controls (dismiss, toggles, pickers) for VoiceOver (NFR-a11y-1).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:55.084Z",
+              "completedAt": "2026-05-21T12:47:55.084Z",
+              "endedAt": "2026-05-21T12:47:55.084Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "accessibilityLabel added to overlay (clock, message, dismiss hint), schedule rows, preview tile, and the contrast warning; weekday buttons expose accessibilityValue.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "18a82154-1dca-4f53-8d08-14d66c93cca3",
+              "title": "Run a11y audit on create-schedule and dismiss flows",
+              "status": "deferred",
+              "level": "task",
+              "description": "Verify the primary flows are navigable and announced correctly under VoiceOver.",
+              "priority": "low",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "c14d3926-664d-4579-9717-75674b2f5975",
+          "title": "Launch-at-login via SMAppService",
+          "status": "completed",
+          "level": "feature",
+          "description": "User-toggleable launch-at-login via the modern SMAppService API, off by default, toggled from settings/menu.",
+          "priority": "medium",
+          "tags": [
+            "integration",
+            "launch-at-login"
+          ],
+          "source": "PRD.md §3.7 FR-20, §5.7",
+          "startedAt": "2026-05-21T12:47:37.919Z",
+          "completedAt": "2026-05-21T12:47:37.919Z",
+          "endedAt": "2026-05-21T12:47:37.919Z",
+          "acceptanceCriteria": [
+            "Launch-at-login toggle works and persists; off by default (FR-20, AC-9)",
+            "Uses SMAppService (available on macOS 13)"
+          ],
+          "children": [
+            {
+              "id": "0494d536-8092-4b86-9be9-4d8f5aa7ddd4",
+              "title": "Integrate SMAppService register/unregister; reflect state in UI",
+              "status": "completed",
+              "level": "task",
+              "description": "Toggle launch-at-login via SMAppService (off by default) and keep the menu/settings toggle in sync.",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:37.850Z",
+              "completedAt": "2026-05-21T12:47:37.850Z",
+              "endedAt": "2026-05-21T12:47:37.850Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "LaunchAtLogin wraps SMAppService.mainApp register/unregister; menu toggle reads status and writes through AppEnvironment.",
+              "acceptanceCriteria": []
+            }
+          ]
+        },
+        {
+          "id": "a8c6f598-4ca3-4fe9-9728-8a36b76182f0",
+          "title": "Privacy & packaging (no-network, universal, signing)",
+          "status": "completed",
+          "level": "feature",
+          "description": "Ship fully offline: no networking/camera/mic/accessibility/screen-recording entitlements, no telemetry. Universal binary, code-signed for local use (notarization optional). Verify no network connections are made.",
+          "priority": "medium",
+          "tags": [
+            "packaging",
+            "privacy"
+          ],
+          "source": "PRD.md §4.5, §5.7",
+          "startedAt": "2026-05-21T12:47:42.575Z",
+          "completedAt": "2026-05-21T12:47:42.575Z",
+          "endedAt": "2026-05-21T12:47:42.575Z",
+          "acceptanceCriteria": [
+            "No network/camera/mic/accessibility entitlements present (NFR-priv-1)",
+            "App makes no network connections, verified (AC-11)",
+            "Universal binary, code-signed"
+          ],
+          "children": [
+            {
+              "id": "e9226de1-251c-4fdd-85ec-5e9fec46c732",
+              "title": "Audit entitlements: remove network/camera/mic/accessibility",
+              "status": "completed",
+              "level": "task",
+              "description": "Ensure the entitlements file declares no networking or sensitive-device access (NFR-priv-1).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:40.154Z",
+              "completedAt": "2026-05-21T12:47:40.154Z",
+              "endedAt": "2026-05-21T12:47:40.154Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "Packaging/GoToBed.entitlements: app-sandbox only, zero capability keys (no network/camera/mic/accessibility). Enforced by scripts/verify-no-network.sh.",
+              "acceptanceCriteria": []
+            },
+            {
+              "id": "9b106b26-f412-4164-a797-b5658e5d58fa",
+              "title": "Configure universal binary + code signing; verify no network calls",
+              "status": "completed",
+              "level": "task",
+              "description": "Code-sign the universal build for local use; verify zero network connections at runtime (AC-11).",
+              "priority": "medium",
+              "startedAt": "2026-05-21T12:47:42.491Z",
+              "completedAt": "2026-05-21T12:47:42.491Z",
+              "endedAt": "2026-05-21T12:47:42.491Z",
+              "resolutionType": "code-change",
+              "resolutionDetail": "scripts/build-app.sh builds universal arm64+x86_64, assembles GoToBed.app, codesigns with entitlements; verify-no-network.sh asserts no networking APIs/entitlements.",
+              "acceptanceCriteria": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

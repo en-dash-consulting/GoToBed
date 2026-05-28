@@ -1,0 +1,27 @@
+{
+  "id": "build-release-scripts",
+  "name": "Build & Release Scripts",
+  "description": "Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.",
+  "files": [
+    "scripts/build-app.sh",
+    "scripts/check-core-purity.sh",
+    "scripts/check-site-docs.sh",
+    "scripts/check-zone-layering.sh",
+    "scripts/make-dmg.sh",
+    "scripts/make-icon.sh",
+    "scripts/stamp-site-version.sh",
+    "scripts/verify-no-network.sh"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 8,
+  "lineCount": 498,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}

@@ -81,6 +81,51 @@
       "scope": "global",
       "acknowledgedAt": "2026-05-23T03:06:00.000Z",
       "acknowledgedBy": "user"
+    },
+    {
+      "hash": "2360c21c19db",
+      "reason": "circulars are AppEnv ↔ SettingsWindowController ↔ Settings views — addressed by accepted doc-only finding 0013e7. Bidirectional 'overlay-ui ↔ scheduler-engine' is a zone-naming artifact: scheduler-engine zone over-includes GoToBedCore + composition root, and overlay-ui zone contains settings editors, not overlay code.",
+      "text": "4 circular dependency chains detected — see imports.json for details",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-25T18:17:31.561Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "1aab9b391f3c",
+      "reason": "circulars are AppEnv ↔ SettingsWindowController ↔ Settings views — addressed by accepted doc-only finding 0013e7. Bidirectional 'overlay-ui ↔ scheduler-engine' is a zone-naming artifact: scheduler-engine zone over-includes GoToBedCore + composition root, and overlay-ui zone contains settings editors, not overlay code.",
+      "text": "Bidirectional coupling: \"overlay-ui\" ↔ \"scheduler-engine\" (9+3 crossings) — consider extracting shared interface",
+      "type": "observation",
+      "scope": "global",
+      "acknowledgedAt": "2026-05-25T18:17:31.561Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "ac6e2b482214",
+      "reason": "tool-artifact",
+      "text": "High coupling (0.67) — 9 imports target \"scheduler-engine\"",
+      "type": "observation",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:38.965Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "2014d80fbcde",
+      "reason": "tool-artifact",
+      "text": "Low cohesion (0.33) — files are loosely related, consider splitting this zone",
+      "type": "observation",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:38.966Z",
+      "acknowledgedBy": "user"
+    },
+    {
+      "hash": "a86c248e6e05",
+      "reason": "over-engineered",
+      "text": "overlay-ui views take @EnvironmentObject var env: AppEnvironment (the composition root) rather than a narrower @EnvironmentObject scoped to only the actions they invoke (updateSchedule, previewOverlay); this prevents standalone SwiftUI Previews and inflates the dependency surface of every settings screen",
+      "type": "relationship",
+      "scope": "overlay-ui",
+      "acknowledgedAt": "2026-05-25T18:17:41.822Z",
+      "acknowledgedBy": "user"
     }
   ]
 }

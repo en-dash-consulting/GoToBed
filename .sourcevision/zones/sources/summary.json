@@ -1,0 +1,42 @@
+{
+  "id": "sources",
+  "name": "Sources",
+  "description": "14 files, primarily Swift",
+  "files": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/AppInfo.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+    "Sources/GoToBed/SettingsWindowController.swift",
+    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBed/UI/ScheduleFormatting.swift",
+    "Sources/GoToBed/UI/SettingsView.swift",
+    "Sources/GoToBedApp/GoToBedApp.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Models/Validation.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Models/Validation.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "cohesion": 0.63,
+  "coupling": 0.37,
+  "fileCount": 14,
+  "lineCount": 1027,
+  "riskMetrics": {
+    "cohesion": 0.63,
+    "coupling": 0.37,
+    "riskScore": 0.37,
+    "riskLevel": "healthy",
+    "failsThreshold": false
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "id": "core-domain-tests",
-  "name": "Core Domain Tests",
-  "description": "Comprehensive test suite for GoToBedCore covering scheduling calculation, persistence, DST edge cases, sleep-skip logic, contrast, and validation.",
+  "id": "tests-gotobedcoretests",
+  "name": "Tests Gotobedcoretests",
+  "description": "10 files, primarily Swift",
   "files": [
     "Tests/GoToBedCoreTests/ContrastTests.swift",
     "Tests/GoToBedCoreTests/DSTTests.swift",
@@ -15,15 +15,15 @@
     "Tests/GoToBedCoreTests/ValidationTests.swift"
   ],
   "entryPoints": [],
-  "cohesion": 0,
+  "cohesion": 1,
   "coupling": 0,
   "fileCount": 10,
   "lineCount": 526,
   "riskMetrics": {
-    "cohesion": 0,
+    "cohesion": 1,
     "coupling": 0,
-    "riskScore": 0.5,
-    "riskLevel": "at-risk",
+    "riskScore": 0,
+    "riskLevel": "healthy",
     "failsThreshold": false
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "static-site-assets",
   "name": "Static Site Assets",
-  "description": "Web presence files for the project's public landing page, including SEO metadata, crawler directives, and AI-consumption hints.",
+  "description": "Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.",
   "files": [
     "docs/CNAME",
     "docs/llms.txt",
@@ -13,7 +13,7 @@
   "cohesion": 0,
   "coupling": 0,
   "fileCount": 5,
-  "lineCount": 51,
+  "lineCount": 57,
   "riskMetrics": {
     "cohesion": 0,
     "coupling": 0,
