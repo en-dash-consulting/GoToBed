@@ -1,0 +1,24 @@
+{
+  "id": "docs",
+  "name": "Documentation Site",
+  "description": "Documentation and static-site assets: CNAME, llms.txt, robots.txt (+2 more)",
+  "files": [
+    "docs/CNAME",
+    "docs/llms.txt",
+    "docs/robots.txt",
+    "docs/site.webmanifest",
+    "docs/sitemap.xml"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 5,
+  "lineCount": 57,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}

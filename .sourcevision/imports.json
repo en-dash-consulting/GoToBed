@@ -307,7 +307,7 @@
       "symbols": [
         "Schedule"
       ],
-      "weight": 1
+      "weight": 2
     },
     {
       "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
@@ -316,7 +316,7 @@
       "symbols": [
         "Schedule"
       ],
-      "weight": 1
+      "weight": 2
     },
     {
       "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",

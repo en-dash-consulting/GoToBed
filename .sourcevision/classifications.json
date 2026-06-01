@@ -642,7 +642,7 @@
         {
           "archetypeId": "config",
           "signalKind": "path",
-          "detail": "App-level environment/dependency wiring — configures runtime context for the application",
+          "detail": "App environment setup — likely holds environment-scoped configuration or dependency wiring for the app target.",
           "weight": 0.7
         }
       ]
@@ -656,7 +656,7 @@
         {
           "archetypeId": "types",
           "signalKind": "path",
-          "detail": "Bundle metadata constants (version, identifier, display name)",
+          "detail": "App metadata constants (bundle ID, version, etc.) — pure declarations, no logic.",
           "weight": 0.7
         }
       ]
@@ -670,7 +670,7 @@
         {
           "archetypeId": "utility",
           "signalKind": "path",
-          "detail": "Conversion helpers bridging color types across frameworks",
+          "detail": "Bridges color representations between frameworks (e.g. NSColor ↔ SwiftUI Color) — shared conversion helpers.",
           "weight": 0.7
         }
       ]
@@ -684,7 +684,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "Encapsulates SMAppService / login-item registration logic",
+          "detail": "Encapsulates launch-at-login registration logic — a self-contained OS-level service wrapper.",
           "weight": 0.7
         }
       ]
@@ -698,7 +698,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "SwiftUI view rendering menu bar popover content",
+          "detail": "Renders the menu bar popover content — a UI component with no top-level routing role.",
           "weight": 0.7
         }
       ]
@@ -712,7 +712,7 @@
         {
           "archetypeId": "store",
           "signalKind": "path",
-          "detail": "ObservableObject driving menu bar view state with high fan-in from UI",
+          "detail": "MVVM view model backing the menu — holds observable state and drives the menu UI.",
           "weight": 0.7
         }
       ]
@@ -726,7 +726,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "Coordinates overlay presentation, dismissal, and lifecycle",
+          "detail": "Manages overlay window lifecycle (show/hide, positioning) — controller/service, not a view itself.",
           "weight": 0.7
         }
       ]
@@ -740,7 +740,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "SwiftUI view defining overlay visual content",
+          "detail": "SwiftUI view rendered inside the overlay window.",
           "weight": 0.7
         }
       ]
@@ -754,7 +754,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "NSWindow subclass providing the overlay window shell",
+          "detail": "NSWindow subclass that hosts the overlay — UI infrastructure, part of the overlay component set.",
           "weight": 0.7
         }
       ]
@@ -768,7 +768,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "Core scheduling business logic — triggers, timers, and alarm dispatch",
+          "detail": "Drives the scheduling loop — orchestrates timers and fires bedtime events; pure service logic.",
           "weight": 0.7
         }
       ]
@@ -782,7 +782,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "NSWindowController managing settings window lifecycle",
+          "detail": "NSWindowController subclass managing the settings window lifecycle — controller glue, not a view.",
           "weight": 0.7
         }
       ]
@@ -796,7 +796,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "Reusable SwiftUI component for editing appearance options",
+          "detail": "Reusable SwiftUI component for editing appearance options.",
           "weight": 0.7
         }
       ]
@@ -810,21 +810,21 @@
         {
           "archetypeId": "utility",
           "signalKind": "path",
-          "detail": "OS-version compatibility shims and conditional API wrappers",
+          "detail": "Cross-version compatibility shims — shared helpers with no domain logic.",
           "weight": 0.7
         }
       ]
     },
     {
       "path": "Sources/GoToBed/UI/Palette.swift",
-      "archetype": "component",
+      "archetype": "types",
       "confidence": 0.7,
       "source": "llm",
       "evidence": [
         {
-          "archetypeId": "component",
+          "archetypeId": "types",
           "signalKind": "path",
-          "detail": "SwiftUI component rendering a color/theme palette picker",
+          "detail": "UI-layer color palette constants — declarations consumed by components, no logic.",
           "weight": 0.7
         }
       ]
@@ -838,7 +838,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "SwiftUI component for editing a schedule entry",
+          "detail": "Reusable SwiftUI component for editing a schedule — not a standalone screen.",
           "weight": 0.7
         }
       ]
@@ -852,7 +852,7 @@
         {
           "archetypeId": "utility",
           "signalKind": "path",
-          "detail": "Pure formatting helpers converting schedule values to display strings",
+          "detail": "Formatting helpers that convert schedule values to display strings.",
           "weight": 0.7
         }
       ]
@@ -866,7 +866,7 @@
         {
           "archetypeId": "page",
           "signalKind": "path",
-          "detail": "Top-level SwiftUI settings screen — route-level UI entry point",
+          "detail": "Top-level SwiftUI view for the Settings screen — root UI entry point for that route.",
           "weight": 0.7
         }
       ]
@@ -880,7 +880,7 @@
         {
           "archetypeId": "component",
           "signalKind": "path",
-          "detail": "Reusable SwiftUI component for selecting days of the week",
+          "detail": "Self-contained SwiftUI picker component for selecting weekdays.",
           "weight": 0.7
         }
       ]
@@ -894,7 +894,7 @@
         {
           "archetypeId": "entrypoint",
           "signalKind": "path",
-          "detail": "@main App struct — application entry point",
+          "detail": "@main App struct — the process entry point for the macOS app target.",
           "weight": 0.7
         }
       ]
@@ -908,7 +908,7 @@
         {
           "archetypeId": "utility",
           "signalKind": "path",
-          "detail": "Shared logging infrastructure with high fan-in across the module",
+          "detail": "Shared logging infrastructure — high fan-in utility with no domain logic.",
           "weight": 0.7
         }
       ]
@@ -922,7 +922,7 @@
         {
           "archetypeId": "model",
           "signalKind": "path",
-          "detail": "Codable struct defining appearance preference data shape",
+          "detail": "Data model for appearance preferences — Codable struct or class defining the schema.",
           "weight": 0.7
         }
       ]
@@ -936,7 +936,7 @@
         {
           "archetypeId": "model",
           "signalKind": "path",
-          "detail": "Codable struct representing a named color palette",
+          "detail": "Domain-layer palette model — defines the data shape used by persistence and business logic.",
           "weight": 0.7
         }
       ]
@@ -950,7 +950,7 @@
         {
           "archetypeId": "model",
           "signalKind": "path",
-          "detail": "Core Codable struct defining schedule data shape",
+          "detail": "Core schedule data model — Codable struct defining schedule fields.",
           "weight": 0.7
         }
       ]
@@ -964,7 +964,7 @@
         {
           "archetypeId": "schema",
           "signalKind": "path",
-          "detail": "Validation rules and constraint definitions for model values",
+          "detail": "Runtime validation rules for model fields — defines constraints rather than data shape.",
           "weight": 0.7
         }
       ]
@@ -978,7 +978,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "Reads/writes app state to disk — persistence layer abstraction",
+          "detail": "Reads and writes app state to disk — a persistence service wrapping UserDefaults or file I/O.",
           "weight": 0.7
         }
       ]
@@ -992,7 +992,7 @@
         {
           "archetypeId": "service",
           "signalKind": "path",
-          "detail": "Pure business logic computing next trigger times from a schedule",
+          "detail": "Pure business logic that computes next fire times from a Schedule — domain service with no side effects.",
           "weight": 0.7
         }
       ]
@@ -1006,7 +1006,7 @@
         {
           "archetypeId": "store",
           "signalKind": "path",
-          "detail": "Central ObservableObject state store — high fan-in from views and services",
+          "detail": "Observable state container for app-wide state — high fan-in, single source of truth.",
           "weight": 0.7
         }
       ]
@@ -1017,10 +1017,10 @@
     "totalUnclassified": 0,
     "byArchetype": {
       "config": 1,
-      "types": 1,
+      "types": 2,
       "utility": 4,
       "service": 6,
-      "component": 7,
+      "component": 6,
       "store": 2,
       "page": 1,
       "entrypoint": 1,

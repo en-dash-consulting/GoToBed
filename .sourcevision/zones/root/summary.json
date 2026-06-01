@@ -1,7 +1,7 @@
 {
   "id": "root",
-  "name": "Root",
-  "description": "6 files, primarily Other, Makefile, Swift",
+  "name": "Project Root",
+  "description": "Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)",
   "files": [
     ".gitignore",
     "LICENSE",

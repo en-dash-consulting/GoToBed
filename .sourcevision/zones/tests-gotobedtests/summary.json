@@ -1,7 +1,7 @@
 {
   "id": "tests-gotobedtests",
-  "name": "Tests Gotobedtests",
-  "description": "4 files, primarily Swift",
+  "name": "Tests",
+  "description": "Non-source files in Tests: InterServiceWiringTests.swift, OverlayControllerTests.swift, SchedulerEngineTests.swift (+1 more)",
   "files": [
     "Tests/GoToBedTests/InterServiceWiringTests.swift",
     "Tests/GoToBedTests/OverlayControllerTests.swift",

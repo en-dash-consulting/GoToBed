@@ -1,40 +1,40 @@
 {
   "schemaVersion": "1.0.0",
   "toolVersion": "0.1.0",
-  "analyzedAt": "2026-05-28T03:43:34.677Z",
-  "gitSha": "500fe5e1f0975104db8a3608306d6188d81d9070",
+  "analyzedAt": "2026-06-01T03:15:52.462Z",
+  "gitSha": "620bec10eb0009a032653e12770bc7a2064c677e",
   "gitBranch": "sv",
   "targetPath": "/Users/nick/development/endash/gotobed",
   "modules": {
     "inventory": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:34:47.748Z",
-      "completedAt": "2026-05-28T03:34:47.798Z"
+      "startedAt": "2026-06-01T03:06:58.209Z",
+      "completedAt": "2026-06-01T03:06:58.264Z"
     },
     "imports": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:34:47.799Z",
-      "completedAt": "2026-05-28T03:34:47.829Z"
+      "startedAt": "2026-06-01T03:06:58.265Z",
+      "completedAt": "2026-06-01T03:06:58.295Z"
     },
     "classifications": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:34:47.829Z",
-      "completedAt": "2026-05-28T03:35:28.091Z"
+      "startedAt": "2026-06-01T03:06:58.295Z",
+      "completedAt": "2026-06-01T03:07:37.156Z"
     },
     "zones": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:35:28.092Z",
-      "completedAt": "2026-05-28T03:43:34.626Z"
+      "startedAt": "2026-06-01T03:07:37.157Z",
+      "completedAt": "2026-06-01T03:15:52.403Z"
     },
     "components": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:43:34.629Z",
-      "completedAt": "2026-05-28T03:43:34.656Z"
+      "startedAt": "2026-06-01T03:15:52.406Z",
+      "completedAt": "2026-06-01T03:15:52.441Z"
     },
     "callgraph": {
       "status": "complete",
-      "startedAt": "2026-05-28T03:43:34.656Z",
-      "completedAt": "2026-05-28T03:43:34.677Z"
+      "startedAt": "2026-06-01T03:15:52.441Z",
+      "completedAt": "2026-06-01T03:15:52.462Z"
     }
   },
   "language": "swift",

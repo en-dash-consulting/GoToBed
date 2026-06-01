@@ -1,7 +1,7 @@
 {
   "id": "tests-gotobedcoretests",
-  "name": "Tests Gotobedcoretests",
-  "description": "10 files, primarily Swift",
+  "name": "Tests",
+  "description": "Non-source files in Tests: ContrastTests.swift, DSTTests.swift, PersistenceTests.swift (+7 more)",
   "files": [
     "Tests/GoToBedCoreTests/ContrastTests.swift",
     "Tests/GoToBedCoreTests/DSTTests.swift",

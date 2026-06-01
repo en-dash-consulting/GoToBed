@@ -92,13 +92,13 @@
     },
     {
       "path": ".claude/settings.local.json",
-      "size": 2167,
+      "size": 2226,
       "language": "JSON",
-      "lineCount": 54,
-      "hash": "4a8180d205724363dd15479f8ea4d159119accabff44e8f5b5187afc672f8c19",
+      "lineCount": 56,
+      "hash": "2e9787de7e47de62ecf95462b9c68ef7ea11c4695448a46004a6c56f618e7298",
       "role": "other",
       "category": ".claude",
-      "lastModified": 1779667406351
+      "lastModified": 1780283075407
     },
     {
       "path": ".claude/skills/ndx-capture/SKILL.md",
@@ -452,13 +452,13 @@
     },
     {
       "path": "Sources/GoToBed/AppEnvironment.swift",
-      "size": 5506,
+      "size": 6136,
       "language": "Swift",
-      "lineCount": 161,
-      "hash": "83a15b4b5e2004e1238cf10455f6629f7e6d473892802a7a6cf3f2fef3878f46",
+      "lineCount": 169,
+      "hash": "c3eaaba82bf39180f4ea0b27b38fac3ea6706139bc2d7c5f8d84d4b0c712ddc7",
       "role": "source",
       "category": "sources",
-      "lastModified": 1779681688349
+      "lastModified": 1779940528292
     },
     {
       "path": "Sources/GoToBed/AppInfo.swift",
@@ -542,13 +542,13 @@
     },
     {
       "path": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
-      "size": 4710,
+      "size": 4959,
       "language": "Swift",
-      "lineCount": 125,
-      "hash": "d459ef22c21a615f7cf60dfd09676522bdd09d2bd10ebf8958057a5f1b01db95",
+      "lineCount": 129,
+      "hash": "0fe870c39569d15745022beaa649a264e35081a1081e52d02b465a9fde7c4609",
       "role": "source",
       "category": "sources",
-      "lastModified": 1779362988083
+      "lastModified": 1779940518868
     },
     {
       "path": "Sources/GoToBed/SettingsWindowController.swift",
@@ -822,13 +822,13 @@
     },
     {
       "path": "Tests/GoToBedTests/InterServiceWiringTests.swift",
-      "size": 3856,
+      "size": 3892,
       "language": "Swift",
       "lineCount": 95,
-      "hash": "7afa54f70b636cb22777b9ff843429331664529aea77964133270f1114912b1c",
+      "hash": "f08abd19cd877de555618cf82b602324249d8e770c62bcd1bee81bd28a4080f5",
       "role": "test",
       "category": "tests",
-      "lastModified": 1779680583273
+      "lastModified": 1779940614802
     },
     {
       "path": "Tests/GoToBedTests/OverlayControllerTests.swift",
@@ -842,13 +842,13 @@
     },
     {
       "path": "Tests/GoToBedTests/SchedulerEngineTests.swift",
-      "size": 6718,
+      "size": 6862,
       "language": "Swift",
       "lineCount": 162,
-      "hash": "13fb1c87ac298efd3ea06264c7b4bbc0e2483d3d94ad2c28ca013beee18b62c1",
+      "hash": "cf23fbbc3883877ad2ff20eb5487d3ca66caa2182e53b7f5ba8b6f6b0fec76f5",
       "role": "test",
       "category": "tests",
-      "lastModified": 1779680542648
+      "lastModified": 1779940614802
     },
     {
       "path": "Tests/GoToBedTests/TestHelpers.swift",
@@ -1113,7 +1113,7 @@
   ],
   "summary": {
     "totalFiles": 111,
-    "totalLines": 5968,
+    "totalLines": 5982,
     "byLanguage": {
       "Markdown": 27,
       "JSON": 4,

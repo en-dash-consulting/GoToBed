@@ -6,8 +6,8 @@
 <architecture>
 
 Project: gotobed
-Git: sv @ 500fe5e
-Files: 111, Lines: 5968
+Git: sv @ 620bec1
+Files: 111, Lines: 5982
 Languages: Swift(42) Markdown(27) Other(18) Shell(8) YAML(6)
 Zones: 6, Described: 6
 Weighted avg cohesion: 0.36, coupling: 0.00 (4 zones with ≥5 files)
@@ -20,23 +20,23 @@ Circulars: 4
 
 <zones>
 
-[build-release-scripts] Build & Release Scripts (8 files, coh=0.00 coup=0.00)
-  Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.
-  files: scripts/build-app.sh, scripts/check-core-purity.sh, scripts/check-site-docs.sh, scripts/check-zone-layering.sh, scripts/make-dmg.sh, scripts/make-icon.sh, scripts/stamp-site-version.sh, scripts/verify-no-network.sh
-[packaging] Packaging (3 files, coh=0.00 coup=0.00)
-  3 files, primarily Other
-  files: Packaging/AppIcon.icns, Packaging/GoToBed.entitlements, Packaging/Info.plist
-[root] Root (5 files, coh=0.00 coup=0.00)
-  6 files, primarily Other, Makefile, Swift
-  files: .gitignore, LICENSE, Makefile, Package.swift, VERSION
-[static-site-assets] Static Site Assets (5 files, coh=0.00 coup=0.00)
-  Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.
+[docs] Documentation Site (5 files, coh=0.00 coup=0.00)
+  Documentation and static-site assets: CNAME, llms.txt, robots.txt (+2 more)
   files: docs/CNAME, docs/llms.txt, docs/robots.txt, docs/site.webmanifest, docs/sitemap.xml
-[tests-gotobedcoretests] Tests Gotobedcoretests (10 files, coh=1.00 coup=0.00)
-  10 files, primarily Swift
+[packaging] Packaging (3 files, coh=0.00 coup=0.00)
+  Non-source files in Packaging: AppIcon.icns, GoToBed.entitlements, Info.plist
+  files: Packaging/AppIcon.icns, Packaging/GoToBed.entitlements, Packaging/Info.plist
+[root] Project Root (5 files, coh=0.00 coup=0.00)
+  Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)
+  files: .gitignore, LICENSE, Makefile, Package.swift, VERSION
+[scripts] Build & CI Scripts (8 files, coh=0.00 coup=0.00)
+  Build, packaging, and CI scripts: build-app.sh, check-core-purity.sh, check-site-docs.sh (+5 more)
+  files: scripts/build-app.sh, scripts/check-core-purity.sh, scripts/check-site-docs.sh, scripts/check-zone-layering.sh, scripts/make-dmg.sh, scripts/make-icon.sh, scripts/stamp-site-version.sh, scripts/verify-no-network.sh
+[tests-gotobedcoretests] Tests (10 files, coh=1.00 coup=0.00)
+  Non-source files in Tests: ContrastTests.swift, DSTTests.swift, PersistenceTests.swift (+7 more)
   files: Tests/GoToBedCoreTests/ContrastTests.swift, Tests/GoToBedCoreTests/DSTTests.swift, Tests/GoToBedCoreTests/PersistenceTests.swift, Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift, Tests/GoToBedCoreTests/SchedulerLoopTests.swift, Tests/GoToBedCoreTests/SleepSkipTests.swift, Tests/GoToBedCoreTests/StoreTests.swift, Tests/GoToBedCoreTests/SubmessageTests.swift, Tests/GoToBedCoreTests/TestSupport.swift, Tests/GoToBedCoreTests/ValidationTests.swift
-[tests-gotobedtests] Tests Gotobedtests (4 files, coh=1.00 coup=0.00)
-  4 files, primarily Swift
+[tests-gotobedtests] Tests (4 files, coh=1.00 coup=0.00)
+  Non-source files in Tests: InterServiceWiringTests.swift, OverlayControllerTests.swift, SchedulerEngineTests.swift (+1 more)
   files: Tests/GoToBedTests/InterServiceWiringTests.swift, Tests/GoToBedTests/OverlayControllerTests.swift, Tests/GoToBedTests/SchedulerEngineTests.swift, Tests/GoToBedTests/TestHelpers.swift
 
 Detailed zone context: .sourcevision/zones/{id}/context.md

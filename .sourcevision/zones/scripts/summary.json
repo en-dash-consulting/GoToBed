@@ -1,0 +1,27 @@
+{
+  "id": "scripts",
+  "name": "Build & CI Scripts",
+  "description": "Build, packaging, and CI scripts: build-app.sh, check-core-purity.sh, check-site-docs.sh (+5 more)",
+  "files": [
+    "scripts/build-app.sh",
+    "scripts/check-core-purity.sh",
+    "scripts/check-site-docs.sh",
+    "scripts/check-zone-layering.sh",
+    "scripts/make-dmg.sh",
+    "scripts/make-icon.sh",
+    "scripts/stamp-site-version.sh",
+    "scripts/verify-no-network.sh"
+  ],
+  "entryPoints": [],
+  "cohesion": 0,
+  "coupling": 0,
+  "fileCount": 8,
+  "lineCount": 498,
+  "riskMetrics": {
+    "cohesion": 0,
+    "coupling": 0,
+    "riskScore": 0.5,
+    "riskLevel": "at-risk",
+    "failsThreshold": false
+  }
+}
