@@ -23,5 +23,6 @@ description: "The timing core: computes each enabled schedule's next weekly fire
 |-------|--------|
 | [Clock/timezone/DST change recomputation](./clock-timezone-dst-change-recomputation/index.md) | completed |
 | [Coalesced timer arming & fire events](./coalesced-timer-arming-fire-events/index.md) | completed |
+| [Fix code in scheduler-engine (1 finding)](./fix-code-in-scheduler-engine-1-finding/index.md) | completed |
 | [Next-fire computation across active weekdays](./next-fire-computation-across-02a2df/index.md) | completed |
 | [Sleep/wake skip handling (recompute-forward)](./sleep-wake-skip-handling-b7d544/index.md) | completed |

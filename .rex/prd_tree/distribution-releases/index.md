@@ -21,6 +21,8 @@ description: "Make GoToBed installable and updatable for the public as an open-s
 |-------|--------|
 | [Developer ID signing & notarization](./developer-id-signing-notarization/index.md) | completed |
 | [Download website on GitHub Pages](./download-website-on-github-pages/index.md) | completed |
+| [Fix documentation in global (1 finding)](./fix-documentation-in-global-1-finding/index.md) | completed |
+| [Fix documentation in static-site-assets (3 findings)](./fix-documentation-in-static-da9d3b/index.md) | completed |
 | [Offline-preserving update path](./offline-preserving-update-path/index.md) | completed |
 | [Open-source the repository (MIT)](./open-source-the-repository-mit/index.md) | completed |
 | [Versioned, automated releases](./versioned-automated-releases/index.md) | completed |

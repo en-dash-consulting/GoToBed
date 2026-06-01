@@ -26,5 +26,8 @@ description: "Cross-cutting integration and quality work: launch-at-login via SM
 |-------|--------|
 | [Acceptance & reliability validation pass](./acceptance-reliability-validation-pass/index.md) | completed |
 | [Accessibility (VoiceOver, contrast)](./accessibility-voiceover-contrast/index.md) | completed |
+| [Fix structural in core-domain-tests (1 finding)](./fix-structural-in-core-domain-73abe5/index.md) | completed |
+| [Fix structural in global (1 finding)](./fix-structural-in-global-1-finding/index.md) | completed |
+| [Fix structural in global (3 findings)](./fix-structural-in-global-3-findings/index.md) | completed |
 | [Launch-at-login via SMAppService](./launch-at-login-via-smappservice/index.md) | completed |
 | [Privacy & packaging (no-network, universal, signing)](./privacy-packaging-no-network-a8c6f5/index.md) | completed |

@@ -23,6 +23,7 @@ description: "The SwiftUI settings surface: the menu-bar menu with inline schedu
 | Title | Status |
 |-------|--------|
 | [App-wide default appearance pane](./app-wide-default-appearance-pane/index.md) | completed |
+| [Fix structural in settings-ui (5 findings)](./fix-structural-in-settings-ui-5-77d815/index.md) | completed |
 | [Menu-bar menu & schedule quick-toggle list](./menu-bar-menu-schedule-quick-722294/index.md) | completed |
 | [Per-schedule appearance controls & live preview](./per-schedule-appearance-9e0699/index.md) | completed |
 | [Preview overlay action](./preview-overlay-action/index.md) | completed |
