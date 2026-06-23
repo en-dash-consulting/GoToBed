@@ -2,13 +2,16 @@
 id: "49e38d57-4fae-4ba3-8fb6-2a9de26ec52a"
 level: "feature"
 title: "Configurable dismissal challenge (random-key / type-to-dismiss)"
-status: "pending"
+status: "completed"
 priority: "medium"
 tags:
   - "overlay"
   - "dismissal"
   - "settings"
 source: "/ndx-capture — conversation 2026-06-22"
+startedAt: "2026-06-23T03:43:22.635Z"
+completedAt: "2026-06-23T03:43:22.635Z"
+endedAt: "2026-06-23T03:43:22.635Z"
 acceptanceCriteria:
   - "A per-schedule setting selects dismissal mode: Esc / Random key / Type-to-dismiss"
   - "Random-key mode displays the required key and dismisses only on that exact key; wrong keys are ignored (optional re-roll)"
@@ -23,5 +26,5 @@ description: "A per-schedule setting that selects how the overlay is dismissed, 
 | Title | Status |
 |-------|--------|
 | [Add dismissal-mode field to the schedule model](./add-dismissal-mode-field-to-the-0556b4.md) | completed |
-| [Add settings UI control for per-schedule dismissal mode](./add-settings-ui-control-for-per-6485e0.md) | pending |
+| [Add settings UI control for per-schedule dismissal mode](./add-settings-ui-control-for-per-6485e0.md) | completed |
 | [Implement overlay input handling for random-key and type-to-dismiss](./implement-overlay-input-efee08.md) | completed |
