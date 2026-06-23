@@ -24,4 +24,4 @@ description: "A per-schedule setting that selects how the overlay is dismissed, 
 |-------|--------|
 | [Add dismissal-mode field to the schedule model](./add-dismissal-mode-field-to-the-0556b4.md) | completed |
 | [Add settings UI control for per-schedule dismissal mode](./add-settings-ui-control-for-per-6485e0.md) | pending |
-| [Implement overlay input handling for random-key and type-to-dismiss](./implement-overlay-input-efee08.md) | pending |
+| [Implement overlay input handling for random-key and type-to-dismiss](./implement-overlay-input-efee08.md) | completed |

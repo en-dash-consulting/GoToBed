@@ -10,9 +10,11 @@ import GoToBedCore
 /// and force-quit all keep working (FR-8).
 final class OverlayWindow: NSWindow {
     private let onDismiss: () -> Void
+    private let challenge: DismissChallengeState
 
     init(schedule: Schedule, screen: NSScreen, reduceMotion: Bool, onDismiss: @escaping () -> Void) {
         self.onDismiss = onDismiss
+        self.challenge = DismissChallengeState(challenge: schedule.dismissChallenge)
         super.init(
             contentRect: screen.frame,
             styleMask: [.borderless],
@@ -33,6 +35,7 @@ final class OverlayWindow: NSWindow {
         let root = OverlayView(
             schedule: schedule,
             startDate: Date(),
+            challenge: challenge,
             onDismiss: { [weak self] in self?.requestDismiss() }
         )
         let hosting = NSHostingView(rootView: root)
@@ -46,18 +49,42 @@ final class OverlayWindow: NSWindow {
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { true }
 
-    /// Esc (and the standard cancel action) dismisses immediately (FR-8).
+    /// Esc (and the standard cancel action) dismisses immediately when the
+    /// schedule uses the default escape challenge (FR-8). The friction challenges
+    /// (random key / type phrase) deliberately ignore Esc — Cmd-Tab/force-quit
+    /// remain the always-available OS escape routes.
     override func cancelOperation(_ sender: Any?) {
-        requestDismiss()
+        if challenge.escDismisses { requestDismiss() }
     }
 
     override func keyDown(with event: NSEvent) {
-        // Esc keyCode is 53; also honor the cancel selector path.
+        // Esc keyCode is 53; honored only by the escape challenge.
         if event.keyCode == 53 {
-            requestDismiss()
-        } else {
-            super.keyDown(with: event)
+            if challenge.escDismisses { requestDismiss() }
+            return
         }
+
+        // Backspace (keyCode 51) edits the type-to-dismiss buffer.
+        if event.keyCode == 51 {
+            challenge.deleteBackward()
+            return
+        }
+
+        // Feed printable characters to the challenge; dismiss once satisfied.
+        if let chars = event.charactersIgnoringModifiers, !chars.isEmpty {
+            var satisfied = false
+            for ch in chars where !satisfied {
+                satisfied = challenge.handle(character: ch)
+            }
+            if satisfied {
+                requestDismiss()
+                return
+            }
+            // A challenge consumed the keystroke — don't beep via super.
+            if challenge.escDismisses == false { return }
+        }
+
+        super.keyDown(with: event)
     }
 
     private var dismissing = false
