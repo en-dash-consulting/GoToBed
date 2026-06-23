@@ -1,0 +1,276 @@
+{
+  "zones": [
+    {
+      "id": "build-release-scripts",
+      "name": "Build & Release Scripts",
+      "description": "Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.",
+      "files": [
+        "scripts/build-app.sh",
+        "scripts/check-core-purity.sh",
+        "scripts/check-site-docs.sh",
+        "scripts/check-zone-layering.sh",
+        "scripts/make-dmg.sh",
+        "scripts/make-icon.sh",
+        "scripts/stamp-site-version.sh",
+        "scripts/verify-no-network.sh"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "packaging",
+      "name": "Packaging",
+      "description": "3 files, primarily Other",
+      "files": [
+        "Packaging/AppIcon.icns",
+        "Packaging/GoToBed.entitlements",
+        "Packaging/Info.plist"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "root",
+      "name": "Root",
+      "description": "6 files, primarily Other, Makefile, Swift",
+      "files": [
+        ".gitignore",
+        "LICENSE",
+        "Makefile",
+        "Package.swift",
+        "VERSION"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "static-site-assets",
+      "name": "Static Site Assets",
+      "description": "Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.",
+      "files": [
+        "docs/CNAME",
+        "docs/llms.txt",
+        "docs/robots.txt",
+        "docs/site.webmanifest",
+        "docs/sitemap.xml"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "tests-gotobedcoretests",
+      "name": "Tests Gotobedcoretests",
+      "description": "10 files, primarily Swift",
+      "files": [
+        "Tests/GoToBedCoreTests/ContrastTests.swift",
+        "Tests/GoToBedCoreTests/DSTTests.swift",
+        "Tests/GoToBedCoreTests/PersistenceTests.swift",
+        "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+        "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+        "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+        "Tests/GoToBedCoreTests/StoreTests.swift",
+        "Tests/GoToBedCoreTests/SubmessageTests.swift",
+        "Tests/GoToBedCoreTests/TestSupport.swift",
+        "Tests/GoToBedCoreTests/ValidationTests.swift"
+      ],
+      "entryPoints": [],
+      "cohesion": 1,
+      "coupling": 0,
+      "insights": [
+        "High cohesion (1) — files are tightly interconnected"
+      ],
+      "riskMetrics": {
+        "cohesion": 1,
+        "coupling": 0,
+        "riskScore": 0,
+        "riskLevel": "healthy",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "tests-gotobedtests",
+      "name": "Tests Gotobedtests",
+      "description": "4 files, primarily Swift",
+      "files": [
+        "Tests/GoToBedTests/InterServiceWiringTests.swift",
+        "Tests/GoToBedTests/OverlayControllerTests.swift",
+        "Tests/GoToBedTests/SchedulerEngineTests.swift",
+        "Tests/GoToBedTests/TestHelpers.swift"
+      ],
+      "entryPoints": [],
+      "cohesion": 1,
+      "coupling": 0,
+      "insights": [
+        "High cohesion (1) — files are tightly interconnected"
+      ],
+      "riskMetrics": {
+        "cohesion": 1,
+        "coupling": 0,
+        "riskScore": 0,
+        "riskLevel": "healthy",
+        "failsThreshold": false
+      }
+    }
+  ],
+  "crossings": [],
+  "unzoned": [],
+  "insights": [
+    "4 circular dependency chains detected — see imports.json for details",
+    "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 3 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Models/Validation.swift is imported by 3 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Store/Store.swift is imported by 3 zones — cross-cutting dependency",
+    "Bidirectional coupling: \"log-overlaycontroller\" ↔ \"sources\" (7+8 crossings) — consider extracting shared interface",
+    "Size imbalance: largest zone has 24 files vs smallest with 3 — uneven decomposition",
+    "4 circular dependency chains detected — see imports.json for details",
+    "App-core and app-orchestration form a two-tier architecture: app-core provides isolated domain and UI logic; app-orchestration coordinates lifecycle. The asymmetric coupling (app-core has low coupling, app-orchestration has high coupling) is structurally appropriate for a composition root.",
+    "Test zones heavily favor app-core (27 + 10 = 37 total imports) over app-orchestration (4 imports), suggesting app-core domain logic is well-tested while orchestration behavior may benefit from integration test coverage.",
+    "Circular imports between app-core and app-orchestration (8 ↔ 7) indicate tight orchestration coupling; confirm this is a documented initialization seam (OverlayController and SchedulerEngine wiring) rather than runtime data-flow coupling.",
+    "File \"Tests/GoToBedCoreTests/SubmessageTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
+    "The apparent bidirectional coupling between 'log-overlaycontroller' and 'sources' (7+8 crossings) resolves cleanly on inspection: it is a one-directional initialization seam (AppEnvironment → OverlayController/SchedulerEngine) combined with downward domain imports (OverlayController/SchedulerEngine → GoToBedCore). No runtime data flows in a cycle.",
+    "Callback injection (SchedulerEngine.onFire wired in AppEnvironment) is the architectural mechanism preventing SchedulerEngine from importing OverlayController. This pattern is load-bearing: removing it in favor of a direct import would create a genuine circular dependency between the orchestration files.",
+    "The three hub files (Schedule.swift, Validation.swift, Store.swift) are all imported exclusively downward: GoToBedCore → consumed by GoToBed. Their hub status reflects ubiquitous domain-model use, not architectural coupling concern.",
+    "The four circular dependency chains reported in imports.json are likely zone-level artifacts from community detection misclassification (Log.swift grouped with orchestration files) rather than true Swift module-level circular imports. Swift would reject genuine circular module dependencies at build time — the presence of a working build indicates these are intra-target import cycles between files, not modules.",
+    "The entire cross-zone dependency surface is funneled through a single composition root (AppEnvironment). This is an intentional hub-and-spoke pattern appropriate for a small app, but it means AppEnvironment has no substitute or abstraction layer — it is a single point of coupling failure for the entire orchestration tier."
+  ],
+  "findings": [
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "build-release-scripts",
+      "text": "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "4 circular dependency chains detected — see imports.json for details",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "packaging",
+      "text": "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "root",
+      "text": "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "static-site-assets",
+      "text": "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "tests-gotobedcoretests",
+      "text": "High cohesion (1) — files are tightly interconnected",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "tests-gotobedtests",
+      "text": "High cohesion (1) — files are tightly interconnected",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "build-release-scripts",
+      "text": "Zone \"Build & Release Scripts\" (build-release-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "packaging",
+      "text": "Zone \"Packaging\" (packaging) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — unreliable: zone has only 3 files (minimum 5 for reliable metrics)",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "root",
+      "text": "Zone \"Root\" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "static-site-assets",
+      "text": "Zone \"Static Site Assets\" (static-site-assets) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "severity": "info"
+    }
+  ],
+  "enrichmentPass": 2,
+  "structureHash": "f35202af76a6feee",
+  "inputFingerprint": "f050241c865333b3",
+  "zoneContentHashes": {
+    "build-release-scripts": "268a417919f93da5",
+    "packaging": "93f00724b4d4b91c",
+    "root": "f0b9a3b824ec424e",
+    "static-site-assets": "72b734f5580cb047",
+    "tests-gotobedcoretests": "4f649f6a85085328",
+    "tests-gotobedtests": "f51e19cda84d7b47"
+  },
+  "stability": {
+    "fileRetention": 1,
+    "persistedZones": 6,
+    "newZones": 0,
+    "removedZones": 0,
+    "reassignedFiles": []
+  }
+}

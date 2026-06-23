@@ -7,6 +7,8 @@ struct OverlayView: View {
     let schedule: Schedule
     /// When the overlay was presented — anchors the clock tick and the countdown.
     let startDate: Date
+    /// Live dismissal-challenge state, driven by the window's key events.
+    @ObservedObject var challenge: DismissChallengeState
     let onDismiss: () -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -60,27 +62,37 @@ struct OverlayView: View {
                             .accessibilityHidden(true)
                     }
 
-                    Text(dismissHint)
-                        .font(.system(size: 15))
-                        .opacity(0.55)
-                        .accessibilityLabel(dismissHint)
+                    VStack(spacing: 8) {
+                        Text(challenge.prompt)
+                            .font(.system(size: 15))
+                            .opacity(0.55)
+                            .multilineTextAlignment(.center)
+                            .accessibilityLabel(challenge.prompt)
+
+                        // Show typed progress for the type-to-dismiss challenge.
+                        if case .typeString = challenge.kind {
+                            Text(challenge.typed.isEmpty ? " " : challenge.typed)
+                                .font(.system(size: 17, weight: .semibold, design: .monospaced))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .stroke(.secondary.opacity(0.4), lineWidth: 1)
+                                )
+                                .accessibilityLabel("Typed so far: \(challenge.typed)")
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(60)
                 .foregroundStyle(Color(appearance.textColor))
             }
             .contentShape(Rectangle())
-            // Manual mode dismisses with Esc only; auto mode also allows an
-            // early dismiss by clicking.
-            .onTapGesture { if isAuto { onDismiss() } }
+            // Auto mode allows an early dismiss by clicking — but only when the
+            // schedule uses the plain Esc challenge. A friction challenge must be
+            // satisfied by the keyed/typed action, so tapping does nothing.
+            .onTapGesture { if isAuto && challenge.allowsTapDismiss { onDismiss() } }
             .transaction { if reduceMotion { $0.disablesAnimations = true } }
-        }
-    }
-
-    private var dismissHint: String {
-        switch schedule.dismissMode {
-        case .manual: return "Press Esc to dismiss"
-        case .auto:   return "Press Esc to dismiss now"
         }
     }
 
