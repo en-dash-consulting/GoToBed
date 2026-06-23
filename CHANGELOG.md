@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/en-dash-consulting/GoToBed/compare/v0.2.1...v0.3.0) (2026-06-23)
+
+
+### Features
+
+* configurable per-schedule dismissal challenge (random-key / type-to-dismiss) ([#7](https://github.com/en-dash-consulting/GoToBed/issues/7)) ([029e05a](https://github.com/en-dash-consulting/GoToBed/commit/029e05a8faf8f78ad901a54d1f16b6494cef781a))
+
 ## [0.2.1](https://github.com/en-dash-consulting/GoToBed/compare/v0.2.0...v0.2.1) (2026-05-22)
 
 
