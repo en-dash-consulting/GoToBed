@@ -9,6 +9,7 @@ public enum ScheduleValidationError: Error, Equatable, CustomStringConvertible {
     case durationOutOfRange(Int)
     case messageTooLong(Int)
     case submessageTooLong(Int)
+    case typeStringTooLong(Int)
 
     public var description: String {
         switch self {
@@ -26,6 +27,8 @@ public enum ScheduleValidationError: Error, Equatable, CustomStringConvertible {
             return "Message length \(n) exceeds \(Schedule.maxMessageLength)."
         case let .submessageTooLong(n):
             return "Submessage length \(n) exceeds \(Schedule.maxMessageLength)."
+        case let .typeStringTooLong(n):
+            return "Type-to-dismiss phrase length \(n) exceeds \(DismissChallenge.maxTypeStringLength)."
         }
     }
 }
@@ -49,6 +52,9 @@ public extension Schedule {
         if submessage.count > Schedule.maxMessageLength {
             errors.append(.submessageTooLong(submessage.count))
         }
+        if case let .typeString(s) = dismissChallenge, s.count > DismissChallenge.maxTypeStringLength {
+            errors.append(.typeStringTooLong(s.count))
+        }
         return errors
     }
 
@@ -71,6 +77,15 @@ public extension Schedule {
         }
         if submessage.count > Schedule.maxMessageLength {
             copy.submessage = String(submessage.prefix(Schedule.maxMessageLength))
+        }
+        if case let .typeString(s) = dismissChallenge {
+            // An all-whitespace phrase would leave the user with nothing typable
+            // to dismiss — downgrade to Esc so the overlay is never a trap.
+            if s.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                copy.dismissChallenge = .escape
+            } else if s.count > DismissChallenge.maxTypeStringLength {
+                copy.dismissChallenge = .typeString(String(s.prefix(DismissChallenge.maxTypeStringLength)))
+            }
         }
         return copy
     }

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "toolVersion": "0.1.0",
+  "analyzedAt": "2026-05-28T03:43:34.677Z",
+  "gitSha": "500fe5e1f0975104db8a3608306d6188d81d9070",
+  "gitBranch": "sv",
+  "targetPath": "/Users/nick/development/endash/gotobed",
+  "modules": {
+    "inventory": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:34:47.748Z",
+      "completedAt": "2026-05-28T03:34:47.798Z"
+    },
+    "imports": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:34:47.799Z",
+      "completedAt": "2026-05-28T03:34:47.829Z"
+    },
+    "classifications": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:34:47.829Z",
+      "completedAt": "2026-05-28T03:35:28.091Z"
+    },
+    "zones": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:35:28.092Z",
+      "completedAt": "2026-05-28T03:43:34.626Z"
+    },
+    "components": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:43:34.629Z",
+      "completedAt": "2026-05-28T03:43:34.656Z"
+    },
+    "callgraph": {
+      "status": "complete",
+      "startedAt": "2026-05-28T03:43:34.656Z",
+      "completedAt": "2026-05-28T03:43:34.677Z"
+    }
+  },
+  "language": "swift",
+  "languages": [
+    "swift"
+  ],
+  "zoneOutputs": true,
+  "tokenUsage": {
+    "calls": 3,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "vendor": "claude",
+    "model": "claude-sonnet-4-6"
+  }
+}

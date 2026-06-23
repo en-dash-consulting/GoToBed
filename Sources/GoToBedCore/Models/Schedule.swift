@@ -10,6 +10,24 @@ public enum DismissMode: Codable, Equatable, Sendable {
     public static let defaultAutoSeconds = 60
 }
 
+/// What the user must *do* to dismiss the overlay — independent of the
+/// auto/manual timing in `DismissMode`. The default preserves the original
+/// "press Esc" behavior; the other cases add deliberate friction so a bedtime
+/// reminder can't be dismissed reflexively. None of these trap the OS escape
+/// routes (Cmd-Tab, Mission Control, force-quit) — they gate only the overlay's
+/// own dismiss path.
+public enum DismissChallenge: Codable, Equatable, Sendable {
+    /// Esc dismisses (original behavior).
+    case escape
+    /// A randomly chosen key (picked when the overlay is shown) must be pressed.
+    case randomKey
+    /// The user must type `target` exactly.
+    case typeString(String)
+
+    /// Longest allowed type-to-dismiss phrase.
+    public static let maxTypeStringLength = 100
+}
+
 /// A weekly recurring reminder: a time-of-day, the weekdays it is active on,
 /// a message, and how its overlay looks and dismisses.
 public struct Schedule: Codable, Identifiable, Equatable, Sendable {
@@ -25,6 +43,8 @@ public struct Schedule: Codable, Identifiable, Equatable, Sendable {
     public var submessage: String
     public var isEnabled: Bool
     public var dismissMode: DismissMode
+    /// What the user must do to dismiss the overlay (Esc / random key / typed phrase).
+    public var dismissChallenge: DismissChallenge
     public var appearance: AppearanceSettings
 
     /// Allowed auto-dismiss durations in seconds (PRD FR-2).
@@ -43,6 +63,7 @@ public struct Schedule: Codable, Identifiable, Equatable, Sendable {
         submessage: String = "",
         isEnabled: Bool = true,
         dismissMode: DismissMode = .auto(seconds: DismissMode.defaultAutoSeconds),
+        dismissChallenge: DismissChallenge = .escape,
         appearance: AppearanceSettings = .appDefault
     ) {
         self.id = id
@@ -53,11 +74,12 @@ public struct Schedule: Codable, Identifiable, Equatable, Sendable {
         self.submessage = submessage
         self.isEnabled = isEnabled
         self.dismissMode = dismissMode
+        self.dismissChallenge = dismissChallenge
         self.appearance = appearance
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, hour, minute, weekdays, message, submessage, isEnabled, dismissMode, appearance
+        case id, hour, minute, weekdays, message, submessage, isEnabled, dismissMode, dismissChallenge, appearance
     }
 
     // Custom decode so older saved schedules (no `submessage` key) still load
@@ -73,6 +95,8 @@ public struct Schedule: Codable, Identifiable, Equatable, Sendable {
         submessage = try c.decodeIfPresent(String.self, forKey: .submessage) ?? ""
         isEnabled = try c.decode(Bool.self, forKey: .isEnabled)
         dismissMode = try c.decode(DismissMode.self, forKey: .dismissMode)
+        // Older saved schedules predate the dismissal challenge — default to Esc.
+        dismissChallenge = try c.decodeIfPresent(DismissChallenge.self, forKey: .dismissChallenge) ?? .escape
         appearance = try c.decode(AppearanceSettings.self, forKey: .appearance)
     }
 }
