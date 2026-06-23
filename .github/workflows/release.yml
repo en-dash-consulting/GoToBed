@@ -23,7 +23,7 @@ jobs:
       release_created: ${{ steps.rp.outputs.release_created }}
       tag_name: ${{ steps.rp.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v5
+      - uses: googleapis/release-please-action@v4
         id: rp
         with:
           config-file: release-please-config.json
@@ -34,7 +34,7 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ needs.release-please.outputs.tag_name }}
@@ -92,21 +92,38 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Stamp docs version and date
         run: ./scripts/stamp-site-version.sh
-      - name: Commit stamped docs
+      - name: Open and merge stamped-docs PR
+        # `main` is a protected ref that rejects direct pushes (changes must go
+        # through a PR), so we open a one-commit PR and merge it. The commit
+        # carries `[skip ci]` so neither the PR nor the squash-merge into main
+        # re-triggers CI/Release. main requires 0 approvals and no required
+        # status checks, so the workflow token can merge immediately.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.release-please.outputs.tag_name }}
         run: |
           if git diff --quiet docs/sitemap.xml docs/site.webmanifest docs/llms.txt; then
             echo "No changes to docs."
             exit 0
           fi
+          BRANCH="docs/stamp-${TAG}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
           git add docs/sitemap.xml docs/site.webmanifest docs/llms.txt
-          git commit -m "chore: stamp docs for ${{ needs.release-please.outputs.tag_name }} [skip ci]"
-          git push
+          git commit -m "chore: stamp docs for ${TAG} [skip ci]"
+          git push -f origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore: stamp docs for ${TAG}" \
+            --body "Automated docs version/date stamp for ${TAG}, opened by the Release workflow because \`main\` rejects direct pushes." \
+            || echo "PR already exists for $BRANCH; continuing to merge."
+          gh pr merge "$BRANCH" --squash --delete-branch \
+            --subject "chore: stamp docs for ${TAG} [skip ci]"
