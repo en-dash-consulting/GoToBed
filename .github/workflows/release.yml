@@ -90,7 +90,15 @@ jobs:
       - name: Build, sign, notarize, package
         env:
           SIGN_IDENTITY: ${{ secrets.SIGN_IDENTITY }}
+          TAG: ${{ github.event.inputs.tag || needs.release-please.outputs.tag_name }}
         run: |
+          # The git tag is the authoritative version for a release build. Pin it
+          # via MARKETING_VERSION so artifacts are named/stamped from the tag and
+          # never from a stale committed VERSION file (build-app.sh reads
+          # MARKETING_VERSION first; make-dmg.sh derives the name from the app's
+          # Info.plist, which build-app.sh stamps from this value).
+          export MARKETING_VERSION="${TAG#v}"
+          echo "==> Building release artifacts for $MARKETING_VERSION (tag $TAG)"
           ./scripts/build-app.sh "$SIGN_IDENTITY" "GoToBed-Notary"
           ./scripts/make-dmg.sh "GoToBed-Notary"
 
