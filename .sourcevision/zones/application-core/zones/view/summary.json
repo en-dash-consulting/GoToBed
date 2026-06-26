@@ -1,0 +1,21 @@
+{
+  "id": "sources/view",
+  "name": "Sources/view",
+  "description": "4 files, primarily Swift",
+  "files": [
+    "Sources/GoToBed/MenuBar/MenuContent.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBed/UI/SettingsView.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/MenuBar/MenuContent.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBed/UI/SettingsView.swift"
+  ],
+  "cohesion": 0.22,
+  "coupling": 0.78,
+  "fileCount": 4,
+  "lineCount": 343
+}

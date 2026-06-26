@@ -1,0 +1,17 @@
+{
+  "id": "sources/appearancesettings-palette",
+  "name": "Sources/appearancesettings Palette",
+  "description": "2 files, primarily Swift",
+  "files": [
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift"
+  ],
+  "cohesion": 0.15,
+  "coupling": 0.85,
+  "fileCount": 2,
+  "lineCount": 190
+}

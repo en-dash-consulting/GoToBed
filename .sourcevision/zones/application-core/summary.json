@@ -1,0 +1,52 @@
+{
+  "id": "application-core",
+  "name": "Application Core",
+  "description": "Primary production code containing application models, services, UI components, and state management.",
+  "files": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/AppInfo.swift",
+    "Sources/GoToBed/ColorBridging.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/MenuBar/MenuContent.swift",
+    "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/SettingsWindowController.swift",
+    "Sources/GoToBed/UI/AppearanceEditor.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBed/UI/Palette.swift",
+    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBed/UI/ScheduleFormatting.swift",
+    "Sources/GoToBed/UI/SettingsView.swift",
+    "Sources/GoToBedApp/GoToBedApp.swift",
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Models/Validation.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/ColorBridging.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Models/Validation.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "cohesion": 0.83,
+  "coupling": 0.17,
+  "fileCount": 22,
+  "lineCount": 1777,
+  "riskMetrics": {
+    "cohesion": 0.83,
+    "coupling": 0.17,
+    "riskScore": 0.17000000000000004,
+    "riskLevel": "healthy",
+    "failsThreshold": false
+  }
+}

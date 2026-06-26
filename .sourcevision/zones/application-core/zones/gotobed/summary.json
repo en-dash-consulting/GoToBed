@@ -1,0 +1,22 @@
+{
+  "id": "sources/gotobed",
+  "name": "Sources/gotobed",
+  "description": "6 files, primarily Swift",
+  "files": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/AppInfo.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+    "Sources/GoToBed/SettingsWindowController.swift",
+    "Sources/GoToBedApp/GoToBedApp.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/AppEnvironment.swift",
+    "Sources/GoToBed/LaunchAtLogin.swift",
+    "Sources/GoToBed/MenuBar/MenuViewModel.swift"
+  ],
+  "cohesion": 0.42,
+  "coupling": 0.58,
+  "fileCount": 6,
+  "lineCount": 349
+}

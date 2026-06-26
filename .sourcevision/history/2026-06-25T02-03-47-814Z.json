@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshots": [
+    {
+      "zoneId": "application-core",
+      "zoneName": "Application Core",
+      "cohesion": 0.83,
+      "coupling": 0.17,
+      "riskScore": 0.17000000000000004,
+      "fileCount": 22,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "docs",
+      "zoneName": "Documentation Site",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 5,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "overlay-ui",
+      "zoneName": "Overlay UI",
+      "cohesion": 0.25,
+      "coupling": 0.75,
+      "riskScore": 0.75,
+      "fileCount": 3,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "packaging",
+      "zoneName": "Packaging",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 3,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "root",
+      "zoneName": "Project Root",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 5,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "scripts",
+      "zoneName": "Build & CI Scripts",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 8,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "system-services",
+      "zoneName": "System Services",
+      "cohesion": 0.21,
+      "coupling": 0.79,
+      "riskScore": 0.79,
+      "fileCount": 3,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "tests-gotobedcoretests",
+      "zoneName": "Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 11,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    },
+    {
+      "zoneId": "tests-gotobedtests",
+      "zoneName": "Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 5,
+      "timestamp": "2026-06-25T02:03:47.814Z",
+      "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+    }
+  ],
+  "analyzedAt": "2026-06-25T02:03:47.814Z",
+  "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210"
+}

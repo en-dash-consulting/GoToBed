@@ -1,7 +1,7 @@
 {
   "id": "packaging",
   "name": "Packaging",
-  "description": "3 files, primarily Other",
+  "description": "Non-source files in Packaging: AppIcon.icns, GoToBed.entitlements, Info.plist",
   "files": [
     "Packaging/AppIcon.icns",
     "Packaging/GoToBed.entitlements",

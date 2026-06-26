@@ -6,38 +6,47 @@
 <architecture>
 
 Project: gotobed
-Git: sv @ 500fe5e
-Files: 111, Lines: 5968
-Languages: Swift(42) Markdown(27) Other(18) Shell(8) YAML(6)
-Zones: 6, Described: 6
-Weighted avg cohesion: 0.36, coupling: 0.00 (4 zones with ≥5 files)
-Unweighted avg cohesion: 0.25, coupling: 0.00
-Small zones excluded from averages: 2 (<5 files, unreliable metrics)
-Import edges: 134, External packages: 10
+Git: main @ f63d72f
+Files: 114, Lines: 6443
+Languages: Swift(45) Markdown(27) Other(18) Shell(8) YAML(6)
+Zones: 9, Described: 9
+Weighted avg cohesion: 0.61, coupling: 0.07 (6 zones with ≥5 files)
+Unweighted avg cohesion: 0.47, coupling: 0.03
+Small zones excluded from averages: 3 (<5 files, unreliable metrics)
+Import edges: 143, External packages: 10
 Circulars: 4
 
 </architecture>
 
 <zones>
 
-[build-release-scripts] Build & Release Scripts (8 files, coh=0.00 coup=0.00)
-  Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.
-  files: scripts/build-app.sh, scripts/check-core-purity.sh, scripts/check-site-docs.sh, scripts/check-zone-layering.sh, scripts/make-dmg.sh, scripts/make-icon.sh, scripts/stamp-site-version.sh, scripts/verify-no-network.sh
-[packaging] Packaging (3 files, coh=0.00 coup=0.00)
-  3 files, primarily Other
-  files: Packaging/AppIcon.icns, Packaging/GoToBed.entitlements, Packaging/Info.plist
-[root] Root (5 files, coh=0.00 coup=0.00)
-  6 files, primarily Other, Makefile, Swift
-  files: .gitignore, LICENSE, Makefile, Package.swift, VERSION
-[static-site-assets] Static Site Assets (5 files, coh=0.00 coup=0.00)
-  Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.
+[application-core] Application Core (22 files, coh=0.83 coup=0.17)
+  Primary production code containing application models, services, UI components, and state management.
+  files: Sources/GoToBed/AppEnvironment.swift [config], Sources/GoToBed/AppInfo.swift [types], Sources/GoToBed/ColorBridging.swift [utility], Sources/GoToBed/LaunchAtLogin.swift [service], Sources/GoToBed/MenuBar/MenuContent.swift [component], Sources/GoToBed/MenuBar/MenuViewModel.swift [store], Sources/GoToBed/Overlay/OverlayView.swift [component], Sources/GoToBed/SettingsWindowController.swift [service], Sources/GoToBed/UI/AppearanceEditor.swift [component], Sources/GoToBed/UI/Compat.swift [utility] +12
+[docs] Documentation Site (5 files, coh=0.00 coup=0.00)
+  Documentation and static-site assets: CNAME, llms.txt, robots.txt (+2 more)
   files: docs/CNAME, docs/llms.txt, docs/robots.txt, docs/site.webmanifest, docs/sitemap.xml
-[tests-gotobedcoretests] Tests Gotobedcoretests (10 files, coh=1.00 coup=0.00)
-  10 files, primarily Swift
-  files: Tests/GoToBedCoreTests/ContrastTests.swift, Tests/GoToBedCoreTests/DSTTests.swift, Tests/GoToBedCoreTests/PersistenceTests.swift, Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift, Tests/GoToBedCoreTests/SchedulerLoopTests.swift, Tests/GoToBedCoreTests/SleepSkipTests.swift, Tests/GoToBedCoreTests/StoreTests.swift, Tests/GoToBedCoreTests/SubmessageTests.swift, Tests/GoToBedCoreTests/TestSupport.swift, Tests/GoToBedCoreTests/ValidationTests.swift
-[tests-gotobedtests] Tests Gotobedtests (4 files, coh=1.00 coup=0.00)
-  4 files, primarily Swift
-  files: Tests/GoToBedTests/InterServiceWiringTests.swift, Tests/GoToBedTests/OverlayControllerTests.swift, Tests/GoToBedTests/SchedulerEngineTests.swift, Tests/GoToBedTests/TestHelpers.swift
+[overlay-ui] Overlay UI (3 files, coh=0.25 coup=0.75)
+  UI components for the overlay window and challenge dismissal interaction flow.
+  files: Sources/GoToBed/Overlay/DismissChallengeState.swift [model], Sources/GoToBed/Overlay/OverlayWindow.swift [component], Sources/GoToBed/UI/WeekdayPicker.swift [component]
+[packaging] Packaging (3 files, coh=0.00 coup=0.00)
+  Non-source files in Packaging: AppIcon.icns, GoToBed.entitlements, Info.plist
+  files: Packaging/AppIcon.icns, Packaging/GoToBed.entitlements, Packaging/Info.plist
+[root] Project Root (5 files, coh=0.00 coup=0.00)
+  Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)
+  files: .gitignore, LICENSE, Makefile, Package.swift, VERSION
+[scripts] Build & CI Scripts (8 files, coh=0.00 coup=0.00)
+  Build, packaging, and CI scripts: build-app.sh, check-core-purity.sh, check-site-docs.sh (+5 more)
+  files: scripts/build-app.sh, scripts/check-core-purity.sh, scripts/check-site-docs.sh, scripts/check-zone-layering.sh, scripts/make-dmg.sh, scripts/make-icon.sh, scripts/stamp-site-version.sh, scripts/verify-no-network.sh
+[system-services] System Services (3 files, coh=0.21 coup=0.79)
+  Background services for scheduling, UI overlay control, and logging utility grouped by incidental import overlap.
+  files: Sources/GoToBed/Overlay/OverlayController.swift [service], Sources/GoToBed/Scheduler/SchedulerEngine.swift [service], Sources/GoToBedCore/Logging/Log.swift [utility]
+[tests-gotobedcoretests] Tests (11 files, coh=1.00 coup=0.00)
+  Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallengeTests.swift (+8 more)
+  files: Tests/GoToBedCoreTests/ContrastTests.swift, Tests/GoToBedCoreTests/DSTTests.swift, Tests/GoToBedCoreTests/DismissChallengeTests.swift, Tests/GoToBedCoreTests/PersistenceTests.swift, Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift, Tests/GoToBedCoreTests/SchedulerLoopTests.swift, Tests/GoToBedCoreTests/SleepSkipTests.swift, Tests/GoToBedCoreTests/StoreTests.swift, Tests/GoToBedCoreTests/SubmessageTests.swift, Tests/GoToBedCoreTests/TestSupport.swift +1
+[tests-gotobedtests] Tests (5 files, coh=1.00 coup=0.00)
+  Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)
+  files: Tests/GoToBedTests/DismissChallengeStateTests.swift, Tests/GoToBedTests/InterServiceWiringTests.swift, Tests/GoToBedTests/OverlayControllerTests.swift, Tests/GoToBedTests/SchedulerEngineTests.swift, Tests/GoToBedTests/TestHelpers.swift
 
 Detailed zone context: .sourcevision/zones/{id}/context.md
 
@@ -46,9 +55,9 @@ Detailed zone context: .sourcevision/zones/{id}/context.md
 <imports>
 
 Most imported:
-  Sources/GoToBedCore/Models/Schedule.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift +18
-  Sources/GoToBedCore/Models/Validation.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift +16
-  Sources/GoToBedCore/Models/AppearanceSettings.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/ColorBridging.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/UI/AppearanceEditor.swift, Sources/GoToBed/UI/Palette.swift +6
+  Sources/GoToBedCore/Models/Schedule.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/Overlay/DismissChallengeState.swift, Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift +21
+  Sources/GoToBedCore/Models/Validation.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift +17
+  Sources/GoToBedCore/Models/AppearanceSettings.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/ColorBridging.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/UI/AppearanceEditor.swift, Sources/GoToBed/UI/Palette.swift +7
   Sources/GoToBed/UI/Compat.swift ← Sources/GoToBed/MenuBar/MenuContent.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/SettingsWindowController.swift, Sources/GoToBed/UI/AppearanceEditor.swift +4
   Sources/GoToBed/ColorBridging.swift ← Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/UI/AppearanceEditor.swift, Sources/GoToBed/UI/Palette.swift, Sources/GoToBed/UI/WeekdayPicker.swift +3
   Sources/GoToBedCore/Logging/Log.swift ← Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/LaunchAtLogin.swift, Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBed/SettingsWindowController.swift +3
@@ -66,13 +75,36 @@ Circular chains:
 
 <findings>
 
+[warning] 10 entry points — wide API surface, consider consolidating exports [application-core]
 [warning] 4 circular dependency chains detected — see imports.json for details
+[warning] Bidirectional coupling: "application-core" ↔ "system-services" (8+6 crossings) — consider extracting shared interface
+[warning] High coupling (0.75) — 9 imports target "application-core" [overlay-ui]
+[warning] High coupling (0.79) — 6 imports target "application-core" [system-services]
+[warning] AppState.launchAtLogin is a persisted field that is never read back to configure the system — LaunchAtLogin.swift documents SMAppService as the source of truth and no startup code calls LaunchAtLogin.set() from this value. Either remove the field from AppState (and the corresponding Store accessors) or add a startup reconciliation step in AppEnvironment.start() that aligns the system with the persisted value when they diverge. [application-core]
+[warning] OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call. Cache each as a static let property and invalidate on NSLocale.currentLocaleDidChangeNotification. The clockText formatter is the most urgent — it fires every second while the overlay is visible. [application-core]
 
 </findings>
 
 <next-steps>
 
+[high] High coupling (0.79) — 6 imports target "application-core"
+  files: Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBedCore/Logging/Log.swift
+  category: refactor
+[high] High coupling (0.75) — 9 imports target "application-core"
+  files: Sources/GoToBed/Overlay/DismissChallengeState.swift, Sources/GoToBed/Overlay/OverlayWindow.swift, Sources/GoToBed/UI/WeekdayPicker.swift
+  category: refactor
+[medium] AppState.launchAtLogin is a persisted field that is never read back to configur…
+  files: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/AppInfo.swift, Sources/GoToBed/ColorBridging.swift
+  category: refactor
+[medium] OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.we…
+  files: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/AppInfo.swift, Sources/GoToBed/ColorBridging.swift
+  category: refactor
+[medium] 10 entry points — wide API surface, consider consolidating exports
+  files: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/AppInfo.swift, Sources/GoToBed/ColorBridging.swift
+  category: refactor
 [medium] 4 circular dependency chains detected — see imports.json for details
+  category: refactor
+[medium] Bidirectional coupling: "application-core" ↔ "system-services" (8+6 crossings) …
   category: refactor
 
 </next-steps>

@@ -1,9 +1,571 @@
 {
   "zones": [
     {
-      "id": "build-release-scripts",
-      "name": "Build & Release Scripts",
-      "description": "Provides the complete build, packaging, distribution, and architectural validation pipeline for GoToBed as a set of standalone shell scripts invoked by the Makefile and CI workflows.",
+      "id": "application-core",
+      "name": "Application Core",
+      "description": "Primary production code containing application models, services, UI components, and state management.",
+      "files": [
+        "Sources/GoToBed/AppEnvironment.swift",
+        "Sources/GoToBed/AppInfo.swift",
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/LaunchAtLogin.swift",
+        "Sources/GoToBed/MenuBar/MenuContent.swift",
+        "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+        "Sources/GoToBed/Overlay/OverlayView.swift",
+        "Sources/GoToBed/SettingsWindowController.swift",
+        "Sources/GoToBed/UI/AppearanceEditor.swift",
+        "Sources/GoToBed/UI/Compat.swift",
+        "Sources/GoToBed/UI/Palette.swift",
+        "Sources/GoToBed/UI/ScheduleEditorView.swift",
+        "Sources/GoToBed/UI/ScheduleFormatting.swift",
+        "Sources/GoToBed/UI/SettingsView.swift",
+        "Sources/GoToBedApp/GoToBedApp.swift",
+        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "Sources/GoToBedCore/Models/Palette.swift",
+        "Sources/GoToBedCore/Models/Schedule.swift",
+        "Sources/GoToBedCore/Models/Validation.swift",
+        "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "Sources/GoToBedCore/Store/Store.swift"
+      ],
+      "entryPoints": [
+        "Sources/GoToBed/ColorBridging.swift",
+        "Sources/GoToBed/Overlay/OverlayView.swift",
+        "Sources/GoToBed/UI/Compat.swift",
+        "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+        "Sources/GoToBedCore/Models/Palette.swift",
+        "Sources/GoToBedCore/Models/Schedule.swift",
+        "Sources/GoToBedCore/Models/Validation.swift",
+        "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+        "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+        "Sources/GoToBedCore/Store/Store.swift"
+      ],
+      "cohesion": 0.83,
+      "coupling": 0.17,
+      "subCrossings": [
+        {
+          "from": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "to": "Sources/GoToBed/ColorBridging.swift",
+          "fromZone": "sources/appearancesettings-palette",
+          "toZone": "sources/gotobed-ui"
+        },
+        {
+          "from": "Sources/GoToBedCore/Models/Palette.swift",
+          "to": "Sources/GoToBed/ColorBridging.swift",
+          "fromZone": "sources/appearancesettings-palette",
+          "toZone": "sources/gotobed-ui"
+        },
+        {
+          "from": "Sources/GoToBed/AppEnvironment.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/AppEnvironment.swift",
+          "to": "Sources/GoToBedCore/Models/Validation.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBed/AppEnvironment.swift",
+          "to": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/AppEnvironment.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/AppEnvironment.swift",
+          "to": "Sources/GoToBedCore/Store/Store.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/SettingsWindowController.swift",
+          "to": "Sources/GoToBed/UI/Compat.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBed/SettingsWindowController.swift",
+          "to": "Sources/GoToBed/UI/SettingsView.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBedApp/GoToBedApp.swift",
+          "to": "Sources/GoToBed/MenuBar/MenuContent.swift",
+          "fromZone": "sources/gotobed",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBed/ColorBridging.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+          "to": "Sources/GoToBedCore/Models/Palette.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/Palette.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/Palette.swift",
+          "to": "Sources/GoToBedCore/Models/Palette.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/AppearanceEditor.swift",
+          "to": "Sources/GoToBed/UI/Compat.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBed/UI/Palette.swift",
+          "to": "Sources/GoToBed/UI/Compat.swift",
+          "fromZone": "sources/gotobed-ui",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+          "to": "Sources/GoToBed/AppEnvironment.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+          "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/gotobed-ui"
+        },
+        {
+          "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBedCore/Models/Validation.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+          "to": "Sources/GoToBed/UI/Compat.swift",
+          "fromZone": "sources/gotobedcore",
+          "toZone": "sources/view"
+        },
+        {
+          "from": "Sources/GoToBedCore/Models/Schedule.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobedcore-models",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBedCore/Store/Store.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/gotobedcore-models",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBedCore/Store/Store.swift",
+          "to": "Sources/GoToBed/LaunchAtLogin.swift",
+          "fromZone": "sources/gotobedcore-models",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+          "to": "Sources/GoToBedCore/Models/Validation.swift",
+          "fromZone": "sources/gotobedcore-models",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBedCore/Store/Store.swift",
+          "to": "Sources/GoToBedCore/Models/Validation.swift",
+          "fromZone": "sources/gotobedcore-models",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/appearancesettings-palette"
+        },
+        {
+          "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+          "to": "Sources/GoToBed/AppEnvironment.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+          "to": "Sources/GoToBed/LaunchAtLogin.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/MenuBar/MenuContent.swift",
+          "to": "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBed/AppEnvironment.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed"
+        },
+        {
+          "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+          "to": "Sources/GoToBed/ColorBridging.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed-ui"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBed/UI/AppearanceEditor.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobed-ui"
+        },
+        {
+          "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+          "to": "Sources/GoToBedCore/Models/Validation.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBedCore/Models/Validation.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore"
+        },
+        {
+          "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBed/UI/ScheduleFormatting.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBedCore/Models/Schedule.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore-models"
+        },
+        {
+          "from": "Sources/GoToBed/UI/SettingsView.swift",
+          "to": "Sources/GoToBedCore/Store/Store.swift",
+          "fromZone": "sources/view",
+          "toZone": "sources/gotobedcore-models"
+        }
+      ],
+      "subZones": [
+        {
+          "id": "sources/appearancesettings-palette",
+          "name": "Sources/appearancesettings Palette",
+          "description": "2 files, primarily Swift",
+          "files": [
+            "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+            "Sources/GoToBedCore/Models/Palette.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+            "Sources/GoToBedCore/Models/Palette.swift"
+          ],
+          "cohesion": 0.15,
+          "coupling": 0.85,
+          "depth": 1
+        },
+        {
+          "id": "sources/gotobed",
+          "name": "Sources/gotobed",
+          "description": "6 files, primarily Swift",
+          "files": [
+            "Sources/GoToBed/AppEnvironment.swift",
+            "Sources/GoToBed/AppInfo.swift",
+            "Sources/GoToBed/LaunchAtLogin.swift",
+            "Sources/GoToBed/MenuBar/MenuViewModel.swift",
+            "Sources/GoToBed/SettingsWindowController.swift",
+            "Sources/GoToBedApp/GoToBedApp.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBed/AppEnvironment.swift",
+            "Sources/GoToBed/LaunchAtLogin.swift",
+            "Sources/GoToBed/MenuBar/MenuViewModel.swift"
+          ],
+          "cohesion": 0.42,
+          "coupling": 0.58,
+          "depth": 1
+        },
+        {
+          "id": "sources/gotobed-ui",
+          "name": "Sources/gotobed Ui",
+          "description": "3 files, primarily Swift",
+          "files": [
+            "Sources/GoToBed/ColorBridging.swift",
+            "Sources/GoToBed/UI/AppearanceEditor.swift",
+            "Sources/GoToBed/UI/Palette.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBed/ColorBridging.swift",
+            "Sources/GoToBed/UI/AppearanceEditor.swift"
+          ],
+          "cohesion": 0.35,
+          "coupling": 0.65,
+          "depth": 1
+        },
+        {
+          "id": "sources/gotobedcore",
+          "name": "Sources/gotobedcore",
+          "description": "3 files, primarily Swift",
+          "files": [
+            "Sources/GoToBed/UI/ScheduleEditorView.swift",
+            "Sources/GoToBedCore/Models/Validation.swift",
+            "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBed/UI/ScheduleEditorView.swift",
+            "Sources/GoToBedCore/Models/Validation.swift",
+            "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift"
+          ],
+          "cohesion": 0.25,
+          "coupling": 0.75,
+          "depth": 1
+        },
+        {
+          "id": "sources/gotobedcore-models",
+          "name": "Sources/gotobedcore Models",
+          "description": "4 files, primarily Swift",
+          "files": [
+            "Sources/GoToBed/UI/ScheduleFormatting.swift",
+            "Sources/GoToBedCore/Models/Schedule.swift",
+            "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+            "Sources/GoToBedCore/Store/Store.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBed/UI/ScheduleFormatting.swift",
+            "Sources/GoToBedCore/Models/Schedule.swift",
+            "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+            "Sources/GoToBedCore/Store/Store.swift"
+          ],
+          "cohesion": 0.35,
+          "coupling": 0.65,
+          "depth": 1
+        },
+        {
+          "id": "sources/view",
+          "name": "Sources/view",
+          "description": "4 files, primarily Swift",
+          "files": [
+            "Sources/GoToBed/MenuBar/MenuContent.swift",
+            "Sources/GoToBed/Overlay/OverlayView.swift",
+            "Sources/GoToBed/UI/Compat.swift",
+            "Sources/GoToBed/UI/SettingsView.swift"
+          ],
+          "entryPoints": [
+            "Sources/GoToBed/MenuBar/MenuContent.swift",
+            "Sources/GoToBed/Overlay/OverlayView.swift",
+            "Sources/GoToBed/UI/Compat.swift",
+            "Sources/GoToBed/UI/SettingsView.swift"
+          ],
+          "cohesion": 0.22,
+          "coupling": 0.78,
+          "depth": 1
+        }
+      ],
+      "insights": [
+        "High cohesion (0.83) — files are tightly interconnected",
+        "10 entry points — wide API surface, consider consolidating exports",
+        "High cohesion (0.83) despite file-system distribution across GoToBedCore and GoToBed packages demonstrates natural semantic grouping",
+        "Low coupling (0.17) indicates effective isolation—the core layer is self-contained and other zones depend on it rather than vice versa",
+        "Entry points span scheduling, persistence, appearance, and menu management, suggesting thoughtful architectural layering",
+        "Entry points include both GoToBedCore domain models (Schedule, Validation, ScheduleCalculator) and GoToBed presentation (MenuBar, Overlay, SettingsWindowController), maintaining clean separation between core logic and UI concerns",
+        "Zone \"application-core\" has files across 9 directories — consider consolidating under a dedicated directory",
+        "AppEnvironment is the sole composition root for the entire object graph: it is the only class that simultaneously holds Store, SchedulerEngine, and OverlayController references, and its init contains an explicitly commented injection seam ('the only place that knows about both') that prevents a scheduler→overlay import cycle. This seam is load-bearing — replacing the onFire closure with a direct OverlayController reference would reintroduce the cycle.",
+        "The reported bidirectional coupling with system-services is a Louvain artifact: at the Swift package level, GoToBedKit (OverlayController, SchedulerEngine) depends on GoToBedCore (Store, Schedule, Log) unidirectionally. No GoToBedCore file imports GoToBedKit.",
+        "AppEnvironment.init documents a deliberate closure injection seam to break the scheduler→overlay cycle ('Scheduler must not import the Overlay layer'). This is a load-bearing architectural constraint — any refactor that replaces the onFire closure with a direct OverlayController reference will reintroduce the cycle.",
+        "Store.setEnabled (and any similar single-field mutate closure) bypasses the sanitized() call that add() and update() enforce. If a future Schedule invariant must hold across all mutations, the inconsistent paths will silently produce invalid state without a compile-time or runtime guard.",
+        "Sources/GoToBed/UI/ScheduleFormatting.swift contains pure formatting logic (no AppKit/SwiftUI imports) but is located in the GoToBedKit UI layer. It is consumed by AppEnvironment for menu-bar display strings, which means formatting rules for a GoToBedCore model are defined in a file that GoToBedCore cannot reach — inverting the natural dependency direction.",
+        "OverlayView.clockText allocates a new DateFormatter on every call; since it is driven by TimelineView(.periodic(by: 1)) this is a fresh allocation every second while the overlay is visible — DateFormatter is one of the most expensive objects to initialize in Foundation",
+        "ScheduleFormatting.timeString and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call; both are invoked per-menu-redraw (once per schedule row for timeString, once per daysAndMessage call for weekdaySymbols)",
+        "AppState.launchAtLogin is a vestigial field: LaunchAtLogin.swift explicitly documents that SMAppService is the persistent source of truth ('the registered state is the system's source of truth'), no startup path reads store.launchAtLogin to call LaunchAtLogin.set(), and AppEnvironment.launchAtLoginEnabled reads LaunchAtLogin.isEnabled (the system) rather than the store — the field is written on change but never drives behavior",
+        "AppEnvironment.launchAtLoginEnabled omits the `is` prefix used consistently by every other Boolean predicate in the codebase (isEnabled on Schedule, isShowing on OverlayController, isValid on Schedule, isAuto in OverlayView, isEnabled on ScheduleDisplayItem) — the inconsistency implies a different kind of property to readers",
+        "ScheduleCalculator.nextFireDate uses `soonest!` (force unwrap guarded by `soonest == nil ||` short-circuit) while the sibling method nextFire in the same struct uses `if let current = best` for the identical min-accumulator pattern — inconsistent defensive coding within one type",
+        "ScheduleEditorView.ChallengeKind is a local mirror of DismissChallenge that strips associated values to serve as picker tags; a new DismissChallenge case will compile cleanly until the exhaustive switch on ChallengeKind in challengeKindBinding triggers a compiler error, but the silent relationship between the two types is undocumented",
+        "OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call. Cache each as a static let property and invalidate on NSLocale.currentLocaleDidChangeNotification. The clockText formatter is the most urgent — it fires every second while the overlay is visible.",
+        "AppState.launchAtLogin is a persisted field that is never read back to configure the system — LaunchAtLogin.swift documents SMAppService as the source of truth and no startup code calls LaunchAtLogin.set() from this value. Either remove the field from AppState (and the corresponding Store accessors) or add a startup reconciliation step in AppEnvironment.start() that aligns the system with the persisted value when they diverge.",
+        "Rename AppEnvironment.launchAtLoginEnabled to isLaunchAtLoginEnabled to match the `is`-prefix Boolean convention used throughout the codebase. The missing prefix signals a different semantic to readers without justification.",
+        "ScheduleCalculator.nextFireDate: replace `soonest == nil || candidate < soonest!` with `if let s = soonest { if candidate < s { soonest = candidate } } else { soonest = candidate }` or the idiomatic `soonest = soonest.map { min($0, candidate) } ?? candidate` to match the optional-binding pattern used in nextFire and eliminate the force unwrap.",
+        "Add a comment to ScheduleEditorView.ChallengeKind documenting its mirroring relationship with DismissChallenge: 'Must be kept in sync with DismissChallenge — adding a new DismissChallenge case requires a matching ChallengeKind case and a challengeKindBinding branch.' Without this, the coupling is invisible until a compiler error surfaces."
+      ],
+      "riskMetrics": {
+        "cohesion": 0.83,
+        "coupling": 0.17,
+        "riskScore": 0.17000000000000004,
+        "riskLevel": "healthy",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Documentation Site",
+      "description": "Documentation and static-site assets: CNAME, llms.txt, robots.txt (+2 more)",
+      "files": [
+        "docs/CNAME",
+        "docs/llms.txt",
+        "docs/robots.txt",
+        "docs/site.webmanifest",
+        "docs/sitemap.xml"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "overlay-ui",
+      "name": "Overlay UI",
+      "description": "UI components for the overlay window and challenge dismissal interaction flow.",
+      "files": [
+        "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift"
+      ],
+      "entryPoints": [
+        "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+        "Sources/GoToBed/Overlay/OverlayWindow.swift",
+        "Sources/GoToBed/UI/WeekdayPicker.swift"
+      ],
+      "cohesion": 0.25,
+      "coupling": 0.75,
+      "insights": [
+        "High coupling (0.75) — 9 imports target \"application-core\"",
+        "Low cohesion (0.25) is structurally expected for a UI zone where components serve distinct rendering and state concerns (window, picker, state model)",
+        "High coupling (0.75) to application-core is healthy and expected—presentation layers should delegate business logic to services",
+        "Three-file zone focused on dismissal interaction suggests appropriate feature-based organization despite internal metric thresholds",
+        "DismissChallengeState, OverlayWindow, and WeekdayPicker form a coherent feature zone around challenge dismissal UX; their dispatch spans state, window management, and controls, which explains low internal cohesion while serving a unified purpose",
+        "DismissChallengeState resolves the random-key challenge at presentation time (inside DismissChallengeState.init) rather than in the persisted model, keeping non-deterministic state out of GoToBedCore. This is a clean boundary decision: the overlay-ui zone owns presentation-time entropy while application-core owns the persisted DismissChallenge enum.",
+        "OverlayWindow subclasses NSWindow directly and handles keyDown/cancelOperation inline, mixing window-system lifecycle with challenge dismissal logic — there is no presenter abstraction separating the AppKit surface from dismissal policy.",
+        "DismissChallengeState is an ObservableObject/@MainActor wrapper whose only domain work (selecting a random challenge kind from the persisted DismissChallenge enum) is pure logic with no UI dependency; the @Published properties exist solely to drive SwiftUI re-renders, but the selection logic itself would be equally at home in GoToBedCore with a thin UI wrapper above it.",
+        "OverlayWindow handles keyboard events (keyDown, cancelOperation) and challenge-completion logic directly inside the NSWindow subclass body. This couples window-system callbacks to dismissal policy with no seam for testing or alternative window strategies.",
+        "DismissChallengeState contains the only call site that converts a DismissChallenge enum value to a resolved Kind — a decision with zero UI dependency. Placing this selection logic in the UI layer means it cannot be unit-tested without AppKit, and any change to challenge resolution rules requires editing a file in Sources/GoToBed/Overlay/ rather than GoToBedCore.",
+        "DismissChallengeState.allowsTapDismiss is a direct alias for escDismisses with an identical body — both exist because tap-to-dismiss and Esc-to-dismiss are semantically distinct actions that happen to share the same precondition today, but maintaining two named predicates with the same body is a silent divergence trap if a future challenge mode should allow one but not the other",
+        "escDismisses uses a verb-subject naming form ('esc dismisses') while every other Boolean predicate in the codebase uses an adjective-predicate form with `is` prefix (isEnabled, isShowing, allowsTapDismiss uses 'allows') — the property name is readable but breaks the established naming convention",
+        "DismissChallengeState.allowsTapDismiss is identical to escDismisses (`var allowsTapDismiss: Bool { escDismisses }`). Either collapse to one property with the clearer name, or add a comment explaining the intended semantic distinction so a future challenge mode that should allow tapping but not Esc is implemented correctly rather than silently inheriting the wrong behavior.",
+        "Rename DismissChallengeState.escDismisses to isEscapeChallenge (or isEscapeDismissible) to match the `is`-prefix Boolean convention. The current verb-subject form is readable but is the only Boolean property in the codebase that breaks the convention."
+      ],
+      "riskMetrics": {
+        "cohesion": 0.25,
+        "coupling": 0.75,
+        "riskScore": 0.75,
+        "riskLevel": "catastrophic",
+        "failsThreshold": true
+      }
+    },
+    {
+      "id": "packaging",
+      "name": "Packaging",
+      "description": "Non-source files in Packaging: AppIcon.icns, GoToBed.entitlements, Info.plist",
+      "files": [
+        "Packaging/AppIcon.icns",
+        "Packaging/GoToBed.entitlements",
+        "Packaging/Info.plist"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "root",
+      "name": "Project Root",
+      "description": "Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)",
+      "files": [
+        ".gitignore",
+        "LICENSE",
+        "Makefile",
+        "Package.swift",
+        "VERSION"
+      ],
+      "entryPoints": [],
+      "cohesion": 0,
+      "coupling": 0,
+      "insights": [
+        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
+      ],
+      "riskMetrics": {
+        "cohesion": 0,
+        "coupling": 0,
+        "riskScore": 0.5,
+        "riskLevel": "at-risk",
+        "failsThreshold": false
+      }
+    },
+    {
+      "id": "scripts",
+      "name": "Build & CI Scripts",
+      "description": "Build, packaging, and CI scripts: build-app.sh, check-core-purity.sh, check-site-docs.sh (+5 more)",
       "files": [
         "scripts/build-app.sh",
         "scripts/check-core-purity.sh",
@@ -29,85 +591,52 @@
       }
     },
     {
-      "id": "packaging",
-      "name": "Packaging",
-      "description": "3 files, primarily Other",
+      "id": "system-services",
+      "name": "System Services",
+      "description": "Background services for scheduling, UI overlay control, and logging utility grouped by incidental import overlap.",
       "files": [
-        "Packaging/AppIcon.icns",
-        "Packaging/GoToBed.entitlements",
-        "Packaging/Info.plist"
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBedCore/Logging/Log.swift"
       ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
+      "entryPoints": [
+        "Sources/GoToBed/Overlay/OverlayController.swift",
+        "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+        "Sources/GoToBedCore/Logging/Log.swift"
+      ],
+      "cohesion": 0.21,
+      "coupling": 0.79,
       "insights": [
-        "Isolated files — no import edges between 3 files, cohesion is unmeasurable (reported as 0)"
+        "High coupling (0.79) — 6 imports target \"application-core\"",
+        "Very low cohesion (0.21 < 0.4 threshold) reveals three files with fundamentally different purposes: OverlayController (UI service), SchedulerEngine (scheduling logic), Log (cross-cutting utility)",
+        "High coupling (0.79 > 0.6 threshold) combined with low cohesion indicates fragmentation—the zone appears to be an import-graph artifact rather than intentional architectural design",
+        "Bidirectional coupling to application-core (8 exports, 6 imports) suggests both OverlayController and SchedulerEngine are tightly entwined with core logic",
+        "OverlayController and SchedulerEngine likely grouped because both depend on Log and application-core, not because they share responsibility; they represent separate service domains (UI vs scheduling) that should be decomposed into distinct zones",
+        "Log.swift serves cross-cutting observability concerns but is grouped with domain services; if Log is imported by many zones, extract it to a dedicated foundation layer or utilities zone",
+        "Log.swift lives in Sources/GoToBedCore/ (GoToBedCore package) while OverlayController.swift and SchedulerEngine.swift live in Sources/GoToBed/ (GoToBedKit package). The zone therefore spans a real Swift package boundary — Log is a foundation-layer file grouped by Louvain with app-layer services, which is the root cause of the reported bidirectional application-core ↔ system-services coupling.",
+        "SchedulerEngine holds no direct reference to OverlayController: its init takes onFire: @escaping (Schedule) -> Void, injected by AppEnvironment, so the scheduler and overlay sub-systems are decoupled at the import level despite both appearing in this zone.",
+        "The system-services zone crosses a Swift package boundary: Log.swift is a GoToBedCore file (no AppKit dependency) while OverlayController and SchedulerEngine are GoToBedKit files. Re-zoning Log.swift into a dedicated foundation or logging zone would eliminate the false bidirectional coupling signal with application-core.",
+        "SchedulerEngine imports AppKit despite using only Foundation, Combine, and GoToBedCore APIs. The import is unused at runtime and is a layering violation — a pure scheduling service in the GoToBedKit target should have no dependency on the AppKit framework.",
+        "OverlayController owns both an auto-dismiss NSTimer and the NSWindow lifecycle (creation, activation policy, animations, teardown). These are distinct concerns: timing policy vs. window management. The timer couples scheduling decisions (how long before auto-dismiss) to the presentation layer rather than allowing the caller to pass a deadline.",
+        "SchedulerEngine (Sources/GoToBed/Scheduler/SchedulerEngine.swift) contains `import AppKit` but references no AppKit symbol. This phantom import makes the scheduler appear to depend on the macOS UI framework, prevents moving the scheduler to GoToBedCore, and blocks unit testing without a full AppKit environment.",
+        "OverlayController manages its auto-dismiss timer internally alongside NSWindow creation and app activation policy. Embedding the timer in the controller conflates 'when to dismiss' (scheduling concern, testable without AppKit) with 'how to dismiss' (window management concern), making it impossible to test timeout behavior without instantiating a real NSWindow."
       ],
       "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
-      }
-    },
-    {
-      "id": "root",
-      "name": "Root",
-      "description": "6 files, primarily Other, Makefile, Swift",
-      "files": [
-        ".gitignore",
-        "LICENSE",
-        "Makefile",
-        "Package.swift",
-        "VERSION"
-      ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
-      "insights": [
-        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
-      ],
-      "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
-      }
-    },
-    {
-      "id": "static-site-assets",
-      "name": "Static Site Assets",
-      "description": "Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.",
-      "files": [
-        "docs/CNAME",
-        "docs/llms.txt",
-        "docs/robots.txt",
-        "docs/site.webmanifest",
-        "docs/sitemap.xml"
-      ],
-      "entryPoints": [],
-      "cohesion": 0,
-      "coupling": 0,
-      "insights": [
-        "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)"
-      ],
-      "riskMetrics": {
-        "cohesion": 0,
-        "coupling": 0,
-        "riskScore": 0.5,
-        "riskLevel": "at-risk",
-        "failsThreshold": false
+        "cohesion": 0.21,
+        "coupling": 0.79,
+        "riskScore": 0.79,
+        "riskLevel": "catastrophic",
+        "failsThreshold": true
       }
     },
     {
       "id": "tests-gotobedcoretests",
-      "name": "Tests Gotobedcoretests",
-      "description": "10 files, primarily Swift",
+      "name": "Tests",
+      "description": "Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallengeTests.swift (+8 more)",
       "files": [
         "Tests/GoToBedCoreTests/ContrastTests.swift",
         "Tests/GoToBedCoreTests/DSTTests.swift",
+        "Tests/GoToBedCoreTests/DismissChallengeTests.swift",
         "Tests/GoToBedCoreTests/PersistenceTests.swift",
         "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
         "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
@@ -133,9 +662,10 @@
     },
     {
       "id": "tests-gotobedtests",
-      "name": "Tests Gotobedtests",
-      "description": "4 files, primarily Swift",
+      "name": "Tests",
+      "description": "Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)",
       "files": [
+        "Tests/GoToBedTests/DismissChallengeStateTests.swift",
         "Tests/GoToBedTests/InterServiceWiringTests.swift",
         "Tests/GoToBedTests/OverlayControllerTests.swift",
         "Tests/GoToBedTests/SchedulerEngineTests.swift",
@@ -156,32 +686,483 @@
       }
     }
   ],
-  "crossings": [],
+  "crossings": [
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "to": "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+      "fromZone": "application-core",
+      "toZone": "overlay-ui"
+    },
+    {
+      "from": "Sources/GoToBed/UI/ScheduleEditorView.swift",
+      "to": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "fromZone": "application-core",
+      "toZone": "overlay-ui"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBed/AppEnvironment.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBed/LaunchAtLogin.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBed/SettingsWindowController.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBedApp/GoToBedApp.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBedCore/Store/Store.swift",
+      "to": "Sources/GoToBedCore/Logging/Log.swift",
+      "fromZone": "application-core",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayView.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBed/UI/Compat.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/UI/WeekdayPicker.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "overlay-ui",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "system-services",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayWindow.swift",
+      "fromZone": "system-services",
+      "toZone": "overlay-ui"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBed/ColorBridging.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ContrastTests.swift",
+      "to": "Sources/GoToBedCore/Models/Palette.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DSTTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DismissChallengeTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DismissChallengeTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/DismissChallengeTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/PersistenceTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SchedulerLoopTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SleepSkipTests.swift",
+      "to": "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/StoreTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/SubmessageTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedCoreTests/ValidationTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedcoretests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Schedule.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Models/Validation.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBedCore/Store/Store.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "application-core"
+    },
+    {
+      "from": "Tests/GoToBedTests/DismissChallengeStateTests.swift",
+      "to": "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "overlay-ui"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Tests/GoToBedTests/InterServiceWiringTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Tests/GoToBedTests/OverlayControllerTests.swift",
+      "to": "Sources/GoToBed/Overlay/OverlayController.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "system-services"
+    },
+    {
+      "from": "Tests/GoToBedTests/SchedulerEngineTests.swift",
+      "to": "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+      "fromZone": "tests-gotobedtests",
+      "toZone": "system-services"
+    }
+  ],
   "unzoned": [],
   "insights": [
-    "4 circular dependency chains detected — see imports.json for details",
-    "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 3 zones — cross-cutting dependency",
-    "Hub: Sources/GoToBedCore/Models/Validation.swift is imported by 3 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 4 zones — cross-cutting dependency",
+    "Hub: Sources/GoToBedCore/Models/Validation.swift is imported by 4 zones — cross-cutting dependency",
     "Hub: Sources/GoToBedCore/Store/Store.swift is imported by 3 zones — cross-cutting dependency",
-    "Bidirectional coupling: \"log-overlaycontroller\" ↔ \"sources\" (7+8 crossings) — consider extracting shared interface",
-    "Size imbalance: largest zone has 24 files vs smallest with 3 — uneven decomposition",
+    "Bidirectional coupling: \"application-core\" ↔ \"system-services\" (8+6 crossings) — consider extracting shared interface",
+    "Bidirectional coupling: \"application-core\" ↔ \"overlay-ui\" (2+9 crossings) — consider extracting shared interface",
+    "Size imbalance: largest zone has 22 files vs smallest with 3 — uneven decomposition",
     "4 circular dependency chains detected — see imports.json for details",
-    "App-core and app-orchestration form a two-tier architecture: app-core provides isolated domain and UI logic; app-orchestration coordinates lifecycle. The asymmetric coupling (app-core has low coupling, app-orchestration has high coupling) is structurally appropriate for a composition root.",
-    "Test zones heavily favor app-core (27 + 10 = 37 total imports) over app-orchestration (4 imports), suggesting app-core domain logic is well-tested while orchestration behavior may benefit from integration test coverage.",
-    "Circular imports between app-core and app-orchestration (8 ↔ 7) indicate tight orchestration coupling; confirm this is a documented initialization seam (OverlayController and SchedulerEngine wiring) rather than runtime data-flow coupling.",
-    "File \"Tests/GoToBedCoreTests/SubmessageTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
-    "The apparent bidirectional coupling between 'log-overlaycontroller' and 'sources' (7+8 crossings) resolves cleanly on inspection: it is a one-directional initialization seam (AppEnvironment → OverlayController/SchedulerEngine) combined with downward domain imports (OverlayController/SchedulerEngine → GoToBedCore). No runtime data flows in a cycle.",
-    "Callback injection (SchedulerEngine.onFire wired in AppEnvironment) is the architectural mechanism preventing SchedulerEngine from importing OverlayController. This pattern is load-bearing: removing it in favor of a direct import would create a genuine circular dependency between the orchestration files.",
-    "The three hub files (Schedule.swift, Validation.swift, Store.swift) are all imported exclusively downward: GoToBedCore → consumed by GoToBed. Their hub status reflects ubiquitous domain-model use, not architectural coupling concern.",
-    "The four circular dependency chains reported in imports.json are likely zone-level artifacts from community detection misclassification (Log.swift grouped with orchestration files) rather than true Swift module-level circular imports. Swift would reject genuine circular module dependencies at build time — the presence of a working build indicates these are intra-target import cycles between files, not modules.",
-    "The entire cross-zone dependency surface is funneled through a single composition root (AppEnvironment). This is an intentional hub-and-spoke pattern appropriate for a small app, but it means AppEnvironment has no substitute or abstraction layer — it is a single point of coupling failure for the entire orchestration tier."
+    "application-core exhibits the ideal pattern for a domain layer: high internal cohesion (0.83) and low outward coupling (0.17), making it a stable foundation for UI and service layers",
+    "overlay-ui's low cohesion (0.25) and high coupling (0.75) align with the expected pattern for presentation layers—internally diverse UI components tightly integrated with business logic",
+    "system-services (cohesion 0.21, coupling 0.79) is the outlier; the three-file zone mixing scheduling, UI control, and logging represents either misclassification by community detection or genuine architectural fragmentation warranting decomposition",
+    "Test coverage is well-distributed with tests-gotobedcoretests importing 30 times from application-core and tests-gotobedtests importing 10 times, indicating comprehensive test coverage of core logic and UI concerns",
+    "Sources/GoToBed/Overlay/ contains files from 3 zones (application-core, overlay-ui, system-services) — consider grouping into subdirectories to clarify architectural boundaries",
+    "File \"Tests/GoToBedCoreTests/DismissChallengeTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
+    "The Swift package hierarchy (GoToBedCore ← GoToBedKit ← GoToBed executable) forms a clean three-tier dependency stack with no circular imports at the package level. The 4 circular dependency chains reported by zone analysis exist only at the Louvain zone level; they are artifacts of cross-package zone grouping, not real Swift import cycles.",
+    "The executable target (Sources/GoToBedApp/GoToBedApp.swift, one file) is the thinnest possible composition surface: it contains only @main, AppDelegate, and lifecycle delegation to AppEnvironment.shared. All substantive architectural decisions are confined to GoToBedKit, which is the correct pattern for a testable app-layer library.",
+    "GoToBedApp.swift imports GoToBedKit (the library target) rather than GoToBed (which would be a self-import). The path Sources/GoToBed/ maps to the GoToBedKit target name — a potential source of confusion for contributors who may write import GoToBed expecting to reach Sources/GoToBed/ types, when the correct import is GoToBedKit.",
+    "The bidirectional application-core ↔ system-services coupling (8+6 crossings) is a Louvain zone artifact caused by Log.swift (GoToBedCore package) being grouped with OverlayController and SchedulerEngine (GoToBedKit package). At the actual Swift package level the dependency is strictly unidirectional: GoToBedKit → GoToBedCore.",
+    "The GoToBedKit library target (path: Sources/GoToBed/) has a name that does not match its source directory. Consumers must write import GoToBedKit, not import GoToBed — a naming mismatch that could mislead contributors unfamiliar with Package.swift.",
+    "MenuBar/MenuViewModel.swift defines a ViewModel type but MenuContent.swift reads schedule data directly from AppEnvironment rather than through the ViewModel. The ViewModel appears to be an abandoned abstraction — either it should own the data transformation currently spread across AppEnvironment, or it should be removed to avoid misleading contributors about where menu state is managed.",
+    "The auto-dismiss timer in OverlayController and the fire callback in SchedulerEngine both express temporal policy (when something should happen) but are wired together only through AppEnvironment closures with no shared type. A typed OverlayCommand or ScheduledEvent value would make the handoff between scheduler and overlay explicit and auditable.",
+    "ScheduleFormatting.swift, Log.swift, and DismissChallengeState.swift are each misplaced relative to their dependency footprint: ScheduleFormatting has no UI imports but lives in the UI layer; Log has no AppKit imports but is grouped by Louvain with AppKit services; DismissChallengeState contains pure domain logic but lives in the overlay zone. All three represent the same root cause: file placement driven by call-site proximity rather than dependency direction.",
+    "MenuBar/MenuViewModel.swift exists alongside a MenuContent.swift that bypasses it in favour of reading AppEnvironment directly. A partially-applied abstraction is worse than none: it suggests a planned architecture that was never completed, leading future contributors to implement new menu features in the wrong place.",
+    "Three files are placed in zones that do not match their actual dependency footprint — ScheduleFormatting.swift (pure logic in UI layer), Log.swift (foundation utility grouped with AppKit services), and DismissChallengeState.swift (domain selection logic in presentation layer). Each file's location implies dependencies it does not have, making the zone coupling metrics misleading.",
+    "DateFormatter allocation is the highest-frequency repeated allocation in the codebase: three separate callsites (OverlayView.clockText once/second, ScheduleFormatting.timeString once/schedule/menu-redraw, ScheduleFormatting.weekdaySymbols once/daysAndMessage call) each allocate fresh instances rather than caching. A single formatter-cache module in ScheduleFormatting would consolidate ownership and make locale-change invalidation straightforward.",
+    "AppState.launchAtLogin and LaunchAtLogin.isEnabled represent a split source of truth with no reconciliation path: the persisted value is written on change but the runtime always reads SMAppService state, and the startup sequence in AppEnvironment.start() never reads the persisted value to configure the system. LaunchAtLogin.swift's own documentation ('the registered state is the system's source of truth') confirms AppState.launchAtLogin is vestigial.",
+    "Establish a convention that DateFormatter instances used for display are static cached properties (or a shared formatter registry) rather than per-call allocations. The current pattern is invisible at the call site — each `DateFormatter()` looks cheap — but DateFormatter initialization is among the most expensive in Foundation and the three current callsites collectively fire on every second tick and every menu redraw."
   ],
   "findings": [
     {
       "type": "observation",
       "pass": 0,
-      "scope": "build-release-scripts",
-      "text": "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)",
+      "scope": "application-core",
+      "text": "10 entry points — wide API surface, consider consolidating exports",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "application-core",
+      "text": "High cohesion (0.83) — files are tightly interconnected",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "docs",
+      "text": "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
       "severity": "info"
     },
     {
@@ -189,6 +1170,34 @@
       "pass": 0,
       "scope": "global",
       "text": "4 circular dependency chains detected — see imports.json for details",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "Bidirectional coupling: \"application-core\" ↔ \"system-services\" (8+6 crossings) — consider extracting shared interface",
+      "severity": "warning"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "Hub: Sources/GoToBedCore/Models/Schedule.swift is imported by 4 zones — cross-cutting dependency",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "global",
+      "text": "Size imbalance: largest zone has 22 files vs smallest with 3 — uneven decomposition",
+      "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "overlay-ui",
+      "text": "High coupling (0.75) — 9 imports target \"application-core\"",
       "severity": "warning"
     },
     {
@@ -208,9 +1217,16 @@
     {
       "type": "observation",
       "pass": 0,
-      "scope": "static-site-assets",
-      "text": "Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)",
+      "scope": "scripts",
+      "text": "Isolated files — no import edges between 8 files, cohesion is unmeasurable (reported as 0)",
       "severity": "info"
+    },
+    {
+      "type": "observation",
+      "pass": 0,
+      "scope": "system-services",
+      "text": "High coupling (0.79) — 6 imports target \"application-core\"",
+      "severity": "warning"
     },
     {
       "type": "observation",
@@ -229,8 +1245,114 @@
     {
       "type": "suggestion",
       "pass": 0,
-      "scope": "build-release-scripts",
-      "text": "Zone \"Build & Release Scripts\" (build-release-scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "scope": "application-core",
+      "text": "Zone \"application-core\" has files across 9 directories — consider consolidating under a dedicated directory",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "application-core",
+      "text": "Add a comment to ScheduleEditorView.ChallengeKind documenting its mirroring relationship with DismissChallenge: 'Must be kept in sync with DismissChallenge — adding a new DismissChallenge case requires a matching ChallengeKind case and a challengeKindBinding branch.' Without this, the coupling is invisible until a compiler error surfaces.",
+      "severity": "info",
+      "category": "documentation"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "application-core",
+      "text": "AppState.launchAtLogin is a persisted field that is never read back to configure the system — LaunchAtLogin.swift documents SMAppService as the source of truth and no startup code calls LaunchAtLogin.set() from this value. Either remove the field from AppState (and the corresponding Store accessors) or add a startup reconciliation step in AppEnvironment.start() that aligns the system with the persisted value when they diverge.",
+      "severity": "warning",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "application-core",
+      "text": "OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call. Cache each as a static let property and invalidate on NSLocale.currentLocaleDidChangeNotification. The clockText formatter is the most urgent — it fires every second while the overlay is visible.",
+      "severity": "warning",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "application-core",
+      "text": "Rename AppEnvironment.launchAtLoginEnabled to isLaunchAtLoginEnabled to match the `is`-prefix Boolean convention used throughout the codebase. The missing prefix signals a different semantic to readers without justification.",
+      "severity": "info",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "application-core",
+      "text": "ScheduleCalculator.nextFireDate: replace `soonest == nil || candidate < soonest!` with `if let s = soonest { if candidate < s { soonest = candidate } } else { soonest = candidate }` or the idiomatic `soonest = soonest.map { min($0, candidate) } ?? candidate` to match the optional-binding pattern used in nextFire and eliminate the force unwrap.",
+      "severity": "info",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "global",
+      "text": "Sources/GoToBed/Overlay/ contains files from 3 zones (application-core, overlay-ui, system-services) — consider grouping into subdirectories to clarify architectural boundaries",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "global",
+      "text": "Establish a convention that DateFormatter instances used for display are static cached properties (or a shared formatter registry) rather than per-call allocations. The current pattern is invisible at the call site — each `DateFormatter()` looks cheap — but DateFormatter initialization is among the most expensive in Foundation and the three current callsites collectively fire on every second tick and every menu redraw.",
+      "severity": "info",
+      "category": "documentation"
+    },
+    {
+      "type": "move-file",
+      "pass": 0,
+      "scope": "global",
+      "text": "File \"Tests/GoToBedCoreTests/DismissChallengeTests.swift\" has 100% of import neighbors in Sources/GoToBedCore/Models/ but lives in Tests/GoToBedCoreTests/ — consider relocating",
+      "severity": "info",
+      "related": [
+        "Tests/GoToBedCoreTests/DismissChallengeTests.swift"
+      ],
+      "from": "Tests/GoToBedCoreTests/DismissChallengeTests.swift",
+      "to": "Sources/GoToBedCore/Models/",
+      "moveReason": "import-neighbor-majority",
+      "predictedImpact": 3
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "overlay-ui",
+      "text": "DismissChallengeState.allowsTapDismiss is identical to escDismisses (`var allowsTapDismiss: Bool { escDismisses }`). Either collapse to one property with the clearer name, or add a comment explaining the intended semantic distinction so a future challenge mode that should allow tapping but not Esc is implemented correctly rather than silently inheriting the wrong behavior.",
+      "severity": "info",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 4,
+      "scope": "overlay-ui",
+      "text": "Rename DismissChallengeState.escDismisses to isEscapeChallenge (or isEscapeDismissible) to match the `is`-prefix Boolean convention. The current verb-subject form is readable but is the only Boolean property in the codebase that breaks the convention.",
+      "severity": "info",
+      "category": "code"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "overlay-ui",
+      "text": "Zone \"Overlay UI\" (overlay-ui) has catastrophic risk (score: 0.75, cohesion: 0.25, coupling: 0.75) — unreliable: zone has only 3 files (minimum 5 for reliable metrics)",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "system-services",
+      "text": "Zone \"System Services\" (system-services) has catastrophic risk (score: 0.79, cohesion: 0.21, coupling: 0.79) — unreliable: zone has only 3 files (minimum 5 for reliable metrics)",
+      "severity": "info"
+    },
+    {
+      "type": "suggestion",
+      "pass": 0,
+      "scope": "docs",
+      "text": "Zone \"Documentation Site\" (docs) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
       "severity": "info"
     },
     {
@@ -244,31 +1366,34 @@
       "type": "suggestion",
       "pass": 0,
       "scope": "root",
-      "text": "Zone \"Root\" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "text": "Zone \"Project Root\" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
       "severity": "info"
     },
     {
       "type": "suggestion",
       "pass": 0,
-      "scope": "static-site-assets",
-      "text": "Zone \"Static Site Assets\" (static-site-assets) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
+      "scope": "scripts",
+      "text": "Zone \"Build & CI Scripts\" (scripts) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds",
       "severity": "info"
     }
   ],
-  "enrichmentPass": 2,
-  "structureHash": "f35202af76a6feee",
-  "inputFingerprint": "f050241c865333b3",
+  "enrichmentPass": 4,
+  "structureHash": "e18ba898a4a8af99",
+  "inputFingerprint": "f9e9229641b8223c",
   "zoneContentHashes": {
-    "build-release-scripts": "268a417919f93da5",
-    "packaging": "93f00724b4d4b91c",
-    "root": "f0b9a3b824ec424e",
-    "static-site-assets": "72b734f5580cb047",
-    "tests-gotobedcoretests": "4f649f6a85085328",
-    "tests-gotobedtests": "f51e19cda84d7b47"
+    "application-core": "06b9bb7322a9844d",
+    "overlay-ui": "72b734f5580cb047",
+    "system-services": "8c45367dd078d850",
+    "docs": "93f00724b4d4b91c",
+    "packaging": "da7a87cf23a635b7",
+    "root": "268a417919f93da5",
+    "scripts": "70a3da3df1eaf92b",
+    "tests-gotobedcoretests": "24e457d8b8f980c3",
+    "tests-gotobedtests": "a2f34c64153c3e70"
   },
   "stability": {
     "fileRetention": 1,
-    "persistedZones": 6,
+    "persistedZones": 9,
     "newZones": 0,
     "removedZones": 0,
     "reassignedFiles": []

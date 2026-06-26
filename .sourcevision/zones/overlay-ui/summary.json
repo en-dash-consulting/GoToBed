@@ -1,0 +1,26 @@
+{
+  "id": "overlay-ui",
+  "name": "Overlay UI",
+  "description": "UI components for the overlay window and challenge dismissal interaction flow.",
+  "files": [
+    "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+    "Sources/GoToBed/Overlay/OverlayWindow.swift",
+    "Sources/GoToBed/UI/WeekdayPicker.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+    "Sources/GoToBed/Overlay/OverlayWindow.swift",
+    "Sources/GoToBed/UI/WeekdayPicker.swift"
+  ],
+  "cohesion": 0.25,
+  "coupling": 0.75,
+  "fileCount": 3,
+  "lineCount": 264,
+  "riskMetrics": {
+    "cohesion": 0.25,
+    "coupling": 0.75,
+    "riskScore": 0.75,
+    "riskLevel": "catastrophic",
+    "failsThreshold": true
+  }
+}

@@ -7,7 +7,7 @@
 Zone: Packaging (`packaging`)
 Files: 3, Cohesion: 0.00, Coupling: 0.00
 Risk: at-risk (score: 0.50)
-Description: 3 files, primarily Other
+Description: Non-source files in Packaging: AppIcon.icns, GoToBed.entitlements, Info.plist
 Lines: 45
 
 </zone>
