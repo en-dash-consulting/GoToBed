@@ -1,8 +1,9 @@
 {
   "id": "tests-gotobedtests",
-  "name": "Tests Gotobedtests",
-  "description": "4 files, primarily Swift",
+  "name": "Tests",
+  "description": "Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)",
   "files": [
+    "Tests/GoToBedTests/DismissChallengeStateTests.swift",
     "Tests/GoToBedTests/InterServiceWiringTests.swift",
     "Tests/GoToBedTests/OverlayControllerTests.swift",
     "Tests/GoToBedTests/SchedulerEngineTests.swift",
@@ -11,8 +12,8 @@
   "entryPoints": [],
   "cohesion": 1,
   "coupling": 0,
-  "fileCount": 4,
-  "lineCount": 356,
+  "fileCount": 5,
+  "lineCount": 457,
   "riskMetrics": {
     "cohesion": 1,
     "coupling": 0,

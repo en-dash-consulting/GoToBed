@@ -1,0 +1,26 @@
+{
+  "id": "system-services",
+  "name": "System Services",
+  "description": "Background services for scheduling, UI overlay control, and logging utility grouped by incidental import overlap.",
+  "files": [
+    "Sources/GoToBed/Overlay/OverlayController.swift",
+    "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+    "Sources/GoToBedCore/Logging/Log.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/Overlay/OverlayController.swift",
+    "Sources/GoToBed/Scheduler/SchedulerEngine.swift",
+    "Sources/GoToBedCore/Logging/Log.swift"
+  ],
+  "cohesion": 0.21,
+  "coupling": 0.79,
+  "fileCount": 3,
+  "lineCount": 241,
+  "riskMetrics": {
+    "cohesion": 0.21,
+    "coupling": 0.79,
+    "riskScore": 0.79,
+    "riskLevel": "catastrophic",
+    "failsThreshold": true
+  }
+}

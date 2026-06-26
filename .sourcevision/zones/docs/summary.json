@@ -1,7 +1,7 @@
 {
-  "id": "static-site-assets",
-  "name": "Static Site Assets",
-  "description": "Hosts the public-facing GoToBed documentation site assets including SEO metadata, PWA manifest, and AI-readable project summary for the GitHub Pages site.",
+  "id": "docs",
+  "name": "Documentation Site",
+  "description": "Documentation and static-site assets: CNAME, llms.txt, robots.txt (+2 more)",
   "files": [
     "docs/CNAME",
     "docs/llms.txt",

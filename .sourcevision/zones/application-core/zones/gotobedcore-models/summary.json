@@ -1,0 +1,21 @@
+{
+  "id": "sources/gotobedcore-models",
+  "name": "Sources/gotobedcore Models",
+  "description": "4 files, primarily Swift",
+  "files": [
+    "Sources/GoToBed/UI/ScheduleFormatting.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/UI/ScheduleFormatting.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
+  ],
+  "cohesion": 0.35,
+  "coupling": 0.65,
+  "fileCount": 4,
+  "lineCount": 344
+}
