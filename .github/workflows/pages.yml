@@ -1,0 +1,65 @@
+name: Pages
+
+# Publish the site to GitHub Pages via a single Actions-built artifact:
+#   - the marketing site (docs/) at the domain root
+#   - the n-dx dashboard (rendered from the committed .sourcevision/.rex data)
+#     at /n-dx/
+#
+# This replaces the legacy "deploy from main:/docs" Pages build. The dashboard is
+# regenerated on every deploy, so nothing rendered is committed to the repo.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".sourcevision/**"
+      - ".rex/prd_tree/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One Pages deployment at a time; never cancel an in-progress deploy.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Pin to the version used locally for reproducible dashboards.
+      - name: Install n-dx
+        run: npm install -g @n-dx/core@0.4.5
+
+      - name: Assemble site (marketing + n-dx dashboard)
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          # Marketing site at the root (includes CNAME for the custom domain).
+          cp -R docs/. _site/
+          # n-dx dashboard at /n-dx/, rendered from the committed analysis data.
+          ndx export --base-path=/n-dx/ --out-dir=_site/n-dx .
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
