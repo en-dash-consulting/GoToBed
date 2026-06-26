@@ -1,8 +1,9 @@
 .PHONY: build test validate app clean
 
-# Single source of truth for the release version.
-# build-app.sh picks this up via the MARKETING_VERSION env var.
-MARKETING_VERSION := $(shell cat VERSION 2>/dev/null || echo 0.0.0-dev)
+# Release version resolved from the single source of truth
+# (.release-please-manifest.json) by scripts/version.sh. Exported so build-app.sh
+# and other scripts pick it up via the MARKETING_VERSION env var.
+MARKETING_VERSION := $(shell ./scripts/version.sh 2>/dev/null || echo 0.0.0-dev)
 export MARKETING_VERSION
 
 # The project validation command (used by the n-dx workflow).
@@ -19,7 +20,7 @@ test:
 	swift test
 
 # Build a signed universal GoToBed.app into build/.
-# MARKETING_VERSION (from VERSION) is forwarded via the environment.
+# MARKETING_VERSION (from the release-please manifest) is forwarded via the environment.
 app:
 	./scripts/build-app.sh
 

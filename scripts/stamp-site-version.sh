@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 #
 # Stamp the static site (docs/) with the current release version and date.
-# Reads the version from the VERSION file at the repository root and updates:
+# Reads the version from scripts/version.sh (single source of truth: the
+# release-please manifest) and updates:
 #   - docs/sitemap.xml       <lastmod>YYYY-MM-DD</lastmod>
 #   - docs/site.webmanifest  "version": "x.y.z"
 #   - docs/llms.txt          "- Current version: x.y.z"
 #
 # The `version` field in site.webmanifest and the "Current version" line in
-# llms.txt are both driven by the VERSION file, which release-please bumps as
-# part of the release PR. This script is the single docs-generation step that
-# propagates that value into all site artifacts.
+# llms.txt are both driven by .release-please-manifest.json, which release-please
+# bumps as part of the release PR. This script is the single docs-generation step
+# that propagates that value into all site artifacts.
 #
 # Run this from the release workflow *after* release-please has produced a tag,
 # or locally before pushing a release commit.
@@ -26,7 +27,6 @@ DATE="${1:-$(date -u +%Y-%m-%d)}"
 SITEMAP="docs/sitemap.xml"
 MANIFEST="docs/site.webmanifest"
 LLMS="docs/llms.txt"
-VERSION_FILE="VERSION"
 
 if [ ! -f "$SITEMAP" ]; then
     echo "stamp-site-version: $SITEMAP not found" >&2
@@ -43,12 +43,7 @@ if [ ! -f "$LLMS" ]; then
     exit 1
 fi
 
-if [ ! -f "$VERSION_FILE" ]; then
-    echo "stamp-site-version: $VERSION_FILE not found" >&2
-    exit 1
-fi
-
-VERSION="$(tr -d '[:space:]' < "$VERSION_FILE")"
+VERSION="$(scripts/version.sh)"
 
 # Update sitemap <lastmod>.
 # Using a temp file + mv keeps the change atomic and avoids sed -i portability
