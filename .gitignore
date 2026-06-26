@@ -15,3 +15,11 @@ build/
 # but kept out of the repo by preference)
 scripts/set-release-secrets.sh
 .run-logs/
+
+# n-dx web server runtime state (auto-managed; not source)
+.n-dx-web.port
+.n-dx-web.pid
+
+# Ephemeral/local n-dx state (derived cache + timestamped backups)
+.rex/.cache/
+.rex/.backups/
