@@ -5,10 +5,7 @@
       "release-type": "simple",
       "package-name": "GoToBed",
       "include-component-in-tag": false,
-      "changelog-path": "CHANGELOG.md",
-      "extra-files": [
-        "VERSION"
-      ]
+      "changelog-path": "CHANGELOG.md"
     }
   }
 }

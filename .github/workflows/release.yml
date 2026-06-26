@@ -93,10 +93,9 @@ jobs:
           TAG: ${{ github.event.inputs.tag || needs.release-please.outputs.tag_name }}
         run: |
           # The git tag is the authoritative version for a release build. Pin it
-          # via MARKETING_VERSION so artifacts are named/stamped from the tag and
-          # never from a stale committed VERSION file (build-app.sh reads
-          # MARKETING_VERSION first; make-dmg.sh derives the name from the app's
-          # Info.plist, which build-app.sh stamps from this value).
+          # via MARKETING_VERSION so artifacts are named/stamped from the tag
+          # (scripts/version.sh honors this override; make-dmg.sh derives the
+          # name from the app's Info.plist, which build-app.sh stamps from it).
           export MARKETING_VERSION="${TAG#v}"
           echo "==> Building release artifacts for $MARKETING_VERSION (tag $TAG)"
           ./scripts/build-app.sh "$SIGN_IDENTITY" "GoToBed-Notary"
@@ -110,10 +109,11 @@ jobs:
 
   stamp-docs:
     # Stamp docs/ with the release version and date.
-    # stamp-site-version.sh reads VERSION (bumped by release-please) and updates:
+    # stamp-site-version.sh reads the version from .release-please-manifest.json
+    # (via scripts/version.sh) and updates:
     #   - docs/sitemap.xml       <lastmod> with today's UTC date
-    #   - docs/site.webmanifest  "version" with the VERSION value
-    #   - docs/llms.txt          "Current version" with the VERSION value
+    #   - docs/site.webmanifest  "version" with the manifest version
+    #   - docs/llms.txt          "Current version" with the manifest version
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     runs-on: ubuntu-latest

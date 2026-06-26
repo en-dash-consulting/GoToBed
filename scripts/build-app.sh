@@ -33,21 +33,11 @@ swift build -c release \
 
 BIN="$(swift build -c release --arch arm64 --arch x86_64 --product GoToBed --show-bin-path)/GoToBed"
 
-# Resolve version using a priority chain:
-#   1. MARKETING_VERSION env var (set by Makefile from the VERSION file)
-#   2. VERSION env var (manual override)
-#   3. VERSION file at the repository root
-#   4. Nearest git tag (vX.Y.Z stripped of the leading "v")
-#   5. Hard-coded dev fallback
-# `|| true` keeps an untagged repo from aborting under `set -e`/`pipefail`.
-VERSION="${MARKETING_VERSION:-${VERSION:-}}"
-if [ -z "$VERSION" ] && [ -f VERSION ]; then
-    VERSION="$(tr -d '[:space:]' < VERSION)"
-fi
-if [ -z "$VERSION" ]; then
-    VERSION="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || true)"
-fi
-VERSION="${VERSION:-0.0.0-dev}"
+# Resolve the version from the single source of truth. version.sh honors a
+# MARKETING_VERSION/VERSION env override (the release workflow pins the git tag
+# there), then reads .release-please-manifest.json, then falls back to the
+# nearest git tag and finally 0.0.0-dev.
+VERSION="$(scripts/version.sh)"
 BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
 
 echo "==> Assembling $APP (version $VERSION build $BUILD)"
