@@ -39,7 +39,17 @@ jobs:
 
       # Pin to the version used locally for reproducible dashboards.
       - name: Install n-dx
-        run: npm install -g @n-dx/core@0.4.5
+        run: |
+          npm install -g @n-dx/core@0.4.5
+          # Workaround for an @n-dx/core@0.4.5 packaging bug: `ndx export`
+          # resolves its rex/web siblings from a monorepo path
+          # (<node_modules>/packages/<pkg>) and its npm fallback throws because
+          # the @n-dx/* exports maps expose no `require`/`./package.json` entry
+          # (ERR_PACKAGE_PATH_NOT_EXPORTED). Recreate the packages/ layout it
+          # expects, pointing at the installed @n-dx/* packages.
+          GROOT="$(npm root -g)"
+          mkdir -p "$GROOT/packages"
+          for p in "$GROOT"/@n-dx/*; do ln -sfn "$p" "$GROOT/packages/$(basename "$p")"; done
 
       - name: Assemble site (marketing + n-dx dashboard)
         run: |
