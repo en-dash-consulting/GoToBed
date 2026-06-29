@@ -631,7 +631,7 @@
     },
     {
       "id": "tests-gotobedcoretests",
-      "name": "Tests",
+      "name": "Core Tests",
       "description": "Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallengeTests.swift (+8 more)",
       "files": [
         "Tests/GoToBedCoreTests/ContrastTests.swift",
@@ -662,7 +662,7 @@
     },
     {
       "id": "tests-gotobedtests",
-      "name": "Tests",
+      "name": "Kit Tests",
       "description": "Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)",
       "files": [
         "Tests/GoToBedTests/DismissChallengeStateTests.swift",

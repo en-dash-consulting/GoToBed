@@ -41,10 +41,10 @@ Circulars: 4
 [system-services] System Services (3 files, coh=0.21 coup=0.79)
   Background services for scheduling, UI overlay control, and logging utility grouped by incidental import overlap.
   files: Sources/GoToBed/Overlay/OverlayController.swift [service], Sources/GoToBed/Scheduler/SchedulerEngine.swift [service], Sources/GoToBedCore/Logging/Log.swift [utility]
-[tests-gotobedcoretests] Tests (11 files, coh=1.00 coup=0.00)
+[tests-gotobedcoretests] Core Tests (11 files, coh=1.00 coup=0.00)
   Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallengeTests.swift (+8 more)
   files: Tests/GoToBedCoreTests/ContrastTests.swift, Tests/GoToBedCoreTests/DSTTests.swift, Tests/GoToBedCoreTests/DismissChallengeTests.swift, Tests/GoToBedCoreTests/PersistenceTests.swift, Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift, Tests/GoToBedCoreTests/SchedulerLoopTests.swift, Tests/GoToBedCoreTests/SleepSkipTests.swift, Tests/GoToBedCoreTests/StoreTests.swift, Tests/GoToBedCoreTests/SubmessageTests.swift, Tests/GoToBedCoreTests/TestSupport.swift +1
-[tests-gotobedtests] Tests (5 files, coh=1.00 coup=0.00)
+[tests-gotobedtests] Kit Tests (5 files, coh=1.00 coup=0.00)
   Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)
   files: Tests/GoToBedTests/DismissChallengeStateTests.swift, Tests/GoToBedTests/InterServiceWiringTests.swift, Tests/GoToBedTests/OverlayControllerTests.swift, Tests/GoToBedTests/SchedulerEngineTests.swift, Tests/GoToBedTests/TestHelpers.swift
 
