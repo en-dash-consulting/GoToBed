@@ -46,15 +46,19 @@ jobs:
       # and its npm fallback throws because the @n-dx/* exports maps expose no
       # `require`/`./package.json` entry (ERR_PACKAGE_PATH_NOT_EXPORTED). Recreate
       # the packages/ tree it expects, pointing at the installed @n-dx/*. The
-      # location is derived from the `ndx` binary (the install that actually runs)
-      # rather than `npm root -g`, which can differ on the runner.
+      # node_modules is derived from the `ndx` binary (the install that runs); the
+      # deps are nested under @n-dx/core/node_modules in a global install, so each
+      # is located by name (find does not follow the symlinks we create).
       - name: Patch n-dx package resolution
         run: |
           core_dir="$(dirname "$(readlink -f "$(command -v ndx)")")"   # <nm>/@n-dx/core
           nm="$(cd "$core_dir/../.." && pwd -P)"                        # <node_modules>
           echo "ndx node_modules: $nm"
           mkdir -p "$nm/packages"
-          for d in "$nm"/@n-dx/*; do ln -sfn "$d" "$nm/packages/$(basename "$d")"; done
+          for name in rex sourcevision web hench llm-client; do
+            src="$(find "$nm" -type d -path "*/@n-dx/$name" 2>/dev/null | head -1)"
+            [ -n "$src" ] && ln -sfn "$src" "$nm/packages/$name" && echo "linked $name -> $src"
+          done
           ls -la "$nm/packages"
           test -e "$nm/packages/rex/dist/public.js"  # fail fast if the layout is wrong
 
