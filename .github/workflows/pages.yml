@@ -37,19 +37,26 @@ jobs:
         with:
           node-version: 20
 
-      # Pin to the version used locally for reproducible dashboards.
+      # Pin to the published version for reproducible dashboards.
       - name: Install n-dx
+        run: npm install -g @n-dx/core@0.4.5
+
+      # Workaround for an @n-dx/core@0.4.5 packaging bug: `ndx export` resolves
+      # its rex/web siblings from a monorepo path (<node_modules>/packages/<pkg>),
+      # and its npm fallback throws because the @n-dx/* exports maps expose no
+      # `require`/`./package.json` entry (ERR_PACKAGE_PATH_NOT_EXPORTED). Recreate
+      # the packages/ tree it expects, pointing at the installed @n-dx/*. The
+      # location is derived from the `ndx` binary (the install that actually runs)
+      # rather than `npm root -g`, which can differ on the runner.
+      - name: Patch n-dx package resolution
         run: |
-          npm install -g @n-dx/core@0.4.5
-          # Workaround for an @n-dx/core@0.4.5 packaging bug: `ndx export`
-          # resolves its rex/web siblings from a monorepo path
-          # (<node_modules>/packages/<pkg>) and its npm fallback throws because
-          # the @n-dx/* exports maps expose no `require`/`./package.json` entry
-          # (ERR_PACKAGE_PATH_NOT_EXPORTED). Recreate the packages/ layout it
-          # expects, pointing at the installed @n-dx/* packages.
-          GROOT="$(npm root -g)"
-          mkdir -p "$GROOT/packages"
-          for p in "$GROOT"/@n-dx/*; do ln -sfn "$p" "$GROOT/packages/$(basename "$p")"; done
+          core_dir="$(dirname "$(readlink -f "$(command -v ndx)")")"   # <nm>/@n-dx/core
+          nm="$(cd "$core_dir/../.." && pwd -P)"                        # <node_modules>
+          echo "ndx node_modules: $nm"
+          mkdir -p "$nm/packages"
+          for d in "$nm"/@n-dx/*; do ln -sfn "$d" "$nm/packages/$(basename "$d")"; done
+          ls -la "$nm/packages"
+          test -e "$nm/packages/rex/dist/public.js"  # fail fast if the layout is wrong
 
       - name: Assemble site (marketing + n-dx dashboard)
         run: |
