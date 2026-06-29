@@ -75,7 +75,7 @@ Background services for scheduling, UI overlay control, and logging utility grou
 - Entry points: Sources/GoToBed/Overlay/OverlayController.swift, Sources/GoToBed/Scheduler/SchedulerEngine.swift, Sources/GoToBedCore/Logging/Log.swift
 - Detail: `.sourcevision/zones/system-services/context.md`
 
-### Tests (`tests-gotobedcoretests`)
+### Core Tests (`tests-gotobedcoretests`)
 
 Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallengeTests.swift (+8 more)
 
@@ -83,7 +83,7 @@ Non-source files in Tests: ContrastTests.swift, DSTTests.swift, DismissChallenge
 - Cohesion: 1.00, Coupling: 0.00
 - Detail: `.sourcevision/zones/tests-gotobedcoretests/context.md`
 
-### Tests (`tests-gotobedtests`)
+### Kit Tests (`tests-gotobedtests`)
 
 Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)
 
