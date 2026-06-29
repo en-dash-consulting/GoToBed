@@ -67,7 +67,7 @@ jobs:
           # n-dx dashboard at /n-dx/, rendered from the committed analysis data.
           ndx export --base-path=/n-dx/ --out-dir=_site/n-dx .
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
