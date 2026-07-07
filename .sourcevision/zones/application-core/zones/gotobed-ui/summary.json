@@ -1,18 +1,17 @@
 {
   "id": "sources/gotobed-ui",
   "name": "Sources/gotobed Ui",
-  "description": "3 files, primarily Swift",
+  "description": "2 files, primarily Swift",
   "files": [
-    "Sources/GoToBed/ColorBridging.swift",
-    "Sources/GoToBed/UI/AppearanceEditor.swift",
-    "Sources/GoToBed/UI/Palette.swift"
+    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBed/UI/ScheduleFormatting.swift"
   ],
   "entryPoints": [
-    "Sources/GoToBed/ColorBridging.swift",
-    "Sources/GoToBed/UI/AppearanceEditor.swift"
+    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBed/UI/ScheduleFormatting.swift"
   ],
-  "cohesion": 0.35,
-  "coupling": 0.65,
-  "fileCount": 3,
-  "lineCount": 219
+  "cohesion": 0,
+  "coupling": 1,
+  "fileCount": 2,
+  "lineCount": 214
 }

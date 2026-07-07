@@ -1,0 +1,28 @@
+{
+  "id": "view-layer",
+  "name": "UI View Layer",
+  "description": "SwiftUI presentation layer assembling settings, menu bar, overlay, and compatibility shims.",
+  "files": [
+    "Sources/GoToBed/MenuBar/MenuContent.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBed/UI/SettingsView.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/MenuBar/MenuContent.swift",
+    "Sources/GoToBed/Overlay/OverlayView.swift",
+    "Sources/GoToBed/UI/Compat.swift",
+    "Sources/GoToBed/UI/SettingsView.swift"
+  ],
+  "cohesion": 0.19,
+  "coupling": 0.81,
+  "fileCount": 4,
+  "lineCount": 343,
+  "riskMetrics": {
+    "cohesion": 0.19,
+    "coupling": 0.81,
+    "riskScore": 0.81,
+    "riskLevel": "catastrophic",
+    "failsThreshold": true
+  }
+}

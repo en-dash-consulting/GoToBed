@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshots": [
+    {
+      "zoneId": "appearance-settings",
+      "zoneName": "Appearance Settings",
+      "cohesion": 0.63,
+      "coupling": 0.38,
+      "riskScore": 0.375,
+      "fileCount": 5,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "application-core",
+      "zoneName": "Application Core",
+      "cohesion": 0.54,
+      "coupling": 0.46,
+      "riskScore": 0.45999999999999996,
+      "fileCount": 13,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "overlay-interaction",
+      "zoneName": "Overlay Interaction System",
+      "cohesion": 0.25,
+      "coupling": 0.75,
+      "riskScore": 0.75,
+      "fileCount": 3,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "root",
+      "zoneName": "Project Root",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 1,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "scheduling-engine",
+      "zoneName": "Scheduling Engine",
+      "cohesion": 0.21,
+      "coupling": 0.79,
+      "riskScore": 0.79,
+      "fileCount": 3,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "scripts",
+      "zoneName": "Build & CI Scripts",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 9,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "tests-gotobedcoretests",
+      "zoneName": "Core Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 11,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "tests-gotobedtests",
+      "zoneName": "Kit Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 5,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "view-layer",
+      "zoneName": "UI View Layer",
+      "cohesion": 0.19,
+      "coupling": 0.81,
+      "riskScore": 0.81,
+      "fileCount": 4,
+      "timestamp": "2026-07-07T04:15:12.951Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    }
+  ],
+  "analyzedAt": "2026-07-07T04:15:12.951Z",
+  "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+}

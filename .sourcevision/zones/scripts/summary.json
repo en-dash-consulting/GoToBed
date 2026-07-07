@@ -10,13 +10,14 @@
     "scripts/make-dmg.sh",
     "scripts/make-icon.sh",
     "scripts/stamp-site-version.sh",
-    "scripts/verify-no-network.sh"
+    "scripts/verify-no-network.sh",
+    "scripts/version.sh"
   ],
   "entryPoints": [],
   "cohesion": 0,
   "coupling": 0,
-  "fileCount": 8,
-  "lineCount": 498,
+  "fileCount": 9,
+  "lineCount": 514,
   "riskMetrics": {
     "cohesion": 0,
     "coupling": 0,

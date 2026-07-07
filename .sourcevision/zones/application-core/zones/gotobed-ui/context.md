@@ -5,26 +5,16 @@
 <zone>
 
 Zone: Sources/gotobed Ui (`sources/gotobed-ui`)
-Files: 3, Cohesion: 0.35, Coupling: 0.65
-Description: 3 files, primarily Swift
-Entry points: Sources/GoToBed/ColorBridging.swift, Sources/GoToBed/UI/AppearanceEditor.swift
-Lines: 219
+Files: 2, Cohesion: 0.00, Coupling: 1.00
+Description: 2 files, primarily Swift
+Entry points: Sources/GoToBed/UI/ScheduleEditorView.swift, Sources/GoToBed/UI/ScheduleFormatting.swift
+Lines: 214
 
 </zone>
 
 <files>
 
-Sources/GoToBed/ColorBridging.swift (Swift, 29 lines, source)
-Sources/GoToBed/UI/AppearanceEditor.swift (Swift, 114 lines, source)
-Sources/GoToBed/UI/Palette.swift (Swift, 76 lines, source)
+Sources/GoToBed/UI/ScheduleEditorView.swift (Swift, 172 lines, source)
+Sources/GoToBed/UI/ScheduleFormatting.swift (Swift, 42 lines, source)
 
 </files>
-
-<imports>
-
-Internal:
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBed/ColorBridging.swift {ColorComponents, Color}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBed/UI/Palette.swift {PresetRow, SwatchPicker}
-  Sources/GoToBed/UI/Palette.swift → Sources/GoToBed/ColorBridging.swift {Color, ColorComponents}
-
-</imports>

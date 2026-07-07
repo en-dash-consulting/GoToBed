@@ -5,25 +5,32 @@
 <zone>
 
 Zone: Sources/gotobedcore (`sources/gotobedcore`)
-Files: 3, Cohesion: 0.25, Coupling: 0.75
-Description: 3 files, primarily Swift
-Entry points: Sources/GoToBed/UI/ScheduleEditorView.swift, Sources/GoToBedCore/Models/Validation.swift, Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift
-Lines: 332
+Files: 5, Cohesion: 0.64, Coupling: 0.36
+Description: 5 files, primarily Swift
+Entry points: Sources/GoToBedCore/Models/Schedule.swift, Sources/GoToBedCore/Models/Validation.swift, Sources/GoToBedCore/Persistence/AppStatePersistence.swift, Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift, Sources/GoToBedCore/Store/Store.swift
+Lines: 462
 
 </zone>
 
 <files>
 
-Sources/GoToBed/UI/ScheduleEditorView.swift (Swift, 172 lines, source)
+Sources/GoToBedCore/Models/Schedule.swift (Swift, 137 lines, source)
 Sources/GoToBedCore/Models/Validation.swift (Swift, 92 lines, source)
+Sources/GoToBedCore/Persistence/AppStatePersistence.swift (Swift, 58 lines, source)
 Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift (Swift, 68 lines, source)
+Sources/GoToBedCore/Store/Store.swift (Swift, 107 lines, source)
 
 </files>
 
 <imports>
 
 Internal:
-  Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
+  Sources/GoToBedCore/Models/Validation.swift → Sources/GoToBedCore/Models/Schedule.swift {DismissChallenge}
+  Sources/GoToBedCore/Persistence/AppStatePersistence.swift → Sources/GoToBedCore/Models/Schedule.swift {AppState}
+  Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule}
   Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
+  Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/Schedule.swift {AppState, Schedule, DismissMode}
+  Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
+  Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift {AppStatePersistence}
 
 </imports>

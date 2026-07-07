@@ -15,8 +15,8 @@
     "Sources/GoToBed/LaunchAtLogin.swift",
     "Sources/GoToBed/MenuBar/MenuViewModel.swift"
   ],
-  "cohesion": 0.42,
-  "coupling": 0.58,
+  "cohesion": 0.63,
+  "coupling": 0.38,
   "fileCount": 6,
   "lineCount": 349
 }

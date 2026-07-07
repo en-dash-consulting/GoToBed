@@ -5,11 +5,11 @@
 <zone>
 
 Zone: Application Core (`application-core`)
-Files: 22, Cohesion: 0.83, Coupling: 0.17
-Risk: healthy (score: 0.17)
-Description: Primary production code containing application models, services, UI components, and state management.
-Entry points: Sources/GoToBed/ColorBridging.swift, Sources/GoToBed/Overlay/OverlayView.swift, Sources/GoToBed/UI/Compat.swift, Sources/GoToBedCore/Models/AppearanceSettings.swift, Sources/GoToBedCore/Models/Palette.swift, Sources/GoToBedCore/Models/Schedule.swift, Sources/GoToBedCore/Models/Validation.swift, Sources/GoToBedCore/Persistence/AppStatePersistence.swift, Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift, Sources/GoToBedCore/Store/Store.swift
-Lines: 1777
+Files: 13, Cohesion: 0.54, Coupling: 0.46
+Risk: healthy (score: 0.46)
+Description: Central app coordination hub bridging GoToBedCore logic with app-layer services, state management, and UI wiring.
+Entry points: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/LaunchAtLogin.swift, Sources/GoToBed/MenuBar/MenuViewModel.swift, Sources/GoToBed/UI/ScheduleEditorView.swift, Sources/GoToBed/UI/ScheduleFormatting.swift, Sources/GoToBedCore/Models/Schedule.swift, Sources/GoToBedCore/Models/Validation.swift, Sources/GoToBedCore/Persistence/AppStatePersistence.swift, Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift, Sources/GoToBedCore/Store/Store.swift
+Lines: 1025
 
 </zone>
 
@@ -17,21 +17,12 @@ Lines: 1777
 
 Sources/GoToBed/AppEnvironment.swift (Swift, 169 lines, source)
 Sources/GoToBed/AppInfo.swift (Swift, 21 lines, source)
-Sources/GoToBed/ColorBridging.swift (Swift, 29 lines, source)
 Sources/GoToBed/LaunchAtLogin.swift (Swift, 23 lines, source)
-Sources/GoToBed/MenuBar/MenuContent.swift (Swift, 94 lines, source)
 Sources/GoToBed/MenuBar/MenuViewModel.swift (Swift, 14 lines, source)
-Sources/GoToBed/Overlay/OverlayView.swift (Swift, 129 lines, source)
 Sources/GoToBed/SettingsWindowController.swift (Swift, 63 lines, source)
-Sources/GoToBed/UI/AppearanceEditor.swift (Swift, 114 lines, source)
-Sources/GoToBed/UI/Compat.swift (Swift, 17 lines, source)
-Sources/GoToBed/UI/Palette.swift (Swift, 76 lines, source)
 Sources/GoToBed/UI/ScheduleEditorView.swift (Swift, 172 lines, source)
 Sources/GoToBed/UI/ScheduleFormatting.swift (Swift, 42 lines, source)
-Sources/GoToBed/UI/SettingsView.swift (Swift, 103 lines, source)
 Sources/GoToBedApp/GoToBedApp.swift (Swift, 59 lines, source)
-Sources/GoToBedCore/Models/AppearanceSettings.swift (Swift, 92 lines, source)
-Sources/GoToBedCore/Models/Palette.swift (Swift, 98 lines, source)
 Sources/GoToBedCore/Models/Schedule.swift (Swift, 137 lines, source)
 Sources/GoToBedCore/Models/Validation.swift (Swift, 92 lines, source)
 Sources/GoToBedCore/Persistence/AppStatePersistence.swift (Swift, 58 lines, source)
@@ -48,152 +39,79 @@ Internal:
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/MenuBar/MenuViewModel.swift {ScheduleDisplayItem}
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/SettingsWindowController.swift {SettingsWindowController}
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/UI/ScheduleFormatting.swift {ScheduleFormatting}
-  Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings}
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule, DismissMode, WeekdayPreset}
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
   Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Store/Store.swift {Store}
-  Sources/GoToBed/ColorBridging.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {Double}
-  Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/AppEnvironment.swift {AppEnvironment}
-  Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/LaunchAtLogin.swift {LaunchAtLogin}
-  Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/MenuBar/MenuViewModel.swift {ScheduleDisplayItem}
-  Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBed/ColorBridging.swift {Color}
-  Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings, Double}
-  Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule}
-  Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
   Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBed/AppEnvironment.swift {AppEnvironment}
-  Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBed/UI/SettingsView.swift {SettingsView}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBed/ColorBridging.swift {ColorComponents, Color}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBed/UI/Palette.swift {PresetRow, SwatchPicker}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings, Double, ColorComponents}
-  Sources/GoToBed/UI/AppearanceEditor.swift → Sources/GoToBedCore/Models/Palette.swift {ColorComponents}
-  Sources/GoToBed/UI/Palette.swift → Sources/GoToBed/ColorBridging.swift {Color, ColorComponents}
-  Sources/GoToBed/UI/Palette.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/UI/Palette.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings, ColorComponents}
-  Sources/GoToBed/UI/Palette.swift → Sources/GoToBedCore/Models/Palette.swift {AppearancePreset, ColorComponents, BrandColor}
   Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/AppEnvironment.swift {AppEnvironment}
-  Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/AppearanceEditor.swift {AppearanceEditor}
-  Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/Compat.swift {View}
   Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule, DismissMode}
   Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
   Sources/GoToBed/UI/ScheduleFormatting.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule, WeekdayPreset}
   Sources/GoToBed/UI/ScheduleFormatting.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/AppEnvironment.swift {AppEnvironment}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/AppearanceEditor.swift {AppearanceEditor}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/Compat.swift {View}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/ScheduleEditorView.swift {ScheduleEditorView}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/ScheduleFormatting.swift {ScheduleFormatting}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule, WeekdayPreset}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
-  Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Store/Store.swift {Store}
   Sources/GoToBedApp/GoToBedApp.swift → Sources/GoToBed/AppEnvironment.swift {AppEnvironment}
-  Sources/GoToBedApp/GoToBedApp.swift → Sources/GoToBed/MenuBar/MenuContent.swift {MenuContent}
-  Sources/GoToBedCore/Models/AppearanceSettings.swift → Sources/GoToBed/ColorBridging.swift {Color}
-  Sources/GoToBedCore/Models/Palette.swift → Sources/GoToBed/ColorBridging.swift {Color}
-  Sources/GoToBedCore/Models/Palette.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {Double, AppearanceSettings}
-  Sources/GoToBedCore/Models/Schedule.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings}
   Sources/GoToBedCore/Models/Validation.swift → Sources/GoToBedCore/Models/Schedule.swift {DismissChallenge}
   Sources/GoToBedCore/Persistence/AppStatePersistence.swift → Sources/GoToBedCore/Models/Schedule.swift {AppState}
   Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift → Sources/GoToBedCore/Models/Schedule.swift {Schedule}
   Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
   Sources/GoToBedCore/Store/Store.swift → Sources/GoToBed/LaunchAtLogin.swift {LaunchAtLogin}
-  Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift {AppearanceSettings}
   Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/Schedule.swift {AppState, Schedule, DismissMode}
   Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/Validation.swift {Schedule}
   Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift {AppStatePersistence}
 
 Outgoing (this zone → other zones):
-  → overlay-ui: Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBed/Overlay/DismissChallengeState.swift; Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/WeekdayPicker.swift
-  → system-services: Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/Overlay/OverlayController.swift; Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift; Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBed/LaunchAtLogin.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedApp/GoToBedApp.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedCore/Persistence/AppStatePersistence.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Logging/Log.swift
+  → appearance-settings: Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift; Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/AppearanceEditor.swift; Sources/GoToBedCore/Models/Schedule.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift; Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift
+  → overlay-interaction: Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/WeekdayPicker.swift
+  → scheduling-engine: Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/Overlay/OverlayController.swift; Sources/GoToBed/AppEnvironment.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift; Sources/GoToBed/AppEnvironment.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBed/LaunchAtLogin.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedApp/GoToBedApp.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedCore/Persistence/AppStatePersistence.swift → Sources/GoToBedCore/Logging/Log.swift; Sources/GoToBedCore/Store/Store.swift → Sources/GoToBedCore/Logging/Log.swift
+  → view-layer: Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBed/UI/Compat.swift; Sources/GoToBed/SettingsWindowController.swift → Sources/GoToBed/UI/SettingsView.swift; Sources/GoToBed/UI/ScheduleEditorView.swift → Sources/GoToBed/UI/Compat.swift; Sources/GoToBedApp/GoToBedApp.swift → Sources/GoToBed/MenuBar/MenuContent.swift
 
 Incoming (other zones → this zone):
-  ← overlay-ui: Sources/GoToBed/Overlay/DismissChallengeState.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBed/ColorBridging.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBed/Overlay/OverlayView.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBed/UI/Compat.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/UI/WeekdayPicker.swift → Sources/GoToBed/ColorBridging.swift; Sources/GoToBed/UI/WeekdayPicker.swift → Sources/GoToBed/UI/Compat.swift; Sources/GoToBed/UI/WeekdayPicker.swift → Sources/GoToBedCore/Models/Schedule.swift
-  ← system-services: Sources/GoToBed/Overlay/OverlayController.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayController.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Store/Store.swift
-  ← tests-gotobedcoretests: Tests/GoToBedCoreTests/ContrastTests.swift → Sources/GoToBed/ColorBridging.swift; Tests/GoToBedCoreTests/ContrastTests.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift; Tests/GoToBedCoreTests/ContrastTests.swift → Sources/GoToBedCore/Models/Palette.swift; Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/DismissChallengeTests.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift; Tests/GoToBedCoreTests/DismissChallengeTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/DismissChallengeTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Models/AppearanceSettings.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Store/Store.swift; Tests/GoToBedCoreTests/SubmessageTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SubmessageTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/ValidationTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/ValidationTests.swift → Sources/GoToBedCore/Models/Validation.swift
+  ← overlay-interaction: Sources/GoToBed/Overlay/DismissChallengeState.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayWindow.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/UI/WeekdayPicker.swift → Sources/GoToBedCore/Models/Schedule.swift
+  ← scheduling-engine: Sources/GoToBed/Overlay/OverlayController.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayController.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Sources/GoToBed/Scheduler/SchedulerEngine.swift → Sources/GoToBedCore/Store/Store.swift
+  ← tests-gotobedcoretests: Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/DSTTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/DismissChallengeTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/DismissChallengeTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/PersistenceTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/ScheduleCalculatorTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/SchedulerLoopTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/SleepSkipTests.swift → Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedCoreTests/StoreTests.swift → Sources/GoToBedCore/Store/Store.swift; Tests/GoToBedCoreTests/SubmessageTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/SubmessageTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedCoreTests/ValidationTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedCoreTests/ValidationTests.swift → Sources/GoToBedCore/Models/Validation.swift
   ← tests-gotobedtests: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Store/Store.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Store/Store.swift
+  ← view-layer: Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/AppEnvironment.swift; Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/LaunchAtLogin.swift; Sources/GoToBed/MenuBar/MenuContent.swift → Sources/GoToBed/MenuBar/MenuViewModel.swift; Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/Overlay/OverlayView.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/AppEnvironment.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/ScheduleEditorView.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBed/UI/ScheduleFormatting.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Models/Schedule.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Models/Validation.swift; Sources/GoToBed/UI/SettingsView.swift → Sources/GoToBedCore/Store/Store.swift
 
 </imports>
 
 <findings>
 
 [observation] [warning] 10 entry points — wide API surface, consider consolidating exports
-[observation] [info] High cohesion (0.83) — files are tightly interconnected
-[suggestion] [info] Zone "application-core" has files across 9 directories — consider consolidating under a dedicated directory
-[suggestion] [info] Add a comment to ScheduleEditorView.ChallengeKind documenting its mirroring relationship with DismissChallenge: 'Must be kept in sync with DismissChallenge — adding a new DismissChallenge case requires a matching ChallengeKind case and a challengeKindBinding branch.' Without this, the coupling is invisible until a compiler error surfaces.
-[suggestion] [warning] AppState.launchAtLogin is a persisted field that is never read back to configure the system — LaunchAtLogin.swift documents SMAppService as the source of truth and no startup code calls LaunchAtLogin.set() from this value. Either remove the field from AppState (and the corresponding Store accessors) or add a startup reconciliation step in AppEnvironment.start() that aligns the system with the persisted value when they diverge.
-[suggestion] [warning] OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call. Cache each as a static let property and invalidate on NSLocale.currentLocaleDidChangeNotification. The clockText formatter is the most urgent — it fires every second while the overlay is visible.
-[suggestion] [info] Rename AppEnvironment.launchAtLoginEnabled to isLaunchAtLoginEnabled to match the `is`-prefix Boolean convention used throughout the codebase. The missing prefix signals a different semantic to readers without justification.
-[suggestion] [info] ScheduleCalculator.nextFireDate: replace `soonest == nil || candidate < soonest!` with `if let s = soonest { if candidate < s { soonest = candidate } } else { soonest = candidate }` or the idiomatic `soonest = soonest.map { min($0, candidate) } ?? candidate` to match the optional-binding pattern used in nextFire and eliminate the force unwrap.
+[suggestion] [info] Zone "application-core" has files across 8 directories — consider consolidating under a dedicated directory
 
 </findings>
 
 <insights>
 
-- High cohesion (0.83) — files are tightly interconnected
 - 10 entry points — wide API surface, consider consolidating exports
-- High cohesion (0.83) despite file-system distribution across GoToBedCore and GoToBed packages demonstrates natural semantic grouping
-- Low coupling (0.17) indicates effective isolation—the core layer is self-contained and other zones depend on it rather than vice versa
-- Entry points span scheduling, persistence, appearance, and menu management, suggesting thoughtful architectural layering
-- Entry points include both GoToBedCore domain models (Schedule, Validation, ScheduleCalculator) and GoToBed presentation (MenuBar, Overlay, SettingsWindowController), maintaining clean separation between core logic and UI concerns
-- Zone "application-core" has files across 9 directories — consider consolidating under a dedicated directory
-- AppEnvironment is the sole composition root for the entire object graph: it is the only class that simultaneously holds Store, SchedulerEngine, and OverlayController references, and its init contains an explicitly commented injection seam ('the only place that knows about both') that prevents a scheduler→overlay import cycle. This seam is load-bearing — replacing the onFire closure with a direct OverlayController reference would reintroduce the cycle.
-- The reported bidirectional coupling with system-services is a Louvain artifact: at the Swift package level, GoToBedKit (OverlayController, SchedulerEngine) depends on GoToBedCore (Store, Schedule, Log) unidirectionally. No GoToBedCore file imports GoToBedKit.
-- AppEnvironment.init documents a deliberate closure injection seam to break the scheduler→overlay cycle ('Scheduler must not import the Overlay layer'). This is a load-bearing architectural constraint — any refactor that replaces the onFire closure with a direct OverlayController reference will reintroduce the cycle.
-- Store.setEnabled (and any similar single-field mutate closure) bypasses the sanitized() call that add() and update() enforce. If a future Schedule invariant must hold across all mutations, the inconsistent paths will silently produce invalid state without a compile-time or runtime guard.
-- Sources/GoToBed/UI/ScheduleFormatting.swift contains pure formatting logic (no AppKit/SwiftUI imports) but is located in the GoToBedKit UI layer. It is consumed by AppEnvironment for menu-bar display strings, which means formatting rules for a GoToBedCore model are defined in a file that GoToBedCore cannot reach — inverting the natural dependency direction.
-- OverlayView.clockText allocates a new DateFormatter on every call; since it is driven by TimelineView(.periodic(by: 1)) this is a fresh allocation every second while the overlay is visible — DateFormatter is one of the most expensive objects to initialize in Foundation
-- ScheduleFormatting.timeString and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call; both are invoked per-menu-redraw (once per schedule row for timeString, once per daysAndMessage call for weekdaySymbols)
-- AppState.launchAtLogin is a vestigial field: LaunchAtLogin.swift explicitly documents that SMAppService is the persistent source of truth ('the registered state is the system's source of truth'), no startup path reads store.launchAtLogin to call LaunchAtLogin.set(), and AppEnvironment.launchAtLoginEnabled reads LaunchAtLogin.isEnabled (the system) rather than the store — the field is written on change but never drives behavior
-- AppEnvironment.launchAtLoginEnabled omits the `is` prefix used consistently by every other Boolean predicate in the codebase (isEnabled on Schedule, isShowing on OverlayController, isValid on Schedule, isAuto in OverlayView, isEnabled on ScheduleDisplayItem) — the inconsistency implies a different kind of property to readers
-- ScheduleCalculator.nextFireDate uses `soonest!` (force unwrap guarded by `soonest == nil ||` short-circuit) while the sibling method nextFire in the same struct uses `if let current = best` for the identical min-accumulator pattern — inconsistent defensive coding within one type
-- ScheduleEditorView.ChallengeKind is a local mirror of DismissChallenge that strips associated values to serve as picker tags; a new DismissChallenge case will compile cleanly until the exhaustive switch on ChallengeKind in challengeKindBinding triggers a compiler error, but the silent relationship between the two types is undocumented
-- OverlayView.clockText, ScheduleFormatting.timeString, and ScheduleFormatting.weekdaySymbols each allocate a new DateFormatter on every call. Cache each as a static let property and invalidate on NSLocale.currentLocaleDidChangeNotification. The clockText formatter is the most urgent — it fires every second while the overlay is visible.
-- AppState.launchAtLogin is a persisted field that is never read back to configure the system — LaunchAtLogin.swift documents SMAppService as the source of truth and no startup code calls LaunchAtLogin.set() from this value. Either remove the field from AppState (and the corresponding Store accessors) or add a startup reconciliation step in AppEnvironment.start() that aligns the system with the persisted value when they diverge.
-- Rename AppEnvironment.launchAtLoginEnabled to isLaunchAtLoginEnabled to match the `is`-prefix Boolean convention used throughout the codebase. The missing prefix signals a different semantic to readers without justification.
-- ScheduleCalculator.nextFireDate: replace `soonest == nil || candidate < soonest!` with `if let s = soonest { if candidate < s { soonest = candidate } } else { soonest = candidate }` or the idiomatic `soonest = soonest.map { min($0, candidate) } ?? candidate` to match the optional-binding pattern used in nextFire and eliminate the force unwrap.
-- Add a comment to ScheduleEditorView.ChallengeKind documenting its mirroring relationship with DismissChallenge: 'Must be kept in sync with DismissChallenge — adding a new DismissChallenge case requires a matching ChallengeKind case and a challengeKindBinding branch.' Without this, the coupling is invisible until a compiler error surfaces.
+- 10+ entry points across config, models, services, and UI indicate this zone conflates orchestration with component implementation; consolidate initialization logic into AppEnvironment and separate pure-logic imports (Schedule, Validation, ScheduleCalculator, Persistence) into a dedicated app-logic zone
+- MenuViewModel and SettingsWindowController are service implementations that should establish clear ownership (who instantiates them, who retains them, who triggers updates) to avoid scattered state mutation
+- Bidirectional coupling with view-layer (4 imports each direction) and scheduling-engine (8 imports in, 6 out) indicates this zone is the integration hub; document the initialization sequence and state-flow contracts explicitly
+- Zone "application-core" has files across 8 directories — consider consolidating under a dedicated directory
+- AppEnvironment is the sole site that mediates the scheduler→overlay boundary via a closure injected at SchedulerEngine init; this runtime inversion prevents the bidirectional scheduling-engine ↔ application-core coupling from becoming a circular import — it is currently undocumented and invisible to static analysis
+- Schedule.swift contains a silent backward-compatibility Decodable migration (missing submessage and dismissChallenge keys are silently defaulted) with no migration version or deprecation notice — callers cannot distinguish migrated from canonical data
+- MenuContent.swift carries a redundant `import GoToBedCore` — no GoToBedCore symbol is directly referenced in the file; the file's own comment states it has no direct domain dependency, but the import list contradicts that claim and creates a false coupling signal for static analysis tools
+- The closure-injection boundary in AppEnvironment.init (onFire: (Schedule) -> Void) that breaks the scheduler→overlay cycle is currently undocumented; losing this comment or refactoring SchedulerEngine.init naively would silently reintroduce the circular import it prevents
 
 </insights>
 
 <sub-crossings>
 
 Cross-dependencies between sub-zones:
-  sources/appearancesettings-palette → sources/gotobed-ui: 2
-  sources/gotobed → sources/appearancesettings-palette: 1
-  sources/gotobed → sources/gotobedcore: 1
-  sources/gotobed → sources/gotobedcore-models: 3
-  sources/gotobed → sources/view: 3
-  sources/gotobed-ui → sources/appearancesettings-palette: 5
-  sources/gotobed-ui → sources/view: 2
+  sources/gotobed → sources/gotobed-ui: 1
+  sources/gotobed → sources/gotobedcore: 3
+  sources/gotobed-ui → sources/gotobed: 1
+  sources/gotobed-ui → sources/gotobedcore: 4
   sources/gotobedcore → sources/gotobed: 1
-  sources/gotobedcore → sources/gotobed-ui: 1
-  sources/gotobedcore → sources/gotobedcore-models: 3
-  sources/gotobedcore → sources/view: 1
-  sources/gotobedcore-models → sources/appearancesettings-palette: 2
-  sources/gotobedcore-models → sources/gotobed: 1
-  sources/gotobedcore-models → sources/gotobedcore: 2
-  sources/view → sources/appearancesettings-palette: 2
-  sources/view → sources/gotobed: 4
-  sources/view → sources/gotobed-ui: 2
-  sources/view → sources/gotobedcore: 3
-  sources/view → sources/gotobedcore-models: 4
 
 </sub-crossings>
 
 <sub-zones>
 
-This zone has 6 sub-zone(s):
+This zone has 3 sub-zone(s):
 
-- **Sources/appearancesettings Palette** (`sources/appearancesettings-palette`): 2 files, cohesion 0.15, coupling 0.85
-- **Sources/gotobed** (`sources/gotobed`): 6 files, cohesion 0.42, coupling 0.58
-- **Sources/gotobed Ui** (`sources/gotobed-ui`): 3 files, cohesion 0.35, coupling 0.65
-- **Sources/gotobedcore** (`sources/gotobedcore`): 3 files, cohesion 0.25, coupling 0.75
-- **Sources/gotobedcore Models** (`sources/gotobedcore-models`): 4 files, cohesion 0.35, coupling 0.65
-- **Sources/view** (`sources/view`): 4 files, cohesion 0.22, coupling 0.78
+- **Sources/gotobed** (`sources/gotobed`): 6 files, cohesion 0.63, coupling 0.38
+- **Sources/gotobed Ui** (`sources/gotobed-ui`): 2 files, cohesion 0, coupling 1
+- **Sources/gotobedcore** (`sources/gotobedcore`): 5 files, cohesion 0.64, coupling 0.36
 
 Detailed sub-zone context available in `zones/{sub-zone-id}/context.md`
 

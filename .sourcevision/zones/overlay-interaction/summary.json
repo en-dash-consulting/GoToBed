@@ -1,0 +1,26 @@
+{
+  "id": "overlay-interaction",
+  "name": "Overlay Interaction System",
+  "description": "Manages the overlay window's lifecycle and user challenge response for bedtime enforcement.",
+  "files": [
+    "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+    "Sources/GoToBed/Overlay/OverlayWindow.swift",
+    "Sources/GoToBed/UI/WeekdayPicker.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/Overlay/DismissChallengeState.swift",
+    "Sources/GoToBed/Overlay/OverlayWindow.swift",
+    "Sources/GoToBed/UI/WeekdayPicker.swift"
+  ],
+  "cohesion": 0.25,
+  "coupling": 0.75,
+  "fileCount": 3,
+  "lineCount": 264,
+  "riskMetrics": {
+    "cohesion": 0.25,
+    "coupling": 0.75,
+    "riskScore": 0.75,
+    "riskLevel": "catastrophic",
+    "failsThreshold": true
+  }
+}

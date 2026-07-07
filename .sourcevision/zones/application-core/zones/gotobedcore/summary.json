@@ -1,19 +1,23 @@
 {
   "id": "sources/gotobedcore",
   "name": "Sources/gotobedcore",
-  "description": "3 files, primarily Swift",
+  "description": "5 files, primarily Swift",
   "files": [
-    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
     "Sources/GoToBedCore/Models/Validation.swift",
-    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift"
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
   ],
   "entryPoints": [
-    "Sources/GoToBed/UI/ScheduleEditorView.swift",
+    "Sources/GoToBedCore/Models/Schedule.swift",
     "Sources/GoToBedCore/Models/Validation.swift",
-    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift"
+    "Sources/GoToBedCore/Persistence/AppStatePersistence.swift",
+    "Sources/GoToBedCore/Scheduling/ScheduleCalculator.swift",
+    "Sources/GoToBedCore/Store/Store.swift"
   ],
-  "cohesion": 0.25,
-  "coupling": 0.75,
-  "fileCount": 3,
-  "lineCount": 332
+  "cohesion": 0.64,
+  "coupling": 0.36,
+  "fileCount": 5,
+  "lineCount": 462
 }

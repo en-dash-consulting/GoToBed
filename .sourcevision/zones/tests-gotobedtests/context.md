@@ -4,7 +4,7 @@
 
 <zone>
 
-Zone: Tests (`tests-gotobedtests`)
+Zone: Kit Tests (`tests-gotobedtests`)
 Files: 5, Cohesion: 1.00, Coupling: 0.00
 Risk: healthy (score: 0.00)
 Description: Non-source files in Tests: DismissChallengeStateTests.swift, InterServiceWiringTests.swift, OverlayControllerTests.swift (+2 more)
@@ -30,8 +30,8 @@ Internal:
 
 Outgoing (this zone → other zones):
   → application-core: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBedCore/Store/Store.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Schedule.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Models/Validation.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Persistence/AppStatePersistence.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBedCore/Store/Store.swift
-  → overlay-ui: Tests/GoToBedTests/DismissChallengeStateTests.swift → Sources/GoToBed/Overlay/DismissChallengeState.swift
-  → system-services: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift
+  → overlay-interaction: Tests/GoToBedTests/DismissChallengeStateTests.swift → Sources/GoToBed/Overlay/DismissChallengeState.swift
+  → scheduling-engine: Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/InterServiceWiringTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift; Tests/GoToBedTests/OverlayControllerTests.swift → Sources/GoToBed/Overlay/OverlayController.swift; Tests/GoToBedTests/SchedulerEngineTests.swift → Sources/GoToBed/Scheduler/SchedulerEngine.swift
 
 </imports>
 
