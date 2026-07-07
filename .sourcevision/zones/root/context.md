@@ -5,32 +5,27 @@
 <zone>
 
 Zone: Project Root (`root`)
-Files: 5, Cohesion: 0.00, Coupling: 0.00
-Risk: at-risk (score: 0.50)
-Description: Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)
-Lines: 109
+Files: 1, Cohesion: 1.00, Coupling: 0.00
+Risk: healthy (score: 0.00)
+Description: Project configuration and manifest files: Package.swift
+Lines: 43
 
 </zone>
 
 <files>
 
-.gitignore (Other, 17 lines, other)
-LICENSE (Other, 21 lines, docs)
-Makefile (Makefile, 27 lines, config)
 Package.swift (Swift, 43 lines, config)
-VERSION (Other, 1 lines, other)
 
 </files>
 
 <findings>
 
-[observation] [info] Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)
-[suggestion] [info] Zone "Project Root" (root) has at-risk risk (score: 0.50, cohesion: 0.00, coupling: 0.00) — approaching architectural risk thresholds
+[observation] [info] High cohesion (1) — files are tightly interconnected
 
 </findings>
 
 <insights>
 
-- Isolated files — no import edges between 5 files, cohesion is unmeasurable (reported as 0)
+- High cohesion (1) — files are tightly interconnected
 
 </insights>

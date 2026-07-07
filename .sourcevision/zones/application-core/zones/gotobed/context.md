@@ -5,7 +5,7 @@
 <zone>
 
 Zone: Sources/gotobed (`sources/gotobed`)
-Files: 6, Cohesion: 0.42, Coupling: 0.58
+Files: 6, Cohesion: 0.63, Coupling: 0.38
 Description: 6 files, primarily Swift
 Entry points: Sources/GoToBed/AppEnvironment.swift, Sources/GoToBed/LaunchAtLogin.swift, Sources/GoToBed/MenuBar/MenuViewModel.swift
 Lines: 349

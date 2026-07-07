@@ -1,0 +1,29 @@
+{
+  "id": "appearance-settings",
+  "name": "Appearance Settings",
+  "description": "Cohesive visual theme system managing color definitions, appearance models, and UI customization.",
+  "files": [
+    "Sources/GoToBed/ColorBridging.swift",
+    "Sources/GoToBed/UI/AppearanceEditor.swift",
+    "Sources/GoToBed/UI/Palette.swift",
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift"
+  ],
+  "entryPoints": [
+    "Sources/GoToBed/ColorBridging.swift",
+    "Sources/GoToBed/UI/AppearanceEditor.swift",
+    "Sources/GoToBedCore/Models/AppearanceSettings.swift",
+    "Sources/GoToBedCore/Models/Palette.swift"
+  ],
+  "cohesion": 0.63,
+  "coupling": 0.38,
+  "fileCount": 5,
+  "lineCount": 409,
+  "riskMetrics": {
+    "cohesion": 0.63,
+    "coupling": 0.38,
+    "riskScore": 0.375,
+    "riskLevel": "healthy",
+    "failsThreshold": false
+  }
+}

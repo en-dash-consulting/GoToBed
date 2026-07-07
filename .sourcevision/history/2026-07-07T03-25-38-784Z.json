@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshots": [
+    {
+      "zoneId": "docs",
+      "zoneName": "Documentation Site",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 5,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "packaging",
+      "zoneName": "Packaging",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 3,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "root",
+      "zoneName": "Project Root",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 4,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "scripts",
+      "zoneName": "Build & CI Scripts",
+      "cohesion": 0,
+      "coupling": 0,
+      "riskScore": 0.5,
+      "fileCount": 9,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "tests-gotobedcoretests",
+      "zoneName": "Core Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 11,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    },
+    {
+      "zoneId": "tests-gotobedtests",
+      "zoneName": "Kit Tests",
+      "cohesion": 1,
+      "coupling": 0,
+      "riskScore": 0,
+      "fileCount": 5,
+      "timestamp": "2026-07-07T03:25:38.784Z",
+      "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+    }
+  ],
+  "analyzedAt": "2026-07-07T03:25:38.784Z",
+  "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d"
+}

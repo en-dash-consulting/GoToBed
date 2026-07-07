@@ -3,16 +3,7 @@
   "primaryLanguage": "swift",
   "languages": [
     "swift",
-    "markdown",
-    "other",
-    "shell",
-    "yaml",
-    "json",
-    "text",
-    "toml",
-    "makefile",
-    "html",
-    "xml"
+    "shell"
   ],
   "frameworks": [
     "appkit",
@@ -24,10 +15,6 @@
     {
       "kind": "release-please",
       "evidence": ".release-please-manifest.json"
-    },
-    {
-      "kind": "version-file",
-      "evidence": "VERSION"
     }
   ],
   "buildSurfaces": [
@@ -43,6 +30,10 @@
   "ciSurfaces": [
     {
       "path": ".github/workflows/ci.yml",
+      "kind": "GitHub Actions"
+    },
+    {
+      "path": ".github/workflows/pages.yml",
       "kind": "GitHub Actions"
     },
     {

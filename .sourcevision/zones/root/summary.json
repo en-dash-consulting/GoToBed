@@ -1,24 +1,20 @@
 {
   "id": "root",
   "name": "Project Root",
-  "description": "Non-source files in root: .gitignore, LICENSE, Makefile (+2 more)",
+  "description": "Project configuration and manifest files: Package.swift",
   "files": [
-    ".gitignore",
-    "LICENSE",
-    "Makefile",
-    "Package.swift",
-    "VERSION"
+    "Package.swift"
   ],
   "entryPoints": [],
-  "cohesion": 0,
+  "cohesion": 1,
   "coupling": 0,
-  "fileCount": 5,
-  "lineCount": 109,
+  "fileCount": 1,
+  "lineCount": 43,
   "riskMetrics": {
-    "cohesion": 0,
+    "cohesion": 1,
     "coupling": 0,
-    "riskScore": 0.5,
-    "riskLevel": "at-risk",
+    "riskScore": 0,
+    "riskLevel": "healthy",
     "failsThreshold": false
   }
 }

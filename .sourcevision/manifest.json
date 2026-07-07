@@ -1,40 +1,40 @@
 {
   "schemaVersion": "1.0.0",
   "toolVersion": "0.1.0",
-  "analyzedAt": "2026-06-25T02:03:47.864Z",
-  "gitSha": "f63d72f580088ad571ca00c36c91dd5b9438a210",
-  "gitBranch": "main",
+  "analyzedAt": "2026-07-07T04:15:13.040Z",
+  "gitSha": "189de534256bb83c0f001a3bc8aabe00a32b3b6d",
+  "gitBranch": "sv0706",
   "targetPath": "/Users/nick/development/endash/gotobed",
   "modules": {
     "inventory": {
       "status": "complete",
-      "startedAt": "2026-06-25T01:49:30.740Z",
-      "completedAt": "2026-06-25T01:49:30.779Z"
+      "startedAt": "2026-07-07T03:46:40.027Z",
+      "completedAt": "2026-07-07T03:46:40.064Z"
     },
     "imports": {
       "status": "complete",
-      "startedAt": "2026-06-25T01:49:30.779Z",
-      "completedAt": "2026-06-25T01:49:30.812Z"
+      "startedAt": "2026-07-07T03:46:40.065Z",
+      "completedAt": "2026-07-07T03:46:40.097Z"
     },
     "classifications": {
       "status": "complete",
-      "startedAt": "2026-06-25T01:49:30.812Z",
-      "completedAt": "2026-06-25T01:49:59.062Z"
+      "startedAt": "2026-07-07T03:46:40.097Z",
+      "completedAt": "2026-07-07T03:47:15.277Z"
     },
     "zones": {
       "status": "complete",
-      "startedAt": "2026-06-25T01:49:59.063Z",
-      "completedAt": "2026-06-25T02:03:47.814Z"
+      "startedAt": "2026-07-07T03:47:15.278Z",
+      "completedAt": "2026-07-07T04:15:12.950Z"
     },
     "components": {
       "status": "complete",
-      "startedAt": "2026-06-25T02:03:47.816Z",
-      "completedAt": "2026-06-25T02:03:47.843Z"
+      "startedAt": "2026-07-07T04:15:12.954Z",
+      "completedAt": "2026-07-07T04:15:12.993Z"
     },
     "callgraph": {
       "status": "complete",
-      "startedAt": "2026-06-25T02:03:47.843Z",
-      "completedAt": "2026-06-25T02:03:47.864Z"
+      "startedAt": "2026-07-07T04:15:12.995Z",
+      "completedAt": "2026-07-07T04:15:13.040Z"
     }
   },
   "language": "swift",
@@ -43,7 +43,7 @@
   ],
   "zoneOutputs": true,
   "tokenUsage": {
-    "calls": 6,
+    "calls": 5,
     "inputTokens": 0,
     "outputTokens": 0,
     "vendor": "claude",
